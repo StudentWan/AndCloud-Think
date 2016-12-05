@@ -1,64 +1,136 @@
 {% extends "./../base.html" %}
+{% block header %}
+<style>
+    body {
+        color: white;
+    }
+
+    .form-control {
+        background: transparent;
+    }
+
+    .login-switcher {
+        transition: all 0.5s ease;
+        cursor: pointer;
+    }
+
+    .form-group-register{
+        transition: all 0.5s ease;
+        overflow: hidden;
+    }
+    .form-group-register-inactive{
+        margin-bottom: 0;
+        height: 0;
+        opacity: 0;
+    }
+    .form-group-register-active{
+        height: auto;
+        opacity: 1;
+        margin-bottom: 15px;
+    }
+
+    .zo-button{
+        cursor: pointer;
+        padding: 10px;
+        background: rgba(0,0,0,0.3);
+        width:auto;
+        float:left;
+    }
+</style>
+{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
 
-            {{success}} <br>
-            --- <br>
-            {{user.name}} <br>
-            <h1>登录</h1>
+<div class="container " style="vertical-align: middle;height:100vh;">
+    <div class="row" style="position: relative;top:50%;margin-top:-150px">
+        <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-12">
+            <h1><span class="login-switcher">登录</span><span class="pull-right login-switcher"
+                                                            style="color:rgba(255,255,255,0.3)">注册</span></h1>
             <hr>
-            <form class="form-horizontal" role="form" method="post" action="">
-                <div class="form-group">
-                    <input type="text" hidden name="type" value="login">
-                    <label for="username-login" class="col-sm-2 control-label">用户</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="username-login" placeholder="username">
+            <div style="overflow: hidden">
+                <form class="form-horizontal fly-form" role="form" method="post" action="">
+                    <div class="form-group">
+                        <input type="text" hidden name="type" value="login"/>
+                        <label for="username-login" class="col-sm-3 control-label">用户</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="username-login" placeholder="username"
+                                   name="username">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="password-login" class="col-sm-2 control-label">密码</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password-login" placeholder="Password">
+                    <div class="form-group">
+                        <label for="password-login" class="col-sm-3 control-label">密码</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password-login" placeholder="Password"
+                                   name="password">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">登录</button>
+                    <div class="form-group form-group-register form-group-register-inactive">
+                        <label for="password-register" class="col-sm-3 control-label">重复密码</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password-register" placeholder="Repeat Password"
+                                   name="password">
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="zo-button" id="submit">提交<span id="error-reason"></span></div>
+                            <!--<button type="submit" class="btn btn-default">GO</button>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <h1>注册</h1>
-            <hr>
-            <form class="form-horizontal" role="form">
-                <input type="text" hidden name="type" value="register">
-                <div class="form-group">
-                    <label for="username-register" class="col-sm-2 control-label">用户</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="username-register" placeholder="username">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password-register" class="col-sm-2 control-label">密码</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password-register" placeholder="Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">注册</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
     </div>
 </div>
+{% endblock %}
+{% block js %}
+<script lang="javascript">
+    $('.login-switcher').on('click', function (evt) {
+
+        var isRegister = (function(dom){
+            return dom.hasClass('pull-right');
+        })($(this));
+
+        if(isRegister){
+            $('.form-group-register').removeClass('form-group-register-inactive').addClass('form-group-register-active');
+        }else{
+            $('.form-group-register').removeClass('form-group-register-active').addClass('form-group-register-inactive');
+        }
+
+        $('.login-switcher').css('color', 'rgba(255,255,255,0.3)');
+        $(this).css('color', 'rgba(255,255,255,1)');
+
+    });
+    $('#submit').on('click',function(evt){
+        var formdata = new FormData();
+        formdata.append('username',$('#username-login').val());
+        formdata.append('password',$('#password-login').val());
+        var isRegister = (function(dom){
+            return dom.hasClass('pull-right');
+        })($(this));
+        formdata.append('type',isRegister?'register':'login');
+        $.ajax({
+            url:"/user/login",
+            method:"POST",
+            data:formdata,
+            contentType: false,
+            processData:false,
+            success:function(data){
+                if(data.errno!==0){
+                    var message = data.errmsg;
+                    var lastText = $("#error-reason").text();
+                    var btn = $("#error-reason").parent();
+                    var lastColor = btn.css('color');
+                    $("#error-reason").text(" "+message);
+                    btn.css("color","red");
+                    btn.addClass("animate-buzz");
+                    setTimeout(function(){
+                        $("#error-reason").parent().removeClass("animate-buzz");
+                        $("#error-reason").text(lastText);
+                        btn.css('color',lastColor);
+                    },1000);
+                }
+            }
+        });
+    })
+</script>
 {% endblock %}

@@ -8,6 +8,7 @@ export default {
     type: 'mongo',
     host: '127.0.0.1',
     port: '27017',
+    name:'ANDCLOUD',
     database: 'ANDCLOUD',
     prefix: '',
     encoding: 'utf8',

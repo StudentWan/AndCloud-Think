@@ -22,4 +22,9 @@ export default class extends Base {
         this.assign("user",res);
         return this.display();
     }
+
+    async loginAction(){
+        this.assign('what','ever');
+    }
+    async
 }

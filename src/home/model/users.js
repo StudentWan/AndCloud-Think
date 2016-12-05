@@ -18,6 +18,19 @@ class Users extends think.model.mongo {
         }
     }
 
+    getId(){
+        return this["_id"];
+    }
+
+    async addUser(username,password){
+        try {
+            return await this.add({"name": username, "pass": Users.encrypt(password)});
+        }catch(e){
+            think.log(`add user cause wrong ${e}`,'app/model');
+            return false;
+        }
+    }
+
     static encrypt(password){
         return md5(password);
     }
