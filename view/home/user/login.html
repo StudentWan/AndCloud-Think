@@ -1,9 +1,7 @@
 {% extends "./../base.html" %}
 {% block header %}
 <style>
-    body {
-        color: white;
-    }
+
 
     .form-control {
         background: transparent;
@@ -20,11 +18,11 @@
     }
     .form-group-register-inactive{
         margin-bottom: 0;
-        height: 0;
+        max-height: 0;
         opacity: 0;
     }
     .form-group-register-active{
-        height: auto;
+        max-height: 50px;
         opacity: 1;
         margin-bottom: 15px;
     }
@@ -84,9 +82,10 @@
 {% endblock %}
 {% block js %}
 <script lang="javascript">
+    var isRegister = false;
     $('.login-switcher').on('click', function (evt) {
 
-        var isRegister = (function(dom){
+        isRegister = (function(dom){
             return dom.hasClass('pull-right');
         })($(this));
 
@@ -100,13 +99,26 @@
         $(this).css('color', 'rgba(255,255,255,1)');
 
     });
+    function addBuzz($dom){
+        $dom.addClass("animate-buzz");
+        setTimeout(function(){
+            $dom.removeClass("animate-buzz");
+        },1000);
+    }
     $('#submit').on('click',function(evt){
+        var username = $("#username-login").val();
+        if(username.length == 0){
+            addBuzz($("#username-login"));
+            return;
+        }
+        var password = $("#password-login").val();
+        if(password.length == 0){
+            addBuzz($("#password-login"));
+            return;
+        }
         var formdata = new FormData();
         formdata.append('username',$('#username-login').val());
         formdata.append('password',$('#password-login').val());
-        var isRegister = (function(dom){
-            return dom.hasClass('pull-right');
-        })($(this));
         formdata.append('type',isRegister?'register':'login');
         $.ajax({
             url:"/user/login",
@@ -128,6 +140,8 @@
                         $("#error-reason").text(lastText);
                         btn.css('color',lastColor);
                     },1000);
+                }else{
+                    window.location.href = "/user/index";
                 }
             }
         });

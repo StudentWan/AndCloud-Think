@@ -1,0 +1,36 @@
+{% extends "./base.html" %}
+{% block header%}
+<style>
+    .left-nav-link{
+        width: 100px;
+        height: 100px;
+        background: rgba(30, 29, 39, 0.18);
+        border-radius: 50px;
+        text-align: center;
+        margin: 50px auto;
+        padding-top: calc(50px - 0.5em);
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="" style="height: 100%">
+    <div class="" style="background: rgba(13, 21, 56, 0.36);height: 100%;width:220px;float:left">
+        <div style="height:80px;width:220px;display: table-cell;vertical-align: middle;text-align: center">
+            <h1>AndCloud</h1>
+            <hr>
+        </div>
+        <div class="left-nav-link">
+            <a href="/project/upload" style="color:white;text-decoration: none">上传</a>
+        </div>
+        <div class="left-nav-link">
+            <a href="/project/history" style="color:white;text-decoration: none">历史</a>
+        </div>
+    </div><div class="" style="background: transparent;height: 100%;width:calc(100% - 220px);float:left">
+    {% block contentright %}
+    {% endblock %}
+</div>
+</div>
+
+
+{% endblock %}

@@ -12,43 +12,54 @@ export default class extends Base {
      * @return {Promise} []
      */
 
-    async indexAction() {
-        let user_id = await this.session("user_id");
-        if (user_id !== null) {
-            this.assign(user_id);
+    async __before(){
+        this.user_id = await this.session('user_id');
+        if(!think.isEmpty(this.user_id)){
+            let userModel = this.model("users");
+            this.user = await userModel.getUserViaId(this.user_id);
+        }else{
+            return this.redirect('login');
         }
+    }
+
+    async indexAction() {
+        this.assign("user",this.user);
         return this.display();
     }
 
-    async loginAction() {
+    * loginAction() {
         if (this.isPost()) {
             if (this.post("type") == "login") {
                 let name = this.post("username");
                 let pass = this.post("password");
                 let userModel = this.model("users");
-                let res = await userModel.loginUser(name, pass);
+                let res = yield userModel.loginUser(name, pass);
                 let retJson = {};
                 if (res) {
                     retJson.success = true;
-                    await this.session("user_id", res.getId());
+                    yield this.session("user_id", res['_id'].toString());
+                    return this.success(res["_id"].toString());
                 } else {
                     retJson.success = false;
                     retJson.reason = 'wrong password';
+                    return this.fail(retJson.reason);
                 }
-                return this.fail(retJson.reason);
+
             } else {
-                let name = this.get("username");
-                let pass = this.get("password");
+                let name_re = this.post("username");
+                let pass = this.post("password");
                 let userModel = this.model("users");
-                let res = await userModel.addUser(name, pass);
-                if (res) {
-                    this.assign("success", true);
-                    this.assign("user", res);
-                } else {
-                    this.assign("success", false);
-                    this.assign("reason", "wrong password");
+                let isExist = yield userModel.isUserNameExist(name_re);
+                if(isExist){
+                    return this.fail('name already exists');
                 }
-                return this.success(this.post());
+                let res = yield userModel.addUser(name_re, pass);
+                if (res) {
+                    yield this.session("user_id", res);
+                    return this.success('');
+                } else {
+                    return this.fail('unknown reason');
+                }
             }
         } else {
             return this.display("login");

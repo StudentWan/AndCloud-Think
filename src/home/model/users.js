@@ -10,21 +10,36 @@ class Users extends think.model.mongo {
     }
 
     async loginUser(username, password){
-        let user = await this.find({name:username});
-        if(Users.vertify(password,user.pass)){
+        let user = await this.where({"name":username}).find();
+        if(Users.vertify(password,user["pass"])){
             return user;
         }else{
             return false;
         }
     }
 
-    getId(){
-        return this["_id"];
+    async getUserViaId(id){
+        try {
+            return await this.where({_id: id}).find();
+        }catch(e){
+            return false;
+        }
+    }
+
+    async isUserNameExist(username){
+        try{
+            let find = await this.where({"name":username}).find();
+            return !think.isEmpty(find);
+        }catch (e){
+            think.log(e.message,"model");
+            return false;
+        }
     }
 
     async addUser(username,password){
         try {
-            return await this.add({"name": username, "pass": Users.encrypt(password)});
+            let insertId = await this.add({"name": username, "pass": Users.encrypt(password)});
+            return insertId;
         }catch(e){
             think.log(`add user cause wrong ${e}`,'app/model');
             return false;
