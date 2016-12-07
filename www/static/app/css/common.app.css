@@ -1,0 +1,76 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    background-image: radial-gradient(circle at 80% 80%, RGBA(53, 97, 149, 1.00) 0%, transparent),
+    radial-gradient(circle farthest-corner at 20% 20%, RGBA(101, 77, 143, 1.00) 0%, RGBA(54, 70, 132, 1.00) 70%);
+}
+.form-control{
+    color:white;
+}
+
+.animate-buzz{
+    animation-name: buzz-out;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+@keyframes buzz-out {
+    0% {
+        transform: translateX(3px);
+    }
+    5% {
+        transform: translateX(-3px);
+    }
+    10% {
+        transform: translateX(3px);
+    }
+    15% {
+        transform: translateX(-3px);
+    }
+    20% {
+        transform: translateX(3px);
+    }
+    25% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+
+.wave {
+    background: url(wave.svg);
+    background-repeat: repeat-x;
+    animation: wave 3s cubic-bezier(0.35, 0.45, 0.65, 0.25) infinite;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.ocean {
+    background: rgb(129, 191, 193);
+    display:inline-block;
+    height: 90px;
+    width:100%;
+    position:absolute;
+    z-index:0;
+    bottom:0;
+    left:0;
+}
+
+@keyframes wave {
+    0% {
+        margin-left: 0;
+    }
+    100% {
+        margin-left: -2296px;
+    }
+}
+
+@-webkit-keyframes wave {
+    0% {
+        margin-left: 0;
+    }
+    100% {
+        margin-left: -2296px;
+    }
+}

@@ -13,8 +13,9 @@ export default class extends Base{
         return this.display();
     }
 
-    * uploadFile(){
+    * uploadAction(){
         console.log(this.post());
+        console.log(this.file());
         return this.success();
     }
 }
