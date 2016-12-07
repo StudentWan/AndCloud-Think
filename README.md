@@ -7,6 +7,12 @@ Application created by [ThinkJS](http://www.thinkjs.org)
 npm install
 ```
 
+## first run mongodb
+
+```
+mongod
+```
+
 ## Start server
 
 ```
