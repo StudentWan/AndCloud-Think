@@ -46,16 +46,16 @@ body {
     transform: translate3d(0, 0, 0);
 }
 
-.ocean {
-    background: rgb(129, 191, 193);
-    display:inline-block;
-    height: 90px;
-    width:100%;
-    position:absolute;
-    z-index:0;
-    bottom:0;
-    left:0;
-}
+/*.ocean {*/
+    /*background: rgb(129, 191, 193);*/
+    /*display:inline-block;*/
+    /*height: 90px;*/
+    /*width:100%;*/
+    /*position:absolute;*/
+    /*z-index:0;*/
+    /*bottom:0;*/
+    /*left:0;*/
+/*}*/
 
 @keyframes wave {
     0% {

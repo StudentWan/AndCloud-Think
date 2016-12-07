@@ -1,33 +1,54 @@
 {% extends "./../basebar.html" %}
 {% block headerbar %}
 <style>
-    .info_an {
+    .info-an {
         transition: all 100ms ease;
+        position: relative;
+        top: 50%;
+        margin-top: -0.5em
     }
 
-    .wave_position {
+    .wave-position {
         transition: all 1000ms ease;
         height: 166px;
         position: relative;
         bottom: 165px;
-        /* width: 100%; */
         left: 0;
         width: 4592px;
     }
-    #file_drag{
-        /*background: repeating-linear-gradient(-45deg, rgba(13, 21, 56, 0.36), rgba(13, 21, 56, 0.36) 5px, transparent 5px, transparent 10px);*/
 
-    }
     @keyframes background-move {
-        0%{
+        0% {
             box-shadow: black 0px 0px 50px;
         }
-        50%{
+        50% {
             box-shadow: black 0px 0px 0px;
         }
-        100%{
+        100% {
             box-shadow: black 0px 0px 50px;
         }
+    }
+
+    #file_drag {
+        height: calc(100% - 80px);
+        margin: 40px;
+        border: dotted rgba(13, 21, 56, 0.36) 3px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    input[type='file'] {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        cursor: pointer;
+        margin-top: -1em;
+        opacity: 0
+    }
+
+    .wave-holder {
+        background: rgba(13, 21, 56, 0.36);
+        height: 1000px;
     }
 </style>
 {% endblock %}
@@ -35,19 +56,18 @@
 <!--<div style="width:100%;height:80px;background: rgba(13, 21, 56, 0.36)">-->
 
 <!--</div>-->
-<div id="file_drag" class=""
-     style="height: calc(100% - 80px); margin: 40px;border:dotted rgba(13, 21, 56, 0.36) 3px;text-align: center;overflow: hidden">
-
-    <div class="info_an" id="message" style="position: relative;top: 50%; margin-top: -0.5em">拖拽到此上传 &nbsp;OR&nbsp; 点击这个框</div>
-    <input type="file" style="width: 100%;height: 100%;outline:none;cursor:pointer;margin-top: -1em;opacity: 0"
-           id="file">
-    <div class="wave wave_position" style="bottom:0px"></div>
-    <div class="wave_position" style="background: rgba(13, 21, 56, 0.36);height:1000px;bottom:0px"></div>
+<div id="file_drag">
+    <div class="info-an" id="message" style="">拖拽到此上传 &nbsp;OR&nbsp;
+        点击这个框
+    </div>
+    <input type="file" style="" id="file">
+    <div class="wave wave-position" style="bottom:0px"></div>
+    <div class="wave-position wave-holder" style="bottom:0px"></div>
 </div>
 {% endblock %}
 {% block js %}
 <script>
-    function uploadFile(file){
+    function uploadFile(file) {
 
         var name = file.name;
         var size = file.size;
@@ -60,24 +80,27 @@
             method: 'POST',
             contentType: false,
             processData: false,
-            xhr: function(){        //这是关键  获取原生的xhr对象  做以前做的所有事情
+            xhr: function () {        //这是关键  获取原生的xhr对象  做以前做的所有事情
                 var xhr = jQuery.ajaxSettings.xhr();
-                xhr.upload.onload = function (){
+                xhr.upload.onload = function () {
 
                 };
                 xhr.upload.onprogress = function (ev) {
-                    if(ev.lengthComputable) {
-                        var percent = new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 2 }).format(100 * ev.loaded/ev.total);
-                        console.log(percent,ev);
-                        message("上传 <i>"+ name + "</i> " +percent+"%");
-                        updateProgress(percent+"%");
+                    if (ev.lengthComputable) {
+                        var percent = new Intl.NumberFormat('en-IN', {maximumSignificantDigits: 2}).format(100 * ev.loaded / ev.total);
+                        message("上传 <i>" + name + "</i> " + percent + "%");
+                        updateProgress(percent + "%");
                     }
                 };
                 return xhr;
             },
             success: function (data) {
                 hide();
-                message("上传 <i>"+ name +"</i> 成功");
+                if (data.errno === 0) {
+                    message("上传 <i>" + name + "</i> 成功");
+                } else {
+                    message("上传 <i>" + name + "</i> 失败，" + data.errmsg);
+                }
             }
         });
     }
@@ -87,61 +110,55 @@
         uploadFile(file);
     });
 
-    function message(message,status){
+    function message(message, status) {
         $("#message").html(message);
-        switch(status){
+        switch (status) {
             case "success":
-                $("#message").css('color','green');
-                setTimeout(function(){
-                    $("#message").css('color','white');
-                },3000);
+                $("#message").css('color', 'green');
+                setTimeout(function () {
+                    $("#message").css('color', 'white');
+                }, 3000);
                 break;
             case "failed":
-                $("#message").css('color','red');
+                $("#message").css('color', 'red');
                 break;
             case "normal":
-                $("#message").css('color','white');
+                $("#message").css('color', 'white');
                 break;
             default:
         }
         $("#message").css('color')
     }
 
-    function show(){
+    function show() {
         updateProgress("0%");
     }
-    function hide(){
+    function hide() {
         updateProgress("-166px");
     }
     function updateProgress(precent) {
-        $(".wave_position").each(function (ele) {
-            var data = $(this).css('bottom');
-            var num = parseInt(data.substr(0, data.length - 2), 10);
-            num += 20;
-            $(this).css('bottom', "calc("+ precent +" + 166px)");
+        $(".wave-position").each(function (ele) {
+            $(this).css('bottom', "calc(" + precent + " + 166px)");
         });
     }
     var isOver = false;
-    $("body").get(0).ondragleave = function(evt){
-        console.log("drag leave");
-        $('#file_drag').css('animation','none');
+    $("body").get(0).ondragleave = function (evt) {
+        $('#file_drag').css('animation', 'none');
         isOver = false;
         return false;
     };
-    $("body").get(0).ondragover = function(evt){
-        console.log("drag enter");
+    $("body").get(0).ondragover = function (evt) {
         evt.preventDefault();
-        if(!isOver) {
+        if (!isOver) {
             $('#file_drag').css('animation', 'background-move 2000ms ease infinite');
             isOver = true;
         }
     };
 
     $('#file_drag').get(0).addEventListener('drop', function (e) {
-        console.log(e);
         e.preventDefault(); // 阻止默认事件
         isOver = false;
-        $('#file_drag').css('animation','none');
+        $('#file_drag').css('animation', 'none');
         var file = e.dataTransfer.files[0]; //获取文件
         uploadFile(file);
     }, false);

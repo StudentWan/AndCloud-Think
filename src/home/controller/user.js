@@ -12,17 +12,17 @@ export default class extends Base {
      * @return {Promise} []
      */
 
-    async __before(){
-        if(this.http.action !== "login"){
-            this.user_id = await this.session('user_id');
-            if(!think.isEmpty(this.user_id)){
-                let userModel = this.model("users");
-                this.user = await userModel.getUserViaId(this.user_id);
-            }else{
-                return this.redirect('login');
-            }
-        }
-    }
+    // async __before(){
+    //     if(this.http.action !== "login"){
+    //         this.user_id = await this.session('user_id');
+    //         if(!think.isEmpty(this.user_id)){
+    //             let userModel = this.model("users");
+    //             this.user = await userModel.getUserViaId(this.user_id);
+    //         }else{
+    //             return this.redirect('login');
+    //         }
+    //     }
+    // }
 
     async indexAction() {
         this.assign("user",this.user);
