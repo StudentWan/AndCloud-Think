@@ -11,6 +11,8 @@
         padding-top: calc(50px - 0.5em);
     }
 </style>
+{% block headerbar %}
+{% endblock %}
 {% endblock %}
 {% block content %}
 
@@ -21,7 +23,7 @@
             <hr>
         </div>
         <div class="left-nav-link">
-            <a href="/project/upload" style="color:white;text-decoration: none">上传</a>
+            <a href="/project/create" style="color:white;text-decoration: none">上传</a>
         </div>
         <div class="left-nav-link">
             <a href="/project/history" style="color:white;text-decoration: none">历史</a>

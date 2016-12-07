@@ -13,12 +13,14 @@ export default class extends Base {
      */
 
     async __before(){
-        this.user_id = await this.session('user_id');
-        if(!think.isEmpty(this.user_id)){
-            let userModel = this.model("users");
-            this.user = await userModel.getUserViaId(this.user_id);
-        }else{
-            return this.redirect('login');
+        if(this.http.action !== "login"){
+            this.user_id = await this.session('user_id');
+            if(!think.isEmpty(this.user_id)){
+                let userModel = this.model("users");
+                this.user = await userModel.getUserViaId(this.user_id);
+            }else{
+                return this.redirect('login');
+            }
         }
     }
 
