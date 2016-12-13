@@ -1,0 +1,263 @@
+{% extends "./../basebar.html" %}
+{% block headerbar %}
+<style>
+    @media screen and (min-width: 760px) {
+        .history-list {
+            width: calc(50% - 3px);
+            height: 100vh;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .app-selected {
+            width: calc(50% - 3px);
+            display: inline-block;
+            height: 100vh;
+            overflow: scroll;
+            vertical-align: top;
+        }
+    }
+
+    @media screen and (max-width: 760px) {
+        .history-list {
+            width: 100%;
+            height: 50vh;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .app-selected {
+            width: 100%;
+            display: inline-block;
+            height: 50vh;
+            overflow: scroll;
+            vertical-align: top;
+        }
+    }
+
+    @media screen and (max-width: 760px) {
+        .left-bar {
+            width: 150px !important;
+        }
+    }
+
+    .app-item {
+        padding: 10px;
+        height: 50px;
+        box-sizing: content-box;
+        cursor: pointer;
+    }
+
+    .app-item:hover {
+        background: rgba(13, 21, 56, 0.10) !important;
+    }
+
+    .app-item.active {
+        background: rgba(13, 21, 56, 0.16);
+    }
+    .app-item.odd{
+        background: rgba(13, 21, 56, 0.06);
+    }
+
+    .app-item .logo {
+        padding: 5px;
+        height: 50px;
+        width: 50px;
+        float: left;
+        /*position: absolute;*/
+    }
+
+    .app-item>div {
+        /*padding-left: 70px;*/
+        float:left;
+        /*display: inline-block;*/
+    }
+
+    .history-list {
+        position: relative;
+    }
+
+    .history-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: rgba(13, 21, 56, 0.16);
+    }
+
+    .app {
+        overflow: scroll;
+        height: 100%;
+        padding-top: 80px;
+    }
+
+    .app span{
+        font-weight: 100;
+        font-size:1.1em;
+    }
+
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+
+    .list-enter, .list-leave-active {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    .bounce-enter-active {
+        animation: bounce-in .5s;
+    }
+    .bounce-leave-active {
+        animation: bounce-out .5s;
+    }
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    @keyframes bounce-out {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(0);
+        }
+    }
+</style>
+{% endblock %}
+{% block contentright %}
+<div id="app">
+    <div class="history-list">
+        <div class="history-header">
+            <h1 style="font-weight:100;padding-left: 10px">历史列表
+                <transition name="bounce">
+                    <p style="float:right" v-if="isLoading">loading...</p>
+                </transition>
+            </h1>
+        </div>
+        <div class="app">
+            <transition-group
+                    tag="p"
+                    v-bind:css="false"
+                    v-on:before-enter="beforeEnter"
+                    v-on:enter="enter"
+                    v-on:leave="leave"
+            >
+                <template v-for="app,index in apps" >
+                    <div :class="{ active: index==selectedIndex, odd:index%2>0 }" class="app-item" @click="select(index)" :key="index" :data-index="index">
+                        <img :src="app.logo" alt="" class="logo">
+                        <div style="">
+                            <div>
+                                <span>app package: </span> <span> {$app.package$}</span>
+                            </div>
+                            <div>
+                                <span>created time: </span> <span> {$displayTime(app.created_time)$}</span>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </template>
+            </transition-group>
+        </div>
+    </div>
+    <div class="app-selected">
+        <div v-if="selectedIndex == -1"></div>
+        <div v-else>{$apps[selectedIndex].package$}</div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="/static/app/js/velocity.min.js"></script>
+<script>
+    Vue.config.debug = true;
+    Vue.config.silent = false;
+    //    var apps = [
+    //        {"id": 123, "created_time": "123", "package": "test.safe-code.com", "logo": "/static/images/1.png"},
+    //        {"id": 1233, "created_time": "12312312", "package": "adsftest.safe-code.com", "logo": "/static/images/2.png"},
+    //        {"id": 1233, "created_time": "312", "package": "asdfasd.safe-code.com", "logo": "/static/images/1.png"}
+    //    ];
+    //    for (var i = 0; i < 100; i++) {
+    //        apps.push(apps[0]);
+    //    }
+    var $vm = new Vue({
+        el: '#app',
+        delimiters: ['{$', '$}'],
+        data: {
+            isLoading:true,
+            selectedIndex: -1,
+            apps: []
+        },
+        methods: {
+            select: function (index) {
+                this.selectedIndex = index;
+            },
+            displayTime: function (time) {
+                if (isNaN(time)) {
+                    time = 0;
+                }
+                var timer = new Date();
+                timer.setTime(time);
+                return timer.toLocaleTimeString();
+            },
+            beforeEnter: function (el,done) {
+                el.style.opacity = 0;
+                var len = el.dataset.index * 50;
+                $.Velocity(el,{translateY:len+"px"},{complete:done});
+//                el.style.height = 0;
+            },
+            enter: function (el, done) {
+                var delay = el.dataset.index * 150
+                setTimeout(function () {
+                    $.Velocity(
+                        el,
+                        {opacity: 1,translateY: "0px"},
+                        {complete: done}
+                    )
+                }, delay)
+            },
+            leave: function (el, done) {
+                var delay = el.dataset.index * 150
+                setTimeout(function () {
+                    $.Velocity(
+                        el,
+                        {opacity: 0,translateY: "200px"},
+                        {complete: done}
+                    )
+                }, delay)
+            }
+        }
+    });
+    $.ajax({
+        url: "/project/getlist",
+        success: function (data) {
+            if (data.errno == 0) {
+                var apps = data.data;
+                setTimeout(function(){
+                    $vm.isLoading = false;
+                    $vm.apps = apps.map(function (app) {
+                        app.created_time = app.createdTime;
+                        if (!app.package) {
+                            app.package = "wait to test";
+                        }
+                        if (!app.logo) {
+                            app.logo = "/static/images/loading.gif";
+                        }
+                        return app;
+                    });
+                },1000);
+            }
+        }
+    })
+</script>
+{% endblock %}

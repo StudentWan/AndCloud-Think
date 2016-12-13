@@ -10,6 +10,17 @@
         margin: 50px auto;
         padding-top: calc(50px - 1em);
     }
+    .left-bar{
+        width:220px;
+    }
+    .right-content{
+        width:calc(100% - 220px);
+    }
+    @media screen and (max-width: 760px){
+        .right-content{
+            width: calc(100% - 150px);
+        }
+    }
 </style>
 {% block headerbar %}
 {% endblock %}
@@ -17,8 +28,8 @@
 {% block content %}
 
 <div class="" style="height: 100%">
-    <div class="" style="background: rgba(13, 21, 56, 0.36);height: 100%;width:220px;float:left">
-        <div style="height:80px;width:220px;display: table-cell;vertical-align: middle;text-align: center">
+    <div class="left-bar" style="background: rgba(13, 21, 56, 0.36);height: 100%;float:left">
+        <div style="height:80px;width:100%;vertical-align: middle;text-align: center">
             <h1 style="font-weight: 100;">AndCloud</h1>
             <hr>
         </div>
@@ -28,7 +39,7 @@
         <div class="left-nav-link">
             <a href="/project/history" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em">history</a>
         </div>
-    </div><div class="" style="background: transparent;height: 100%;width:calc(100% - 220px);float:left">
+    </div><div class="right-content" style="background: transparent;height: 100%;float:left">
     {% block contentright %}
     {% endblock %}
 </div>

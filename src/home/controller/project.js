@@ -18,6 +18,17 @@ export default class extends Base {
         return this.display();
     }
 
+    historyAction(){
+        return this.display();
+    }
+
+    async getlistAction(){
+        let projectModel = this.model('projects');
+        let result = await projectModel.getProjectByUserID(this.user_id);
+        console.log(result);
+        return this.success(result);
+    }
+
     async uploadAction() {
         let file = this.file('apk');
         let type = file.originalFilename.split('.').pop();
