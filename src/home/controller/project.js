@@ -18,11 +18,11 @@ export default class extends Base {
         return this.display();
     }
 
-    historyAction(){
+    historyAction() {
         return this.display();
     }
 
-    async getlistAction(){
+    async getlistAction() {
         let projectModel = this.model('projects');
         let result = await projectModel.getProjectByUserID(this.user_id);
         console.log(result);
@@ -41,6 +41,10 @@ export default class extends Base {
                 fs.renameSync(path, newPath);
                 let projectModel = that.model('projects');
                 let insertID = await projectModel.addProject(name, newPath, this.user_id);
+                let sock = global.sock;
+                sock.sendAction("test", {
+                    projectId: insertID
+                });
                 return this.success({"id": insertID, "name": name});
             } catch (e) {
                 this.fail("i do not know");
