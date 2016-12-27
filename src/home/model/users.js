@@ -3,15 +3,19 @@ import md5 from 'md5';
 /**
  * model
  */
-class Users extends think.model.mongo {
+class Users extends think.model.base {
 
+    init(...args){
+        super.init(...args);
+        this.tableName = "T_USER";
+    }
     async findUser(id){
         return await this.find({_id:id});
     }
 
     async loginUser(username, password){
-        let user = await this.where({"name":username}).find();
-        if(Users.vertify(password,user["pass"])){
+        let user = await this.where({"username":username}).find();
+        if(Users.vertify(password,user["password"])){
             return user;
         }else{
             return false;
@@ -20,7 +24,7 @@ class Users extends think.model.mongo {
 
     async getUserViaId(id){
         try {
-            return await this.where({_id: id}).find();
+            return await this.where({"id": id}).find();
         }catch(e){
             return false;
         }
@@ -28,7 +32,7 @@ class Users extends think.model.mongo {
 
     async isUserNameExist(username){
         try{
-            let find = await this.where({"name":username}).find();
+            let find = await this.where({"username":username}).find();
             return !think.isEmpty(find);
         }catch (e){
             think.log(e.message,"model");
@@ -38,7 +42,7 @@ class Users extends think.model.mongo {
 
     async addUser(username,password){
         try {
-            let insertId = await this.add({"name": username, "pass": Users.encrypt(password)});
+            let insertId = await this.add({"username": username, "password": Users.encrypt(password)});
             return insertId;
         }catch(e){
             think.log(`add user cause wrong ${e}`,'app/model');

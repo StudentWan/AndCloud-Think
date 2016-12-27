@@ -1,23 +1,27 @@
 'use strict';
 
-class Projects extends think.model.mongo {
+class Projects extends think.model.base {
+    init(...args){
+        super.init(...args);
+        this.tableName = "T_PROJECT";
+    }
     async addProject(projectName, filePath, userId) {
         return await this.add({
             name: projectName,
-            filePath: filePath,
-            userId: userId,
-            createdTime: new Date().getTime().toString(),
+            filename: filePath,
+            userid: userId,
+            uploadtime: new Date().getTime().toString(),
         });
     }
 
     async getProjectViaId(id) {
-        let data = await this.where({_id: id}).find();
+        let data = await this.where({"id": id}).find();
         return data;
     }
 
     async getProjectByUserID(user_id) {
         console.log(user_id);
-        let data = await this.where({'userId': user_id}).select();
+        let data = await this.where({'userid': user_id}).select();
         return data;
     }
 }
