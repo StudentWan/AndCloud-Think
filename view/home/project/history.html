@@ -55,7 +55,8 @@
     .app-item.active {
         background: rgba(13, 21, 56, 0.16);
     }
-    .app-item.odd{
+
+    .app-item.odd {
         background: rgba(13, 21, 56, 0.06);
     }
 
@@ -67,9 +68,9 @@
         /*position: absolute;*/
     }
 
-    .app-item>div {
+    .app-item > div {
         /*padding-left: 70px;*/
-        float:left;
+        float: left;
         /*display: inline-block;*/
     }
 
@@ -92,9 +93,9 @@
         padding-top: 80px;
     }
 
-    .app span{
+    .app span {
         font-weight: 100;
-        font-size:1.1em;
+        font-size: 1.1em;
     }
 
     .list-enter-active, .list-leave-active {
@@ -109,9 +110,11 @@
     .bounce-enter-active {
         animation: bounce-in .5s;
     }
+
     .bounce-leave-active {
         animation: bounce-out .5s;
     }
+
     @keyframes bounce-in {
         0% {
             transform: scale(0);
@@ -123,6 +126,7 @@
             transform: scale(1);
         }
     }
+
     @keyframes bounce-out {
         0% {
             transform: scale(1);
@@ -154,8 +158,9 @@
                     v-on:enter="enter"
                     v-on:leave="leave"
             >
-                <template v-for="app,index in apps" >
-                    <div :class="{ active: index==selectedIndex, odd:index%2>0 }" class="app-item" @click="select(index)" :key="index" :data-index="index">
+                <template v-for="app,index in apps">
+                    <div :class="{ active: index==selectedIndex, odd:index%2>0 }" class="app-item"
+                         @click="select(index)" :key="index" :data-index="index">
                         <img :src="app.logo" alt="" class="logo">
                         <div style="">
                             <div>
@@ -179,85 +184,82 @@
 {% endblock %}
 {% block js %}
 <script src="/static/app/js/velocity.min.js"></script>
+<script src="/static/app/js/moment-with-locales.js"></script>
 <script>
-    Vue.config.debug = true;
-    Vue.config.silent = false;
-    //    var apps = [
-    //        {"id": 123, "created_time": "123", "package": "test.safe-code.com", "logo": "/static/images/1.png"},
-    //        {"id": 1233, "created_time": "12312312", "package": "adsftest.safe-code.com", "logo": "/static/images/2.png"},
-    //        {"id": 1233, "created_time": "312", "package": "asdfasd.safe-code.com", "logo": "/static/images/1.png"}
-    //    ];
-    //    for (var i = 0; i < 100; i++) {
-    //        apps.push(apps[0]);
-    //    }
-    var $vm = new Vue({
-        el: '#app',
-        delimiters: ['{$', '$}'],
-        data: {
-            isLoading:true,
-            selectedIndex: -1,
-            apps: []
-        },
-        methods: {
-            select: function (index) {
-                this.selectedIndex = index;
-            },
-            displayTime: function (time) {
-                if (isNaN(time)) {
-                    time = 0;
-                }
-                var timer = new Date();
-                timer.setTime(time);
-                return timer.toLocaleTimeString();
-            },
-            beforeEnter: function (el,done) {
-                el.style.opacity = 0;
-                var len = el.dataset.index * 50;
-                $.Velocity(el,{translateY:len+"px"},{complete:done});
+  moment.locale('zh-CN');
+  Vue.config.debug = true;
+  Vue.config.silent = false;
+  //    var apps = [
+  //        {"id": 123, "created_time": "123", "package": "test.safe-code.com", "logo": "/static/images/1.png"},
+  //        {"id": 1233, "created_time": "12312312", "package": "adsftest.safe-code.com", "logo": "/static/images/2.png"},
+  //        {"id": 1233, "created_time": "312", "package": "asdfasd.safe-code.com", "logo": "/static/images/1.png"}
+  //    ];
+  //    for (var i = 0; i < 100; i++) {
+  //        apps.push(apps[0]);
+  //    }
+  var $vm = new Vue({
+    el: '#app',
+    delimiters: ['{$', '$}'],
+    data: {
+      isLoading: true,
+      selectedIndex: -1,
+      apps: []
+    },
+    methods: {
+      select: function (index) {
+        this.selectedIndex = index;
+      },
+      displayTime: function (time) {
+        return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
+      },
+      beforeEnter: function (el, done) {
+        el.style.opacity = 0;
+        var len = el.dataset.index * 50;
+        $.Velocity(el, {translateY: len + "px"}, {complete: done});
 //                el.style.height = 0;
-            },
-            enter: function (el, done) {
-                var delay = el.dataset.index * 150
-                setTimeout(function () {
-                    $.Velocity(
-                        el,
-                        {opacity: 1,translateY: "0px"},
-                        {complete: done}
-                    )
-                }, delay)
-            },
-            leave: function (el, done) {
-                var delay = el.dataset.index * 150
-                setTimeout(function () {
-                    $.Velocity(
-                        el,
-                        {opacity: 0,translateY: "200px"},
-                        {complete: done}
-                    )
-                }, delay)
+      },
+      enter: function (el, done) {
+        var delay = el.dataset.index * 150
+        setTimeout(function () {
+          $.Velocity(
+            el,
+            {opacity: 1, translateY: "0px"},
+            {complete: done}
+          )
+        }, delay)
+      },
+      leave: function (el, done) {
+        var delay = el.dataset.index * 150
+        setTimeout(function () {
+          $.Velocity(
+            el,
+            {opacity: 0, translateY: "200px"},
+            {complete: done}
+          )
+        }, delay)
+      }
+    }
+  });
+  $.ajax({
+    url: "/project/getlist",
+    success: function (data) {
+      if (data.errno == 0) {
+        var apps = data.data;
+        setTimeout(function () {
+          $vm.isLoading = false;
+          $vm.apps = apps.map(function (app) {
+            app.created_time = app.uploadtime;
+            if (!app.package) {
+              app.package = "wait to test";
             }
-        }
-    });
-    $.ajax({
-        url: "/project/getlist",
-        success: function (data) {
-            if (data.errno == 0) {
-                var apps = data.data;
-                setTimeout(function(){
-                    $vm.isLoading = false;
-                    $vm.apps = apps.map(function (app) {
-                        app.created_time = app.createdTime;
-                        if (!app.package) {
-                            app.package = "wait to test";
-                        }
-                        if (!app.logo) {
-                            app.logo = "/static/images/loading.gif";
-                        }
-                        return app;
-                    });
-                },1000);
+            if (!app.logo) {
+              app.logo = "/static/images/loading.gif";
             }
-        }
-    })
+            return app;
+          });
+        }, 1000);
+      }
+    }
+  })
 </script>
 {% endblock %}
