@@ -18,6 +18,10 @@ export default class extends Base {
     return this.display();
   }
 
+  autoviewAction(){
+    return this.display();
+  }
+
   historyAction() {
     return this.display();
   }
@@ -47,9 +51,6 @@ export default class extends Base {
         });
         let tokens = that.model('tokens');
         tokens.addTokens(insertID,this.user_id);
-        // let deviceMapModel = that.model('deviceMaps');
-        // deviceMapModel.addDeviceMap(insertID).then(function () {
-        // });
         return this.success({"id": insertID, "name": name});
       } catch (e) {
         this.fail("i do not know");

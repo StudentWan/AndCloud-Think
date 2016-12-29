@@ -138,10 +138,36 @@
             transform: scale(0);
         }
     }
+    .empty-page{
+        text-align: center;
+        float: left;
+        margin-top: 50%;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .app-selected{
+        padding:50px;
+    }
+
+    .app-info-detail{
+        height:100px;
+    }
+    .app-info-detail .logo{
+        width:100%;
+    }
+    .app-info-detail .app-name{
+        padding: 10px;
+        border: 1px solid white;
+        margin: 5px 0px;
+        border-radius: 5px;
+        text-align: center;
+    }
 </style>
 {% endblock %}
 {% block contentright %}
-<div id="app">
+<div id="app" style="opacity: 0">
     <div class="history-list">
         <div class="history-header">
             <h1 style="font-weight:100;padding-left: 10px">历史列表
@@ -164,10 +190,10 @@
                         <img :src="app.logo" alt="" class="logo">
                         <div style="">
                             <div>
-                                <span>app package: </span> <span> {$app.package$}</span>
+                                <span><i class="iconfont icon-news_hot_light"></i></span> <span> {$app.package$}</span>
                             </div>
                             <div>
-                                <span>created time: </span> <span> {$displayTime(app.created_time)$}</span>
+                                <span><i class="iconfont icon-time"></i> </span> <span> {$displayTime(app.created_time)$}</span>
                             </div>
                         </div>
                         <div style="clear:both;"></div>
@@ -175,10 +201,41 @@
                 </template>
             </transition-group>
         </div>
-    </div>
-    <div class="app-selected">
-        <div v-if="selectedIndex == -1"></div>
-        <div v-else>{$apps[selectedIndex].package$}</div>
+    </div><!--
+    --><div class="app-selected">
+        <template v-if="selectedIndex == -1">
+            <div class="empty-page" >
+                <div style="animation: buzz-out 3s infinite linear;">
+                <i class="iconfont icon-focus" style="font-size: 60px;margin:auto;"></i>
+                </div>
+                <br>
+                你啊，还没选择项目呢...
+                <br>
+                去左边选一个
+            </div>
+        </template>
+        <template v-else>
+            <div class="app-info-detail">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img :src="apps[selectedIndex].logo" alt="" class="logo">
+                        <br>
+                        <div class="app-name">{$apps[selectedIndex].package$}</div>
+                    </div>
+                    <div class="col-xs-8">
+                        3xiaoshiqian
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="app-action-list">
+                <div class="row">
+                    <div class="col-xs-12">
+
+                    </div>
+                </div>
+            </div>
+        </template>
     </div>
 </div>
 {% endblock %}
@@ -189,14 +246,6 @@
   moment.locale('zh-CN');
   Vue.config.debug = true;
   Vue.config.silent = false;
-  //    var apps = [
-  //        {"id": 123, "created_time": "123", "package": "test.safe-code.com", "logo": "/static/images/1.png"},
-  //        {"id": 1233, "created_time": "12312312", "package": "adsftest.safe-code.com", "logo": "/static/images/2.png"},
-  //        {"id": 1233, "created_time": "312", "package": "asdfasd.safe-code.com", "logo": "/static/images/1.png"}
-  //    ];
-  //    for (var i = 0; i < 100; i++) {
-  //        apps.push(apps[0]);
-  //    }
   var $vm = new Vue({
     el: '#app',
     delimiters: ['{$', '$}'],
@@ -238,6 +287,9 @@
           )
         }, delay)
       }
+    },
+    mounted: function () {
+      $(this.$el).css('opacity', '1')
     }
   });
   $.ajax({
@@ -257,7 +309,7 @@
             }
             return app;
           });
-        }, 1000);
+        }, 100);
       }
     }
   })

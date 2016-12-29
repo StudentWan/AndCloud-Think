@@ -1,7 +1,7 @@
 'use strict';
 
 import moment from 'moment'
-
+moment.locale('zh-CN')
 class Projects extends think.model.base {
   init(...args) {
     super.init(...args);
@@ -25,6 +25,9 @@ class Projects extends think.model.base {
   async getProjectByUserID(user_id) {
     console.log(user_id);
     let data = await this.where({'userid': user_id}).select();
+    data.forEach($ => {
+      $.uploadtime = moment($.uploadtime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
+    });
     return data;
   }
 }
