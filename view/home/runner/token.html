@@ -56,10 +56,10 @@
     if (msg == "{type:\"pong\"}") {
       return;
     } else {
-
+        $vm.addLog(msg);
     }
     console.log(msg);
-  }
+  };
   socket.onclose = function () {
     clearInterval(pinger)
   };
