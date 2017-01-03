@@ -1,10 +1,25 @@
 {% extends "./../basebar.html" %}
 {% block contentright %}
-
+<canvas></canvas>
+<div id="app">
+<pre>
+    {$logList.join('\n')$}
+</pre>
+</div>
 {% endblock %}
 {% block js %}
 <script src="/static/socket/socket.io.js"></script>
 <script>
+    var $vm = new Vue({
+      el: '#app',
+      delimiters: ['{$', '$}'],
+      data:{
+        logList:[],
+      },
+      methods:{
+
+      }
+    });
   var socket = new WebSocket('ws://192.168.8.88:6565');
   var pinger = null;
   socket.onopen = function(){
@@ -13,8 +28,13 @@
       socket.send(JSON.stringify({type:'ping',detail:'{{token}}'}))
     },1000*30);
   };
-  socket.onmessage = function(){
-
+  socket.onmessage = function(msg){
+    if(msg == "{type:\"pong\"}"){
+      return;
+    }else{
+      $vm.logList.push(msg);
+    }
+    console.log(msg);
   }
   socket.onclose = function(){
     clearInterval(pinger)
