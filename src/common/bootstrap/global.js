@@ -39,6 +39,9 @@ if (!global.sock) {
     think.log("send message " + JSON.stringify(json), "ZMQ");
     sock.send(JSON.stringify(json));
   };
+  sock.on('message',function(message){
+    think.log('receive message '+ message,"ZMQ");
+  });
   think.log("register global success", "ZMQ");
   global.sock = sock;
 }
