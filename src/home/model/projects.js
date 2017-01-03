@@ -8,11 +8,12 @@ class Projects extends think.model.base {
     this.tableName = "T_PROJECT";
   }
 
-  async addProject(projectName, filePath, userId) {
+  async addProject(projectName, filePath, userId, mirrid) {
     return await this.add({
       name: projectName,
       filename: filePath,
       userid: userId,
+      mirrorid: mirrid,
       uploadtime: moment().format("YYYY-MM-DD HH:mm:ss"),
     });
   }

@@ -44,7 +44,7 @@ export default class extends Base {
       try {
         fs.renameSync(path, newPath);
         let projectModel = that.model('projects');
-        let insertID = await projectModel.addProject(name, newPath, this.user_id);
+        let insertID = await projectModel.addProject(name, newPath, this.user_id, 1);
         let sock = global.sock;
         sock.sendAction("new_project", {
           projectid: insertID,
