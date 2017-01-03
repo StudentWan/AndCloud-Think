@@ -12,21 +12,33 @@
  */
 import ZMQ from 'zmq';
 if (!global.sock) {
-    think.log("ZMQ Version: " + ZMQ.version, "ZMQ");
+  think.log("ZMQ Version: " + ZMQ.version, "ZMQ");
 
-    let sockUrl = think.config('zmq.url');
-    let sock = ZMQ.socket('push');
+  let sockUrl = think.config('zmq.url');
+  let sock = ZMQ.socket('req');
 
-    sock.bindSync(sockUrl);
-    think.log("ZMQ binding " + sockUrl, "ZMQ");
+  sock.connect(sockUrl);
+  think.log("ZMQ binding " + sockUrl, "ZMQ");
 
-    sock.sendAction = function (actionname, params) {
-        let json = {
-            type: actionname,
-            params: params
-        };
-        sock.send(JSON.stringify(json));
+  sock.sendAction = function (actionname, params) {
+    let json = {
+      type: actionname,
+      params: params
     };
-    think.log("register global success", "ZMQ");
-    global.sock = sock;
+    switch (actionname) {
+      case "new_project":
+        json = {
+          projectid: params.projectid,
+          type: 0,
+          uid: params.uid
+        };
+        break;
+      default:
+        break;
+    }
+    think.log("send message " + JSON.stringify(json), "ZMQ");
+    sock.send(JSON.stringify(json));
+  };
+  think.log("register global success", "ZMQ");
+  global.sock = sock;
 }

@@ -10,7 +10,7 @@ class Users extends think.model.base {
         this.tableName = "T_USER";
     }
     async findUser(id){
-        return await this.find({_id:id});
+        return await this.find({id:id});
     }
 
     async loginUser(username, password){
@@ -43,7 +43,7 @@ class Users extends think.model.base {
     async addUser(username,password){
         try {
             let insertId = await this.add({"username": username, "password": Users.encrypt(password)});
-            return insertId;
+            return insertId
         }catch(e){
             think.log(`add user cause wrong ${e}`,'app/model');
             return false;

@@ -26,6 +26,13 @@ class Tokens extends think.model.base {
     );
     return Promise.all(promiseList);
   }
+
+  async getTokens(projectid, userid) {
+    return await this.where({
+      userid: userid,
+      projectid: projectid,
+    }).select();
+  }
 }
 
 export default Tokens;

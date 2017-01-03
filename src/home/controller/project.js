@@ -18,7 +18,7 @@ export default class extends Base {
     return this.display();
   }
 
-  autoviewAction(){
+  autoviewAction() {
     return this.display();
   }
 
@@ -46,11 +46,12 @@ export default class extends Base {
         let projectModel = that.model('projects');
         let insertID = await projectModel.addProject(name, newPath, this.user_id);
         let sock = global.sock;
-        sock.sendAction("test", {
-          projectId: insertID
+        sock.sendAction("new_project", {
+          projectid: insertID,
+          uid: this.user_id
         });
         let tokens = that.model('tokens');
-        tokens.addTokens(insertID,this.user_id);
+        tokens.addTokens(insertID, this.user_id);
         return this.success({"id": insertID, "name": name});
       } catch (e) {
         this.fail("i do not know");
@@ -58,5 +59,15 @@ export default class extends Base {
     } else {
       return this.fail("wrong type");
     }
+  }
+
+  async gettokensAction() {
+    let projectid = this.post('projectid');
+    let userid = await this.session('user_id');
+    let tokenModel = this.model('tokens');
+    let tokens = await tokenModel.getTokens(projectid, userid);
+    // let res = tokens.map($ => $.tokens.toArray());
+    console.log(tokens);
+    return this.success(tokens);
   }
 }

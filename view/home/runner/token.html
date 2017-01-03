@@ -1,0 +1,23 @@
+{% extends "./../basebar.html" %}
+{% block contentright %}
+
+{% endblock %}
+{% block js %}
+<script src="/static/socket/socket.io.js"></script>
+<script>
+  var socket = new WebSocket('ws://192.168.8.88:6565');
+  var pinger = null;
+  socket.onopen = function(){
+    socket.send(JSON.stringify({type:'auth',detail:'{{token}}'}));
+    pinger = setInterval(function(){
+      socket.send(JSON.stringify({type:'ping',detail:'{{token}}'}))
+    },1000*30);
+  };
+  socket.onmessage = function(){
+
+  }
+  socket.onclose = function(){
+    clearInterval(pinger)
+  }
+</script>
+{% endblock %}
