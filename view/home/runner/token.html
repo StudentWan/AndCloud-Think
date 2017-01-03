@@ -28,7 +28,8 @@
       socket.send(JSON.stringify({type:'ping',detail:'{{token}}'}))
     },1000*30);
   };
-  socket.onmessage = function(msg){
+  socket.onmessage = function(message){
+    var msg = message.data;
     if(msg == "{type:\"pong\"}"){
       return;
     }else{
