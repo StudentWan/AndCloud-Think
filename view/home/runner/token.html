@@ -1,44 +1,105 @@
 {% extends "./../basebar.html" %}
 {% block contentright %}
-<canvas></canvas>
-<div id="app">
-<pre>
-    {$logList.join('\n')$}
-</pre>
+<style>
+    #phone-screen{
+        float:left;
+        top: 50%;
+        position: relative;
+        margin-top: -250px;
+    }
+    .log-container{
+        float:left;
+        height: 100%;
+        width: calc(100% - 300px);
+    }
+    .log-container pre {
+        height: 100%;
+        overflow: scroll;
+        background-color: transparent;
+    }
+</style>
+<canvas id="phone-screen" width="300" height="500"></canvas>
+<div id="app" class="log-container">
+    <pre>
+        {$logList.join('\n')$}
+    </pre>
 </div>
 {% endblock %}
 {% block js %}
 <script src="/static/socket/socket.io.js"></script>
 <script>
-    var $vm = new Vue({
-      el: '#app',
-      delimiters: ['{$', '$}'],
-      data:{
-        logList:[],
-      },
-      methods:{
-
+  var $vm = new Vue({
+    el: '#app',
+    delimiters: ['{$', '$}'],
+    data: {
+      logList: [],
+    },
+    methods: {
+      addLog: function ($log) {
+        while (this.logList.length > 1000) {
+          this.logList.shift();
+        }
+        this.logList.push($log);
       }
-    });
+    }
+  });
   var socket = new WebSocket('ws://192.168.8.88:6565');
   var pinger = null;
-  socket.onopen = function(){
-    socket.send(JSON.stringify({type:'auth',detail:'{{token}}'}));
-    pinger = setInterval(function(){
-      socket.send(JSON.stringify({type:'ping',detail:'{{token}}'}))
-    },1000*30);
+  socket.onopen = function () {
+    socket.send(JSON.stringify({type: 'auth', detail: '{{token}}'}));
+    pinger = setInterval(function () {
+      socket.send(JSON.stringify({type: 'ping', detail: '{{token}}'}))
+    }, 1000 * 30);
   };
-  socket.onmessage = function(message){
+  socket.onmessage = function (message) {
     var msg = message.data;
-    if(msg == "{type:\"pong\"}"){
+    if (msg == "{type:\"pong\"}") {
       return;
-    }else{
-      $vm.logList.push(msg);
+    } else {
+
     }
     console.log(msg);
   }
-  socket.onclose = function(){
+  socket.onclose = function () {
     clearInterval(pinger)
   }
+  (function(){
+    var BLANK_IMG =
+      'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+    var canvas = document.getElementById('phone-screen');
+    var ctx = canvas.getContext('2d');
+    var socket = new WebSocket('ws://192.168.8.88:6566');
+    var pinger = null;
+    socket.onopen = function () {
+      socket.send(JSON.stringify({type: 'auth', detail: '{{token}}'}));
+      pinger = setInterval(function () {
+        socket.send(JSON.stringify({type: 'ping', detail: '{{token}}'}))
+      }, 1000 * 30);
+    };
+    socket.onmessage = function (message) {
+      var msg = message.data;
+      if (msg == "{type:\"pong\"}") {
+        return;
+      } else {
+        var blob = new Blob([msg], {type: 'image/jpeg'});
+        var URL = window.URL || window.webkitURL;
+        var img = new Image();
+        img.onload = function() {
+          console.log(img.width, img.height);
+          ctx.drawImage(img,220,0, 360,600,0, 0,canvas.width,canvas.height);
+          img.onload = null;
+          img.src = BLANK_IMG;
+          img = null;
+          u = null;
+          blob = null;
+        };
+        var u = URL.createObjectURL(blob);
+        img.src = u
+      }
+    }
+    socket.onclose = function () {
+      clearInterval(pinger)
+    }
+  })();
 </script>
 {% endblock %}
