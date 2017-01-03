@@ -8,6 +8,6 @@ export default {
   //key: value
     port:8000,
     zmq:{
-        url:'tcp://192.168.8.88:12001'
+        url:'tcp://127.0.0.1:12001'
     }
 };
