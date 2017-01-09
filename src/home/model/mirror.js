@@ -1,0 +1,1 @@
+'use strict';class Mirror extends think.model.base{  init(...args) {    super.init(...args);    this.tableName = "T_MIRRORIMAGE";  }  getMirrorList(){    return this.where(1).select();  }}export default Mirror;

@@ -14,7 +14,11 @@ const ALLOW_LIST = ["apk", "pdf"];
 export default class extends Base {
 
 
-  * createAction() {
+  async createAction() {
+    let mirrorModel = this.model('mirror');
+    let res = await mirrorModel.getMirrorList();
+    this.assign('mirrorlist',res);
+    console.log(res);
     return this.display();
   }
 
@@ -35,6 +39,8 @@ export default class extends Base {
 
   async uploadAction() {
     let file = this.file('apk');
+    let vm = this.post("vm");
+    let time = this.post("time");
     let type = file.originalFilename.split('.').pop();
     let name = this.post("name");
     if (ALLOW_LIST.indexOf(type) >= 0) {
@@ -44,11 +50,12 @@ export default class extends Base {
       try {
         fs.renameSync(path, newPath);
         let projectModel = that.model('projects');
-        let insertID = await projectModel.addProject(name, newPath, this.user_id, 1);
+        let insertID = await projectModel.addProject(name, newPath, this.user_id, vm);
         let sock = global.sock;
         sock.sendAction("new_project", {
           projectid: insertID,
-          uid: this.user_id
+          uid: this.user_id,
+          time: time
         });
         let tokens = that.model('tokens');
         tokens.addTokens(insertID, this.user_id);
