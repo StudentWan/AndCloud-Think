@@ -18,7 +18,6 @@ export default class extends Base {
     let mirrorModel = this.model('mirror');
     let res = await mirrorModel.getMirrorList();
     this.assign('mirrorlist',res);
-    console.log(res);
     return this.display();
   }
 
@@ -33,7 +32,6 @@ export default class extends Base {
   async getlistAction() {
     let projectModel = this.model('projects');
     let result = await projectModel.getProjectByUserID(this.user_id);
-    console.log(result);
     return this.success(result);
   }
 
@@ -74,7 +72,6 @@ export default class extends Base {
     let tokenModel = this.model('tokens');
     let tokens = await tokenModel.getTokens(projectid, userid);
     // let res = tokens.map($ => $.tokens.toArray());
-    console.log(tokens);
     return this.success(tokens);
   }
 }
