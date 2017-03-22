@@ -1,4 +1,5 @@
 {% extends "./../basebar.html" %}
+{% block title %}历史列表{% endblock %}
 {% block headerbar %}
 <style>
     @media screen and (min-width: 760px) {
@@ -156,7 +157,8 @@
     }
 
     .app-info-detail .logo {
-        width: 100%;
+        width: 64px;
+        height: 64px;
     }
 
     .app-info-detail .app-name {
@@ -166,6 +168,24 @@
         border-radius: 5px;
         text-align: center;
     }
+
+    .app-info .info-title {
+        border-radius: .25em;
+        background-color: #ccc;
+        font-size: 75%;
+        font-weight: 700;
+        padding: .2em .6em .3em;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        display: inline;
+    }
+
+    .app-info {
+        margin: 2px;
+        white-space: nowrap;
+    }
 </style>
 {% endblock %}
 {% block contentright %}
@@ -174,7 +194,7 @@
         <div class="history-header">
             <h1 style="font-weight:100;padding-left: 10px">历史列表
                 <transition name="bounce">
-                    <p style="float:right" v-if="isLoading">loading...</p>
+                    <p style="float:right" v-if="isLoading">Loading...</p>
                 </transition>
             </h1>
         </div>
@@ -192,7 +212,7 @@
                         <img :src="app.logo" alt="" class="logo">
                         <div style="">
                             <div>
-                                <span><i class="iconfont icon-news_hot_light"></i></span> <span> {$app.package$}</span>
+                                <span><i class="iconfont icon-news_hot_light"></i></span> <span> {$app.label$}</span>
                             </div>
                             <div>
                                 <span><i class="iconfont icon-time"></i> </span> <span> {$displayTime(app.created_time)$}</span>
@@ -220,14 +240,22 @@
         <template v-else>
             <div class="app-info-detail">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
                         <img :src="apps[selectedIndex].logo" alt="" class="logo">
-                        <br>
-                        <div class="app-name">{$apps[selectedIndex].package$}</div>
                     </div>
-                    <div class="col-xs-8">
-                        3xiaoshiqian
+                    <div class="col-xs-9">
+                        <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后</div>
+                        <div v-if="apps[selectedIndex].isfullinfo">
+                            <div class="app-name">{$apps[selectedIndex].label$}</div>
+                            <div class="app-info"><span class="info-title">包名</span> {$apps[selectedIndex].packagename$}</div>
+                            <div class="app-info"><span class="info-title">文件大小</span> {$apps[selectedIndex].size$}</div>
+                            <div class="app-info"><span class="info-title">文件MD5</span> {$apps[selectedIndex].md5$}</div>
+                            <div class="app-info"><span class="info-title">文件SHA1</span> {$apps[selectedIndex].sha1$}</div>
+                        </div>
                     </div>
+                </div>
+                <div class="row" v-if="apps[selectedIndex].isfullinfo" style="text-align: center; margin-top: 3px;">
+                    <a class="btn btn-default" href="#"><i class="iconfont icon-report"></i>APK静态分析报告</a>
                 </div>
                 <hr>
             </div>
@@ -238,7 +266,8 @@
                             shit
                         </div>
                         <div v-else>
-                            <a class="btn btn-default" :href="'/runner/token/'+autoToken.token"><i class="iconfont icon-magic"></i>自动检测</a>
+                            <a class="btn btn-default" :href="'/runner/token/'+autoToken.token"><i
+                                    class="iconfont icon-magic"></i>自动检测</a>
                             {$autoToken.token$}
                         </div>
                     </div>
@@ -252,110 +281,143 @@
 <script src="/static/app/js/velocity.min.js"></script>
 <script src="/static/app/js/moment-with-locales.js"></script>
 <script>
-  moment.locale('zh-CN');
-  Vue.config.debug = true;
-  Vue.config.silent = false;
-  var $vm = new Vue({
-    el: '#app',
-    delimiters: ['{$', '$}'],
-    data: {
-      isLoading: true,
-      selectedIndex: -1,
-      apps: [],
-      appTokens: {},
-      autoToken:{},
-      handToken:{}
-    },
-    methods: {
-      getTokensEvt :function(projectid){
-        var that = this;
-        this.getTokens(projectid,function(tokens){
-          that.autoToken = tokens[0];
-          that.handToken = tokens[1];
-        });
-      },
-      getTokens: function (projectid, success_callback) {
-        if (this.appTokens[projectid] !== undefined) {
-          return success_callback(this.appTokens[projectid]);
-        }
-        var that = this;
-        $.ajax({
-          url: '/project/getTokens',
-          data: {projectid: projectid},
-          method: "POST",
-          success: function (data) {
-            if(data.errno!==0){
-              return alert(data.errmsg);
-            }
-            data.data.forEach(function($){
-              var projectid = $.projectid;
-              if(that.appTokens[projectid] === undefined){
-                that.appTokens[projectid] = {};
-              }
-              that.appTokens[projectid][$.type] = $;
-            });
-            success_callback(that.appTokens[projectid]);
-          }
-        });
-      },
-      select: function (index) {
-        this.selectedIndex = index;
-        this.getTokensEvt(this.apps[this.selectedIndex].id)
-      },
-      displayTime: function (time) {
-        return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
-      },
-      beforeEnter: function (el, done) {
-        el.style.opacity = 0;
-        var len = el.dataset.index * 50;
-        $.Velocity(el, {translateY: len + "px"}, {complete: done});
+    moment.locale('zh-CN');
+    Vue.config.debug = true;
+    Vue.config.silent = false;
+    var $vm = new Vue({
+        el: '#app',
+        delimiters: ['{$', '$}'],
+        data: {
+            isLoading: true,
+            selectedIndex: -1,
+            apps: [],
+            appTokens: {},
+            autoToken: {},
+            handToken: {}
+        },
+        methods: {
+            getTokensEvt: function (projectid) {
+                var that = this;
+                this.getTokens(projectid, function (tokens) {
+                    that.autoToken = tokens[0];
+                    that.handToken = tokens[1];
+                });
+            },
+            getTokens: function (projectid, success_callback) {
+                if (this.appTokens[projectid] !== undefined) {
+                    return success_callback(this.appTokens[projectid]);
+                }
+                var that = this;
+                $.ajax({
+                    url: '/project/getTokens',
+                    data: {projectid: projectid},
+                    method: "POST",
+                    success: function (data) {
+                        if (data.errno !== 0) {
+                            return alert(data.errmsg);
+                        }
+                        data.data.forEach(function ($) {
+                            var projectid = $.projectid;
+                            if (that.appTokens[projectid] === undefined) {
+                                that.appTokens[projectid] = {};
+                            }
+                            that.appTokens[projectid][$.type] = $;
+                        });
+                        success_callback(that.appTokens[projectid]);
+                    }
+                });
+            },
+            getApkInfo: function (projid) {
+                var that = this;
+                $.ajax({
+                    url: '/project/apkinfo',
+                    data: {proj: projid},
+                    method: "GET",
+                success: function (data) {
+                    var apkinfo = null;
+                    if(!data.data || data.data.length == 0){
+                        console.log("projid" + projid +" not have apkinfo");
+                        return;
+                    }
+                    apkinfo = data.data[0];
+                    that.apps.forEach(function ($) {
+                        if($.id === projid){
+                            if(apkinfo.id){
+                                $.isfullinfo = true;
+                                for(var key in apkinfo){
+                                    if(key=='id') continue;
+                                    if(apkinfo.hasOwnProperty(key)) {
+                                        console.log(key + "  ---  " + apkinfo[key]);
+                                        $[key] = apkinfo[key];
+                                    }
+                                }
+                            }else{
+                                $.isfullinfo = false;
+                            }
+                        }
+                    })
+                }});
+            },
+            select: function (index) {
+                this.selectedIndex = index;
+                this.getTokensEvt(this.apps[this.selectedIndex].id);
+                this.getApkInfo(this.apps[this.selectedIndex].id);
+            },
+            displayTime: function (time) {
+                return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
+            },
+            beforeEnter: function (el, done) {
+                el.style.opacity = 0;
+                var len = el.dataset.index * 50;
+                $.Velocity(el, {translateY: len + "px"}, {complete: done});
 //                el.style.height = 0;
-      },
-      enter: function (el, done) {
-        var delay = el.dataset.index * 150
-        setTimeout(function () {
-          $.Velocity(
-            el,
-            {opacity: 1, translateY: "0px"},
-            {complete: done}
-          )
-        }, delay)
-      },
-      leave: function (el, done) {
-        var delay = el.dataset.index * 150
-        setTimeout(function () {
-          $.Velocity(
-            el,
-            {opacity: 0, translateY: "200px"},
-            {complete: done}
-          )
-        }, delay)
-      }
-    },
-    mounted: function () {
-      $(this.$el).css('opacity', '1')
-    }
-  });
-  $.ajax({
-    url: "/project/getlist",
-    success: function (data) {
-      if (data.errno == 0) {
-        var apps = data.data;
-        setTimeout(function () {
-          $vm.isLoading = false;
-          $vm.apps = apps.map(function (app) {
-            app.created_time = app.uploadtime;
-            if (!app.package) {
-              app.package = "wait to test";
+            },
+            enter: function (el, done) {
+                var delay = el.dataset.index * 150
+                setTimeout(function () {
+                    $.Velocity(
+                        el,
+                        {opacity: 1, translateY: "0px"},
+                        {complete: done}
+                    )
+                }, delay)
+            },
+            leave: function (el, done) {
+                var delay = el.dataset.index * 150
+                setTimeout(function () {
+                    $.Velocity(
+                        el,
+                        {opacity: 0, translateY: "200px"},
+                        {complete: done}
+                    )
+                }, delay)
             }
-            if (!app.logo) {
-              app.logo = "/static/images/loading.gif";
+        },
+        mounted: function () {
+            $(this.$el).css('opacity', '1')
+        }
+    });
+    $.ajax({
+        url: "/project/getlist",
+        success: function (data) {
+            if (data.errno == 0) {
+                var apps = data.data;
+                setTimeout(function () {
+                    $vm.isLoading = false;
+                    $vm.apps = apps.map(function (app) {
+                        app.created_time = app.uploadtime;
+                        app.isfullinfo = false;
+                        if (!app.label) {
+                            app.label = "正在检测...";
+                        }
+                        if (!app.logo) {
+                            app.logo = "/static/images/loading.gif";
+                        }
+                        return app;
+                    });
+                }, 100);
             }
-            return app;
-          });
-        }, 100);
-      }
-    }
-  })
+        }
+    })
 </script>
 {% endblock %}

@@ -1,35 +1,55 @@
 'use strict';
 
 import moment from 'moment'
-moment.locale('zh-CN')
+moment.locale('zh-CN');
 class Projects extends think.model.base {
-  init(...args) {
-    super.init(...args);
-    this.tableName = "T_PROJECT";
-  }
+    init(...args) {
+        super.init(...args);
+        this.tableName = "T_PROJECT";
+    }
 
-  async addProject(projectName, filePath, userId, mirrid) {
-    return await this.add({
-      name: projectName,
-      filename: filePath,
-      userid: userId,
-      mirrorid: mirrid,
-      uploadtime: moment().format("YYYY-MM-DD HH:mm:ss"),
-    });
-  }
+    async addProject(projectName, filePath, userId, mirrid) {
+        return await this.add({
+            name: projectName,
+            filename: filePath,
+            userid: userId,
+            mirrorid: mirrid,
+            uploadtime: moment().format("YYYY-MM-DD HH:mm:ss"),
+        });
+    }
 
-  async getProjectViaId(id) {
-    let data = await this.where({"id": id}).find();
-    return data;
-  }
+    async getProjectViaId(id) {
+        let data = await this.where({"id": id}).find();
+        return data;
+    }
 
-  async getProjectByUserID(user_id) {
-    let data = await this.where({'userid': user_id}).select();
-    data.forEach($ => {
-      $.uploadtime = moment($.uploadtime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
-    });
-    return data.reverse();
-  }
+    async getProjectByUserID(user_id) {
+        let data = await this.alias('project')
+            .field('project.id as id, name, uploadtime, info.iconimg as logo, label')
+            .join([{
+                table: 'T_APKINFO',
+                as: 'info',
+                on: ['apkinfoid', 'info.id']
+            }])
+            .where({'userid': user_id}).select();
+        data.forEach($ => {
+            $.uploadtime = moment($.uploadtime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
+        });
+        return data.reverse();
+    }
+
+    async getApkInfoByProjectIdAndUserId(proj_id, user_id) {
+        let data = await this.alias('project')
+            .field('uploadtime, info.iconimg as logo, info.*')
+            .join([{
+                table: 'T_APKINFO',
+                as: 'info',
+                on: ['apkinfoid', 'info.id']
+            }])
+            .where({"project.id": proj_id, "userid": user_id}).select();
+        return data;
+    }
+
 }
 
 export default Projects;
