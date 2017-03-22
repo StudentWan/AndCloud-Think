@@ -119,6 +119,7 @@
         formdata.append('username',$('#username-login').val());
         formdata.append('password',$('#password-login').val());
         formdata.append('type',isRegister?'register':'login');
+        //未做两次输入密码的验证
         $.ajax({
             url:"/user/login",
             method:"POST",
