@@ -314,6 +314,7 @@
 <script src="/static/app/js/moment-with-locales.js"></script>
 <script>
     moment.locale('zh-CN');
+    Vue.config.debug = true;
     Vue.config.silent = false;
     var $vm = new Vue({
         el: '#app',
@@ -328,9 +329,10 @@
         },
         methods: {
             getTokensEvt: function (projectid) {
-                this.getTokens(projectid, tokens => {
-                    this.autoToken = tokens[0];
-                    this.handToken = tokens[1];
+                var that = this;
+                this.getTokens(projectid, function (tokens) {
+                    that.autoToken = tokens[0];
+                    that.handToken = tokens[1];
                 });
             },
             getTokens: function (projectid, success_callback) {
@@ -365,29 +367,28 @@
                     method: "GET",
                     success: function (data) {
                         var apkinfo = null;
-                        if (!data.data || data.data.length == 0) {
-                            console.log("projid" + projid + " not have apkinfo");
+                        if(!data.data || data.data.length == 0){
+                            console.log("projid" + projid +" not have apkinfo");
                             return;
                         }
                         apkinfo = data.data[0];
                         that.apps.forEach(function ($) {
-                            if ($.id === projid) {
-                                if (apkinfo.id) {
+                            if($.id === projid){
+                                if(apkinfo.id){
                                     $.isfullinfo = true;
-                                    for (var key in apkinfo) {
-                                        if (key == 'id') continue;
-                                        if (apkinfo.hasOwnProperty(key)) {
+                                    for(var key in apkinfo){
+                                        if(key=='id') continue;
+                                        if(apkinfo.hasOwnProperty(key)) {
                                             console.log(key + "  ---  " + apkinfo[key]);
                                             $[key] = apkinfo[key];
                                         }
                                     }
-                                } else {
+                                }else{
                                     $.isfullinfo = false;
                                 }
                             }
                         })
-                    }
-                });
+                    }});
             },
             select: function (index) {
                 this.selectedIndex = index;
@@ -424,14 +425,13 @@
                 }, delay)
             },
             getStaticReport: function () {
-                console.log(this.apps[this.selectedIndex].label);
+               window.location.href = "/staticreport/index?id=" + this.apps[this.selectedIndex].id;
             }
         },
         mounted: function () {
             $(this.$el).css('opacity', '1')
-        }
+        },
     });
-
     $.ajax({
         url: "/project/getlist",
         success: function (data) {

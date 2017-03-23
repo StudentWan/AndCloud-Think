@@ -1,0 +1,2266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Static Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/dash/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/static/dash/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  {% block content %}
+  <body class="skin-blue fixed" data-spy="scroll" data-target="#scrollspy">
+  <div id="app" class="wrapper">
+
+
+      <header class="main-header">
+    <!-- Logo -->
+    <a href="../" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>Safe</b>Code</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Safe</b>Code</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+    </nav>
+  </header>
+
+
+
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div class="sidebar" id="scrollspy">
+
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="nav sidebar-menu">
+            <li class="header">Static Analysis</li>
+            <li class="active"><a href="#information"><i class="glyphicon glyphicon-info-sign"></i> Information</a></li>
+            <li><a href="#nature"><i class="glyphicon glyphicon-tasks"></i> Code Nature</a></li>
+            <li><a href="#certificate"><i class="fa fa-certificate"></i> Signer Certificate</a></li>
+            <li><a href="#permissions"><i class="fa fa-align-justify"></i> Permissions</a></li>
+            <li><a href="#android-api"><i class="fa fa-dot-circle-o"></i> Android API</a></li>
+
+            <li class="treeview">
+              <a href="javascript::;"><i class="fa fa-circle-o"></i> Security Analysis</a>
+              <ul class="nav treeview-menu">
+                <li><a href="#manifest"><i class="fa fa-search"></i> Manifest Analysis</a></li>
+                <li><a href="#code"><i class="fa fa-code"></i> Code Analysis</a></li>
+                <li><a href="#file"><i class="fa fa-file-text-o"></i> File Analysis</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="javascript::;"><i class="fa fa-plus"></i> Reconnaissance</a>
+              <ul class="nav treeview-menu">
+                <li><a href="#url"><i class="glyphicon glyphicon-globe"></i> URLs</a></li>
+                <li><a href="#domain"><i class="glyphicon glyphicon-screenshot"></i> Malware Check</a></li>
+                <li><a href="#email"><i class="glyphicon glyphicon-envelope"></i> Emails</a></li>
+                <li><a href="#string"><i class="glyphicon glyphicon-sort-by-alphabet-alt"></i> Strings</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="javascript::;"><i class="fa fa-bullseye"></i> Components</a>
+              <ul class="nav treeview-menu">
+                <li><a href="#activities"><i class="fa fa-language"></i> Activities</a></li>
+                <li><a href="#services"><i class="fa fa-gears"></i> Services</a></li>
+                <li><a href="#receivers"><i class="fa fa-sort-amount-desc"></i> Receivers</a></li>
+                <li><a href="#providers"><i class="fa fa-database"></i> Providers</a></li>
+                <li><a href="#libraries"><i class="glyphicon glyphicon-chevron-down"></i> Libraries</a></li>
+                <li><a href="#files"><i class="fa fa-files-o"></i> Files</a></li>
+              </ul>
+            </li>
+            <li><a target="_blank" href="../PDF/?md5=33f69268f67b7c50daa7c27ebc29dae2&amp;type=APK"><i class="glyphicon glyphicon-list-alt"></i> Download Report</a></li>
+          </ul>
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+
+          <form id="dynform" action="../DynamicAnalyzer/" method="POST">
+           <input type='hidden' name='csrfmiddlewaretoken' value='mNe2XmliwfO3Z6msF6b6qSGRH4qTbVYN' />
+          <input type="hidden" name="md5" value="33f69268f67b7c50daa7c27ebc29dae2">
+          <input type="hidden" name="pkg" value="com.github.shadowsocks">
+          <input type="hidden" name="lng" value="com.github.shadowsocks.Shadowsocks">
+          </form>
+
+
+        <!-- Main content -->
+        <div class="content body">
+
+<section id="information">
+  <h2 class="page-header"></h2>
+  <p class="lead">
+      <div class="row">
+    <div class="col-sm-7">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">File Information</h3>
+          <span class="label label-primary pull-right"><i class="glyphicon glyphicon-file"></i></span>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+           <div class="list-group">
+    <p>
+                      <span class="label label-primary">Name</span>
+                     {$apkInfo.label$}
+                  </p>
+                  <p>
+                      <span class="label label-primary">Size</span>
+                      {$apkInfo.size$}
+                  </p>
+                  <p>
+                      <span class="label label-primary">MD5</span>
+                      {$apkInfo.md5$}
+                  </p>
+                  <p>
+                     <span class="label label-primary">SHA1</span>
+                      {$apkInfo.sha1$}
+                  </p>
+                  <p>
+                     <span class="label label-primary">SHA256</span>
+                    {$apkInfo.sha256$}
+                </p>
+             </div>
+
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+
+    <div class="col-sm-5">
+      <div class="box box-danger">
+        <div class="box-header with-border">
+          <h3 class="box-title">App Information</h3>
+          <span class="label label-danger pull-right"><i class="glyphicon glyphicon-info-sign"></i></span>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+        <div class="list-group">
+                  <p>
+                     <span class="label label-primary">Package Name</span>
+                        {$apkInfo.packagename$}
+                  </p>
+                  <p>
+                     <span class="label label-primary">Main Activity</span>
+                    {$apkInfo.mainactivity$}
+                  </p>
+                  <p>
+                     <span class="label label-primary">Target SDK</span>
+                      {$apkInfo.targetsdk$}
+                     <span class="label label-primary">Min SDK</span>
+                      {$apkInfo.minsdk$}
+                     <span class="label label-primary">Max SDK</span>
+                      {$apkInfo.maxsdk$}
+                  </p>
+                  <p>
+                     <span class="label label-primary">Android Version Name</span>
+                     {$apkInfo.versionname$}
+                  </p>
+                  <p>
+                  <span class="label label-primary">Android Version Code</span>
+                    {$apkInfo.versioncode$}
+                  </p>
+       </div>
+
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+    <!---Components-->
+  </div><!-- /.row -->
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>10</h3>
+
+              <p>ACTIVITIES</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-language"></i>
+            </div>
+            <a href="#activities" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>4</h3>
+
+              <p>SERVICES</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-gears"></i>
+            </div>
+            <a href="#services" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>2</h3>
+
+              <p>RECEIVERS</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-sort-amount-desc"></i>
+            </div>
+            <a href="#receivers" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>0</h3>
+
+              <p>PROVIDERS</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-database"></i>
+            </div>
+            <a href="#providers" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+
+ <!--Exported Components-->
+<div class="row">
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-language"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Exported </br>Activities</span>
+              <span class="info-box-number">3</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-gears"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Exported </br>Services</span>
+              <span class="info-box-number">0</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-sort-amount-desc"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Exported </br>Receivers</span>
+              <span class="info-box-number">2</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-database"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Exported </br>Providers</span>
+              <span class="info-box-number">0</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+ <!--End of Exported -->
+</section><!-- /#introduction -->
+
+
+<!-- ============================================================= -->
+
+<section id="nature">
+  <h2 class="page-header"></h2>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Code Nature</h3>
+          <span class="label label-primary pull-right"><i class="glyphicon glyphicon-tasks"></i></span>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+         <div class="list-group">
+                  <p>
+                  <span class="label label-primary">Native</span>
+                  <a href="#" data-toggle="tooltip" title="Native is true if the application load native code via JNI bridge.">True</a>
+                  </p>
+                  <p>
+                  <span class="label label-primary">Dynamic</span>
+                  <a href="#" data-toggle="tooltip" title="Dynamic is true if the application load dynamic code at runtime.">False</a>
+                  </p>
+                  <p>
+                  <span class="label label-primary">Reflection</span>
+                  <a href="#" data-toggle="tooltip" title="Reflection is true if the application uses any Java Reflection API.">True</a>
+                  </p>
+                  <p>
+                  <span class="label label-primary">Crypto</span>
+                  <a href="#" data-toggle="tooltip" title="Crypto is true if the application uses any Java Crypto API.">False</a>
+                  </p>
+                  <p>
+                  <span class="label label-primary">Obfuscation</span>
+                  <a href="#" data-toggle="tooltip" title="Obfuscation is true if the application uses any Java Obfuscation API.">False</a>
+                  </p>
+            </div>
+          </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+    <div class="col-sm-8">
+      <div class="box box-danger">
+        <div class="box-header with-border">
+          <h3 class="box-title">Options</h3>
+          <span class="label label-danger pull-right"><i class="fa fa-flash"></i></span>
+        </div><!-- /.box-header -->
+        <div align="center" class="box-body">
+          <a href="../Java/?md5=33f69268f67b7c50daa7c27ebc29dae2&amp;type=apk" class="btn btn-info" role="button"><i class="fa fa-code"></i> View Java</a>
+            <a href="../download/33f69268f67b7c50daa7c27ebc29dae2-java.zip" class="btn btn-warning" role="button"> <i class="glyphicon glyphicon-download"></i> Download Java Code</a>
+              </br>
+            <a href="../Smali/?md5=33f69268f67b7c50daa7c27ebc29dae2" class="btn btn-info" role="button"><i class="fa fa-code"></i> View Smali</a>
+            <a href="../download/33f69268f67b7c50daa7c27ebc29dae2-smali.zip" class="btn btn-warning"> <i class="glyphicon glyphicon-download"></i> Download Smali Code</a>
+          </br>
+             <a href="../StaticAnalyzer/?checksum=33f69268f67b7c50daa7c27ebc29dae2&amp;name=shadowsocks-nightly-2.10.7.apk&amp;type=apk&amp;rescan=1" class="btn btn-info" role="button"><i class="glyphicon glyphicon-refresh"></i> Rescan</a>
+             <a target="_blank" href="../ManifestView/?md5=33f69268f67b7c50daa7c27ebc29dae2&amp;type=apk&amp;bin=1" role="button" class="btn btn-warning"><i class="fa fa-eye"></i>  View AndroidManifest.xml</a>
+          </br></br>
+          <a href="javascript:document.getElementById('dynform').submit();" class="btn btn-success btn-lg" role="button"><i class="glyphicon glyphicon-play-circle"></i> Start Dynamic Analysis</a>
+
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+</section>
+
+
+<!-- ============================================================= -->
+
+<section id="certificate">
+  <h2 class="page-header"></h2>
+   <div class="box-header">
+             <!-- /.box-header -->
+              <h3 class="box-title"><i class="fa fa-certificate"></i> Signer Certificate</h3>
+            </div>
+ <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
+[</br>[</br>  Version: V3</br>  Subject: CN=Max Lv, OU=PPI, O=Fudan Univ., L=Pudong, ST=Shanghai, C=cn</br>  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5</br></br>  Key:  </br>  Validity: [From: Sat Feb 19 05:00:54 UTC 2011,</br>               To: Wed Feb 13 05:00:54 UTC 2036]</br>  Issuer: CN=Max Lv, OU=PPI, O=Fudan Univ., L=Pudong, ST=Shanghai, C=cn</br>  SerialNumber: [    4d5f4e86]</br></br>]</br>  Algorithm: [SHA1withRSA]</br>  Signature:</br>0000: 10 22 AA 27 C6 9C 24 D9   AC BE 0E 6E 51 84 57 D9  .&quot;.&#39;..$....nQ.W.</br>0010: C8 6F 52 6A D3 3F 24 D1   71 D8 E7 44 AD 4D 7A 5B  .oRj.?$.q..D.Mz[</br>0020: 3B 8A D4 8B 68 B5 71 95   25 AC 42 66 FD EE FE D4  ;...h.q.%.Bf....</br>0030: F0 33 96 9A 30 00 86 10   3E 67 02 F1 DA 0C 60 96  .3..0...&gt;g....`.</br>0040: CA 76 3B E2 80 C0 A2 93   38 96 21 7F C8 B7 B5 C2  .v;.....8.!.....</br>0050: 66 43 BB A6 68 FF B7 D7   AC 7F 93 D3 72 C1 82 3D  fC..h.......r..=</br>0060: 9F 70 89 14 7C DD 40 03   87 6F 9C 1A 3C 5D 60 26  .p....@..o..&lt;]`&amp;</br>0070: F5 5A C8 D6 23 6E 2C 8B   2C 76 10 F3 DC 82 FD 62  .Z..#n,.,v.....b</br></br>]</br>
+
+<strong>Certicate Status: </strong><span class="label label-success">Good</span>
+
+</code></pre>
+</section>
+
+
+<!-- ============================================================= -->
+
+<section id="permissions">
+  <h2 class="page-header"></h2>
+  <!-- /.box -->
+
+          <div class="box">
+          <div class="box-header">
+             <!-- /.box-header -->
+              <h3 class="box-title"><i class="fa fa-align-justify"></i> Android Permissions</h3>
+            </div>
+  <div class="box-body no-padding">
+             <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>PERMISSION</th>
+                                                <th>STATUS</th>
+                                                <th>INFO </th>
+                        <th>DESCRIPTION</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                    <tr><td>android.permission.RECEIVE_BOOT_COMPLETED</td><td><span class="label label-info">normal</span></td><td>automatically start at boot</td><td>Allows an application to start itself as soon as the system has finished booting. This can make it take longer to start the phone and allow the application to slow down the overall phone by always running.</td></tr><tr><td>android.permission.CAMERA</td><td><span class="label label-danger">dangerous</span></td><td>take pictures and videos</td><td>Allows application to take pictures and videos with the camera. This allows the application to collect images that the camera is seeing at any time.</td></tr><tr><td>android.permission.WAKE_LOCK</td><td><span class="label label-danger">dangerous</span></td><td>prevent phone from sleeping</td><td>Allows an application to prevent the phone from going to sleep.</td></tr><tr><td>android.permission.ACCESS_NETWORK_STATE</td><td><span class="label label-info">normal</span></td><td>view network status</td><td>Allows an application to view the status of all networks.</td></tr><tr><td>android.permission.INTERNET</td><td><span class="label label-danger">dangerous</span></td><td>full Internet access</td><td>Allows an application to create network sockets.</td></tr><tr><td>android.permission.NFC</td><td><span class="label label-danger">dangerous</span></td><td>control Near-Field Communication</td><td>Allows an application to communicate with Near-Field Communication (NFC) tags, cards and readers.</td></tr>
+                    </tbody>
+                    </table>
+
+                            </div>
+
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+</section>
+
+
+<!-- ============================================================= -->
+
+
+
+<section id="android-api">
+   <h2 class="page-header"></h2>
+  <!-- /.box -->
+
+          <div class="box">
+          <div class="box-header">
+             <!-- /.box-header -->
+              <h3 class="box-title"><i class="fa  fa-dot-circle-o"></i> Android API</h3>
+            </div>
+ <div class="box-body no-padding">
+          <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+
+                                                <th>API</th>
+                        <th>FILES</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                    <tr><td>Inter Process Communication </td><td><a href='../ViewSource/?file=com/github/shadowsocks/ScannerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ScannerActivity.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerActivity.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNatService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNatService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/AppManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AppManager.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksSettings.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksTileService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksTileService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/TaskerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TaskerActivity.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/TaskerReceiver.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TaskerReceiver.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/BootReceiver.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BootReceiver.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ServiceBoundContext.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ServiceBoundContext.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/BaseService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BaseService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNotification.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNotification.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/utils/TaskerSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TaskerSettings.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/aidl/IShadowsocksServiceCallback.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>IShadowsocksServiceCallback.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/aidl/IShadowsocksService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>IShadowsocksService.java</a> </td></tr><tr><td>Get System Service </td><td><a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerActivity.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/AppManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AppManager.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNotification.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNotification.java</a> <a href='../ViewSource/?file=me/dm7/barcodescanner/core/DisplayUtils.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>DisplayUtils.java</a> <a href='../ViewSource/?file=me/dm7/barcodescanner/core/CameraPreview.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>CameraPreview.java</a> </td></tr><tr><td>URL Connection supports file,http,https,ftp and jar </td><td><a href='../ViewSource/?file=com/github/kevinsawicki/http/HttpRequest.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>HttpRequest.java</a> <a href='../ViewSource/?file=org/xbill/DNS/ZoneTransferIn.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ZoneTransferIn.java</a> </td></tr><tr><td>Execute System Command </td><td><a href='../ViewSource/?file=eu/chainfire/libsuperuser/Shell.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shell.java</a> <a href='../ViewSource/?file=org/xbill/DNS/ResolverConfig.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ResolverConfig.java</a> </td></tr><tr><td>UDP Datagram Socket </td><td><a href='../ViewSource/?file=org/xbill/DNS/UDPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>UDPClient.java</a> </td></tr><tr><td>TCP Socket </td><td><a href='../ViewSource/?file=org/xbill/DNS/ZoneTransferIn.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ZoneTransferIn.java</a> <a href='../ViewSource/?file=org/xbill/DNS/TCPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TCPClient.java</a> <a href='../ViewSource/?file=org/xbill/DNS/ExtendedResolver.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ExtendedResolver.java</a> <a href='../ViewSource/?file=org/xbill/DNS/Client.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Client.java</a> <a href='../ViewSource/?file=org/xbill/DNS/UDPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>UDPClient.java</a> <a href='../ViewSource/?file=org/xbill/DNS/PacketLogger.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>PacketLogger.java</a> </td></tr><tr><td>Message Digest </td><td><a href='../ViewSource/?file=org/xbill/DNS/utils/HMAC.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>HMAC.java</a> </td></tr><tr><td>Starting Activity</td><td><a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerActivity.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksSettings.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a> </td></tr><tr><td>Java Reflection Method Invocation </td><td><a href='../ViewSource/?file=com/j256/ormlite/field/FieldType.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>FieldType.java</a> <a href='../ViewSource/?file=com/j256/ormlite/field/types/DateTimeType.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>DateTimeType.java</a> <a href='../ViewSource/?file=com/j256/ormlite/misc/JavaxPersistence.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>JavaxPersistence.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnThread.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnThread.java</a> <a href='../ViewSource/?file=org/xbill/DNS/ResolverConfig.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ResolverConfig.java</a> </td></tr><tr><td>Local File I/O Operations</td><td><a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksSettings.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksApplication.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksApplication.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a> </td></tr><tr><td>HTTP Connection </td><td><a href='../ViewSource/?file=com/github/kevinsawicki/http/HttpRequest.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>HttpRequest.java</a> </td></tr>
+                    </tbody>
+                    </table>
+
+                            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+</section>
+
+
+<!-- ============================================================= -->
+<section id="manifest">
+  <h2 class="page-header"></h2>
+   <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-search"></i> Manifest Analysis</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ISSUE</th>
+                                                <th>SEVERITY</th>
+                        <th>DESCRIPTION</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                    <tr><td>Application Data can be Backed up<br>[android:allowBackup=true]</td><td><span class="label label-warning">medium</span></td><td>This flag allows anyone to backup your application data via adb. It allows users who have enabled USB debugging to copy application data off of the device.</td></tr><tr><td><strong>Activity</strong> (com.github.shadowsocks.ProfileManagerActivity) is not Protected.<br>An intent-filter exists.</td><td><span class="label label-danger">high</span></td><td> An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. The presence of intent-filter indicates that the Activity is explicitly exported.</td></tr><tr><td><strong>Activity</strong> (com.github.shadowsocks.TaskerActivity) is not Protected.<br>An intent-filter exists.</td><td><span class="label label-danger">high</span></td><td> An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. The presence of intent-filter indicates that the Activity is explicitly exported.</td></tr><tr><td><strong>Activity</strong> (com.github.shadowsocks.ShadowsocksQuickSwitchActivity) is not Protected.<br>An intent-filter exists.</td><td><span class="label label-danger">high</span></td><td> An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. The presence of intent-filter indicates that the Activity is explicitly exported.</td></tr><tr><td><strong>Service</strong> (com.github.shadowsocks.ShadowsocksTileService) is Protected by a permission.</br><strong>Permission: </strong>android.permission.BIND_QUICK_SETTINGS_TILE <br>[android:exported=true]</td><td><span class="label label-info">info</span></td><td> A Service is found to be exported, but is protected by permission.</td></tr><tr><td><strong>Broadcast Receiver</strong> (com.github.shadowsocks.BootReceiver) is not Protected.<br>An intent-filter exists.</td><td><span class="label label-danger">high</span></td><td> A Broadcast Receiver is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. The presence of intent-filter indicates that the Broadcast Receiver is explicitly exported.</td></tr><tr><td><strong>Broadcast Receiver</strong> (com.github.shadowsocks.TaskerReceiver) is not Protected.<br>An intent-filter exists.</td><td><span class="label label-danger">high</span></td><td> A Broadcast Receiver is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. The presence of intent-filter indicates that the Broadcast Receiver is explicitly exported.</td></tr>
+                    </tbody>
+                    </table>
+
+                            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+
+<!-- ============================================================= -->
+
+<section id="code">
+   <h2 class="page-header"></h2>
+   <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa  fa-code"></i> Code Analysis</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+             <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ISSUE</th>
+                                                <th>SEVERITY</th>
+                        <th>FILES</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                    <tr><td>The App uses an insecure Random Number Generator.</td><td><span class="label label-danger">high</span></td><td><a href='../ViewSource/?file=scala/util/Random.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Random.java</a> <a href='../ViewSource/?file=org/xbill/DNS/Header.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Header.java</a> </td></tr><tr><td>The App logs information. Sensitive information should never be logged.</td><td><span class="label label-info">info</span></td><td><a href='../ViewSource/?file=com/j256/ormlite/table/TableUtils.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TableUtils.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidCompiledStatement.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidCompiledStatement.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidDatabaseConnection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidDatabaseConnection.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidConnectionSource.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidConnectionSource.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/apptools/OrmLiteSqliteOpenHelper.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>OrmLiteSqliteOpenHelper.java</a> <a href='../ViewSource/?file=com/j256/ormlite/misc/VersionUtils.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>VersionUtils.java</a> <a href='../ViewSource/?file=com/j256/ormlite/logger/Logger.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Logger.java</a> <a href='../ViewSource/?file=com/j256/ormlite/logger/LocalLog.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>LocalLog.java</a> <a href='../ViewSource/?file=com/j256/ormlite/dao/DaoManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>DaoManager.java</a> <a href='../ViewSource/?file=com/j256/ormlite/support/BaseConnectionSource.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BaseConnectionSource.java</a> <a href='../ViewSource/?file=com/j256/ormlite/stmt/StatementExecutor.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>StatementExecutor.java</a> <a href='../ViewSource/?file=com/j256/ormlite/stmt/SelectIterator.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>SelectIterator.java</a> <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedCreate.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedCreate.java</a> <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedQueryForId.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedQueryForId.java</a> <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/BaseMappedStatement.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BaseMappedStatement.java</a> <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedUpdate.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedUpdate.java</a> <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedDelete.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedDelete.java</a> <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedPreparedStmt.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedPreparedStmt.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerActivity.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNatService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNatService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/GuardedProcess.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>GuardedProcess.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/BaseService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BaseService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnThread.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnThread.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/utils/TrafficMonitorThread.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TrafficMonitorThread.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/database/ProfileManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ProfileManager.java</a> <a href='../ViewSource/?file=me/dm7/barcodescanner/core/CameraPreview.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>CameraPreview.java</a> <a href='../ViewSource/?file=me/dm7/barcodescanner/zxing/ZXingScannerView.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ZXingScannerView.java</a> <a href='../ViewSource/?file=eu/chainfire/libsuperuser/Debug.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Debug.java</a> <a href='../ViewSource/?file=org/xbill/DNS/ResolverConfig.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ResolverConfig.java</a> <a href='../ViewSource/?file=org/xbill/DNS/ZoneTransferIn.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ZoneTransferIn.java</a> <a href='../ViewSource/?file=org/xbill/DNS/TCPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TCPClient.java</a> <a href='../ViewSource/?file=org/xbill/DNS/Client.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Client.java</a> <a href='../ViewSource/?file=org/xbill/DNS/UDPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>UDPClient.java</a> <a href='../ViewSource/?file=org/xbill/DNS/PacketLogger.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>PacketLogger.java</a> <a href='../ViewSource/?file=org/xbill/DNS/Cache.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Cache.java</a> </td></tr><tr><td>This App uses Java Hash Code. It's a weak hash function and should never be used in Secure Crypto Implementation.</td><td><span class="label label-danger">high</span></td><td><a href='../ViewSource/?file=scala/runtime/BoxesRunTime.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BoxesRunTime.java</a> <a href='../ViewSource/?file=scala/math/BigDecimal.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BigDecimal.java</a> <a href='../ViewSource/?file=scala/util/hashing/MurmurHash3.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MurmurHash3.java</a> <a href='../ViewSource/?file=com/j256/ormlite/field/FieldType.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>FieldType.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidCompiledStatement.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidCompiledStatement.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidDatabaseResults.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidDatabaseResults.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidDatabaseConnection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidDatabaseConnection.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidConnectionSource.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidConnectionSource.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/apptools/OrmLiteSqliteOpenHelper.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>OrmLiteSqliteOpenHelper.java</a> <a href='../ViewSource/?file=com/j256/ormlite/dao/EagerForeignCollection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>EagerForeignCollection.java</a> <a href='../ViewSource/?file=com/j256/ormlite/dao/LazyForeignCollection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>LazyForeignCollection.java</a> <a href='../ViewSource/?file=com/j256/ormlite/dao/DaoManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>DaoManager.java</a> <a href='../ViewSource/?file=org/xbill/DNS/Name.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Name.java</a> <a href='../ViewSource/?file=org/xbill/DNS/APLRecord.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>APLRecord.java</a> <a href='../ViewSource/?file=org/xbill/DNS/Compression.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Compression.java</a> </td></tr><tr><td>Files may contain hardcoded sensitive informations like usernames, passwords, keys etc.</td><td><span class="label label-danger">high</span></td><td><a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksBackupAgent.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksBackupAgent.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/database/Profile.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Profile.java</a> </td></tr><tr><td>This App may request root (Super User) privileges.</td><td><span class="label label-danger">high</span></td><td><a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNatService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNatService.java</a> <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a> <a href='../ViewSource/?file=eu/chainfire/libsuperuser/ShellOnMainThreadException.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShellOnMainThreadException.java</a> <a href='../ViewSource/?file=eu/chainfire/libsuperuser/Shell.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shell.java</a> <a href='../ViewSource/?file=eu/chainfire/libsuperuser/Debug.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Debug.java</a> <a href='../ViewSource/?file=eu/chainfire/libsuperuser/StreamGobbler.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>StreamGobbler.java</a> <a href='../ViewSource/?file=eu/chainfire/libsuperuser/ShellNotClosedException.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShellNotClosedException.java</a> </td></tr><tr><td>App uses SQLite Database and execute raw SQL query. Untrusted user input in raw SQL queries can cause SQL Injection. Also sensitive information should be encrypted and written to the database.</td><td><span class="label label-danger">high</span></td><td><a href='../ViewSource/?file=com/j256/ormlite/android/AndroidCompiledStatement.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidCompiledStatement.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidDatabaseConnection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidDatabaseConnection.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/compat/JellyBeanApiCompatibility.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>JellyBeanApiCompatibility.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/compat/ApiCompatibility.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ApiCompatibility.java</a> <a href='../ViewSource/?file=com/j256/ormlite/android/compat/BasicApiCompatibility.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BasicApiCompatibility.java</a> </td></tr>
+                    </tbody>
+                    </table>
+
+                            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+
+<!-- ============================================================= -->
+
+<section id="file">
+  <h2 class="page-header"></h2>
+    <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-file-text-o"></i> File Analysis</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+            <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                              <thead>
+                                            <tr>
+                                                <th>ISSUE</th>
+                                                <th>FILES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                    </tbody>
+                    </table>
+
+                            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+
+<!-- ============================================================= -->
+
+<section id="url">
+  <h2 class="page-header"></h2>
+       <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="glyphicon glyphicon-globe"></i> URLs</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+
+                  <thead>
+                  <tr>
+                     <th>URL</th>
+                     <th>File</th>
+                  </tr>
+                 </thead>
+
+                 <tbody>
+                                        <tbody>
+
+                  <tr><td>file:///android_asset/pages/about.html</td><td><a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksSettings.java</a></td></tr>
+                    </tbody>
+                    </table>
+
+                            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+  </section>
+
+
+<!-- ============================================================= -->
+
+<section id="domain">
+  <h2 class="page-header"></h2>
+       <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="glyphicon glyphicon-screenshot"></i> Malware Check</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+
+                  <thead>
+                  <tr>
+                     <th>Domain</th>
+                     <th>Status</th>
+                  </tr>
+                 </thead>
+
+                 <tbody>
+
+
+
+                    </tbody>
+                    </table>
+
+             </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+  </section>
+
+
+<!-- ============================================================= -->
+
+<section id="email">
+  <h2 class="page-header"></h2>
+     <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="glyphicon glyphicon-envelope"></i> Emails</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+
+                 <tbody>
+                                        <tbody>
+
+
+                    </tbody>
+                    </table>
+
+                            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+
+<!-- ============================================================= -->
+
+<section id="string">
+  <h2 class="page-header"></h2>
+       <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="glyphicon glyphicon-sort-by-alphabet-alt"></i> Strings</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+          <div class="list-group">
+                  <p>
+
+
+
+                     <br>
+
+
+
+
+                  </p>
+                                </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+
+<!-- ============================================================= -->
+
+<section id="activities">
+  <h2 class="page-header"></h2>
+   <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-language"></i> Activities</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="list-group">
+                  <p>
+
+                  com.google.android.gms.ads.AdActivity <br>
+
+                  com.github.shadowsocks.Shadowsocks <br>
+
+                  com.github.shadowsocks.ShadowsocksRunnerActivity <br>
+
+                  com.github.shadowsocks.ProfileManagerActivity <br>
+
+                  com.github.shadowsocks.ScannerActivity <br>
+
+                  com.github.shadowsocks.AppManager <br>
+
+                  com.github.shadowsocks.TaskerActivity <br>
+
+                  com.github.shadowsocks.ShadowsocksQuickSwitchActivity <br>
+
+                  com.google.android.gms.ads.purchase.InAppPurchaseActivity <br>
+
+                  com.google.android.gms.common.api.GoogleApiActivity <br>
+
+
+                  </p>
+                  </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+
+<!-- ============================================================= -->
+
+<section id="services">
+  <h2 class="page-header"></h2>
+  <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-gears"></i> Services</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+          <div class="list-group">
+                  <p>
+
+                  com.github.shadowsocks.ShadowsocksRunnerService <br>
+
+                  com.github.shadowsocks.ShadowsocksNatService <br>
+
+                  com.github.shadowsocks.ShadowsocksVpnService <br>
+
+                  com.github.shadowsocks.ShadowsocksTileService <br>
+
+
+                  </p>
+                                </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+<!-- ============================================================= -->
+
+<section id="receivers">
+  <h2 class="page-header"></h2>
+ <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-sort-amount-desc"></i> Broadcast Receivers</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="list-group">
+                  <p>
+
+                  com.github.shadowsocks.BootReceiver <br>
+
+                  com.github.shadowsocks.TaskerReceiver <br>
+
+
+                  </p>
+                                </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+<!-- ============================================================= -->
+
+<section id="providers">
+  <h2 class="page-header"></h2>
+
+   <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-database"></i> Content Providers</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+           <div class="list-group">
+                  <p>
+
+
+                  </p>
+                                </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+<!-- ============================================================= -->
+
+<section id="libraries">
+  <h2 class="page-header"></h2>
+  <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="glyphicon glyphicon-chevron-down"></i> Libraries</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="list-group">
+                  <p>
+
+                  android.test.runner <br>
+
+
+                  </p>
+                                </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+
+<section id="files">
+  <h2 class="page-header"></h2>
+  <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-files-o"></i> Files</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+           <div class="list-group">
+                  <p>
+
+                  META-INF/MANIFEST.MF <br>
+
+                  META-INF/GAEPROXY.SF <br>
+
+                  META-INF/GAEPROXY.RSA <br>
+
+                  META-INF/maven/com.github.kevinsawicki/http-request/pom.properties <br>
+
+                  META-INF/maven/com.github.kevinsawicki/http-request/pom.xml <br>
+
+                  META-INF/maven/com.google.zxing/core/pom.properties <br>
+
+                  META-INF/maven/com.google.zxing/core/pom.xml <br>
+
+                  META-INF/maven/com.j256.ormlite/ormlite-android/pom.properties <br>
+
+                  META-INF/maven/com.j256.ormlite/ormlite-android/pom.xml <br>
+
+                  META-INF/maven/com.j256.ormlite/ormlite-core/pom.properties <br>
+
+                  META-INF/maven/com.j256.ormlite/ormlite-core/pom.xml <br>
+
+                  META-INF/maven/dnsjava/dnsjava/pom.properties <br>
+
+                  META-INF/maven/dnsjava/dnsjava/pom.xml <br>
+
+                  META-INF/maven/net.glxn.qrgen/android/pom.properties <br>
+
+                  META-INF/maven/net.glxn.qrgen/android/pom.xml <br>
+
+                  META-INF/maven/net.glxn.qrgen/core/pom.properties <br>
+
+                  META-INF/maven/net.glxn.qrgen/core/pom.xml <br>
+
+                  META-INF/services/sun.net.spi.nameservice.NameServiceDescriptor <br>
+
+                  AndroidManifest.xml <br>
+
+                  assets/armeabi-v7a/pdnsd <br>
+
+                  assets/armeabi-v7a/redsocks <br>
+
+                  assets/armeabi-v7a/ss-local <br>
+
+                  assets/armeabi-v7a/ss-tunnel <br>
+
+                  assets/armeabi-v7a/tun2socks <br>
+
+                  assets/fonts/Iceland.ttf <br>
+
+                  assets/pages/about.html <br>
+
+                  assets/x86/pdnsd <br>
+
+                  assets/x86/redsocks <br>
+
+                  assets/x86/ss-local <br>
+
+                  assets/x86/ss-tunnel <br>
+
+                  assets/x86/tun2socks <br>
+
+                  res/anim-v21/design_appbar_state_list_animator.xml <br>
+
+                  res/anim-v21/design_bottom_sheet_slide_in.xml <br>
+
+                  res/anim-v21/design_bottom_sheet_slide_out.xml <br>
+
+                  res/anim/abc_fade_in.xml <br>
+
+                  res/anim/abc_fade_out.xml <br>
+
+                  res/anim/abc_grow_fade_in_from_bottom.xml <br>
+
+                  res/anim/abc_popup_enter.xml <br>
+
+                  res/anim/abc_popup_exit.xml <br>
+
+                  res/anim/abc_shrink_fade_out_from_bottom.xml <br>
+
+                  res/anim/abc_slide_in_bottom.xml <br>
+
+                  res/anim/abc_slide_in_top.xml <br>
+
+                  res/anim/abc_slide_out_bottom.xml <br>
+
+                  res/anim/abc_slide_out_top.xml <br>
+
+                  res/anim/design_bottom_sheet_slide_in.xml <br>
+
+                  res/anim/design_bottom_sheet_slide_out.xml <br>
+
+                  res/anim/design_fab_in.xml <br>
+
+                  res/anim/design_fab_out.xml <br>
+
+                  res/anim/design_snackbar_in.xml <br>
+
+                  res/anim/design_snackbar_out.xml <br>
+
+                  res/anim/fab_scale_down.xml <br>
+
+                  res/anim/fab_scale_up.xml <br>
+
+                  res/anim/fab_slide_in_from_left.xml <br>
+
+                  res/anim/fab_slide_in_from_right.xml <br>
+
+                  res/anim/fab_slide_out_to_left.xml <br>
+
+                  res/anim/fab_slide_out_to_right.xml <br>
+
+                  res/color-v11/abc_background_cache_hint_selector_material_dark.xml <br>
+
+                  res/color-v11/abc_background_cache_hint_selector_material_light.xml <br>
+
+                  res/color-v23/abc_btn_colored_borderless_text_material.xml <br>
+
+                  res/color-v23/abc_color_highlight_material.xml <br>
+
+                  res/color-v23/abc_tint_btn_checkable.xml <br>
+
+                  res/color-v23/abc_tint_default.xml <br>
+
+                  res/color-v23/abc_tint_edittext.xml <br>
+
+                  res/color-v23/abc_tint_seek_thumb.xml <br>
+
+                  res/color-v23/abc_tint_spinner.xml <br>
+
+                  res/color-v23/abc_tint_switch_thumb.xml <br>
+
+                  res/color-v23/abc_tint_switch_track.xml <br>
+
+                  res/color/abc_btn_colored_borderless_text_material.xml <br>
+
+                  res/color/abc_primary_text_disable_only_material_dark.xml <br>
+
+                  res/color/abc_primary_text_disable_only_material_light.xml <br>
+
+                  res/color/abc_primary_text_material_dark.xml <br>
+
+                  res/color/abc_primary_text_material_light.xml <br>
+
+                  res/color/abc_search_url_text.xml <br>
+
+                  res/color/abc_secondary_text_material_dark.xml <br>
+
+                  res/color/abc_secondary_text_material_light.xml <br>
+
+                  res/color/abc_tint_btn_checkable.xml <br>
+
+                  res/color/abc_tint_default.xml <br>
+
+                  res/color/abc_tint_edittext.xml <br>
+
+                  res/color/abc_tint_seek_thumb.xml <br>
+
+                  res/color/abc_tint_spinner.xml <br>
+
+                  res/color/abc_tint_switch_thumb.xml <br>
+
+                  res/color/abc_tint_switch_track.xml <br>
+
+                  res/color/common_google_signin_btn_text_dark.xml <br>
+
+                  res/color/common_google_signin_btn_text_light.xml <br>
+
+                  res/color/common_plus_signin_btn_text_dark.xml <br>
+
+                  res/color/common_plus_signin_btn_text_light.xml <br>
+
+                  res/color/switch_thumb_material_dark.xml <br>
+
+                  res/color/switch_thumb_material_light.xml <br>
+
+                  res/drawable-anydpi-v21/ic_action_settings.xml <br>
+
+                  res/drawable-anydpi-v21/ic_navigation_close.xml <br>
+
+                  res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png <br>
+
+                  res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png <br>
+
+                  res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png <br>
+
+                  res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png <br>
+
+                  res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_star_black_16dp.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_star_black_36dp.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_star_black_48dp.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_star_half_black_36dp.png <br>
+
+                  res/drawable-hdpi-v4/abc_ic_star_half_black_48dp.png <br>
+
+                  res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_list_focused_holo.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png <br>
+
+                  res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png <br>
+
+                  res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png <br>
+
+                  res/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png <br>
+
+                  res/drawable-hdpi-v4/common_full_open_on_phone.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-hdpi-v4/common_google_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-hdpi-v4/common_ic_googleplayservices.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-hdpi-v4/common_plus_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-hdpi-v4/fab_add.png <br>
+
+                  res/drawable-hdpi-v4/ic_action_settings.png <br>
+
+                  res/drawable-hdpi-v4/ic_done.png <br>
+
+                  res/drawable-hdpi-v4/ic_launcher.png <br>
+
+                  res/drawable-hdpi-v4/ic_navigation_close.png <br>
+
+                  res/drawable-hdpi-v4/ic_stat_shadowsocks.png <br>
+
+                  res/drawable-ldpi-v4/common_ic_googleplayservices.png <br>
+
+                  res/drawable-ldrtl-hdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-ldrtl-hdpi-v17/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-ldrtl-mdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-ldrtl-mdpi-v17/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-ldrtl-xhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-ldrtl-xhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-ldrtl-xhdpi-v17/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-ldrtl-xxxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_000.png <br>
+
+                  res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_015.png <br>
+
+                  res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_000.png <br>
+
+                  res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_015.png <br>
+
+                  res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_menu_share_mtrl_alpha.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_star_black_16dp.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_star_black_36dp.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_star_black_48dp.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_star_half_black_16dp.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_star_half_black_36dp.png <br>
+
+                  res/drawable-mdpi-v4/abc_ic_star_half_black_48dp.png <br>
+
+                  res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_list_focused_holo.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_list_longpressed_holo.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_list_pressed_holo_dark.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_list_pressed_holo_light.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_list_selector_disabled_holo_dark.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_list_selector_disabled_holo_light.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_popup_background_mtrl_mult.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_scrubber_control_off_mtrl_alpha.png <br>
+
+                  res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png <br>
+
+                  res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png <br>
+
+                  res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_scrubber_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_switch_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_tab_indicator_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_textfield_default_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png <br>
+
+                  res/drawable-mdpi-v4/common_full_open_on_phone.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-mdpi-v4/common_google_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-mdpi-v4/common_ic_googleplayservices.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-mdpi-v4/common_plus_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-mdpi-v4/fab_add.png <br>
+
+                  res/drawable-mdpi-v4/ic_action_settings.png <br>
+
+                  res/drawable-mdpi-v4/ic_done.png <br>
+
+                  res/drawable-mdpi-v4/ic_launcher.png <br>
+
+                  res/drawable-mdpi-v4/ic_navigation_close.png <br>
+
+                  res/drawable-mdpi-v4/ic_stat_shadowsocks.png <br>
+
+                  res/drawable-tvdpi-v4/common_full_open_on_phone.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_google_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-tvdpi-v4/common_plus_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-v21/abc_action_bar_item_background_material.xml <br>
+
+                  res/drawable-v21/abc_btn_colored_material.xml <br>
+
+                  res/drawable-v21/abc_edit_text_material.xml <br>
+
+                  res/drawable-v21/abc_ratingbar_indicator_material.xml <br>
+
+                  res/drawable-v21/abc_ratingbar_material.xml <br>
+
+                  res/drawable-v21/abc_ratingbar_small_material.xml <br>
+
+                  res/drawable-v21/background_stat.xml <br>
+
+                  res/drawable-v23/abc_control_background_material.xml <br>
+
+                  res/drawable-xhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png <br>
+
+                  res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_015.png <br>
+
+                  res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_000.png <br>
+
+                  res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_015.png <br>
+
+                  res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_menu_share_mtrl_alpha.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_star_black_16dp.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_star_black_36dp.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_star_black_48dp.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_star_half_black_16dp.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_star_half_black_36dp.png <br>
+
+                  res/drawable-xhdpi-v4/abc_ic_star_half_black_48dp.png <br>
+
+                  res/drawable-xhdpi-v4/abc_list_divider_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_list_focused_holo.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_list_longpressed_holo.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_list_pressed_holo_dark.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_dark.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_light.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png <br>
+
+                  res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png <br>
+
+                  res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png <br>
+
+                  res/drawable-xhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_switch_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_textfield_default_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_full_open_on_phone.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_google_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_ic_googleplayservices.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-xhdpi-v4/common_plus_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-xhdpi-v4/fab_add.png <br>
+
+                  res/drawable-xhdpi-v4/ic_action_settings.png <br>
+
+                  res/drawable-xhdpi-v4/ic_done.png <br>
+
+                  res/drawable-xhdpi-v4/ic_launcher.png <br>
+
+                  res/drawable-xhdpi-v4/ic_navigation_close.png <br>
+
+                  res/drawable-xhdpi-v4/ic_stat_shadowsocks.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_015.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_menu_share_mtrl_alpha.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_star_black_16dp.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_star_black_36dp.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_star_black_48dp.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_star_half_black_16dp.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_star_half_black_36dp.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_ic_star_half_black_48dp.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_list_divider_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_list_focused_holo.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_list_longpressed_holo.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_dark.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_light.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_popup_background_mtrl_mult.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_full_open_on_phone.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_ic_googleplayservices.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_dark_disabled.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_dark_focused.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_dark_normal.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_dark_pressed.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_light_disabled.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_light_focused.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_light_normal.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_icon_light_pressed.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_text_dark_disabled.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_text_dark_focused.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_text_dark_normal.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_text_dark_pressed.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_text_light_disabled.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_text_light_focused.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_text_light_normal.9.png <br>
+
+                  res/drawable-xxhdpi-v4/common_plus_signin_btn_text_light_pressed.9.png <br>
+
+                  res/drawable-xxhdpi-v4/fab_add.png <br>
+
+                  res/drawable-xxhdpi-v4/ic_action_settings.png <br>
+
+                  res/drawable-xxhdpi-v4/ic_done.png <br>
+
+                  res/drawable-xxhdpi-v4/ic_launcher.png <br>
+
+                  res/drawable-xxhdpi-v4/ic_navigation_close.png <br>
+
+                  res/drawable-xxhdpi-v4/ic_stat_shadowsocks.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_015.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_menu_share_mtrl_alpha.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_star_black_16dp.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_star_black_36dp.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_star_black_48dp.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_star_half_black_16dp.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_star_half_black_36dp.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_ic_star_half_black_48dp.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png <br>
+
+                  res/drawable-xxxhdpi-v4/ic_action_settings.png <br>
+
+                  res/drawable-xxxhdpi-v4/ic_navigation_close.png <br>
+
+                  res/drawable/abc_btn_borderless_material.xml <br>
+
+                  res/drawable/abc_btn_check_material.xml <br>
+
+                  res/drawable/abc_btn_colored_material.xml <br>
+
+                  res/drawable/abc_btn_default_mtrl_shape.xml <br>
+
+                  res/drawable/abc_btn_radio_material.xml <br>
+
+                  res/drawable/abc_cab_background_internal_bg.xml <br>
+
+                  res/drawable/abc_cab_background_top_material.xml <br>
+
+                  res/drawable/abc_dialog_material_background.xml <br>
+
+                  res/drawable/abc_edit_text_material.xml <br>
+
+                  res/drawable/abc_ic_ab_back_material.xml <br>
+
+                  res/drawable/abc_ic_arrow_drop_right_black_24dp.xml <br>
+
+                  res/drawable/abc_ic_clear_material.xml <br>
+
+                  res/drawable/abc_ic_go_search_api_material.xml <br>
+
+                  res/drawable/abc_ic_menu_overflow_material.xml <br>
+
+                  res/drawable/abc_ic_search_api_material.xml <br>
+
+                  res/drawable/abc_ic_voice_search_api_material.xml <br>
+
+                  res/drawable/abc_item_background_holo_dark.xml <br>
+
+                  res/drawable/abc_item_background_holo_light.xml <br>
+
+                  res/drawable/abc_list_selector_background_transition_holo_dark.xml <br>
+
+                  res/drawable/abc_list_selector_background_transition_holo_light.xml <br>
+
+                  res/drawable/abc_list_selector_holo_dark.xml <br>
+
+                  res/drawable/abc_list_selector_holo_light.xml <br>
+
+                  res/drawable/abc_ratingbar_indicator_material.xml <br>
+
+                  res/drawable/abc_ratingbar_material.xml <br>
+
+                  res/drawable/abc_ratingbar_small_material.xml <br>
+
+                  res/drawable/abc_seekbar_thumb_material.xml <br>
+
+                  res/drawable/abc_seekbar_tick_mark_material.xml <br>
+
+                  res/drawable/abc_seekbar_track_material.xml <br>
+
+                  res/drawable/abc_spinner_textfield_background_material.xml <br>
+
+                  res/drawable/abc_switch_thumb_material.xml <br>
+
+                  res/drawable/abc_tab_indicator_material.xml <br>
+
+                  res/drawable/abc_text_cursor_material.xml <br>
+
+                  res/drawable/abc_textfield_search_material.xml <br>
+
+                  res/drawable/background_stat.xml <br>
+
+                  res/drawable/common_google_signin_btn_icon_dark.xml <br>
+
+                  res/drawable/common_google_signin_btn_icon_light.xml <br>
+
+                  res/drawable/common_google_signin_btn_text_dark.xml <br>
+
+                  res/drawable/common_google_signin_btn_text_light.xml <br>
+
+                  res/drawable/common_plus_signin_btn_icon_dark.xml <br>
+
+                  res/drawable/common_plus_signin_btn_icon_light.xml <br>
+
+                  res/drawable/common_plus_signin_btn_text_dark.xml <br>
+
+                  res/drawable/common_plus_signin_btn_text_light.xml <br>
+
+                  res/drawable/design_fab_background.xml <br>
+
+                  res/drawable/design_snackbar_background.xml <br>
+
+                  res/drawable/ic_arrow_drop_down.xml <br>
+
+                  res/drawable/ic_content_add.xml <br>
+
+                  res/drawable/ic_content_copy.xml <br>
+
+                  res/drawable/ic_content_create.xml <br>
+
+                  res/drawable/ic_content_paste.xml <br>
+
+                  res/drawable/ic_device_nfc.xml <br>
+
+                  res/drawable/ic_done_all.xml <br>
+
+                  res/drawable/ic_image_camera_alt.xml <br>
+
+                  res/drawable/ic_social_share.xml <br>
+
+                  res/drawable/ic_start_busy.xml <br>
+
+                  res/drawable/ic_start_connected.xml <br>
+
+                  res/drawable/ic_start_idle.xml <br>
+
+                  res/drawable/oval_complete.xml <br>
+
+                  res/layout-sw600dp-v13/design_layout_snackbar.xml <br>
+
+                  res/layout-v17/abc_alert_dialog_button_bar_material.xml <br>
+
+                  res/layout-v17/abc_alert_dialog_material.xml <br>
+
+                  res/layout-v17/abc_dialog_title_material.xml <br>
+
+                  res/layout-v17/abc_popup_menu_header_item_layout.xml <br>
+
+                  res/layout-v17/abc_popup_menu_item_layout.xml <br>
+
+                  res/layout-v17/abc_search_view.xml <br>
+
+                  res/layout-v17/design_layout_snackbar_include.xml <br>
+
+                  res/layout-v17/layout_apps_item.xml <br>
+
+                  res/layout-v17/layout_main.xml <br>
+
+                  res/layout-v17/layout_profiles.xml <br>
+
+                  res/layout-v17/layout_profiles_item.xml <br>
+
+                  res/layout-v17/notification_template_big_media.xml <br>
+
+                  res/layout-v17/notification_template_big_media_narrow.xml <br>
+
+                  res/layout-v17/notification_template_lines.xml <br>
+
+                  res/layout-v17/notification_template_media.xml <br>
+
+                  res/layout-v17/notification_template_part_chronometer.xml <br>
+
+                  res/layout-v17/notification_template_part_time.xml <br>
+
+                  res/layout-v17/select_dialog_multichoice_material.xml <br>
+
+                  res/layout-v17/select_dialog_singlechoice_material.xml <br>
+
+                  res/layout-v21/abc_screen_toolbar.xml <br>
+
+                  res/layout-v21/layout_apps.xml <br>
+
+                  res/layout-v21/layout_main.xml <br>
+
+                  res/layout-v21/layout_tasker.xml <br>
+
+                  res/layout-v21/toolbar_light_dark.xml <br>
+
+                  res/layout-w400dp-v13/layout_main_stat_title.xml <br>
+
+                  res/layout/abc_action_bar_title_item.xml <br>
+
+                  res/layout/abc_action_bar_up_container.xml <br>
+
+                  res/layout/abc_action_bar_view_list_nav_layout.xml <br>
+
+                  res/layout/abc_action_menu_item_layout.xml <br>
+
+                  res/layout/abc_action_menu_layout.xml <br>
+
+                  res/layout/abc_action_mode_bar.xml <br>
+
+                  res/layout/abc_action_mode_close_item_material.xml <br>
+
+                  res/layout/abc_activity_chooser_view.xml <br>
+
+                  res/layout/abc_activity_chooser_view_list_item.xml <br>
+
+                  res/layout/abc_alert_dialog_button_bar_material.xml <br>
+
+                  res/layout/abc_alert_dialog_material.xml <br>
+
+                  res/layout/abc_dialog_title_material.xml <br>
+
+                  res/layout/abc_expanded_menu_layout.xml <br>
+
+                  res/layout/abc_list_menu_item_checkbox.xml <br>
+
+                  res/layout/abc_list_menu_item_icon.xml <br>
+
+                  res/layout/abc_list_menu_item_layout.xml <br>
+
+                  res/layout/abc_list_menu_item_radio.xml <br>
+
+                  res/layout/abc_popup_menu_header_item_layout.xml <br>
+
+                  res/layout/abc_popup_menu_item_layout.xml <br>
+
+                  res/layout/abc_screen_content_include.xml <br>
+
+                  res/layout/abc_screen_simple.xml <br>
+
+                  res/layout/abc_screen_simple_overlay_action_mode.xml <br>
+
+                  res/layout/abc_screen_toolbar.xml <br>
+
+                  res/layout/abc_search_dropdown_item_icons_2line.xml <br>
+
+                  res/layout/abc_search_view.xml <br>
+
+                  res/layout/abc_select_dialog_material.xml <br>
+
+                  res/layout/complete_fab.xml <br>
+
+                  res/layout/design_bottom_sheet_dialog.xml <br>
+
+                  res/layout/design_layout_snackbar.xml <br>
+
+                  res/layout/design_layout_snackbar_include.xml <br>
+
+                  res/layout/design_layout_tab_icon.xml <br>
+
+                  res/layout/design_layout_tab_text.xml <br>
+
+                  res/layout/design_menu_item_action_area.xml <br>
+
+                  res/layout/design_navigation_item.xml <br>
+
+                  res/layout/design_navigation_item_header.xml <br>
+
+                  res/layout/design_navigation_item_separator.xml <br>
+
+                  res/layout/design_navigation_item_subheader.xml <br>
+
+                  res/layout/design_navigation_menu.xml <br>
+
+                  res/layout/design_navigation_menu_item.xml <br>
+
+                  res/layout/layout_apps.xml <br>
+
+                  res/layout/layout_apps_item.xml <br>
+
+                  res/layout/layout_main.xml <br>
+
+                  res/layout/layout_main_stat_title.xml <br>
+
+                  res/layout/layout_profiles.xml <br>
+
+                  res/layout/layout_profiles_item.xml <br>
+
+                  res/layout/layout_quick_switch.xml <br>
+
+                  res/layout/layout_scanner.xml <br>
+
+                  res/layout/layout_tasker.xml <br>
+
+                  res/layout/merge_camera_preview_view_finder.xml <br>
+
+                  res/layout/notification_media_action.xml <br>
+
+                  res/layout/notification_media_cancel_action.xml <br>
+
+                  res/layout/notification_template_big_media.xml <br>
+
+                  res/layout/notification_template_big_media_narrow.xml <br>
+
+                  res/layout/notification_template_lines.xml <br>
+
+                  res/layout/notification_template_media.xml <br>
+
+                  res/layout/notification_template_part_chronometer.xml <br>
+
+                  res/layout/notification_template_part_time.xml <br>
+
+                  res/layout/select_dialog_item_material.xml <br>
+
+                  res/layout/select_dialog_multichoice_material.xml <br>
+
+                  res/layout/select_dialog_singlechoice_material.xml <br>
+
+                  res/layout/support_simple_spinner_dropdown_item.xml <br>
+
+                  res/layout/toolbar_light_dark.xml <br>
+
+                  res/menu/app_manager_menu.xml <br>
+
+                  res/menu/profile_manager_menu.xml <br>
+
+                  res/raw/gtm_analytics <br>
+
+                  res/raw/gtm_default_container <br>
+
+                  res/xml/pref_all.xml <br>
+
+                  res/xml/tracker.xml <br>
+
+                  resources.arsc <br>
+
+                  classes.dex <br>
+
+                  build-data.properties <br>
+
+                  com/j256/ormlite/android/LICENSE.txt <br>
+
+                  com/j256/ormlite/android/README.txt <br>
+
+                  com/j256/ormlite/core/LICENSE.txt <br>
+
+                  com/j256/ormlite/core/README.txt <br>
+
+                  jsr305_annotations/Jsr305_annotations.gwt.xml <br>
+
+                  lib/armeabi-v7a/libsystem.so <br>
+
+                  lib/x86/libsystem.so <br>
+
+
+                  </p>
+                                </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+</section>
+        </div><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+
+
+
+
+     <footer class="main-footer">
+        <strong>© 2016 SafeCode Technology - SafeCode </strong>
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <div class="pad">
+          Console logs will be shown here.
+        </div>
+      </aside><!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="/static/jQuery/jQuery-3.1.1.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="/static/plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/static/dash/js/app.min.js"></script>
+    <!-- SlimScroll 1.3.0 -->
+    <script src="/static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+   <!-- <script src="/static/js/run_prettify.js"></script>-->
+    <script src="/static/js/docs.js"></script>
+    <script src="/static/vue/vue.js"></script>
+  <script>
+        Vue.config.silent = false;
+        var $vm = new Vue({
+            el: '#app',
+            delimiters: ['{$', '$}'],
+            data: {
+                apkInfo:{}
+            }
+        });
+        $.ajax({
+            url: "/project/apkinfo",
+            data: {proj: "{{id}}"},
+            method: "GET",
+            success: function(data) {
+                $vm.apkInfo = data.data[0];
+                return;
+        }
+        })
+    </script>
+  </body>
+  {% endblock %}
+</html>
+
