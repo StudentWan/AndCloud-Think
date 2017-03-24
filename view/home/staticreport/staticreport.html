@@ -26,6 +26,7 @@
 
 {% block content %}
 <!--<body class="skin-blue fixed" data-spy="scroll" data-target="#scrollspy">-->
+<body class="skin-purple fixed" data-spy="scroll" data-target="#scrollspy">
 <div id="app" class="wrapper">
 
 
@@ -33,9 +34,9 @@
         <!-- Logo -->
         <a href="../" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>Safe</b>Code</span>
+            <span class="logo-mini"><b>And</b>Cloud</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Safe</b>Code</span>
+            <span class="logo-lg"><b>And</b>Cloud</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -55,31 +56,11 @@
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="nav sidebar-menu">
+                <li class="header">Static Analysis</li>
                 <li class="active"><a href="#information"><i class="glyphicon glyphicon-info-sign"></i> Information</a>
                 </li>
-                <li><a href="#nature"><i class="glyphicon glyphicon-tasks"></i> Code Nature</a></li>
                 <li><a href="#certificate"><i class="fa fa-certificate"></i> Signer Certificate</a></li>
                 <li><a href="#permissions"><i class="fa fa-align-justify"></i> Permissions</a></li>
-                <li><a href="#android-api"><i class="fa fa-dot-circle-o"></i> Android API</a></li>
-
-                <li class="treeview">
-                    <a href="javascript::;"><i class="fa fa-circle-o"></i> Security Analysis</a>
-                    <ul class="nav treeview-menu">
-                        <li><a href="#manifest"><i class="fa fa-search"></i> Manifest Analysis</a></li>
-                        <li><a href="#code"><i class="fa fa-code"></i> Code Analysis</a></li>
-                        <li><a href="#file"><i class="fa fa-file-text-o"></i> File Analysis</a></li>
-                    </ul>
-                </li>
-
-                <li class="treeview">
-                    <a href="javascript::;"><i class="fa fa-plus"></i> Reconnaissance</a>
-                    <ul class="nav treeview-menu">
-                        <li><a href="#url"><i class="glyphicon glyphicon-globe"></i> URLs</a></li>
-                        <li><a href="#domain"><i class="glyphicon glyphicon-screenshot"></i> Malware Check</a></li>
-                        <li><a href="#email"><i class="glyphicon glyphicon-envelope"></i> Emails</a></li>
-                        <li><a href="#string"><i class="glyphicon glyphicon-sort-by-alphabet-alt"></i> Strings</a></li>
-                    </ul>
-                </li>
 
                 <li class="treeview">
                     <a href="javascript::;"><i class="fa fa-bullseye"></i> Components</a>
@@ -88,12 +69,9 @@
                         <li><a href="#services"><i class="fa fa-gears"></i> Services</a></li>
                         <li><a href="#receivers"><i class="fa fa-sort-amount-desc"></i> Receivers</a></li>
                         <li><a href="#providers"><i class="fa fa-database"></i> Providers</a></li>
-                        <li><a href="#libraries"><i class="glyphicon glyphicon-chevron-down"></i> Libraries</a></li>
                         <li><a href="#files"><i class="fa fa-files-o"></i> Files</a></li>
                     </ul>
                 </li>
-                <li><a target="_blank" href="../PDF/?md5=33f69268f67b7c50daa7c27ebc29dae2&amp;type=APK"><i
-                        class="glyphicon glyphicon-list-alt"></i> Download Report</a></li>
             </ul>
         </div>
         <!-- /.sidebar -->
@@ -322,82 +300,6 @@
 
 
 <!-- ============================================================= -->
-
-<section id="nature">
-    <h2 class="page-header"></h2>
-
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Code Nature</h3>
-                    <span class="label label-primary pull-right"><i class="glyphicon glyphicon-tasks"></i></span>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                    <div class="list-group">
-                        <p>
-                            <span class="label label-primary">Native</span>
-                            <a href="#" data-toggle="tooltip"
-                               title="Native is true if the application load native code via JNI bridge.">True</a>
-                        </p>
-                        <p>
-                            <span class="label label-primary">Dynamic</span>
-                            <a href="#" data-toggle="tooltip"
-                               title="Dynamic is true if the application load dynamic code at runtime.">False</a>
-                        </p>
-                        <p>
-                            <span class="label label-primary">Reflection</span>
-                            <a href="#" data-toggle="tooltip"
-                               title="Reflection is true if the application uses any Java Reflection API.">True</a>
-                        </p>
-                        <p>
-                            <span class="label label-primary">Crypto</span>
-                            <a href="#" data-toggle="tooltip"
-                               title="Crypto is true if the application uses any Java Crypto API.">False</a>
-                        </p>
-                        <p>
-                            <span class="label label-primary">Obfuscation</span>
-                            <a href="#" data-toggle="tooltip"
-                               title="Obfuscation is true if the application uses any Java Obfuscation API.">False</a>
-                        </p>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div><!-- /.col -->
-        <div class="col-sm-8">
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Options</h3>
-                    <span class="label label-danger pull-right"><i class="fa fa-flash"></i></span>
-                </div><!-- /.box-header -->
-                <div align="center" class="box-body">
-                    <a href="../Java/?md5=33f69268f67b7c50daa7c27ebc29dae2&amp;type=apk" class="btn btn-info"
-                       role="button"><i class="fa fa-code"></i> View Java</a>
-                    <a href="../download/33f69268f67b7c50daa7c27ebc29dae2-java.zip" class="btn btn-warning"
-                       role="button"> <i class="glyphicon glyphicon-download"></i> Download Java Code</a>
-                    </br>
-                    <a href="../Smali/?md5=33f69268f67b7c50daa7c27ebc29dae2" class="btn btn-info" role="button"><i
-                            class="fa fa-code"></i> View Smali</a>
-                    <a href="../download/33f69268f67b7c50daa7c27ebc29dae2-smali.zip" class="btn btn-warning"> <i
-                            class="glyphicon glyphicon-download"></i> Download Smali Code</a>
-                    </br>
-                    <a href="../StaticAnalyzer/?checksum=33f69268f67b7c50daa7c27ebc29dae2&amp;name=shadowsocks-nightly-2.10.7.apk&amp;type=apk&amp;rescan=1"
-                       class="btn btn-info" role="button"><i class="glyphicon glyphicon-refresh"></i> Rescan</a>
-                    <a target="_blank"
-                       href="../ManifestView/?md5=33f69268f67b7c50daa7c27ebc29dae2&amp;type=apk&amp;bin=1" role="button"
-                       class="btn btn-warning"><i class="fa fa-eye"></i> View AndroidManifest.xml</a>
-                    </br></br>
-                    <a href="javascript:document.getElementById('dynform').submit();" class="btn btn-success btn-lg"
-                       role="button"><i class="glyphicon glyphicon-play-circle"></i> Start Dynamic Analysis</a>
-
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
-</section>
-
-
 <!-- ============================================================= -->
 
 <section id="certificate">
@@ -416,8 +318,6 @@
         0030: F0 33 96 9A 30 00 86 10   3E 67 02 F1 DA 0C 60 96  .3..0...&gt;g....`.</br>0040: CA 76 3B E2 80 C0 A2 93   38 96 21 7F C8 B7 B5 C2  .v;.....8.!.....</br>
         0050: 66 43 BB A6 68 FF B7 D7   AC 7F 93 D3 72 C1 82 3D  fC..h.......r..=</br>0060: 9F 70 89 14 7C DD 40 03   87 6F 9C 1A 3C 5D 60 26  .p....@..o..&lt;]`&amp;</br>
         0070: F5 5A C8 D6 23 6E 2C 8B   2C 76 10 F3 DC 82 FD 62  .Z..#n,.,v.....b</br></br>]</br>
-
-        <strong>Certicate Status: </strong><span class="label label-success">Good</span>
 
 </code></pre>
 </section>
@@ -503,553 +403,6 @@
 
 
 <!-- ============================================================= -->
-
-
-<section id="android-api">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <!-- /.box-header -->
-            <h3 class="box-title"><i class="fa  fa-dot-circle-o"></i> Android API</h3>
-        </div>
-        <div class="box-body no-padding">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-
-                        <th>API</th>
-                        <th>FILES</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Inter Process Communication</td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ScannerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ScannerActivity.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerActivity.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNatService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNatService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/AppManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AppManager.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksSettings.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksTileService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksTileService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/TaskerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TaskerActivity.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/TaskerReceiver.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TaskerReceiver.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/BootReceiver.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BootReceiver.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ServiceBoundContext.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ServiceBoundContext.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/BaseService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BaseService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNotification.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNotification.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/utils/TaskerSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TaskerSettings.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/aidl/IShadowsocksServiceCallback.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>IShadowsocksServiceCallback.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/aidl/IShadowsocksService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>IShadowsocksService.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Get System Service</td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerActivity.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/AppManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AppManager.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNotification.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNotification.java</a>
-                            <a href='../ViewSource/?file=me/dm7/barcodescanner/core/DisplayUtils.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>DisplayUtils.java</a>
-                            <a href='../ViewSource/?file=me/dm7/barcodescanner/core/CameraPreview.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>CameraPreview.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>URL Connection supports file,http,https,ftp and jar</td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/kevinsawicki/http/HttpRequest.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>HttpRequest.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/ZoneTransferIn.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ZoneTransferIn.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Execute System Command</td>
-                        <td>
-                            <a href='../ViewSource/?file=eu/chainfire/libsuperuser/Shell.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shell.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/ResolverConfig.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ResolverConfig.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>UDP Datagram Socket</td>
-                        <td>
-                            <a href='../ViewSource/?file=org/xbill/DNS/UDPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>UDPClient.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>TCP Socket</td>
-                        <td>
-                            <a href='../ViewSource/?file=org/xbill/DNS/ZoneTransferIn.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ZoneTransferIn.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/TCPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TCPClient.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/ExtendedResolver.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ExtendedResolver.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/Client.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Client.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/UDPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>UDPClient.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/PacketLogger.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>PacketLogger.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Message Digest</td>
-                        <td>
-                            <a href='../ViewSource/?file=org/xbill/DNS/utils/HMAC.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>HMAC.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Starting Activity</td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerActivity.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksSettings.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Java Reflection Method Invocation</td>
-                        <td>
-                            <a href='../ViewSource/?file=com/j256/ormlite/field/FieldType.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>FieldType.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/field/types/DateTimeType.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>DateTimeType.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/misc/JavaxPersistence.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>JavaxPersistence.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnThread.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnThread.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/ResolverConfig.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ResolverConfig.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Local File I/O Operations</td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksSettings.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksApplication.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksApplication.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>HTTP Connection</td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/kevinsawicki/http/HttpRequest.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>HttpRequest.java</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-    </div>
-</section>
-
-
-<!-- ============================================================= -->
-<section id="manifest">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="fa fa-search"></i> Manifest Analysis</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>ISSUE</th>
-                        <th>SEVERITY</th>
-                        <th>DESCRIPTION</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Application Data can be Backed up<br>[android:allowBackup=true]</td>
-                        <td><span class="label label-warning">medium</span></td>
-                        <td>This flag allows anyone to backup your application data via adb. It allows users who have
-                            enabled USB debugging to copy application data off of the device.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Activity</strong> (com.github.shadowsocks.ProfileManagerActivity) is not
-                            Protected.<br>An intent-filter exists.
-                        </td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td> An Activity is found to be shared with other apps on the device therefore leaving it
-                            accessible to any other application on the device. The presence of intent-filter indicates
-                            that the Activity is explicitly exported.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Activity</strong> (com.github.shadowsocks.TaskerActivity) is not Protected.<br>An
-                            intent-filter exists.
-                        </td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td> An Activity is found to be shared with other apps on the device therefore leaving it
-                            accessible to any other application on the device. The presence of intent-filter indicates
-                            that the Activity is explicitly exported.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Activity</strong> (com.github.shadowsocks.ShadowsocksQuickSwitchActivity) is not
-                            Protected.<br>An intent-filter exists.
-                        </td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td> An Activity is found to be shared with other apps on the device therefore leaving it
-                            accessible to any other application on the device. The presence of intent-filter indicates
-                            that the Activity is explicitly exported.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Service</strong> (com.github.shadowsocks.ShadowsocksTileService) is Protected by a
-                            permission.</br><strong>Permission: </strong>android.permission.BIND_QUICK_SETTINGS_TILE
-                            <br>[android:exported=true]
-                        </td>
-                        <td><span class="label label-info">info</span></td>
-                        <td> A Service is found to be exported, but is protected by permission.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Broadcast Receiver</strong> (com.github.shadowsocks.BootReceiver) is not
-                            Protected.<br>An intent-filter exists.
-                        </td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td> A Broadcast Receiver is found to be shared with other apps on the device therefore leaving
-                            it accessible to any other application on the device. The presence of intent-filter
-                            indicates that the Broadcast Receiver is explicitly exported.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Broadcast Receiver</strong> (com.github.shadowsocks.TaskerReceiver) is not
-                            Protected.<br>An intent-filter exists.
-                        </td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td> A Broadcast Receiver is found to be shared with other apps on the device therefore leaving
-                            it accessible to any other application on the device. The presence of intent-filter
-                            indicates that the Broadcast Receiver is explicitly exported.
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-
-<!-- ============================================================= -->
-
-<section id="code">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="fa  fa-code"></i> Code Analysis</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>ISSUE</th>
-                        <th>SEVERITY</th>
-                        <th>FILES</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>The App uses an insecure Random Number Generator.</td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td>
-                            <a href='../ViewSource/?file=scala/util/Random.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Random.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/Header.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Header.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>The App logs information. Sensitive information should never be logged.</td>
-                        <td><span class="label label-info">info</span></td>
-                        <td>
-                            <a href='../ViewSource/?file=com/j256/ormlite/table/TableUtils.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TableUtils.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidCompiledStatement.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidCompiledStatement.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidDatabaseConnection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidDatabaseConnection.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidConnectionSource.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidConnectionSource.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/apptools/OrmLiteSqliteOpenHelper.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>OrmLiteSqliteOpenHelper.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/misc/VersionUtils.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>VersionUtils.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/logger/Logger.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Logger.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/logger/LocalLog.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>LocalLog.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/dao/DaoManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>DaoManager.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/support/BaseConnectionSource.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BaseConnectionSource.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/stmt/StatementExecutor.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>StatementExecutor.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/stmt/SelectIterator.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>SelectIterator.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedCreate.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedCreate.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedQueryForId.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedQueryForId.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/BaseMappedStatement.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BaseMappedStatement.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedUpdate.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedUpdate.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedDelete.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedDelete.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/stmt/mapped/MappedPreparedStmt.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MappedPreparedStmt.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksRunnerActivity.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksRunnerActivity.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNatService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNatService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/GuardedProcess.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>GuardedProcess.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/BaseService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BaseService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksVpnThread.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksVpnThread.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/utils/TrafficMonitorThread.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TrafficMonitorThread.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/database/ProfileManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ProfileManager.java</a>
-                            <a href='../ViewSource/?file=me/dm7/barcodescanner/core/CameraPreview.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>CameraPreview.java</a>
-                            <a href='../ViewSource/?file=me/dm7/barcodescanner/zxing/ZXingScannerView.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ZXingScannerView.java</a>
-                            <a href='../ViewSource/?file=eu/chainfire/libsuperuser/Debug.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Debug.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/ResolverConfig.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ResolverConfig.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/ZoneTransferIn.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ZoneTransferIn.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/TCPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>TCPClient.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/Client.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Client.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/UDPClient.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>UDPClient.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/PacketLogger.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>PacketLogger.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/Cache.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Cache.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>This App uses Java Hash Code. It's a weak hash function and should never be used in Secure
-                            Crypto Implementation.
-                        </td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td>
-                            <a href='../ViewSource/?file=scala/runtime/BoxesRunTime.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BoxesRunTime.java</a>
-                            <a href='../ViewSource/?file=scala/math/BigDecimal.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BigDecimal.java</a>
-                            <a href='../ViewSource/?file=scala/util/hashing/MurmurHash3.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>MurmurHash3.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/field/FieldType.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>FieldType.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidCompiledStatement.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidCompiledStatement.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidDatabaseResults.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidDatabaseResults.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidDatabaseConnection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidDatabaseConnection.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidConnectionSource.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidConnectionSource.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/apptools/OrmLiteSqliteOpenHelper.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>OrmLiteSqliteOpenHelper.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/dao/EagerForeignCollection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>EagerForeignCollection.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/dao/LazyForeignCollection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>LazyForeignCollection.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/dao/DaoManager.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>DaoManager.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/Name.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Name.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/APLRecord.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>APLRecord.java</a>
-                            <a href='../ViewSource/?file=org/xbill/DNS/Compression.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Compression.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Files may contain hardcoded sensitive informations like usernames, passwords, keys etc.</td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksBackupAgent.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksBackupAgent.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/database/Profile.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Profile.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>This App may request root (Super User) privileges.</td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksNatService.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksNatService.java</a>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/Shadowsocks.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shadowsocks.java</a>
-                            <a href='../ViewSource/?file=eu/chainfire/libsuperuser/ShellOnMainThreadException.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShellOnMainThreadException.java</a>
-                            <a href='../ViewSource/?file=eu/chainfire/libsuperuser/Shell.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Shell.java</a>
-                            <a href='../ViewSource/?file=eu/chainfire/libsuperuser/Debug.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>Debug.java</a>
-                            <a href='../ViewSource/?file=eu/chainfire/libsuperuser/StreamGobbler.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>StreamGobbler.java</a>
-                            <a href='../ViewSource/?file=eu/chainfire/libsuperuser/ShellNotClosedException.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShellNotClosedException.java</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>App uses SQLite Database and execute raw SQL query. Untrusted user input in raw SQL queries
-                            can cause SQL Injection. Also sensitive information should be encrypted and written to the
-                            database.
-                        </td>
-                        <td><span class="label label-danger">high</span></td>
-                        <td>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidCompiledStatement.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidCompiledStatement.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/AndroidDatabaseConnection.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>AndroidDatabaseConnection.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/compat/JellyBeanApiCompatibility.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>JellyBeanApiCompatibility.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/compat/ApiCompatibility.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ApiCompatibility.java</a>
-                            <a href='../ViewSource/?file=com/j256/ormlite/android/compat/BasicApiCompatibility.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>BasicApiCompatibility.java</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-
-<!-- ============================================================= -->
-
-<section id="file">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="fa fa-file-text-o"></i> File Analysis</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>ISSUE</th>
-                        <th>FILES</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-
-<!-- ============================================================= -->
-
-<section id="url">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="glyphicon glyphicon-globe"></i> URLs</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-
-                    <thead>
-                    <tr>
-                        <th>URL</th>
-                        <th>File</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tbody>
-
-                    <tr>
-                        <td>file:///android_asset/pages/about.html</td>
-                        <td>
-                            <a href='../ViewSource/?file=com/github/shadowsocks/ShadowsocksSettings.java&md5=33f69268f67b7c50daa7c27ebc29dae2&type=apk'>ShadowsocksSettings.java</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-
-<!-- ============================================================= -->
-
-<section id="domain">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="glyphicon glyphicon-screenshot"></i> Malware Check</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-
-                    <thead>
-                    <tr>
-                        <th>Domain</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-
-
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-
-<!-- ============================================================= -->
-
-<section id="email">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="glyphicon glyphicon-envelope"></i> Emails</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body no-padding">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-
-                    <tbody>
-                    <tbody>
-
-
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-
-<!-- ============================================================= -->
-
-<section id="string">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="glyphicon glyphicon-sort-by-alphabet-alt"></i> Strings</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="list-group">
-                <p>
-
-
-                    <br>
-
-
-                </p>
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
 
 <!-- ============================================================= -->
 
@@ -1182,30 +535,6 @@
 </section>
 
 <!-- ============================================================= -->
-
-<section id="libraries">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="glyphicon glyphicon-chevron-down"></i> Libraries</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="list-group">
-                <p>
-
-                    android.test.runner <br>
-
-
-                </p>
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
 
 <section id="files">
     <h2 class="page-header"></h2>
@@ -2545,7 +1874,7 @@
 
 
 <footer class="main-footer">
-    <strong>© 2016 SafeCode Technology - SafeCode </strong>
+    <strong>© 2017 SafeCode Technology - SafeCode </strong>
 </footer>
 
 <!-- Control Sidebar -->
@@ -2560,6 +1889,7 @@
 <div class="control-sidebar-bg"></div>
 
 </div><!-- ./wrapper -->
+</body>
 {% endblock %}
 {% block js %}
 <!-- jQuery 2.1.4 -->
@@ -2589,6 +1919,7 @@
         success: function (data) {
             data.data[0].size = (data.data[0].size / 1024 / 1024).toFixed(2);
             $vm.apkInfo = data.data[0];
+            console.log($vm.apkInfo);
             return;
         }
     })
