@@ -1,6 +1,7 @@
 {% extends "./../basebar.html" %}
 {% block title %}历史列表{% endblock %}
 {% block headerbar %}
+<link rel="stylesheet" href="/static/app/css/hwLayer.css">
 <style>
     @media screen and (min-width: 760px) {
         .history-list {
@@ -196,7 +197,7 @@
         text-align: center;
     }
 
-    .test-link{
+    .test-link {
         width: 68px;
         height: 68px;
         padding: 5px;
@@ -205,9 +206,29 @@
         text-align: center;
         padding-top: calc(50px - 1.4em);
     }
+
 </style>
 {% endblock %}
 {% block contentright %}
+
+<div class="hw-overlay" id="hw-layer">
+    <div class="hw-layer-wrap" style="background-image: radial-gradient(circle at 80% 80%, RGBA(53, 97, 149, 1.00) 0%, transparent),
+    radial-gradient(circle farthest-corner at 20% 20%, RGBA(101, 77, 143, 1.00) 0%, RGBA(54, 70, 132, 1.00) 70%);border: 1px solid white">
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <p><b>And</b>Cloud</p>
+                <p>Static Options</p>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <h4>你确定吗？</h4>
+                <p>这是HTML+CSS+Javascript实现的一个弹出层效果，它是响应式的，它可以在所有现代浏览器上工作（包括PC和移动端）。</p>
+                <span class="button-btn">确 定</span>
+                <span class="button-btn">取 消</span>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="app" style="opacity: 0">
     <div class="history-list">
         <div class="history-header">
@@ -280,45 +301,102 @@
                 <div class="row" v-if="apps[selectedIndex].isfullinfo" style="text-align: center; margin-top: 3px;">
                     <div class="col-xs-3"></div>
                     <div class="col-xs-9">
-                        <div class="button-btn pull-left iconfont icon-report" v-on:click="getStaticReport" style="font-weight:400;">APK静态分析报告</div>
+                        <div class="button-btn pull-left iconfont icon-report" v-on:click="getStaticReport"
+                             style="font-weight:400;">APK静态分析报告
+                        </div>
                     </div>
                 </div>
                 <hr>
             </div>
             <!--Waiting for implement-->
-             <div class="app-action-list">
-                 <div class="row">
-                         <div v-if="autoToken==undefined">
-                             shit
-                         </div>
-                         <div v-else style="overflow: auto;padding: 12px;">
-                             <div style="overflow: auto;">
-                             <div class="test-link pull-left col-xs-3" style="padding-top:15px">
-                                 <a :href="'/runner/token/'+autoToken.token" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-magic" style="font-size: 30px;padding-top:5px;"></i></a>
-                             </div>
-                             <div class="col-xs-9" style="padding-top: 18px;text-align: center">
-                                 <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">自动检测</div>
-                             </div>
-                             </div>
-                             <div style="overflow: auto;padding-top: 30px;">
-                                 <div class="test-link pull-left col-xs-3" style="padding-top:15px">
-                                     <a :href="'/runner/token/'+autoToken.token" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-check" style="font-size: 30px;padding-top:5px;"></i></a>
-                                 </div>
-                                 <div class="col-xs-9" style="padding-top: 18px;">
-                                     <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">手动检测</div>
-                                     <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%"><i class="iconfont icon-add_light test-link" style="font-size: 30px;padding-top:5px;"></i></div>
-                                 </div>
-                             </div>
-                             <!--:href=-->
-                             <!--{$autoToken.token$}-->
-                         </div>
-                 </div>
-             </div>
+            <div class="app-action-list">
+                <div class="row">
+                    <div v-if="autoToken==undefined">
+                        shit
+                    </div>
+                    <div v-else style="overflow: auto;padding: 12px;">
+                        <div style="overflow: auto;">
+                            <div class="test-link pull-left col-xs-3" style="padding-top:15px">
+                                <a :href="'/runner/token/'+autoToken.token"
+                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                        class="iconfont icon-magic" style="font-size: 30px;padding-top:5px;"></i></a>
+                            </div>
+                            <div class="col-xs-9" style="padding-top: 18px;text-align: center">
+                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
+                                    自动检测
+                                </div>
+                            </div>
+                        </div>
+                        <div style="overflow: auto;padding-top: 30px;">
+                            <div class="test-link pull-left col-xs-3" style="padding-top:15px">
+                                <a :href="'/runner/token/'+autoToken.token"
+                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                        class="iconfont icon-check" style="font-size: 30px;padding-top:5px;"></i></a>
+                            </div>
+                            <div class="col-xs-9" style="padding-top: 18px;">
+                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
+                                    手动检测
+                                </div>
+                                <div v-on:click="chooseTest" data-show-layer="hw-layer"
+                                     style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
+                                    <i class="iconfont icon-add_light test-link"
+                                       style="font-size: 30px;padding-top:5px;"></i></div>
+                            </div>
+                        </div>
+                        <!--:href=-->
+                        <!--{$autoToken.token$}-->
+                    </div>
+                </div>
+            </div>
         </template>
     </div>
 </div>
 {% endblock %}
 {% block js %}
+<script>
+//    $(function () {
+        //展示层
+        function showLayer(id) {
+            var layer = $('#' + id),
+                layerwrap = layer.find('.hw-layer-wrap');
+            layer.slideToggle();
+            //屏幕居中
+            layerwrap.css({
+                'margin-top': -layerwrap.outerHeight() / 2
+            });
+        }
+
+        //隐藏层
+        function hideLayer() {
+            $('.hw-overlay').slideToggle();
+        }
+
+        $('.button-btn').on('click', function () {
+            hideLayer();
+        });
+
+        //触发弹出层
+        $('.show-layer').on('click', function () {
+            var layerid = $(this).data('show-layer');
+            alert(layerid);
+            showLayer(layerid);
+        });
+
+        //点击或者触控弹出层外的半透明遮罩层，关闭弹出层
+        $('.hw-overlay').on('click', function (event) {
+            if (event.target == this) {
+                hideLayer();
+            }
+        });
+
+        //按ESC键关闭弹出层
+        $(document).keyup(function (event) {
+            if (event.keyCode == 27) {
+                hideLayer();
+            }
+        });
+//    });
+</script>
 <script src="/static/app/js/velocity.min.js"></script>
 <script src="/static/app/js/moment-with-locales.js"></script>
 <script>
@@ -376,28 +454,29 @@
                     method: "GET",
                     success: function (data) {
                         var apkinfo = null;
-                        if(!data.data || data.data.length == 0){
-                            console.log("projid" + projid +" not have apkinfo");
+                        if (!data.data || data.data.length == 0) {
+                            console.log("projid" + projid + " not have apkinfo");
                             return;
                         }
                         apkinfo = data.data[0];
                         that.apps.forEach(function ($) {
-                            if($.id === projid){
-                                if(apkinfo.id){
+                            if ($.id === projid) {
+                                if (apkinfo.id) {
                                     $.isfullinfo = true;
-                                    for(var key in apkinfo){
-                                        if(key=='id') continue;
-                                        if(apkinfo.hasOwnProperty(key)) {
+                                    for (var key in apkinfo) {
+                                        if (key == 'id') continue;
+                                        if (apkinfo.hasOwnProperty(key)) {
                                             console.log(key + "  ---  " + apkinfo[key]);
                                             $[key] = apkinfo[key];
                                         }
                                     }
-                                }else{
+                                } else {
                                     $.isfullinfo = false;
                                 }
                             }
                         })
-                    }});
+                    }
+                });
             },
             select: function (index) {
                 this.selectedIndex = index;
@@ -434,7 +513,11 @@
                 }, delay)
             },
             getStaticReport: function () {
-               window.location.href = "/staticreport/index?id=" + this.apps[this.selectedIndex].id;
+                window.location.href = "/staticreport/index?id=" + this.apps[this.selectedIndex].id;
+            },
+            chooseTest: function () {
+                var layerid ='hw-layer';
+                showLayer(layerid);
             }
         },
         mounted: function () {
@@ -462,6 +545,6 @@
                 }, 100);
             }
         }
-    })
+    });
 </script>
 {% endblock %}
