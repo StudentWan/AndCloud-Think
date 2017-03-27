@@ -288,21 +288,30 @@
             <!--Waiting for implement-->
              <div class="app-action-list">
                  <div class="row">
-                     <div class="col-xs-3">
                          <div v-if="autoToken==undefined">
                              shit
                          </div>
-                         <div v-else>
+                         <div v-else style="overflow: auto;padding: 12px;">
+                             <div style="overflow: auto;">
                              <div class="test-link pull-left col-xs-3" style="padding-top:15px">
                                  <a :href="'/runner/token/'+autoToken.token" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-magic" style="font-size: 30px;padding-top:5px;"></i></a>
+                             </div>
+                             <div class="col-xs-9" style="padding-top: 18px;text-align: center">
+                                 <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">自动检测</div>
+                             </div>
+                             </div>
+                             <div style="overflow: auto;padding-top: 30px;">
+                                 <div class="test-link pull-left col-xs-3" style="padding-top:15px">
+                                     <a :href="'/runner/token/'+autoToken.token" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-check" style="font-size: 30px;padding-top:5px;"></i></a>
+                                 </div>
+                                 <div class="col-xs-9" style="padding-top: 18px;">
+                                     <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">手动检测</div>
+                                     <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%"><i class="iconfont icon-add_light test-link" style="font-size: 30px;padding-top:5px;"></i></div>
+                                 </div>
                              </div>
                              <!--:href=-->
                              <!--{$autoToken.token$}-->
                          </div>
-                     </div>
-                     <div class="col-xs-9">
-                         <p style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;padding-top: 18px">自动检测</p>
-                     </div>
                  </div>
              </div>
         </template>
