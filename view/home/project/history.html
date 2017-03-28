@@ -212,17 +212,32 @@
 {% block contentright %}
 
 <div class="hw-overlay" id="hw-layer">
-    <div class="hw-layer-wrap" style="background:gray;border: 1px solid white">
+    <div class="hw-layer-wrap" style="background:#5cb85c;border: 1px solid white;overflow: auto;opacity: 0.8">
         <div class="row">
             <div class="col-md-3 col-sm-12">
                 <p><b>And</b>Cloud</p>
                 <p>Static Options</p>
             </div>
             <div class="col-md-9 col-sm-12">
-                <h4>你确定吗？</h4>
-                <p>这是HTML+CSS+Javascript实现的一个弹出层效果，它是响应式的，它可以在所有现代浏览器上工作（包括PC和移动端）。</p>
-                <span class="button-btn">确 定</span>
-                <span class="button-btn">取 消</span>
+                <div>
+                <h4>选择</h4>
+                </div>
+                <div style="margin:20px 0 20px;color:black">
+                    <form>
+                        <select name="version" id="version">
+                            <option value="4.4">Android 4.4</option>
+                            <option value="5.0">Android 5.0</option>
+                            <option value="6.0">Android 6.0</option>
+                            <option value="7.0">Android 7.0</option>
+                        </select>
+                        <label for="version" style="color: white;font-weight: 100">Version</label>
+                        <br />
+                    </form>
+                </div>
+                <div style="overflow: hidden">
+                <span style="float:left" class="button-btn confirm">确 定</span>
+                <span style="margin-left:5px;float:left" class="button-btn cancel">取 消</span>
+                </div>
             </div>
         </div>
     </div>
@@ -344,6 +359,10 @@
                         </div>
                         <!--:href=-->
                         <!--{$autoToken.token$}-->
+
+                        <div id="options" style="padding:15px 5px 15px;">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -370,15 +389,19 @@
             $('.hw-overlay').slideToggle();
         }
 
-        $('.button-btn').on('click', function () {
+        $('.confirm').on('click', function () {
             hideLayer();
-        });
+            //Wait for change
+            //转成jQuery对象
+            let dom = $('<p class="button-btn" style="margin-bottom: 10px;">Android Version: ' +  $("#version").val() + '</p>');
+            //将jQuery对象的dom值绑定到dom tree
+            $('#options').append(dom);
+            //这样dom就指向dom tree上的dom值了
+            dom.hide().slideToggle();
 
-        //触发弹出层
-        $('.show-layer').on('click', function () {
-            var layerid = $(this).data('show-layer');
-            alert(layerid);
-            showLayer(layerid);
+        });
+        $('.cancel').on('click', function () {
+            hideLayer();
         });
 
         //点击或者触控弹出层外的半透明遮罩层，关闭弹出层
