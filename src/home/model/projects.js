@@ -46,7 +46,24 @@ class Projects extends think.model.base {
                 as: 'info',
                 on: ['apkinfoid', 'info.id']
             }])
-            .where({"project.id": proj_id, "userid": user_id}).select();
+            .where({"project.id": proj_id, "project.userid": user_id}).select();
+        return data;
+    }
+
+    async getStaticInfoByProjectIdAndUserId(proj_id, user_id) {
+        let data = await this.alias('static')
+            .field('fileappinfo.*, components.*')
+            .join([{
+                table: 'T_APKINFO',
+                as: 'fileappinfo',
+                on: ['apkinfoid', 'fileappinfo.id']
+            }])
+            .join([{
+                table: 'T_APKSTATICANALYSISINFO',
+                as: 'components',
+                on: ['apkinfoid', 'components.apkinfoid']
+            }])
+            .where({"static.id": proj_id, "static.userid": user_id}).select();
         return data;
     }
 

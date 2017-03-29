@@ -315,9 +315,8 @@
                 <div class="row" v-if="apps[selectedIndex].isfullinfo" style="text-align: center; margin-top: 3px;">
                     <div class="col-xs-3"></div>
                     <div class="col-xs-9">
-                        <div class="button-btn pull-left iconfont icon-report" v-on:click="getStaticReport"
-                             style="font-weight:400;">APK静态分析报告
-                        </div>
+                        <a class="button-btn pull-left iconfont icon-report" style="color:white; text-decoration:none; font-weight: 300;" v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id" target="view_window">APK静态分析报告
+                        </a>
                     </div>
                 </div>
                 <hr>
@@ -535,7 +534,6 @@
                 }, delay)
             },
             getStaticReport: function () {
-                window.location.href = "/staticreport/index?id=" + this.apps[this.selectedIndex].id;
             },
             chooseTest: function () {
                 var layerid ='hw-layer';

@@ -53,7 +53,6 @@
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <div class="sidebar" id="scrollspy">
-
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="nav sidebar-menu">
                 <li class="header">Static Analysis</li>
@@ -176,7 +175,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>10</h3>
+                <h3>{$apkInfo.activitiesnum$}</h3>
 
                 <p>ACTIVITIES</p>
             </div>
@@ -191,7 +190,7 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>4</h3>
+                <h3>{$apkInfo.servicesnum$}</h3>
 
                 <p>SERVICES</p>
             </div>
@@ -206,7 +205,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>2</h3>
+                <h3>{$apkInfo.receiversnum$}</h3>
 
                 <p>RECEIVERS</p>
             </div>
@@ -221,7 +220,7 @@
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>0</h3>
+                <h3>{$apkInfo.providersnum$}</h3>
 
                 <p>PROVIDERS</p>
             </div>
@@ -244,7 +243,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Exported </br>Activities</span>
-                <span class="info-box-number">3</span>
+                <span class="info-box-number">{$apkInfo.exportedactivitiesnum$}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -257,7 +256,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Exported </br>Services</span>
-                <span class="info-box-number">0</span>
+                <span class="info-box-number">{$apkInfo.exportedservicesnum$}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -274,7 +273,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Exported </br>Receivers</span>
-                <span class="info-box-number">2</span>
+                <span class="info-box-number">{$apkInfo.exportedreceiversnum$}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -287,7 +286,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Exported </br>Providers</span>
-                <span class="info-box-number">0</span>
+                <span class="info-box-number">{$apkInfo.exportedprovidersnum$}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -309,16 +308,7 @@
         <h3 class="box-title"><i class="fa fa-certificate"></i> Signer Certificate</h3>
     </div>
     <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
-[</br>[</br>  Version: V3</br>  Subject: CN=Max Lv, OU=PPI, O=Fudan Univ., L=Pudong, ST=Shanghai, C=cn</br>  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5</br></br>
-        Key:  </br>  Validity: [From: Sat Feb 19 05:00:54 UTC 2011,</br>
-        To: Wed Feb 13 05:00:54 UTC 2036]</br>
-        Issuer: CN=Max Lv, OU=PPI, O=Fudan Univ., L=Pudong, ST=Shanghai, C=cn</br>
-        SerialNumber: [    4d5f4e86]</br></br>]</br>  Algorithm: [SHA1withRSA]</br>  Signature:</br>0000: 10 22 AA 27 C6 9C 24 D9   AC BE 0E 6E 51 84 57 D9  .&quot;.&#39;..$....nQ.W.</br>
-        0010: C8 6F 52 6A D3 3F 24 D1   71 D8 E7 44 AD 4D 7A 5B  .oRj.?$.q..D.Mz[</br>0020: 3B 8A D4 8B 68 B5 71 95   25 AC 42 66 FD EE FE D4  ;...h.q.%.Bf....</br>
-        0030: F0 33 96 9A 30 00 86 10   3E 67 02 F1 DA 0C 60 96  .3..0...&gt;g....`.</br>0040: CA 76 3B E2 80 C0 A2 93   38 96 21 7F C8 B7 B5 C2  .v;.....8.!.....</br>
-        0050: 66 43 BB A6 68 FF B7 D7   AC 7F 93 D3 72 C1 82 3D  fC..h.......r..=</br>0060: 9F 70 89 14 7C DD 40 03   87 6F 9C 1A 3C 5D 60 26  .p....@..o..&lt;]`&amp;</br>
-        0070: F5 5A C8 D6 23 6E 2C 8B   2C 76 10 F3 DC 82 FD 62  .Z..#n,.,v.....b</br></br>]</br>
-
+        {$apkInfo.signercertificate$}
 </code></pre>
 </section>
 
@@ -417,30 +407,7 @@
         <!-- /.box-header -->
         <div class="box-body">
             <div class="list-group">
-                <p>
-
-                    com.google.android.gms.ads.AdActivity <br>
-
-                    com.github.shadowsocks.Shadowsocks <br>
-
-                    com.github.shadowsocks.ShadowsocksRunnerActivity <br>
-
-                    com.github.shadowsocks.ProfileManagerActivity <br>
-
-                    com.github.shadowsocks.ScannerActivity <br>
-
-                    com.github.shadowsocks.AppManager <br>
-
-                    com.github.shadowsocks.TaskerActivity <br>
-
-                    com.github.shadowsocks.ShadowsocksQuickSwitchActivity <br>
-
-                    com.google.android.gms.ads.purchase.InAppPurchaseActivity <br>
-
-                    com.google.android.gms.common.api.GoogleApiActivity <br>
-
-
-                </p>
+                    <p v-for='activity in activities'>{$ activity $}</p>
             </div>
         </div>
         <!-- /.box-body -->
@@ -1909,17 +1876,19 @@
         el: '#app',
         delimiters: ['{$', '$}'],
         data: {
-            apkInfo: {}
+            apkInfo: {},
+            activities: []
         }
     });
     $.ajax({
-        url: "/project/apkinfo",
+        url: "/project/staticinfo",
         data: {proj: "{{id}}"},
         method: "GET",
         success: function (data) {
             data.data[0].size = (data.data[0].size / 1024 / 1024).toFixed(2);
             $vm.apkInfo = data.data[0];
-//            console.log($vm.apkInfo);
+            let activityPattern = /([.\w]+)/g;
+            $vm.activities = $vm.apkInfo.activities.match(activityPattern);
             return;
         }
     })

@@ -38,6 +38,13 @@ export default class extends Base {
         return this.success(result);
     }
 
+    async staticinfoAction() {
+        let projId = this.get("proj");
+        let projectModel = this.model('projects');
+        let result = await projectModel.getStaticInfoByProjectIdAndUserId(projId, this.user_id);
+        return this.success(result);
+    }
+
     async uploadAction() {
         let file = this.file('apk');
         let vm = this.post("vm");
