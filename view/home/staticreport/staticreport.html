@@ -309,7 +309,7 @@
     </div>
     <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
         {$apkInfo.signercertificate$}
-        <strong>Certicate Status: </strong><span v-if="apkInfo.certissued == 'good'" class="label label-success">Good</span>
+        <strong>Certicate Status: </strong><span v-if="apkInfo.certissued == 'good'" class="label label-success">Good</span><span v-if="apkInfo.certissued == 'missing'" class="label label-danger">Missing</span><span v-if="apkInfo.certissued == 'broken'" class="label label-danger">Broken</span><span v-if="apkInfo.certissued == 'bad'" class="label label-warning">Bad</span>
         <!--其他情况-->
 </code></pre>
 </section>
