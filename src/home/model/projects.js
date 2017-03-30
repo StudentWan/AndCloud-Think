@@ -66,7 +66,6 @@ class Projects extends think.model.base {
             .where({"static.id": proj_id, "static.userid": user_id}).select();
         return data;
     }
-
 }
 
 export default Projects;
