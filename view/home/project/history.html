@@ -206,19 +206,6 @@
         text-align: center;
         padding-top: calc(50px - 1.4em);
     }
-
-    .fade-enter-active {
-        transition: all .3s ease;
-    }
-
-    .fade-leave-active {
-        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-    }
-
-    .fade-enter, .fade-leave-active {
-        transform: translateX(10px);
-        opacity: 0;
-    }
 </style>
 {% endblock %}
 {% block contentright %}
@@ -292,7 +279,12 @@
     </div><!--
     -->
     <div class="app-selected">
-        <template v-if="selectedIndex == -1">
+        <transition
+                v-bind:css="false"
+                v-on:before-enter="beforeEnter"
+                v-on:enter="enter"
+                v-on:leave="leave">
+        <div v-if="selectedIndex == -1" v-bind:key="1">
             <div class="empty-page">
                 <div style="animation: buzz-out 3s infinite linear;">
                     <i class="iconfont icon-focus" style="font-size: 60px;margin:auto;"></i>
@@ -302,9 +294,9 @@
                 <br>
                 去左边选一个
             </div>
-        </template>
-        <template v-else>
-            <div class="app-info-detail" v-bind:key="1">
+        </div>
+        <div v-else v-bind:key="2">
+            <div class="app-info-detail">
                 <div class="row">
                     <div class="col-xs-3">
                         <img :src="apps[selectedIndex].logo" alt="" class="logo">
@@ -342,7 +334,7 @@
                 <hr>
             </div>
             <!--Waiting for implement-->
-            <div class="app-action-list" v-bind:key="2">
+            <div class="app-action-list">
                 <div class="row">
                     <div v-if="autoToken==undefined">
                         shit
@@ -388,7 +380,8 @@
                 </div>
             </div>
 
-        </template>
+        </div>
+        </transition>
     </div>
 </div>
 {% endblock %}
