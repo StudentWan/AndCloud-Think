@@ -207,13 +207,15 @@
         padding-top: calc(50px - 1.4em);
     }
 
-    .slide-fade-enter-active {
+    .fade-enter-active {
         transition: all .3s ease;
     }
-    .slide-fade-leave-active {
+
+    .fade-leave-active {
         transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
     }
-    .slide-fade-enter, .slide-fade-leave-active {
+
+    .fade-enter, .fade-leave-active {
         transform: translateX(10px);
         opacity: 0;
     }
@@ -302,89 +304,90 @@
             </div>
         </template>
         <template v-else>
-            <transition-group
-                    tag="div"
-                    name="slide-fade">
-                <div class="app-info-detail" v-bind:key="1">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <img :src="apps[selectedIndex].logo" alt="" class="logo">
-                        </div>
-                        <div class="col-xs-9">
-                            <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后</div>
-                            <div v-if="apps[selectedIndex].isfullinfo">
-                                <div class="app-name">{$apps[selectedIndex].label$}</div>
-                                <div class="app-info"><span class="info-title">包名</span>
-                                    {$apps[selectedIndex].packagename$}
-                                </div>
-                                <div class="app-info"><span class="info-title">文件大小</span> {$apps[selectedIndex].size$}
-                                </div>
-                                <div class="app-info"><span class="info-title">文件MD5</span> {$apps[selectedIndex].md5$}
-                                </div>
-                                <div class="app-info"><span class="info-title">文件SHA1</span>
-                                    {$apps[selectedIndex].sha1$}
-                                </div>
-                            </div>
-                        </div>
+            <div class="app-info-detail" v-bind:key="1">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img :src="apps[selectedIndex].logo" alt="" class="logo">
                     </div>
-                    <div class="row" v-if="apps[selectedIndex].isfullinfo" style="text-align: center; margin-top: 3px;">
-                        <div class="col-xs-3"></div>
-                        <div class="col-xs-9">
-                            <a class="button-btn pull-left iconfont icon-report"
-                               style="color:white; text-decoration:none; font-weight: 300;"
-                               v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id" target="view_window">APK静态分析报告
-                            </a>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <!--Waiting for implement-->
-                <div class="app-action-list" v-bind:key="2">
-                    <div class="row">
-                        <div v-if="autoToken==undefined">
-                            shit
-                        </div>
-                        <div v-else style="overflow: auto;padding: 12px;">
-                            <div style="overflow: auto;">
-                                <div class="test-link pull-left col-xs-3" style="padding-top:15px">
-                                    <a :href="'/runner/token/'+autoToken.token"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
-                                            class="iconfont icon-magic"
-                                            style="font-size: 30px;padding-top:5px;"></i></a>
-                                </div>
-                                <div class="col-xs-9" style="padding-top: 18px;text-align: center">
-                                    <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
-                                        自动检测
-                                    </div>
-                                </div>
+                    <div class="col-xs-9">
+                        <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后</div>
+                        <div v-if="apps[selectedIndex].isfullinfo">
+                            <div class="app-name">{$apps[selectedIndex].label$}</div>
+                            <div class="app-info"><span class="info-title">包名</span>
+                                {$apps[selectedIndex].packagename$}
                             </div>
-                            <div style="overflow: auto;padding-top: 30px;">
-                                <div class="test-link pull-left col-xs-3" style="padding-top:15px">
-                                    <a :href="'/runner/token/'+autoToken.token"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
-                                            class="iconfont icon-check"
-                                            style="font-size: 30px;padding-top:5px;"></i></a>
-                                </div>
-                                <div class="col-xs-9" style="padding-top: 18px;">
-                                    <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
-                                        手动检测
-                                    </div>
-                                    <div v-on:click="chooseTest" data-show-layer="hw-layer"
-                                         style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
-                                        <i class="iconfont icon-add_light test-link"
-                                           style="font-size: 30px;padding-top:5px;"></i></div>
-                                </div>
+                            <div class="app-info"><span class="info-title">文件大小</span>
+                                {$apps[selectedIndex].size$}
                             </div>
-                            <!--:href=-->
-                            <!--{$autoToken.token$}-->
-
-                            <div id="options" style="padding:15px 5px 15px;">
-
+                            <div class="app-info"><span class="info-title">文件MD5</span>
+                                {$apps[selectedIndex].md5$}
+                            </div>
+                            <div class="app-info"><span class="info-title">文件SHA1</span>
+                                {$apps[selectedIndex].sha1$}
                             </div>
                         </div>
                     </div>
                 </div>
-                </transition-group>
+                <div class="row" v-if="apps[selectedIndex].isfullinfo"
+                     style="text-align: center; margin-top: 3px;">
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-9">
+                        <a class="button-btn pull-left iconfont icon-report"
+                           style="color:white; text-decoration:none; font-weight: 300;"
+                           v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id"
+                           target="view_window">APK静态分析报告
+                        </a>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <!--Waiting for implement-->
+            <div class="app-action-list" v-bind:key="2">
+                <div class="row">
+                    <div v-if="autoToken==undefined">
+                        shit
+                    </div>
+                    <div v-else style="overflow: auto;padding: 12px;">
+                        <div style="overflow: auto;">
+                            <div class="test-link pull-left col-xs-3" style="padding-top:15px">
+                                <a :href="'/runner/token/'+autoToken.token"
+                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                        class="iconfont icon-magic"
+                                        style="font-size: 30px;padding-top:5px;"></i></a>
+                            </div>
+                            <div class="col-xs-9" style="padding-top: 18px;text-align: center">
+                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
+                                    自动检测
+                                </div>
+                            </div>
+                        </div>
+                        <div style="overflow: auto;padding-top: 30px;">
+                            <div class="test-link pull-left col-xs-3" style="padding-top:15px">
+                                <a :href="'/runner/token/'+autoToken.token"
+                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                        class="iconfont icon-check"
+                                        style="font-size: 30px;padding-top:5px;"></i></a>
+                            </div>
+                            <div class="col-xs-9" style="padding-top: 18px;">
+                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
+                                    手动检测
+                                </div>
+                                <div v-on:click="chooseTest" data-show-layer="hw-layer"
+                                     style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
+                                    <i class="iconfont icon-add_light test-link"
+                                       style="font-size: 30px;padding-top:5px;"></i></div>
+                            </div>
+                        </div>
+                        <!--:href=-->
+                        <!--{$autoToken.token$}-->
+
+                        <div id="options" style="padding:15px 5px 15px;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </template>
     </div>
 </div>
@@ -444,6 +447,7 @@
     moment.locale('zh-CN');
     Vue.config.debug = true;
     Vue.config.silent = false;
+
     var $vm = new Vue({
         el: '#app',
         delimiters: ['{$', '$}'],
@@ -453,7 +457,8 @@
             apps: [],
             appTokens: {},
             autoToken: {},
-            handToken: {}
+            handToken: {},
+            items: [1]
         },
         methods: {
             getTokensEvt: function (projectid) {
