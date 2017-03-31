@@ -60,6 +60,8 @@
                 </li>
                 <li><a href="#certificate"><i class="fa fa-certificate"></i> Signer Certificate</a></li>
                 <li><a href="#permissions"><i class="fa fa-align-justify"></i> Permissions</a></li>
+                <li><a href="#manifest"><i class="fa fa-credit-card"></i> Manifest</a></li>
+
 
                 <li class="treeview">
                     <a href="javascript::;"><i class="fa fa-bullseye"></i> Components</a>
@@ -79,15 +81,6 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-
-        <form id="dynform" action="../DynamicAnalyzer/" method="POST">
-            <input type='hidden' name='csrfmiddlewaretoken' value='mNe2XmliwfO3Z6msF6b6qSGRH4qTbVYN'/>
-            <input type="hidden" name="md5" value="33f69268f67b7c50daa7c27ebc29dae2">
-            <input type="hidden" name="pkg" value="com.github.shadowsocks">
-            <input type="hidden" name="lng" value="com.github.shadowsocks.Shadowsocks">
-        </form>
-
-
         <!-- Main content -->
         <div class="content body">
 
@@ -317,6 +310,9 @@
 
 <!-- ============================================================= -->
 
+<!-- ============================================================= -->
+
+
 <section id="permissions">
     <h2 class="page-header"></h2>
     <!-- /.box -->
@@ -369,7 +365,16 @@
 
 
 <!-- ============================================================= -->
-
+<section id="manifest">
+    <h2 class="page-header"></h2>
+    <div class="box-header">
+        <!-- /.box-header -->
+        <h3 class="box-title"><i class="fa fa-credit-card"></i> Manifest</h3>
+    </div>
+    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
+        {$ apkInfo.manifest $}
+    </code></pre>
+</section>
 <!-- ============================================================= -->
 
 <section id="activities">
@@ -538,8 +543,7 @@
             $vm.receivers = JSON.parse($vm.apkInfo.receivers);
             $vm.providers = JSON.parse($vm.apkInfo.providers);
             $vm.files = JSON.parse($vm.apkInfo.files);
-
-
+            console.log($vm.apkInfo);
             permissions = JSON.parse($vm.apkInfo.permissions);
             for(var permission of permissions) {
                 $.ajax({

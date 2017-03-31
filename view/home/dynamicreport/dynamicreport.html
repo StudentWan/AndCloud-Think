@@ -1,0 +1,464 @@
+{% extends "./../base.html" %}
+{%block title%}Dynamic Analysis{%endblock%}
+{% block header %}
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/dash/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/static/dash/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+{% endblock %}
+
+{% block content %}
+<body class="skin-purple fixed" data-spy="scroll" data-target="#scrollspy">
+<div class="wrapper">
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="../" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>And</b>Cloud</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>And</b>Cloud</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+
+                    <!--Menu Items--
+
+                    <!-- Control Sidebar Toggle Button -->
+                    <!--
+                    <li>
+                      <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i> Tools</a>
+                    </li>
+                  -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/shCore.js"></script>
+    <script type="text/javascript" src="/static/js/shBrushJava.js"></script>
+    <link type="text/css" rel="stylesheet" href="/static/css/shCoreDefault.css"/>
+    <style type="text/css" media="print">
+        @page { size: landscape; }
+    </style>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div class="sidebar" id="scrollspy">
+
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="nav sidebar-menu">
+                <li class="header">Dynamic Analysis</li>
+                <li class="treeview">
+                    <a href="javascript::;"><i class="glyphicon glyphicon-phone"></i> API Monitor</a>
+                    <ul class="nav treeview-menu">
+                        <li><a href="#fileio"><i class="glyphicon glyphicon-file"></i> File IO</a></li>
+                        <li><a href="#networkcalls"><i class="fa fa-plug"></i> Network Calls</a></li>
+                        <li><a href="#bindercalls"><i class="fa fa-cubes"></i> Binder Calls</a></li>
+                        <li><a href="#crypto"><i class="fa fa-flash"></i> Crypto</a></li>
+                        <li><a href="#deviceinfo"><i class="fa fa-info"></i> Device Info</a></li>
+                        <li><a href="#base64"><i class="fa fa-puzzle-piece"></i> Base64</a></li>
+                        <li><a href="#content"><i class="fa fa-reorder"></i> Content</a></li>
+                        <li><a href="#sms"><i class="fa fa-comments"></i> SMS</a></li>
+                        <li><a href="#devicedata"><i class="fa fa-phone"></i> Device Data</a></li>
+                        <li><a href="#dexclassloader"><i class="fa fa-asterisk"></i> Dex Class Loader</a></li>
+                        <li><a href="#reflection"><i class="fa fa-object-ungroup"></i> Reflection</a></li>
+                        <li><a href="#systemmanager"><i class="fa fa-cogs"></i> System Manager</a></li>
+                        <li><a href="#process"><i class="fa fa-bar-chart-o"></i> Process</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <!-- Main content -->
+        <div class="content body">
+
+
+            <!-- ============================================================= -->
+
+            <section id="fileio">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="glyphicon glyphicon-file"></i> File IO</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="alert alert-info" role="alert">
+                            </br>METHOD: open</br>ARGUMENTS: [u&#39;/system/framework/android.test.runner.jar&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/shared_prefs/com.github.shadowsocks_preferences.xml&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/eth1/ifindex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/app_google_tagmanager/resource_GTM-NT8WS8&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/ss-tunnel&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/proc/net/if_inet6&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.google.android.gms/shared_prefs/google_ads_flags.xml&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.tmp&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/redsocks&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.jar&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.tmp&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/app/com.github.shadowsocks-1.apk&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.dex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/pdnsd&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/sit0/ifindex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/ss-local&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.dex&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/eth0/mtu&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/shared_prefs/com.github.shadowsocks_preferences.xml&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/lo/ifindex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/tun2socks&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/eth0/ifindex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/app_google_tagmanager/resource_GTM-NT8WS8&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br> </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+
+
+            <section id="networkcalls">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-plug"></i> Network Calls</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="alert alert-success" role="alert">
+                            </br>METHOD: openConnection</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br> </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+
+
+            <section id="bindercalls">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-cubes"></i> Binder Calls</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="alert alert-warning" role="alert">
+                            </br>METHOD: registerReceiver</br>ARGUMENTS: [{u&#39;mHasPartialTypes&#39;: False, u&#39;mPriority&#39;: 0, u&#39;mActions&#39;: [u&#39;android.intent.action.BATTERY_CHANGED&#39;]}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: registerReceiver</br>ARGUMENTS: [{u&#39;mDebugUnregister&#39;: False}, {u&#39;mHasPartialTypes&#39;: False, u&#39;mPriority&#39;: 0, u&#39;mActions&#39;: [u&#39;android.intent.action.USER_PRESENT&#39;, u&#39;android.intent.action.SCREEN_OFF&#39;]}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: registerReceiver</br>ARGUMENTS: [u&#39;com.github.shadowsocks.AppManager$$anonfun$2@528aaf00&#39;, {u&#39;mHasPartialTypes&#39;: False, u&#39;mDataSchemes&#39;: [u&#39;package&#39;], u&#39;mPriority&#39;: 0, u&#39;mActions&#39;: [u&#39;android.intent.action.PACKAGE_ADDED&#39;, u&#39;android.intent.action.PACKAGE_REMOVED&#39;]}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: registerReceiver</br>ARGUMENTS: [{u&#39;mDebugUnregister&#39;: False}, {u&#39;mHasPartialTypes&#39;: False, u&#39;mPriority&#39;: 0, u&#39;mActions&#39;: [u&#39;android.intent.action.PROXY_CHANGE&#39;]}]</br>RETURN DATA: No Return Data</br> </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+
+            <section id="crypto">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-flash"></i> Crypto</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="alert alert-danger" role="alert">
+                        </div>
+
+                        </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+            <section id="deviceinfo">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-info"></i> Device Info</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="alert alert-info" role="alert">
+                            </br>METHOD: getNetworkOperator</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br>  </br>METHOD: getNetworkCountryIso</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br> </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+            <section id="base64">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-puzzle-piece"></i> Base64</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+
+                        <div class="alert alert-success" role="alert">
+                        </div>
+
+                        </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+            <section id="content">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-reorder"></i> Content</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="alert alert-warning" role="alert">
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+            <section id="sms">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-comments"></i> SMS</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="alert alert-danger" role="alert">
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+            <section id="devicedata">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-phone"></i> Device Data</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="alert alert-success" role="alert">
+                            </br>METHOD: get</br>ARGUMENTS: [u&#39;debug.sqlite.syncmode&#39;, u&#39;FULL&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;debug.second-display.pkg&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;gsm.operator.iso-country&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;persist.sys.timezone&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;debug.sqlite.journalmode&#39;, u&#39;PERSIST&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;gsm.operator.numeric&#39;]</br>RETURN DATA: No Return Data</br> </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+
+            <section id="dexclassloader">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-asterisk"></i> Dex Class Loader</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="alert alert-warning" role="alert">
+                            </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [{u&#39;path&#39;: u&#39;/system/framework/com.android.media.remotedisplay.jar&#39;}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.PathClassLoader</br>ARGUMENTS: [u&#39;/system/framework/com.android.location.provider.jar:/system/framework/com.android.media.remotedisplay.jar:/data/app/com.google.android.gms-1.apk&#39;, u&#39;/data/app-lib/com.google.android.gms-1&#39;, {u&#39;packages&#39;: {u&#39;com.android.org.conscrypt&#39;: {u&#39;implTitle&#39;: u&#39;Unknown&#39;, u&#39;name&#39;: u&#39;com.android.org.conscrypt&#39;, u&#39;implVendor&#39;: u&#39;Unknown&#39;, u&#39;specTitle&#39;: u&#39;Unknown&#39;, u&#39;specVendor&#39;: u&#39;Unknown&#39;, u&#39;specVersion&#39;: u&#39;0.0&#39;, u&#39;implVersion&#39;: u&#39;0.0&#39;}}}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [{u&#39;path&#39;: u&#39;/data/app/com.google.android.gms-1.apk&#39;}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexClassLoader</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.jar&#39;, u&#39;/data/data/com.github.shadowsocks/cache&#39;, u&#39;dalvik.system.PathClassLoader[DexPathList[[zip file &quot;/system/framework/android.test.runner.jar&quot;, zip file &quot;/data/app/com.github.shadowsocks-1.apk&quot;],nativeLibraryDirectories=[/data/app-lib/com.github.shadowsocks-1, /system/lib]]]&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: findResource</br>ARGUMENTS: [u&#39;library.properties&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [u&#39;/system/framework/com.android.location.provider.jar&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: loadDex</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.jar&#39;, u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.dex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [u&#39;/data/app/com.google.android.gms-1.apk&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.jar&#39;, u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.dex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [u&#39;/system/framework/com.android.media.remotedisplay.jar&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: findResource</br>ARGUMENTS: [u&#39;ormliteLocalLog.properties&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: findLibrary</br>ARGUMENTS: [u&#39;system&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [{u&#39;path&#39;: u&#39;/system/framework/com.android.location.provider.jar&#39;}]</br>RETURN DATA: No Return Data</br> </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+
+            <section id="reflection">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-object-ungroup"></i> Reflection</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="alert alert-info" role="alert">
+                            </br>METHOD: invoke</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;com.android.org.chromium.content.common.TraceEvent$1@52935f5c&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;debug.atrace.tags.enableflags&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;com.github.shadowsocks.Shadowsocks@527f6a80&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;com.github.shadowsocks.Shadowsocks@52806ed0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [{u&#39;noncompatHeightPixels&#39;: 1280, u&#39;noncompatWidthPixels&#39;: 800, u&#39;density&#39;: 2, u&#39;noncompatYdpi&#39;: 160.15764, u&#39;noncompatScaledDensity&#39;: 2, u&#39;noncompatXdpi&#39;: 160, u&#39;xdpi&#39;: 160, u&#39;widthPixels&#39;: 800, u&#39;heightPixels&#39;: 1280, u&#39;densityDpi&#39;: 320, u&#39;noncompatDensity&#39;: 2, u&#39;ydpi&#39;: 160.15764, u&#39;scaledDensity&#39;: 2, u&#39;noncompatDensityDpi&#39;: 320}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;com.android.org.chromium.content.common.TraceEvent$1@5294f79c&#39;]</br>RETURN DATA: No Return Data</br> </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+
+
+            <section id="systemmanager">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-cogs"></i> System Manager</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="alert alert-danger" role="alert">
+                            </br>METHOD: getInstalledPackages</br>ARGUMENTS: [u&#39;4096&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br> </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+
+
+
+            <section id="process">
+                <h2 class="page-header"></h2>
+                <!-- /.box -->
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-bar-chart-o"></i> Process</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="alert alert-success" role="alert">
+                            </br>METHOD: exec</br>ARGUMENTS: [[u&#39;sh&#39;]]</br>RETURN DATA: No Return Data</br>  </br>METHOD: exec</br>ARGUMENTS: [u&#39;sh&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: read</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br>  </br>METHOD: write</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br> </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </section>
+
+
+            <!-- ============================================================= -->
+            <!-- ============================================================= -->
+            <!-- ============================================================= -->
+            <!-- ============================================================= -->
+            <!-- ============================================================= -->
+            <!-- ============================================================= -->
+
+            <!-- ============================================================= -->
+
+
+
+
+            <!-- ============================================================= -->
+
+
+
+
+            <!-- ============================================================= -->
+
+
+            <!-- ============================================================= -->
+
+
+            <!-- ============================================================= -->
+
+        </div><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+
+
+
+
+    <footer class="main-footer">
+        <strong>© 2017 SafeCode Technology - SafeCode</strong>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <div class="pad">
+            Console logs will be shown here.
+        </div>
+    </aside><!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+
+</div><!-- ./wrapper -->
+</body>
+{% endblock %}
+
+{% block js %}
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="/static/plugins/fastclick/fastclick.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/dash/js/app.min.js"></script>
+<!-- SlimScroll 1.3.0 -->
+<script src="/static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- <script src="/static/js/run_prettify.js"></script>-->
+<script src="/static/js/docs.js"></script>
+{% endblock %}
+
+
