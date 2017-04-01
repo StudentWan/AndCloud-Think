@@ -4,6 +4,7 @@ import Base from './base.js';
 
 export default class extends Base {
     indexAction() {
-        return this.display('dynamicreport');
+        this.assign("id", this.get("id"));
+        return this.display("dynamicreport");
     }
 }

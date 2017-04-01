@@ -1,8 +1,6 @@
 {% extends "./../base.html" %}
 {%block title%}Dynamic Analysis{%endblock%}
 {% block header %}
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -57,8 +55,6 @@
     </header>
 
 
-
-    <script src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/shCore.js"></script>
     <script type="text/javascript" src="/static/js/shBrushJava.js"></script>
     <link type="text/css" rel="stylesheet" href="/static/css/shCoreDefault.css"/>
@@ -99,7 +95,7 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div id="app" class="content-wrapper">
         <!-- Content Header (Page header) -->
         <!-- Main content -->
         <div class="content body">
@@ -118,7 +114,8 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="alert alert-info" role="alert">
-                            </br>METHOD: open</br>ARGUMENTS: [u&#39;/system/framework/android.test.runner.jar&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/shared_prefs/com.github.shadowsocks_preferences.xml&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/eth1/ifindex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/app_google_tagmanager/resource_GTM-NT8WS8&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/ss-tunnel&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/proc/net/if_inet6&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.google.android.gms/shared_prefs/google_ads_flags.xml&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.tmp&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/redsocks&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.jar&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.tmp&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/app/com.github.shadowsocks-1.apk&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.dex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/pdnsd&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/sit0/ifindex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/ss-local&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.dex&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/eth0/mtu&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/shared_prefs/com.github.shadowsocks_preferences.xml&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/lo/ifindex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/tun2socks&#39;, u&#39;577&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/sys/class/net/eth0/ifindex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: open</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/app_google_tagmanager/resource_GTM-NT8WS8&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='fileinfo in fileio'></br>METHOD: {$ fileinfo.mtd $}</br>ARGUMENTS: {$ fileinfo.args $}</br>RETURN DATA: <span v-if="fileinfo.ret">{$ fileinfo.ret $}</span><span v-else>No return data</span></br></a>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -141,7 +138,8 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="alert alert-success" role="alert">
-                            </br>METHOD: openConnection</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='networkinfo in networkcall'></br>METHOD: {$ networkinfo.mtd $}</br>ARGUMENTS: {$ networkinfo.args $}</br>RETURN DATA: <span v-if="networkinfo.ret">{$ networkinfo.ret $}</span><span v-else>No return data</span></br></a>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -165,7 +163,8 @@
                     <div class="box-body">
 
                         <div class="alert alert-warning" role="alert">
-                            </br>METHOD: registerReceiver</br>ARGUMENTS: [{u&#39;mHasPartialTypes&#39;: False, u&#39;mPriority&#39;: 0, u&#39;mActions&#39;: [u&#39;android.intent.action.BATTERY_CHANGED&#39;]}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: registerReceiver</br>ARGUMENTS: [{u&#39;mDebugUnregister&#39;: False}, {u&#39;mHasPartialTypes&#39;: False, u&#39;mPriority&#39;: 0, u&#39;mActions&#39;: [u&#39;android.intent.action.USER_PRESENT&#39;, u&#39;android.intent.action.SCREEN_OFF&#39;]}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: registerReceiver</br>ARGUMENTS: [u&#39;com.github.shadowsocks.AppManager$$anonfun$2@528aaf00&#39;, {u&#39;mHasPartialTypes&#39;: False, u&#39;mDataSchemes&#39;: [u&#39;package&#39;], u&#39;mPriority&#39;: 0, u&#39;mActions&#39;: [u&#39;android.intent.action.PACKAGE_ADDED&#39;, u&#39;android.intent.action.PACKAGE_REMOVED&#39;]}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: registerReceiver</br>ARGUMENTS: [{u&#39;mDebugUnregister&#39;: False}, {u&#39;mHasPartialTypes&#39;: False, u&#39;mPriority&#39;: 0, u&#39;mActions&#39;: [u&#39;android.intent.action.PROXY_CHANGE&#39;]}]</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='binderinfo in bindercall'></br>METHOD: {$ binderinfo.mtd $}</br>ARGUMENTS: {$ binderinfo.args $}</br>RETURN DATA: <span v-if="binderinfo.ret">{$ binderinfo.ret $}</span><span v-else>No return data</span></br></a>
+                        </div>
 
                     </div>
                     <!-- /.box-body -->
@@ -189,6 +188,7 @@
                     <div class="box-body">
 
                         <div class="alert alert-danger" role="alert">
+                            <a  style="text-decoration: none" v-for='cryptoinfo in crypto'></br>METHOD: {$ cryptoinfo.mtd $}</br>ARGUMENTS: {$ cryptoinfo.args $}</br>RETURN DATA: <span v-if="cryptoinfo.ret">{$ cryptoinfo.ret $}</span><span v-else>No return data</span></br></a>
                         </div>
 
                         </div>
@@ -211,7 +211,8 @@
                     <div class="box-body">
 
                         <div class="alert alert-info" role="alert">
-                            </br>METHOD: getNetworkOperator</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br>  </br>METHOD: getNetworkCountryIso</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='devinfo in deviceinfo'></br>METHOD: {$ devinfo.mtd $}</br>ARGUMENTS: {$ devinfo.args $}</br>RETURN DATA: <span v-if="devinfo.ret">{$ devinfo.ret $}</span><span v-else>No return data</span></br></a>
+                        </div>
 
                     </div>
                     <!-- /.box-body -->
@@ -234,6 +235,7 @@
 
 
                         <div class="alert alert-success" role="alert">
+                            <a  style="text-decoration: none" v-for='baseinfo in base64'></br>METHOD: {$ baseinfo.mtd $}</br>ARGUMENTS: {$ baseinfo.args $}</br>RETURN DATA: <span v-if="baseinfo.ret">{$ baseinfo.ret $}</span><span v-else>No return data</span></br></a>
                         </div>
 
                         </div>
@@ -257,6 +259,7 @@
                     <div class="box-body">
 
                         <div class="alert alert-warning" role="alert">
+                            <a  style="text-decoration: none" v-for='contentinfo in content'></br>METHOD: {$ contentinfo.mtd $}</br>ARGUMENTS: {$ contentinfo.args $}</br>RETURN DATA: <span v-if="contentinfo.ret">{$ contentinfo.ret $}</span><span v-else>No return data</span></br></a>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -278,6 +281,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="alert alert-danger" role="alert">
+                            <a  style="text-decoration: none" v-for='smsinfo in sms'></br>METHOD: {$ smsinfo.mtd $}</br>ARGUMENTS: {$ smsinfo.args $}</br>RETURN DATA: <span v-if="smsinfo.ret">{$ smsinfo.ret $}</span><span v-else>No return data</span></br></a>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -299,7 +303,8 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="alert alert-success" role="alert">
-                            </br>METHOD: get</br>ARGUMENTS: [u&#39;debug.sqlite.syncmode&#39;, u&#39;FULL&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;debug.second-display.pkg&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;gsm.operator.iso-country&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;persist.sys.timezone&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;debug.sqlite.journalmode&#39;, u&#39;PERSIST&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: get</br>ARGUMENTS: [u&#39;gsm.operator.numeric&#39;]</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='devicedatainfo in devicedata'></br>METHOD: {$ devicedatainfo.mtd $}</br>ARGUMENTS: {$ devicedatainfo.args $}</br>RETURN DATA: <span v-if="devicedatainfo.ret">{$ devicedatainfo.ret $}</span><span v-else>No return data</span></br></a>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -321,7 +326,8 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="alert alert-warning" role="alert">
-                            </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [{u&#39;path&#39;: u&#39;/system/framework/com.android.media.remotedisplay.jar&#39;}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.PathClassLoader</br>ARGUMENTS: [u&#39;/system/framework/com.android.location.provider.jar:/system/framework/com.android.media.remotedisplay.jar:/data/app/com.google.android.gms-1.apk&#39;, u&#39;/data/app-lib/com.google.android.gms-1&#39;, {u&#39;packages&#39;: {u&#39;com.android.org.conscrypt&#39;: {u&#39;implTitle&#39;: u&#39;Unknown&#39;, u&#39;name&#39;: u&#39;com.android.org.conscrypt&#39;, u&#39;implVendor&#39;: u&#39;Unknown&#39;, u&#39;specTitle&#39;: u&#39;Unknown&#39;, u&#39;specVendor&#39;: u&#39;Unknown&#39;, u&#39;specVersion&#39;: u&#39;0.0&#39;, u&#39;implVersion&#39;: u&#39;0.0&#39;}}}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [{u&#39;path&#39;: u&#39;/data/app/com.google.android.gms-1.apk&#39;}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexClassLoader</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.jar&#39;, u&#39;/data/data/com.github.shadowsocks/cache&#39;, u&#39;dalvik.system.PathClassLoader[DexPathList[[zip file &quot;/system/framework/android.test.runner.jar&quot;, zip file &quot;/data/app/com.github.shadowsocks-1.apk&quot;],nativeLibraryDirectories=[/data/app-lib/com.github.shadowsocks-1, /system/lib]]]&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: findResource</br>ARGUMENTS: [u&#39;library.properties&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [u&#39;/system/framework/com.android.location.provider.jar&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: loadDex</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.jar&#39;, u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.dex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [u&#39;/data/app/com.google.android.gms-1.apk&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.jar&#39;, u&#39;/data/data/com.github.shadowsocks/cache/1460683162801.dex&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [u&#39;/system/framework/com.android.media.remotedisplay.jar&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: findResource</br>ARGUMENTS: [u&#39;ormliteLocalLog.properties&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: findLibrary</br>ARGUMENTS: [u&#39;system&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: dalvik.system.DexFile</br>ARGUMENTS: [{u&#39;path&#39;: u&#39;/system/framework/com.android.location.provider.jar&#39;}]</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='dexinfo in dexclassloader'></br>METHOD: {$ dexinfo.mtd $}</br>ARGUMENTS: {$ dexinfo.args $}</br>RETURN DATA: <span v-if="dexinfo.ret">{$ dexinfo.ret $}</span><span v-else>No return data</span></br></a>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -343,7 +349,8 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="alert alert-info" role="alert">
-                            </br>METHOD: invoke</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;com.android.org.chromium.content.common.TraceEvent$1@52935f5c&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;debug.atrace.tags.enableflags&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;com.github.shadowsocks.Shadowsocks@527f6a80&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;com.github.shadowsocks.Shadowsocks@52806ed0&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [{u&#39;noncompatHeightPixels&#39;: 1280, u&#39;noncompatWidthPixels&#39;: 800, u&#39;density&#39;: 2, u&#39;noncompatYdpi&#39;: 160.15764, u&#39;noncompatScaledDensity&#39;: 2, u&#39;noncompatXdpi&#39;: 160, u&#39;xdpi&#39;: 160, u&#39;widthPixels&#39;: 800, u&#39;heightPixels&#39;: 1280, u&#39;densityDpi&#39;: 320, u&#39;noncompatDensity&#39;: 2, u&#39;ydpi&#39;: 160.15764, u&#39;scaledDensity&#39;: 2, u&#39;noncompatDensityDpi&#39;: 320}]</br>RETURN DATA: No Return Data</br>  </br>METHOD: invoke</br>ARGUMENTS: [u&#39;com.android.org.chromium.content.common.TraceEvent$1@5294f79c&#39;]</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='refinfo in reflection'></br>METHOD: {$ refinfo.mtd $}</br>ARGUMENTS: {$ refinfo.args $}</br>RETURN DATA: <span v-if="refinfo.ret">{$ refinfo.ret $}</span><span v-else>No return data</span></br></a>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -366,7 +373,8 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="alert alert-danger" role="alert">
-                            </br>METHOD: getInstalledPackages</br>ARGUMENTS: [u&#39;4096&#39;, u&#39;0&#39;]</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='sysinfo in sysmanager'></br>METHOD: {$ sysinfo.mtd $}</br>ARGUMENTS: {$ sysinfo.args $}</br>RETURN DATA: <span v-if="sysinfo.ret">{$ sysinfo.ret $}</span><span v-else>No return data</span></br></a>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -390,38 +398,13 @@
                     <div class="box-body">
 
                         <div class="alert alert-success" role="alert">
-                            </br>METHOD: exec</br>ARGUMENTS: [[u&#39;sh&#39;]]</br>RETURN DATA: No Return Data</br>  </br>METHOD: exec</br>ARGUMENTS: [u&#39;sh&#39;]</br>RETURN DATA: No Return Data</br>  </br>METHOD: read</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br>  </br>METHOD: write</br>ARGUMENTS: No Arguments Passed</br>RETURN DATA: No Return Data</br> </div>
+                            <a  style="text-decoration: none" v-for='processinfo in process'></br>METHOD: {$ processinfo.mtd $}</br>ARGUMENTS: {$ processinfo.args $}</br>RETURN DATA: <span v-if="processinfo.ret">{$ processinfo.ret $}</span><span v-else>No return data</span></br></a>
+                            </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
             </section>
-
-
-            <!-- ============================================================= -->
-            <!-- ============================================================= -->
-            <!-- ============================================================= -->
-            <!-- ============================================================= -->
-            <!-- ============================================================= -->
-            <!-- ============================================================= -->
-
-            <!-- ============================================================= -->
-
-
-
-
-            <!-- ============================================================= -->
-
-
-
-
-            <!-- ============================================================= -->
-
-
-            <!-- ============================================================= -->
-
-
-            <!-- ============================================================= -->
 
         </div><!-- /.content -->
     </div><!-- /.content-wrapper -->
@@ -450,7 +433,6 @@
 {% endblock %}
 
 {% block js %}
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="/static/plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE App -->
@@ -459,6 +441,81 @@
 <script src="/static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- <script src="/static/js/run_prettify.js"></script>-->
 <script src="/static/js/docs.js"></script>
+
+<script>
+    Vue.config.silent = false;
+    var $vm = new Vue({
+        el: '#app',
+        delimiters: ['{$', '$}'],
+        data: {
+            fileio: [],
+            networkcall: [],
+            bindercall: [],
+            crypto: [],
+            deviceinfo: [],
+            base64: [],
+            content: [],
+            sms: [],
+            devicedata: [],
+            dexclassloader: [],
+            reflection: [],
+            sysmanager: [],
+            process: []
+        }
+    });
+
+    $.ajax({
+        url: "/project/dynamicinfo",
+        data: {sim: "{{id}}"},
+        method: "GET",
+        success: function(data) {
+            for(var info of data.data) {
+                switch (info.type) {
+                    case "API_FILEIO":
+                        $vm.fileio.push(info);
+                        break;
+                    case "API_NET":
+                        $vm.networkcall.push(info);
+                        break;
+                    case "API_BINDER":
+                        $vm.bindercall.push(info);
+                        break;
+                    case "API_CRYPTO":
+                        $vm.crypto.push(info);
+                        break;
+                    case "API_DEVICEINFO":
+                        $vm.deviceinfo.push(info);
+                        break;
+                    case "API_BASE64":
+                        $vm.base64.push(info);
+                        break;
+                    case "API_CNTVAL":
+                        $vm.content.push(info);
+                        break;
+                    case "API_SMS":
+                        $vm.sms.push(info);
+                        break;
+                    case "API_SYSPROP":
+                        $vm.devicedata.push(info);
+                        break;
+                    case "API_DEXLOADER":
+                        $vm.dexclassloader.push(info);
+                        break;
+                    case "API_REFLECT":
+                        $vm.reflection.push(info);
+                        break;
+                    case "API_ACNTMNGER":
+                        $vm.sysmanager.push(info);
+                        break;
+                    case "API_CMD":
+                        $vm.process.push(info);
+                    default:
+                        break;
+                }
+            }
+            console.log($vm.content);
+            return;
+        }
+    })
+</script>
 {% endblock %}
-
-

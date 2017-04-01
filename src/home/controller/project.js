@@ -45,6 +45,13 @@ export default class extends Base {
         return this.success(result);
     }
 
+    async dynamicinfoAction() {
+        let sim = this.get("sim");
+        let dynamicModel = this.model("dynamicreport");
+        let result = await dynamicModel.getDynamicInfoBySimId(sim);
+        return this.success(result);
+    }
+
     async uploadAction() {
         let file = this.file('apk');
         let vm = this.post("vm");
