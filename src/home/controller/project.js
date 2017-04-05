@@ -21,7 +21,10 @@ export default class extends Base {
         return this.display();
     }
 
-    historyAction() {
+    async historyAction() {
+        let mirrorModel = this.model('mirror');
+        let res = await mirrorModel.getMirrorList();
+        this.assign('mirrorlist', res);
         return this.display();
     }
 
@@ -56,11 +59,11 @@ export default class extends Base {
         let file = this.file('apk');
         let vm = this.post("vm");
         let time = this.post("time");
-        let type = file.originalFilename.split('.').pop();
+        let ext = file.originalFilename.split('.').pop();
         let name = this.post("name");
-        if (ALLOW_LIST.indexOf(type) >= 0) {
+        if (ALLOW_LIST.indexOf(ext) >= 0) {
             let path = file.path;
-            let newPath = pathOS.join(think.RESOURCE_PATH, 'upload', uuidV4() + "." + type);
+            let newPath = pathOS.join(think.RESOURCE_PATH, 'upload', uuidV4() + "." + ext);
             var that = this;
             try {
                 fs.renameSync(path, newPath);
@@ -70,10 +73,11 @@ export default class extends Base {
                 sock.sendAction("new_project", {
                     projectid: insertID,
                     uid: this.user_id,
-                    time: time
+                    time: time,
+                    vm: vm
                 });
                 let tokens = that.model('tokens');
-                tokens.addTokens(insertID, this.user_id);
+                tokens.addTokens(insertID, this.user_id, vm, 0);
                 return this.success({"id": insertID, "name": name});
             } catch (e) {
                 this.fail("i do not know");
@@ -81,6 +85,25 @@ export default class extends Base {
         } else {
             return this.fail("wrong type");
         }
+    }
+
+    async uploadhandfulAction() {
+        let vm = this.post("vm");
+        let projectid = this.post("projectid");
+        let type = this.post("type");
+        let userid = await this.session('user_id');
+        let time = this.post("time");
+        let tokenModel = this.model('tokens');
+        tokenModel.addTokens(projectid, userid, vm, type);
+        let sock = global.sock;
+        sock.sendAction("not_new_project", {
+            projectid: projectid,
+            uid: userid,
+            time: time,
+            vm: vm,
+            type: type
+        });
+        return this.success();
     }
 
     async gettokensAction() {

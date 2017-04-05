@@ -224,12 +224,19 @@
                 <div style="margin:20px 0 20px;color:black">
                     <form>
                         <select name="version" id="version">
-                            <option value="4.4">Android 4.4</option>
-                            <option value="5.0">Android 5.0</option>
-                            <option value="6.0">Android 6.0</option>
-                            <option value="7.0">Android 7.0</option>
+                            {% for item in mirrorlist %}
+                            <option value="{{item.id}}">{{item.name}}</option>
+                            {% endfor %}
                         </select>
                         <label for="version" style="color: white;font-weight: 100">Version</label>
+                        <br/>
+                        <select name="time" id="time">
+                            <option value="5">5 mins</option>
+                            <option value="10">10 mins</option>
+                            <option value="15">15 mins</option>
+                            <option value="120">2 hours</option>
+                        </select>
+                        <label for="time" style="color: white;font-weight: 100">Time</label>
                         <br/>
                     </form>
                 </div>
@@ -244,7 +251,7 @@
 
 <div id="app" style="opacity: 0">
     <div class="history-list">
-        <div class="history-header">
+        <div class="history-header" style="z-index: 2">
             <h1 style="font-weight:100;padding-left: 10px">历史列表
                 <transition name="bounce">
                     <p style="float:right" v-if="isLoading">Loading...</p>
@@ -393,6 +400,11 @@
 {% endblock %}
 {% block js %}
 <script>
+    $(function() {
+//        $.('#options')
+    })
+</script>
+<script>
     //    $(function () {
     //展示层
     function showLayer(id) {
@@ -414,12 +426,36 @@
         hideLayer();
         //Wait for change
         //转成jQuery对象
-        let dom = $('<p class="button-btn" style="margin-bottom: 10px;">Android Version: ' + $("#version").val() + '</p>');
+        let dom = $('<p class="button-btn" style="margin-bottom: 10px;">Android Version: ' + $("#version").find("option:selected").text() + '</p>');
         //将jQuery对象的dom值绑定到dom tree
         $('#options').append(dom);
         //这样dom就指向dom tree上的dom值了
         dom.hide().slideToggle('fast');
 
+        const projectid = $vm.apps[$vm.selectedIndex].id;
+        let type = 0;
+        let tokens = $vm.appTokens[projectid];
+        for(var token of tokens) {
+            if(token.type > type) {
+                type = token.type;
+            }
+        }
+        type++;
+        let formData = new FormData();
+        formData.append('type', type);
+        formData.append('projectid', projectid);
+        formData.append('vm', $('#version').val());
+        formData.append('time', $('#time').val());
+        $.ajax({
+            url: '/project/uploadhandful',
+            data: formData,
+            method: 'POST',
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+            }
+        })
     });
     $('.cancel').on('click', function () {
         hideLayer();
@@ -456,15 +492,24 @@
             apps: [],
             appTokens: {},
             autoToken: {},
-            handToken: {},
+            handToken: [],
             items: [1]
         },
         methods: {
             getTokensEvt: function (projectid) {
-                var that = this;
-                this.getTokens(projectid, function (tokens) {
-                    that.autoToken = tokens[0];
-                    that.handToken = tokens[1];
+                this.getTokens(projectid, tokens => {
+                    //等待修改
+                    this.autoToken = tokens[0];
+                    for(var token of this.appTokens[projectid]) {
+                        if(token.type > 0) {
+                            let image;
+                            if(token.imageid === 1) {
+                                image = "Android 4.4";
+                            }
+                            let dom = $('<p class="button-btn" style="margin-bottom: 10px;">Android Version: ' + image + '</p>');
+                            $('#options').append(dom);
+                        }
+                    }
                 });
             },
             getTokens: function (projectid, success_callback) {
@@ -483,7 +528,7 @@
                         data.data.forEach(function ($) {
                             var projectid = $.projectid;
                             if (that.appTokens[projectid] === undefined) {
-                                that.appTokens[projectid] = {};
+                                that.appTokens[projectid] = [];
                             }
                             that.appTokens[projectid][$.type] = $;
                         });
@@ -511,7 +556,6 @@
                                     for (var key in apkinfo) {
                                         if (key == 'id') continue;
                                         if (apkinfo.hasOwnProperty(key)) {
-//                                            console.log(key + "  ---  " + apkinfo[key]);
                                             $[key] = apkinfo[key];
                                         }
                                     }
