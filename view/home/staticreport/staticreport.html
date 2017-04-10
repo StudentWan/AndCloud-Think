@@ -540,7 +540,6 @@
             $vm.receivers = JSON.parse($vm.apkInfo.receivers);
             $vm.providers = JSON.parse($vm.apkInfo.providers);
             $vm.files = JSON.parse($vm.apkInfo.files);
-            console.log($vm.apkInfo);
             permissions = JSON.parse($vm.apkInfo.permissions);
             for(var permission of permissions) {
                 $.ajax({

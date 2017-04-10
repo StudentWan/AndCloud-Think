@@ -114,4 +114,14 @@ export default class extends Base {
         // let res = tokens.map($ => $.tokens.toArray());
         return this.success(tokens);
     }
+
+    async getlifecycleAction() {
+        let projectid = this.get('projectid');
+        let type = this.get('type');
+        let deviceMapModel = this.model('devicemaps');
+        let deviceMap = await deviceMapModel.getDeviceMap(projectid, type);
+        let simulatorModel = this.model('simulators');
+        let result = await simulatorModel.getSimulator(deviceMap[0].deviceid);
+        return this.success(result);
+    }
 }

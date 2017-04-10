@@ -197,6 +197,13 @@
         text-align: center;
     }
 
+    .infoblanket {
+        padding: 10px;
+        border: 1px solid white;
+        margin: 5px 0px;
+        border-radius: 5px;
+    }
+
     .test-link {
         width: 68px;
         height: 68px;
@@ -205,6 +212,11 @@
         border-radius: 50px;
         text-align: center;
         padding-top: calc(50px - 1.4em);
+    }
+
+    .demo2 {
+        transform-origin: center;
+        transform: rotate(-90deg);
     }
 </style>
 {% endblock %}
@@ -316,7 +328,7 @@
                                     {$apps[selectedIndex].packagename$}
                                 </div>
                                 <div class="app-info"><span class="info-title">文件大小</span>
-                                    {$apps[selectedIndex].size$}
+                                    {$(apps[selectedIndex].size/ 1024 / 1024).toFixed(2)$}MB
                                 </div>
                                 <div class="app-info"><span class="info-title">文件MD5</span>
                                     {$apps[selectedIndex].md5$}
@@ -359,36 +371,49 @@
                                         自动检测
                                     </div>
                                     <a v-bind:href="'/dynamicreport/index?id=51'" target="view_window"
-                                         style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
+                                       style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
                                         <i class="iconfont icon-file test-link"
                                            style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
                             </div>
-                        <div style="overflow: auto;padding-top: 30px;">
-                            <div class="test-link pull-left col-xs-3" style="padding-top:15px">
-                                <a :href="'/runner/token/'+autoToken.token"
-                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
-                                        class="iconfont icon-check"
-                                        style="font-size: 30px;padding-top:5px;"></i></a>
+
+
+                            <div class="infoblanket">
+                                <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
+                                    <circle cx="55" cy="55" r="50" fill="none" stroke="white" stroke-width="5"
+                                            stroke-linecap="round"/>
+                                    <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50" fill="none"
+                                            stroke="#5cb85c" stroke-width="5" stroke-dasharray="157,10000"/>
+                                </svg>
                             </div>
-                            <div class="col-xs-9" style="padding-top: 18px;">
-                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
-                                    手动检测
+
+
+                            <div style="overflow: auto;padding-top: 30px;">
+                                <div class="test-link pull-left col-xs-3" style="padding-top:15px">
+                                    <a :href="'/runner/token/'+autoToken.token"
+                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                            class="iconfont icon-check"
+                                            style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
-                                <div v-on:click="chooseTest" data-show-layer="hw-layer"
-                                     style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
-                                    <i class="iconfont icon-add_light test-link"
-                                       style="font-size: 30px;padding-top:5px;"></i></div>
+                                <div class="col-xs-9" style="padding-top: 18px;">
+                                    <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
+                                        手动检测
+                                    </div>
+                                    <div v-on:click="chooseTest" data-show-layer="hw-layer"
+                                         style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
+                                        <i class="iconfont icon-add_light test-link"
+                                           style="font-size: 30px;padding-top:5px;"></i></div>
+                                </div>
                             </div>
-                        </div>
+                            <div id="options">
+
+                            </div>
                         </div>
 
                         <!--:href=-->
                         <!--{$autoToken.token$}-->
 
-                        <div id="options" style="padding:15px 5px 15px;">
 
-                        </div>
                     </div>
                 </div>
             </div>
@@ -400,12 +425,11 @@
 {% endblock %}
 {% block js %}
 <script>
-    $(function() {
+    $(function () {
 //        $.('#options')
     })
 </script>
 <script>
-    //    $(function () {
     //展示层
     function showLayer(id) {
         var layer = $('#' + id),
@@ -426,7 +450,7 @@
         hideLayer();
         //Wait for change
         //转成jQuery对象
-        let dom = $('<p class="button-btn" style="margin-bottom: 10px;">Android Version: ' + $("#version").find("option:selected").text() + '</p>');
+        let dom = $('<div class="button-btn" style="margin-bottom: 10px;">Android Version: ' + $("#version").find("option:selected").text() + '</div>');
         //将jQuery对象的dom值绑定到dom tree
         $('#options').append(dom);
         //这样dom就指向dom tree上的dom值了
@@ -435,8 +459,8 @@
         const projectid = $vm.apps[$vm.selectedIndex].id;
         let type = 0;
         let tokens = $vm.appTokens[projectid];
-        for(var token of tokens) {
-            if(token.type > type) {
+        for (var token of tokens) {
+            if (token.type > type) {
                 type = token.type;
             }
         }
@@ -474,7 +498,6 @@
             hideLayer();
         }
     });
-    //    });
 </script>
 <script src="/static/app/js/velocity.min.js"></script>
 <script src="/static/app/js/moment-with-locales.js"></script>
@@ -500,14 +523,43 @@
                 this.getTokens(projectid, tokens => {
                     //等待修改
                     this.autoToken = tokens[0];
-                    for(var token of this.appTokens[projectid]) {
-                        if(token.type > 0) {
+                    for (let token of this.appTokens[projectid]) {
+                        if (token.type > 0) {
                             let image;
-                            if(token.imageid === 1) {
+                            if (token.imageid === 1) {
                                 image = "Android 4.4";
                             }
-                            let dom = $('<p class="button-btn" style="margin-bottom: 10px;">Android Version: ' + image + '</p>');
+                            let dom = $('<div class="button-btn" style="margin-bottom: 10px;">Android Version: ' + image + '</div>');
                             $('#options').append(dom);
+                        } else {
+                            $.ajax({
+                                url: "/project/getLifeCycle",
+                                data: {projectid: token.projectid, type: token.type},
+                                method: "GET",
+                                success: data => {
+                                    if (data.errno === 0) {
+                                        let simulator = data.data[0];
+                                        let createTime = Date.parse(simulator.createtime);
+                                        let deadlineTime = Date.parse(simulator.deadlinetime);
+                                        let totalTime = deadlineTime - createTime;
+                                        let nowTime = new Date().getTime();
+
+                                        let circle = $('#J_progress_bar');
+                                        let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
+                                        let cycling = setInterval(function () {
+                                            if ((nowTime - createTime) < totalTime) {
+                                                nowTime = new Date().getTime();
+                                                let val = nowTime - createTime;
+                                                val = Math.max(0,val);
+                                                val = Math.min(totalTime,val);
+                                                circle.attr('stroke-dasharray', "" + circleLength * (val / totalTime) + ', 10000');
+                                            } else {
+                                                clearInterval(cycling);
+                                            }
+                                        }, 100);
+                                    }
+                                }
+                            })
                         }
                     }
                 });
@@ -516,40 +568,38 @@
                 if (this.appTokens[projectid] !== undefined) {
                     return success_callback(this.appTokens[projectid]);
                 }
-                var that = this;
                 $.ajax({
                     url: '/project/getTokens',
                     data: {projectid: projectid},
                     method: "POST",
-                    success: function (data) {
+                    success: data => {
                         if (data.errno !== 0) {
                             return alert(data.errmsg);
                         }
-                        data.data.forEach(function ($) {
+                        data.data.forEach($ => {
                             var projectid = $.projectid;
-                            if (that.appTokens[projectid] === undefined) {
-                                that.appTokens[projectid] = [];
+                            if (this.appTokens[projectid] === undefined) {
+                                this.appTokens[projectid] = [];
                             }
-                            that.appTokens[projectid][$.type] = $;
+                            this.appTokens[projectid][$.type] = $;
                         });
-                        success_callback(that.appTokens[projectid]);
+                        success_callback(this.appTokens[projectid]);
                     }
                 });
             },
             getApkInfo: function (projid) {
-                var that = this;
                 $.ajax({
                     url: '/project/apkinfo',
                     data: {proj: projid},
                     method: "GET",
-                    success: function (data) {
+                    success: data => {
                         var apkinfo = null;
                         if (!data.data || data.data.length == 0) {
                             console.log("projid" + projid + " not have apkinfo");
                             return;
                         }
                         apkinfo = data.data[0];
-                        that.apps.forEach(function ($) {
+                        this.apps.forEach(function ($) {
                             if ($.id === projid) {
                                 if (apkinfo.id) {
                                     $.isfullinfo = true;
@@ -614,10 +664,10 @@
     });
     $.ajax({
         url: "/project/getlist",
-        success: function (data) {
+        success: data => {
             if (data.errno == 0) {
                 var apps = data.data;
-                setTimeout(function () {
+                setTimeout(() => {
                     $vm.isLoading = false;
                     $vm.apps = apps.map(function (app) {
                         app.created_time = app.uploadtime;
