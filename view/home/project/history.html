@@ -198,10 +198,13 @@
     }
 
     .infoblanket {
+        position: relative;
         padding: 10px;
         border: 1px solid white;
         margin: 5px 0px;
         border-radius: 5px;
+        display: flex;
+        align-items: center;
     }
 
     .test-link {
@@ -217,6 +220,25 @@
     .demo2 {
         transform-origin: center;
         transform: rotate(-90deg);
+    }
+
+    .mask {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        left: 10px;
+        top: 10px;
+        position: absolute;
+        text-align: center;
+        line-height: 110px;
+        font-size: 16px;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-active {
+        opacity: 0
     }
 </style>
 {% endblock %}
@@ -359,54 +381,72 @@
                             shit
                         </div>
                         <div v-else style="overflow: auto;padding: 12px;">
-                            <div style="overflow: auto;">
-                                <div class="test-link pull-left col-xs-3" style="padding-top:15px">
-                                    <a :href="'/runner/token/'+autoToken.token"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
-                                            class="iconfont icon-magic"
-                                            style="font-size: 30px;padding-top:5px;"></i></a>
-                                </div>
-                                <div class="col-xs-9" style="padding-top: 18px;text-align: center">
-                                    <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
-                                        自动检测
-                                    </div>
-                                    <a v-bind:href="'/dynamicreport/index?id=51'" target="view_window"
-                                       style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
-                                        <i class="iconfont icon-file test-link"
-                                           style="font-size: 30px;padding-top:5px;"></i></a>
+                            <div style="overflow: auto;margin: 15px auto;">
+                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
+                                    自动检测
                                 </div>
                             </div>
 
 
                             <div class="infoblanket">
-                                <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
-                                    <circle cx="55" cy="55" r="50" fill="none" stroke="white" stroke-width="5"
-                                            stroke-linecap="round"/>
-                                    <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50" fill="none"
-                                            stroke="#5cb85c" stroke-width="5" stroke-dasharray="157,10000"/>
-                                </svg>
+                                <div class='process_bar' style="width: 30%;">
+                                    <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
+                                        <circle cx="55" cy="55" r="50" fill="none" stroke="white" stroke-width="5"
+                                                stroke-linecap="round"/>
+                                        <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50" fill="none"
+                                                stroke="#5cb85c" stroke-width="5" stroke-dasharray="157,10000"/>
+                                    </svg>
+                                    <div class="mask">{$autoPercentage$}</div>
+                                </div>
+
+                                <div class="test_info" style="width: 40%;text-align: center">
+                                    <p>{$ autoToken.imageid $}</p>
+                                    <p>检测时长：{$ autoToken.testTime $} min</p>
+                                    <p>包名称：{$ autoToken.name $}</p>
+                                </div>
+
+                                <div class="choose_button" style="width: 30%;text-align: center">
+                                    <p>
+                                        <a v-bind:href="'/runner/token/'+autoToken.token" target="view_window"
+                                           style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
+                                            <i class="iconfont icon-creative test-link"
+                                               style="font-size: 30px;padding-top:5px;"></i></a>
+                                    </p>
+                                    <transition name="fade">
+                                    <p  v-if='autoComplete' style="">
+                                        <a v-bind:href="'/dynamicreport/index?id=51'" target="view_window"
+                                           style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
+                                            <i class="iconfont icon-file test-link"
+                                               style="font-size: 30px;padding-top:5px;"></i></a>
+                                    </p>
+                                    </transition>
+                                </div>
                             </div>
 
 
-                            <div style="overflow: auto;padding-top: 30px;">
-                                <div class="test-link pull-left col-xs-3" style="padding-top:15px">
+                            <div style="overflow: auto;margin: 15px auto; display: flex; justify-content: space-between;align-items: center">
+                               <!-- <div class="test-link pull-left col-xs-3" style="padding-top:15px">
                                     <a :href="'/runner/token/'+autoToken.token"
                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
                                             class="iconfont icon-check"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
+                                </div>-->
+                                <!--<div class="col-xs-9" style="padding: 0;">
+                                </div>-->
+                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
+                                    手动检测
                                 </div>
-                                <div class="col-xs-9" style="padding-top: 18px;">
-                                    <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:left;text-align: right;width:50%">
-                                        手动检测
-                                    </div>
-                                    <div v-on:click="chooseTest" data-show-layer="hw-layer"
-                                         style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;float:right;margin-right:2%;text-align:right;width:48%">
-                                        <i class="iconfont icon-add_light test-link"
-                                           style="font-size: 30px;padding-top:5px;"></i></div>
+                                <div v-on:click="chooseTest" data-show-layer="hw-layer"
+                                     style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
+                                    <i class="iconfont icon-repairfill test-link"
+                                       style="font-size: 30px;padding-top:5px;"></i>
                                 </div>
+
                             </div>
                             <div id="options">
-
+                                <div class="button-btn" style="margin-bottom: 10px;" v-for="token in handToken">
+                                    Android Version: {$ token.imageid $}
+                                </div>
                             </div>
                         </div>
 
@@ -476,8 +516,7 @@
             method: 'POST',
             contentType: false,
             processData: false,
-            success: function (data) {
-
+            success: data => {
             }
         })
     });
@@ -516,25 +555,20 @@
             appTokens: {},
             autoToken: {},
             handToken: [],
-            items: [1]
+            items: [1],
+            autoPercentage: 0,
+            autoComplete: false,
         },
         methods: {
             getTokensEvt: function (projectid) {
-                this.getTokens(projectid, tokens => {
+                this.getTokens(projectid, (tokens) => {
                     //等待修改
                     this.autoToken = tokens[0];
-                    for (let token of this.appTokens[projectid]) {
-                        if (token.type > 0) {
-                            let image;
-                            if (token.imageid === 1) {
-                                image = "Android 4.4";
-                            }
-                            let dom = $('<div class="button-btn" style="margin-bottom: 10px;">Android Version: ' + image + '</div>');
-                            $('#options').append(dom);
-                        } else {
+                    this.handToken = tokens.slice(1);
+                        if (this.autoToken.type == 0) {
                             $.ajax({
                                 url: "/project/getLifeCycle",
-                                data: {projectid: token.projectid, type: token.type},
+                                data: {projectid: this.autoToken.projectid, type: this.autoToken.type},
                                 method: "GET",
                                 success: data => {
                                     if (data.errno === 0) {
@@ -542,18 +576,26 @@
                                         let createTime = Date.parse(simulator.createtime);
                                         let deadlineTime = Date.parse(simulator.deadlinetime);
                                         let totalTime = deadlineTime - createTime;
+                                        $vm.autoToken.testTime = totalTime/1000/60;
+                                        $vm.autoToken.name = $vm.apps[$vm.selectedIndex].packagename;
                                         let nowTime = new Date().getTime();
 
                                         let circle = $('#J_progress_bar');
                                         let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
                                         let cycling = setInterval(function () {
-                                            if ((nowTime - createTime) < totalTime) {
-                                                nowTime = new Date().getTime();
-                                                let val = nowTime - createTime;
-                                                val = Math.max(0,val);
-                                                val = Math.min(totalTime,val);
-                                                circle.attr('stroke-dasharray', "" + circleLength * (val / totalTime) + ', 10000');
+                                            nowTime = new Date().getTime();
+                                            let val = nowTime - createTime;
+                                            val = Math.max(0, val);
+                                            val = Math.min(totalTime, val);
+                                            let percentage = Math.round((val / totalTime) * 100);
+                                            if (percentage !== 100) {
+                                                $vm.autoPercentage = Math.round((val / totalTime) * 100) + '%';
                                             } else {
+                                                $vm.autoPercentage = '检测完成';
+                                            }
+                                            circle.attr('stroke-dasharray', "" + circleLength * (val / totalTime) + ', 10000');
+                                            if (val === totalTime) {
+                                                $vm.autoComplete = true;
                                                 clearInterval(cycling);
                                             }
                                         }, 100);
@@ -561,7 +603,6 @@
                                 }
                             })
                         }
-                    }
                 });
             },
             getTokens: function (projectid, success_callback) {
@@ -580,6 +621,9 @@
                             var projectid = $.projectid;
                             if (this.appTokens[projectid] === undefined) {
                                 this.appTokens[projectid] = [];
+                            }
+                            if($.imageid === 1) {
+                                $.imageid = 'Android 4.4'
                             }
                             this.appTokens[projectid][$.type] = $;
                         });
@@ -632,7 +676,7 @@
 //                el.style.height = 0;
             },
             enter: function (el, done) {
-                var delay = el.dataset.index * 150
+                var delay = el.dataset.index * 150;
                 setTimeout(function () {
                     $.Velocity(
                         el,
