@@ -237,8 +237,55 @@
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s
     }
+
     .fade-enter, .fade-leave-active {
         opacity: 0
+    }
+
+    .container {
+        width: 100%;
+        margin: 0 auto
+    }
+
+    .bar-unfill {
+        height: 30px;
+        display: block;
+        background: #fff;
+        width: 100%;
+        border-radius: 8px
+    }
+
+    .bar-fill {
+        height: 30px;
+        display: block;
+        background: #5cb85c;
+        width: 0;
+        border-radius: 8px;
+        transition: width .8s ease;
+        animation: progressbar 8s 1 forwards;
+    }
+
+    /* Standard syntax */
+    @keyframes progressbar {
+        from {
+            width: 10%
+        }
+        to {
+            width: 100%
+        }
+    }
+
+    .slide-fade-enter-active {
+        transition: sliding-vertically .3s ease;
+    }
+
+    .slide-fade-leave-active {
+        transition: sliding-vertically .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    .slide-fade-enter, .slide-fade-leave-active {
+        transform: translateX(10px);
+        opacity: 0;
     }
 </style>
 {% endblock %}
@@ -407,30 +454,30 @@
 
                                 <div class="choose_button" style="width: 30%;text-align: center">
                                     <p>
-                                        <a v-bind:href="'/runner/token/'+autoToken.token" target="view_window"
+                                        <a v-bind:href="'/runner/token/'+autoToken.token"
                                            style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
                                             <i class="iconfont icon-creative test-link"
                                                style="font-size: 30px;padding-top:5px;"></i></a>
                                     </p>
                                     <transition name="fade">
-                                    <p  v-if='autoComplete' style="">
-                                        <a v-bind:href="'/dynamicreport/index?id=51'" target="view_window"
-                                           style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
-                                            <i class="iconfont icon-file test-link"
-                                               style="font-size: 30px;padding-top:5px;"></i></a>
-                                    </p>
+                                        <p v-if='autoComplete' style="">
+                                            <a v-bind:href="'/dynamicreport/index?id=51'" target="view_window"
+                                               style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
+                                                <i class="iconfont icon-file test-link"
+                                                   style="font-size: 30px;padding-top:5px;"></i></a>
+                                        </p>
                                     </transition>
                                 </div>
                             </div>
 
 
                             <div style="overflow: auto;margin: 15px auto; display: flex; justify-content: space-between;align-items: center">
-                               <!-- <div class="test-link pull-left col-xs-3" style="padding-top:15px">
-                                    <a :href="'/runner/token/'+autoToken.token"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
-                                            class="iconfont icon-check"
-                                            style="font-size: 30px;padding-top:5px;"></i></a>
-                                </div>-->
+                                <!-- <div class="test-link pull-left col-xs-3" style="padding-top:15px">
+                                     <a :href="'/runner/token/'+autoToken.token"
+                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                             class="iconfont icon-check"
+                                             style="font-size: 30px;padding-top:5px;"></i></a>
+                                 </div>-->
                                 <!--<div class="col-xs-9" style="padding: 0;">
                                 </div>-->
                                 <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
@@ -444,16 +491,30 @@
 
                             </div>
                             <div id="options">
-                                <div class="button-btn" style="margin-bottom: 10px;" v-for="token in handToken">
-                                    Android Version: {$ token.imageid $}
+                                <div class="button-btn" style="margin-bottom: 20px;" v-for="token of handToken"
+                                     :key="token">
+                                    <div class="container">
+                                        <div class="bar">
+                                            <span class="bar-unfill">
+                                                <span class="bar-fill" style="position: relative">
+                                                    <span class="bar-percentage"
+                                                          style="position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);"></span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="test_info" style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
+                                        <p>{$ token.imageid $}</p>
+                                        <p>检测时长：{$ token.testTime $} min</p>
+                                        <p>包名称：{$ token.name $}</p>
+                                    </div>
+                                    <a :href="'/runner/token/'+token.token"
+                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                            class="iconfont icon-creative test-link"
+                                            style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
                             </div>
                         </div>
-
-                        <!--:href=-->
-                        <!--{$autoToken.token$}-->
-
-
                     </div>
                 </div>
             </div>
@@ -464,11 +525,6 @@
 </div>
 {% endblock %}
 {% block js %}
-<script>
-    $(function () {
-//        $.('#options')
-    })
-</script>
 <script>
     //展示层
     function showLayer(id) {
@@ -490,11 +546,6 @@
         hideLayer();
         //Wait for change
         //转成jQuery对象
-        let dom = $('<div class="button-btn" style="margin-bottom: 10px;">Android Version: ' + $("#version").find("option:selected").text() + '</div>');
-        //将jQuery对象的dom值绑定到dom tree
-        $('#options').append(dom);
-        //这样dom就指向dom tree上的dom值了
-        dom.hide().slideToggle('fast');
 
         const projectid = $vm.apps[$vm.selectedIndex].id;
         let type = 0;
@@ -517,6 +568,13 @@
             contentType: false,
             processData: false,
             success: data => {
+                let token = data.data;
+                if (token.imageid == 1) {
+                    token.imageid = 'Android 4.4';
+                }
+                $vm.handToken.push(token);
+                $vm.appTokens[projectid][type] = token;
+                $vm.handleHandToken();
             }
         })
     });
@@ -562,47 +620,48 @@
         methods: {
             getTokensEvt: function (projectid) {
                 this.getTokens(projectid, (tokens) => {
-                    //等待修改
                     this.autoToken = tokens[0];
                     this.handToken = tokens.slice(1);
-                        if (this.autoToken.type == 0) {
-                            $.ajax({
-                                url: "/project/getLifeCycle",
-                                data: {projectid: this.autoToken.projectid, type: this.autoToken.type},
-                                method: "GET",
-                                success: data => {
-                                    if (data.errno === 0) {
-                                        let simulator = data.data[0];
-                                        let createTime = Date.parse(simulator.createtime);
-                                        let deadlineTime = Date.parse(simulator.deadlinetime);
-                                        let totalTime = deadlineTime - createTime;
-                                        $vm.autoToken.testTime = totalTime/1000/60;
-                                        $vm.autoToken.name = $vm.apps[$vm.selectedIndex].packagename;
-                                        let nowTime = new Date().getTime();
+                    //autoToken数据处理&&动画控制
+                    $.ajax({
+                        url: "/project/getLifeCycle",
+                        data: {projectid: this.autoToken.projectid, type: this.autoToken.type},
+                        method: "GET",
+                        success: data => {
+                            if (data.errno === 0) {
+                                let simulator = data.data[0];
+                                let createTime = Date.parse(simulator.createtime);
+                                let deadlineTime = Date.parse(simulator.deadlinetime);
+                                let totalTime = deadlineTime - createTime;
+                                $vm.autoToken.testTime = totalTime / 1000 / 60;
+                                $vm.autoToken.name = $vm.apps[$vm.selectedIndex].packagename;
+                                let nowTime = new Date().getTime();
 
-                                        let circle = $('#J_progress_bar');
-                                        let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
-                                        let cycling = setInterval(function () {
-                                            nowTime = new Date().getTime();
-                                            let val = nowTime - createTime;
-                                            val = Math.max(0, val);
-                                            val = Math.min(totalTime, val);
-                                            let percentage = Math.round((val / totalTime) * 100);
-                                            if (percentage !== 100) {
-                                                $vm.autoPercentage = Math.round((val / totalTime) * 100) + '%';
-                                            } else {
-                                                $vm.autoPercentage = '检测完成';
-                                            }
-                                            circle.attr('stroke-dasharray', "" + circleLength * (val / totalTime) + ', 10000');
-                                            if (val === totalTime) {
-                                                $vm.autoComplete = true;
-                                                clearInterval(cycling);
-                                            }
-                                        }, 100);
+                                let circle = $('#J_progress_bar');
+                                let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
+                                let cycling = setInterval(() => {
+                                    nowTime = new Date().getTime();
+                                    let val = nowTime - createTime;
+                                    val = Math.max(0, val);
+                                    val = Math.min(totalTime, val);
+                                    let percentage = Math.round((val / totalTime) * 100);
+                                    if (percentage !== 100) {
+                                        $vm.autoPercentage = Math.round((val / totalTime) * 100) + '%';
+                                    } else {
+                                        $vm.autoPercentage = '检测完成';
                                     }
-                                }
-                            })
+                                    circle.attr('stroke-dasharray', "" + circleLength * (val / totalTime) + ', 10000');
+                                    if (val === totalTime) {
+                                        $vm.autoComplete = true;
+                                        clearInterval(cycling);
+                                    }
+                                }, 100);
+                            }
                         }
+                    });
+
+                    //handToken数据处理&&动画控制
+                    this.handleHandToken();
                 });
             },
             getTokens: function (projectid, success_callback) {
@@ -622,7 +681,7 @@
                             if (this.appTokens[projectid] === undefined) {
                                 this.appTokens[projectid] = [];
                             }
-                            if($.imageid === 1) {
+                            if ($.imageid === 1) {
                                 $.imageid = 'Android 4.4'
                             }
                             this.appTokens[projectid][$.type] = $;
@@ -630,6 +689,48 @@
                         success_callback(this.appTokens[projectid]);
                     }
                 });
+            },
+            handleHandToken: function() {
+                for (let i = 0; i < this.handToken.length; i++) {
+                    $.ajax({
+                        url: "/project/getLifeCycle",
+                        data: {projectid: this.handToken[i].projectid, type: this.handToken[i].type},
+                        method: "GET",
+                        success: data => {
+                            if (data.errno === 0) {
+                                let simulator = data.data[0];
+                                let createTime = Date.parse(simulator.createtime);
+                                let deadlineTime = Date.parse(simulator.deadlinetime);
+                                let totalTime = deadlineTime - createTime;
+                                $vm.handToken[i].testTime = totalTime / 1000 / 60;
+                                $vm.handToken[i].name = $vm.apps[$vm.selectedIndex].packagename;
+                                let barFill = $('.bar-fill')[i];
+                                let barPercentage = $('.bar-percentage')[i];
+                                let nowTime = new Date().getTime();
+                                let val = nowTime - createTime;
+
+                                if (barPercentage.innerHTML === '') {
+                                    let leftTime = Math.round((totalTime - val) / 1000);
+                                    barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
+                                }
+                                let tick = setInterval(() => {
+                                    nowTime = new Date().getTime();
+                                    let val = nowTime - createTime;
+                                    val = Math.max(0, val);
+                                    val = Math.min(totalTime, val);
+                                    if (val !== totalTime) {
+                                        let percentage = Math.round((val / totalTime) * 100);
+                                        barPercentage.innerHTML = percentage + '%';
+                                    } else {
+                                        clearInterval(tick);
+                                        barPercentage.innerHTML = '检测完成';
+                                    }
+                                }, 100);
+
+                            }
+                        }
+                    })
+                }
             },
             getApkInfo: function (projid) {
                 $.ajax({
@@ -686,7 +787,7 @@
                 }, delay)
             },
             leave: function (el, done) {
-                var delay = el.dataset.index * 150
+                var delay = el.dataset.index * 150;
                 setTimeout(function () {
                     $.Velocity(
                         el,

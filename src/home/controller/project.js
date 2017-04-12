@@ -103,6 +103,12 @@ export default class extends Base {
             vm: vm,
             type: type
         });
+        let updateTokens = await tokenModel.getTokens(projectid, userid);
+        for(let token of updateTokens) {
+            if(token.type == type) {
+                return this.success(token);
+            }
+        }
         return this.success();
     }
 
