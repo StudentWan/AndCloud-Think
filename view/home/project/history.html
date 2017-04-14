@@ -497,8 +497,7 @@
 
                             </div>
                             <div id="options">
-                                <transition-group name="fade" tag="p">
-                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto" v-for="(token,index) of handToken" v-bind:key="index"
+                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto" v-for="(token,index) of handToken"
                                      :key="token">
                                     <div class="container">
                                         <div class="bar">
@@ -518,12 +517,11 @@
                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
                                             class="iconfont icon-creative test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
-                                    <a v-on:click="terminateHandTest(token)" v-if="!token.isComplete"
+                                    <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)"
                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
                                             class="iconfont icon-roundclose test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
-                                </transition-group>
                             </div>
                         </div>
                     </div>
@@ -746,10 +744,10 @@
                                 Vue.set($vm.handToken[i], 'totalTime', totalTime);
                                 Vue.set($vm.handToken[i], 'createTime', createTime);
                                 Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
-                                if(($vm.handToken[i].deadlinetime - new Date().getTime()) > 0) {
-                                    Vue.set($vm.handToken[i], 'isComplete', true);
-                                } else {
+                                if(($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
                                     Vue.set($vm.handToken[i], 'isComplete', false);
+                                } else {
+                                    Vue.set($vm.handToken[i], 'isComplete', true);
                                 }
                                 Vue.set($vm.handToken[i], 'barFill', barFill);
                                 Vue.set($vm.handToken[i], 'barPercentage', barPercentage);
