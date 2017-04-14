@@ -5,6 +5,7 @@
 
 import Base from './base.js';
 import fs from 'fs';
+import moment from 'moment';
 const uuidV4 = require('uuid/v4');
 const pathOS = require('path');
 
@@ -117,6 +118,11 @@ export default class extends Base {
         let userid = await this.session('user_id');
         let tokenModel = this.model('tokens');
         let tokens = await tokenModel.getTokens(projectid, userid);
+        let imageModel = this.model('images');
+        for(let token of tokens) {
+            let image = await imageModel.getImage(token.imageid);
+            token.imageid = image[0].name;
+        }
         // let res = tokens.map($ => $.tokens.toArray());
         return this.success(tokens);
     }
@@ -128,6 +134,17 @@ export default class extends Base {
         let deviceMap = await deviceMapModel.getDeviceMap(projectid, type);
         let simulatorModel = this.model('simulators');
         let result = await simulatorModel.getSimulator(deviceMap[0].deviceid);
+        return this.success(result);
+    }
+
+    async updatelifecycleAction() {
+        let projectid = this.post('projectid');
+        let type = this.post('type');
+        let deadlinetime = moment().format('YYYY-MM-DD HH:mm:ss');
+        let deviceMapModel = this.model('devicemaps');
+        let deviceMap = await deviceMapModel.getDeviceMap(projectid, type);
+        let simulatorModel = this.model('simulators');
+        let result = await simulatorModel.updateSimulator(deviceMap[0].deviceid, deadlinetime);
         return this.success(result);
     }
 }

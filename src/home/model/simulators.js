@@ -9,6 +9,10 @@ class Simulators extends think.model.base {
     async getSimulator(id) {
         return await this.where({'id': id}).select();
     }
+
+    async updateSimulator(id, deadlinetime) {
+        return await this.where({'id': id}).update({'deadlinetime': deadlinetime});
+    }
 }
 
 export default Simulators;

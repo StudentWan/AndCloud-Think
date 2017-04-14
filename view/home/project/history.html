@@ -197,6 +197,15 @@
         text-align: center;
     }
 
+    .info-hand {
+        padding-bottom: 10px;
+        border: 1px solid white;
+        margin: 5px 0px;
+        border-radius: 5px;
+        text-align: center;
+        overflow: hidden;
+    }
+
     .infoblanket {
         position: relative;
         padding: 10px;
@@ -244,7 +253,8 @@
 
     .container {
         width: 100%;
-        margin: 0 auto
+        margin: 0 auto;
+        padding: 0;
     }
 
     .bar-unfill {
@@ -252,7 +262,6 @@
         display: block;
         background: #fff;
         width: 100%;
-        border-radius: 8px
     }
 
     .bar-fill {
@@ -260,9 +269,7 @@
         display: block;
         background: #5cb85c;
         width: 0;
-        border-radius: 8px;
         transition: width .8s ease;
-        animation: progressbar 8s 1 forwards;
     }
 
     /* Standard syntax */
@@ -448,8 +455,7 @@
 
                                 <div class="test_info" style="width: 40%;text-align: center">
                                     <p>{$ autoToken.imageid $}</p>
-                                    <p>检测时长：{$ autoToken.testTime $} min</p>
-                                    <p>包名称：{$ autoToken.name $}</p>
+                                    <p>存活时间：{$ autoToken.testTime $} min</p>
                                 </div>
 
                                 <div class="choose_button" style="width: 30%;text-align: center">
@@ -491,7 +497,8 @@
 
                             </div>
                             <div id="options">
-                                <div class="button-btn" style="margin-bottom: 20px;" v-for="token of handToken"
+                                <transition-group name="fade" tag="p">
+                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto" v-for="(token,index) of handToken" v-bind:key="index"
                                      :key="token">
                                     <div class="container">
                                         <div class="bar">
@@ -505,14 +512,18 @@
                                     </div>
                                     <div class="test_info" style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
                                         <p>{$ token.imageid $}</p>
-                                        <p>检测时长：{$ token.testTime $} min</p>
-                                        <p>包名称：{$ token.name $}</p>
+                                        <p>存活时间：{$ token.testTime $} min</p>
                                     </div>
                                     <a :href="'/runner/token/'+token.token"
                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
                                             class="iconfont icon-creative test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
+                                    <a v-on:click="terminateHandTest(token)" v-if="!token.isComplete"
+                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
+                                            class="iconfont icon-roundclose test-link"
+                                            style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
+                                </transition-group>
                             </div>
                         </div>
                     </div>
@@ -526,6 +537,15 @@
 {% endblock %}
 {% block js %}
 <script>
+
+    var formatDate = function (date) {
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? '0' + m : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        return y + '-' + m + '-' + d;
+    };
     //展示层
     function showLayer(id) {
         var layer = $('#' + id),
@@ -569,9 +589,6 @@
             processData: false,
             success: data => {
                 let token = data.data;
-                if (token.imageid == 1) {
-                    token.imageid = 'Android 4.4';
-                }
                 $vm.handToken.push(token);
                 $vm.appTokens[projectid][type] = token;
                 $vm.handleHandToken();
@@ -633,8 +650,7 @@
                                 let createTime = Date.parse(simulator.createtime);
                                 let deadlineTime = Date.parse(simulator.deadlinetime);
                                 let totalTime = deadlineTime - createTime;
-                                $vm.autoToken.testTime = totalTime / 1000 / 60;
-                                $vm.autoToken.name = $vm.apps[$vm.selectedIndex].packagename;
+                                $vm.autoToken.testTime = (totalTime / 1000 / 60).toFixed(2);
                                 let nowTime = new Date().getTime();
 
                                 let circle = $('#J_progress_bar');
@@ -681,9 +697,6 @@
                             if (this.appTokens[projectid] === undefined) {
                                 this.appTokens[projectid] = [];
                             }
-                            if ($.imageid === 1) {
-                                $.imageid = 'Android 4.4'
-                            }
                             this.appTokens[projectid][$.type] = $;
                         });
                         success_callback(this.appTokens[projectid]);
@@ -691,6 +704,30 @@
                 });
             },
             handleHandToken: function() {
+                setInterval(() => {
+                    for(let token of this.handToken) {
+                        let nowTime = new Date().getTime();
+                        let val = nowTime - token.createTime;
+                        if (token.barPercentage.innerHTML === '') {
+                            let leftTime = Math.round((token.totalTime - val) / 1000);
+                            token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
+                        }
+                        let tick = setInterval(() => {
+                            nowTime = new Date().getTime();
+                            let val = nowTime - token.createTime;
+                            val = Math.max(0, val);
+                            val = Math.min(token.totalTime, val);
+                            if (val !== token.totalTime) {
+                                let percentage = Math.round((val / token.totalTime) * 100);
+                                token.barPercentage.innerHTML = percentage + '%';
+                            } else {
+                                clearInterval(tick);
+                                token.barPercentage.innerHTML = '检测完成';
+                                Vue.set(token,'isComplete',true);
+                            }
+                        }, 100);
+                    }
+                },1000);
                 for (let i = 0; i < this.handToken.length; i++) {
                     $.ajax({
                         url: "/project/getLifeCycle",
@@ -702,35 +739,26 @@
                                 let createTime = Date.parse(simulator.createtime);
                                 let deadlineTime = Date.parse(simulator.deadlinetime);
                                 let totalTime = deadlineTime - createTime;
-                                $vm.handToken[i].testTime = totalTime / 1000 / 60;
-                                $vm.handToken[i].name = $vm.apps[$vm.selectedIndex].packagename;
                                 let barFill = $('.bar-fill')[i];
                                 let barPercentage = $('.bar-percentage')[i];
-                                let nowTime = new Date().getTime();
-                                let val = nowTime - createTime;
 
-                                if (barPercentage.innerHTML === '') {
-                                    let leftTime = Math.round((totalTime - val) / 1000);
-                                    barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
+                                Vue.set($vm.handToken[i], 'testTime', (totalTime / 1000 / 60).toFixed(2));
+                                Vue.set($vm.handToken[i], 'totalTime', totalTime);
+                                Vue.set($vm.handToken[i], 'createTime', createTime);
+                                Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
+                                if(($vm.handToken[i].deadlinetime - new Date().getTime()) > 0) {
+                                    Vue.set($vm.handToken[i], 'isComplete', true);
+                                } else {
+                                    Vue.set($vm.handToken[i], 'isComplete', false);
                                 }
-                                let tick = setInterval(() => {
-                                    nowTime = new Date().getTime();
-                                    let val = nowTime - createTime;
-                                    val = Math.max(0, val);
-                                    val = Math.min(totalTime, val);
-                                    if (val !== totalTime) {
-                                        let percentage = Math.round((val / totalTime) * 100);
-                                        barPercentage.innerHTML = percentage + '%';
-                                    } else {
-                                        clearInterval(tick);
-                                        barPercentage.innerHTML = '检测完成';
-                                    }
-                                }, 100);
+                                Vue.set($vm.handToken[i], 'barFill', barFill);
+                                Vue.set($vm.handToken[i], 'barPercentage', barPercentage);
 
                             }
                         }
                     })
                 }
+
             },
             getApkInfo: function (projid) {
                 $.ajax({
@@ -796,11 +824,22 @@
                     )
                 }, delay)
             },
-            getStaticReport: function () {
-            },
             chooseTest: function () {
                 var layerid = 'hw-layer';
                 showLayer(layerid);
+            },
+            terminateHandTest: function(token) {
+                $.ajax({
+                    url: "/project/updateLifeCycle",
+                    data: {projectid: token.projectid, type: token.type},
+                    method: "POST",
+                    success: (data) => {
+                            if(data.errno === 0) {
+                                $vm.handleHandToken();
+                                token.barFill.style.animation = 'progressbar 0s 1 forwards';
+                            }
+                    }
+                })
             }
         },
         mounted: function () {
