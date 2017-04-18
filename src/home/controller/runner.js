@@ -26,14 +26,14 @@ export default class extends Base {
         this.assign({
             'token': token,
             //测试数据
-            'width': 800,
-            'height': 600,
-            'wmwidth': 768,
-            'wmheight': 1200
-                // 'width': mirrorData.width,
-                // 'height': mirrorData.height,
-                // 'wmwidth': mirrorData.wmwidth,
-                // 'wmheight': mirrorData.wmheight
+            // 'width': 800,
+            // 'height': 600,
+            // 'wmwidth': 768,
+            // 'wmheight': 1200
+                'width': mirrorData.width,
+                'height': mirrorData.height,
+                'wmwidth': mirrorData.wmwidth,
+                'wmheight': mirrorData.wmheight
 
         });
         return this.display()
