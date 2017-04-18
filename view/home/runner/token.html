@@ -1,108 +1,228 @@
-{% extends "./../basebar.html" %}
-{% block contentright %}
+{% extends "./../basebar.html" %} {% block contentright %}
 <style>
-    #phone-screen{
-        float:left;
-        top: 50%;
-        position: relative;
-        margin-top: -250px;
-    }
-    .log-container{
-        float:left;
+    .contain {
+        margin: auto;
+        margin-top: 10%;
         height: 100%;
-        width: calc(100% - 300px);
+        max-width: 1000px;
     }
+    
+    .log-container {
+        float: left;
+        height: 100%;
+        width: 50%;
+        margin-left: 5%;
+    }
+    
     .log-container pre {
-        margin: 0;
-        color:white;
-        height: 100%;
-        overflow: scroll;
-        background-color: transparent;
+        width: 100%;
+        height: 70%;
+        background: transparent;
+    }
+    
+    #phone-screen {
+        margin-left: 5%;
+        float: left;
+        border: 1px solid #cccccc;
     }
 </style>
-<canvas id="phone-screen" width="300" height="500"></canvas>
-<div id="app" class="log-container">
-    <pre>
-        {$logList.join('\n')$}
-    </pre>
-</div>
-{% endblock %}
-{% block js %}
-<script src="/static/socket/socket.io.js"></script>
-<script>
-  var $vm = new Vue({
-    el: '#app',
-    delimiters: ['{$', '$}'],
-    data: {
-      logList: [],
-    },
-    methods: {
-      addLog: function ($log) {
-        while (this.logList.length > 1000) {
-          this.logList.shift();
-        }
-        this.logList.push($log);
-      }
-    }
-  });
-  var socket = new WebSocket('ws://192.168.8.88:6565');
-  var pinger = null;
-  socket.onopen = function () {
-    socket.send(JSON.stringify({type: 'auth', detail: '{{token}}'}));
-    pinger = setInterval(function () {
-      socket.send(JSON.stringify({type: 'ping', detail: '{{token}}'}))
-    }, 1000 * 30);
-  };
-  socket.onmessage = function (message) {
-    var msg = message.data;
-    if (msg == "{type:\"pong\"}") {
-      return;
-    } else {
-        $vm.addLog(msg);
-    }
-    console.log(msg);
-  };
-  socket.onclose = function () {
-    clearInterval(pinger)
-  };
+<div class="contain">
 
-  (function(){
-    var BLANK_IMG =
-      'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
-    var canvas = document.getElementById('phone-screen');
-    var ctx = canvas.getContext('2d');
-    var socket = new WebSocket('ws://192.168.8.88:6566');
+    <canvas id="phone-screen"></canvas>
+    <div id="app" class="log-container">
+        <pre>
+            {$logList.join('\n')$}
+        </pre>
+    </div>
+</div>
+
+{% endblock %}{% block js %}
+<script src="/static/socket/socket.io.js"></script>
+
+<script>
+    var $vm = new Vue({
+        el: '#app',
+        delimiters: ['{$', '$}'],
+        data: {
+            logList: [],
+        },
+        methods: {
+            addLog: function($log) {
+                while (this.logList.length > 1000) {
+                    this.logList.shift();
+                }
+                this.logList.push($log);
+            }
+        }
+    });
+    // let socket = new WebSocket('ws://127.0.0.1:9002') //测试socket
+    let socket = new WebSocket('ws://192.168.8.88:6565');
+    let canvas = document.getElementById('phone-screen');
     var pinger = null;
-    socket.onopen = function () {
-      socket.send(JSON.stringify({type: 'auth', detail: '{{token}}'}));
-      pinger = setInterval(function () {
-        socket.send(JSON.stringify({type: 'ping', detail: '{{token}}'}))
-      }, 1000 * 30);
+    socket.onopen = function() {
+        socket.send(JSON.stringify({
+            type: 'auth',
+            detail: '{{token}}'
+        }));
+        pinger = setInterval(function() {
+            socket.send(JSON.stringify({
+                type: 'ping',
+                detail: '{{token}}'
+            }))
+        }, 1000 * 30);
+        canvas.addEventListener('mousedown', mouseDownListener);
+
     };
-    socket.onmessage = function (message) {
-      var msg = message.data;
-      if (msg == "{type:\"pong\"}") {
-        return;
-      } else {
-        var blob = new Blob([msg], {type: 'image/jpeg'});
-        var URL = window.URL || window.webkitURL;
-        var img = new Image();
-        img.onload = function() {
-          console.log(img.width, img.height);
-          ctx.drawImage(img,220,0, 360,600,0, 0,canvas.width,canvas.height);
-          img.onload = null;
-          img.src = BLANK_IMG;
-          img = null;
-          u = null;
-          blob = null;
+    socket.onmessage = function(message) {
+        if (message) {
+            var msg = message.data;
+            if (msg == "{type:\"pong\"}") {
+                return;
+            } else {
+                $vm.addLog(msg);
+            }
+            console.log(msg);
+        }
+
+    };
+    socket.onclose = function() {
+        clearInterval(pinger)
+    };
+
+    (function() {
+        var BLANK_IMG =
+            'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+        var canvas = document.getElementById('phone-screen');
+        var ctx = canvas.getContext('2d');
+
+
+
+        canvas.width = window.innerWidth / 4.0;
+        canvas.height = window.innerHeight / 1.428;
+        let socket = new WebSocket('ws://192.168.8.88:6566');
+        // var socket = new WebSocket('ws://127.0.0.1:9002') //测试socket
+        var pinger = null;
+        socket.onopen = function() {
+
+            socket.send(JSON.stringify({
+                type: 'auth',
+                detail: '{{token}}'
+            }));
+            pinger = setInterval(function() {
+                socket.send(JSON.stringify({
+                    type: 'ping',
+                    detail: '{{token}}'
+                }))
+            }, 1000 * 30);
         };
-        var u = URL.createObjectURL(blob);
-        img.src = u
-      }
+        socket.onmessage = function(message) {
+                var msg = message.data;
+                if (msg == "{type:\"pong\"}") {
+                    return;
+                } else {
+                    var blob = new Blob([msg], {
+                        type: 'image/jpeg'
+                    });
+                    var URL = window.URL || window.webkitURL;
+                    var img = new Image();
+                    img.onload = function() {
+                        //console.log(img.width, img.height);
+                        let width = (Number('{{height}}') / Number('{{vmheight}}')) * (Number('{{vmwidth}}'));
+
+                        ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
+                        img.onload = null;
+                        img.src = BLANK_IMG;
+                        img = null;
+                        u = null;
+                        blob = null;
+                    };
+                    var u = URL.createObjectURL(blob);
+                    img.src = u
+                }
+            }
+            // canvas自动调整大小
+            // window.onresize = function() {
+            //     canvas.width = window.innerWidth / 4.2;
+            //     canvas.height = window.innerHeight / 1.428;
+            //     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // }
+        socket.onclose = function() {
+            clearInterval(pinger)
+        }
+    })();
+
+    function dataLimit(data) {
+        if (data < 0) {
+            data = 0;
+        } else if (data > 1) {
+            data = 1;
+        }
+        return data;
+
     }
-    socket.onclose = function () {
-      clearInterval(pinger)
+
+    function calculateRate(event) {
+        let controlData = {
+            MODE: 'DOWN',
+            X: 0,
+            Y: 0
+        };
+        controlData.X = dataLimit((event.pageX - canvas.offsetLeft) / canvas.width);
+        controlData.Y = dataLimit((event.pageY - canvas.offsetTop) / canvas.height);
+
+        return controlData;
     }
-  })();
+
+    function mouseDownListener(event) {
+
+        if (event.which == 3) {
+            return;
+        }
+        event.preventDefault();
+        let Data = calculateRate(event);
+        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+        console.log(JSON.stringify(sendData));
+        socket.send(JSON.stringify(sendData));
+        canvas.addEventListener('mousemove', mouseMoveListener);
+        document.addEventListener('mouseup', mouseUpListener);
+        canvas.addEventListener('mouseleave', mouseUpListener);
+    }
+
+    function mouseMoveListener(event) {
+        if (event.which == 3) {
+            return;
+        }
+
+        let Data = calculateRate(event);
+
+        event.preventDefault();
+        Data.MODE = 'MOVE';
+        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+        console.log(JSON.stringify(sendData));
+        socket.send(JSON.stringify(sendData));
+
+    }
+
+    function mouseUpListener(event) {
+        if (event.which == 3) {
+            return;
+
+        }
+        event.preventDefault();
+
+        let Data = calculateRate(event);
+        Data.MODE = 'UP';
+        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+        console.log(JSON.stringify(sendData));
+        socket.send(JSON.stringify(sendData));
+        stopMousing();
+    }
+
+    function stopMousing() {
+        canvas.removeEventListener('mousemove', mouseMoveListener);
+        canvas.removeEventListener('mouseup', mouseUpListener);
+        canvas.removeEventListener('mouseleave', mouseUpListener);
+    }
 </script>
 {% endblock %}
