@@ -127,8 +127,9 @@
                     var img = new Image();
                     img.onload = function() {
                         //console.log(img.width, img.height);
+                        let width = (Number('{{height}}') / Number('{{vmheight}}')) * (Number('{{vmwidth}}'));
 
-                        ctx.drawImage(img, (Number('{{width}}') - Number('{{wmwidth}}')) / 2, 0, '{{wmwidth}}', '{{wmheight}}', 0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
                         img.onload = null;
                         img.src = BLANK_IMG;
                         img = null;
@@ -179,7 +180,8 @@
             return;
         }
         event.preventDefault();
-        let sendData = calculateRate(event);
+        let Data = calculateRate(event);
+        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
         socket.send(JSON.stringify(sendData));
         canvas.addEventListener('mousemove', mouseMoveListener);
@@ -192,9 +194,11 @@
             return;
         }
 
-        let sendData = calculateRate(event);
+        let Data = calculateRate(event);
+
         event.preventDefault();
-        sendData.MODE = 'MOVE';
+        Data.MODE = 'MOVE';
+        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
         socket.send(JSON.stringify(sendData));
 
@@ -207,8 +211,9 @@
         }
         event.preventDefault();
 
-        let sendData = calculateRate(event);
-        sendData.MODE = 'UP';
+        let Data = calculateRate(event);
+        Data.MODE = 'UP';
+        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
         socket.send(JSON.stringify(sendData));
         stopMousing();
