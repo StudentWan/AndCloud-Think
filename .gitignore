@@ -41,5 +41,5 @@ www/.DS_Store
 www/static/.DS_Store
 www/static/jQuery/.DS_Store
 
-*db.js
+
 run.sh
