@@ -497,7 +497,8 @@
 
                             </div>
                             <div id="options">
-                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto" v-for="(token,index) of handToken"
+                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto"
+                                     v-for="(token,index) of handToken"
                                      :key="token">
                                     <div class="container">
                                         <div class="bar">
@@ -509,7 +510,8 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="test_info" style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
+                                    <div class="test_info"
+                                         style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
                                         <p>{$ token.imageid $}</p>
                                         <p>存活时间：{$ token.testTime $} min</p>
                                     </div>
@@ -631,6 +633,7 @@
             items: [1],
             autoPercentage: 0,
             autoComplete: false,
+            autoInterval: undefined,
         },
         methods: {
             getTokensEvt: function (projectid) {
@@ -638,6 +641,9 @@
                     this.autoToken = tokens[0];
                     this.handToken = tokens.slice(1);
                     //autoToken数据处理&&动画控制
+                    if (this.autoInterval) {
+                        clearInterval(this.autoInterval);
+                    }
                     $.ajax({
                         url: "/project/getLifeCycle",
                         data: {projectid: this.autoToken.projectid, type: this.autoToken.type},
@@ -648,12 +654,13 @@
                                 let createTime = Date.parse(simulator.createtime);
                                 let deadlineTime = Date.parse(simulator.deadlinetime);
                                 let totalTime = deadlineTime - createTime;
-                                $vm.autoToken.testTime = (totalTime / 1000 / 60).toFixed(2);
+                                Vue.set($vm.autoToken, 'testTime', (totalTime / 1000 / 60).toFixed(2));
                                 let nowTime = new Date().getTime();
 
                                 let circle = $('#J_progress_bar');
                                 let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
-                                let cycling = setInterval(() => {
+
+                                this.autoInterval = setInterval(() => {
                                     nowTime = new Date().getTime();
                                     let val = nowTime - createTime;
                                     val = Math.max(0, val);
@@ -665,11 +672,18 @@
                                         $vm.autoPercentage = '检测完成';
                                     }
                                     circle.attr('stroke-dasharray', "" + circleLength * (val / totalTime) + ', 10000');
+                                    circle.attr('stroke', '#5cb85c');
                                     if (val === totalTime) {
                                         $vm.autoComplete = true;
-                                        clearInterval(cycling);
+                                        clearInterval(this.autoInterval);
                                     }
                                 }, 100);
+                            } else {
+                                $vm.autoPercentage = "无检测数据";
+                                let circle = $('#J_progress_bar');
+                                let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
+                                circle.attr('stroke-dasharray', "" + circleLength + ', 10000');
+                                circle.attr('stroke', 'red');
                             }
                         }
                     });
@@ -701,9 +715,9 @@
                     }
                 });
             },
-            handleHandToken: function() {
+            handleHandToken: function () {
                 setInterval(() => {
-                    for(let token of this.handToken) {
+                    for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
                         let val = nowTime - token.createTime;
                         if (token.barPercentage.innerHTML === '') {
@@ -721,11 +735,11 @@
                             } else {
                                 clearInterval(tick);
                                 token.barPercentage.innerHTML = '检测完成';
-                                Vue.set(token,'isComplete',true);
+                                Vue.set(token, 'isComplete', true);
                             }
                         }, 100);
                     }
-                },1000);
+                }, 1000);
                 for (let i = 0; i < this.handToken.length; i++) {
                     $.ajax({
                         url: "/project/getLifeCycle",
@@ -744,7 +758,7 @@
                                 Vue.set($vm.handToken[i], 'totalTime', totalTime);
                                 Vue.set($vm.handToken[i], 'createTime', createTime);
                                 Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
-                                if(($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
+                                if (($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
                                     Vue.set($vm.handToken[i], 'isComplete', false);
                                 } else {
                                     Vue.set($vm.handToken[i], 'isComplete', true);
@@ -826,16 +840,16 @@
                 var layerid = 'hw-layer';
                 showLayer(layerid);
             },
-            terminateHandTest: function(token) {
+            terminateHandTest: function (token) {
                 $.ajax({
                     url: "/project/updateLifeCycle",
                     data: {projectid: token.projectid, type: token.type},
                     method: "POST",
                     success: (data) => {
-                            if(data.errno === 0) {
-                                $vm.handleHandToken();
-                                token.barFill.style.animation = 'progressbar 0s 1 forwards';
-                            }
+                        if (data.errno === 0) {
+                            $vm.handleHandToken();
+                            token.barFill.style.animation = 'progressbar 0s 1 forwards';
+                        }
                     }
                 })
             }
