@@ -75,7 +75,7 @@
                 detail: '{{token}}'
             }))
         }, 1000 * 30);
-        canvas.addEventListener('mousedown', mouseDownListener);
+
 
     };
     socket.onmessage = function(message) {
@@ -119,6 +119,7 @@
                     detail: '{{token}}'
                 }))
             }, 1000 * 30);
+            canvas.addEventListener('mousedown', mouseDownListener);
         };
         imgsocket.onmessage = function(message) {
             var msg = message.data;
