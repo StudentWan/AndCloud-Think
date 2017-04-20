@@ -127,7 +127,7 @@
                     var img = new Image();
                     img.onload = function() {
                         //console.log(img.width, img.height);
-                        let width = (Number('{{height}}') / Number('{{vmheight}}')) * (Number('{{vmwidth}}'));
+                        let width = (Number('{{height}}') / Number('{{wmheight}}')) * (Number('{{wmwidth}}'));
 
                         ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
                         img.onload = null;
