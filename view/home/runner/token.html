@@ -70,7 +70,7 @@
                 detail: '{{token}}'
             }))
         }, 1000 * 30);
-        // canvas.addEventListener('mousedown', mouseDownListener);
+        canvas.addEventListener('mousedown', mouseDownListener);
 
     };
     socket.onmessage = function(message) {
@@ -88,18 +88,18 @@
     socket.onclose = function() {
         clearInterval(pinger)
     };
-    let imgSocket = new WebSocket('ws://192.168.8.88:6566');
+
     (function() {
         var BLANK_IMG =
             'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
         var canvas = document.getElementById('phone-screen');
         var ctx = canvas.getContext('2d');
 
-        let socket = imgSocket;
+
 
         canvas.width = window.innerWidth / 4.0;
         canvas.height = window.innerHeight / 1.428;
-
+        let socket = new WebSocket('ws://192.168.8.88:6566');
         // var socket = new WebSocket('ws://127.0.0.1:9002') //测试socket
         var pinger = null;
         socket.onopen = function() {
@@ -127,8 +127,7 @@
                     var img = new Image();
                     img.onload = function() {
                         //console.log(img.width, img.height);
-                        let width = (Number('{{height}}') / Number('{{wmheight}}')) * (Number('{{wmwidth}}'));
-                        console.log(width);
+                        let width = (Number('{{height}}') / Number('{{vmheight}}')) * (Number('{{vmwidth}}'));
 
                         ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
                         img.onload = null;
@@ -184,7 +183,7 @@
         let Data = calculateRate(event);
         let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
-        imgSocket.send(JSON.stringify(sendData));
+        socket.send(JSON.stringify(sendData));
         canvas.addEventListener('mousemove', mouseMoveListener);
         document.addEventListener('mouseup', mouseUpListener);
         canvas.addEventListener('mouseleave', mouseUpListener);
@@ -201,7 +200,7 @@
         Data.MODE = 'MOVE';
         let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
-        imgSocket.send(JSON.stringify(sendData));
+        socket.send(JSON.stringify(sendData));
 
     }
 
@@ -216,7 +215,7 @@
         Data.MODE = 'UP';
         let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
-        imgSocket.send(JSON.stringify(sendData));
+        socket.send(JSON.stringify(sendData));
         stopMousing();
     }
 
