@@ -182,7 +182,10 @@
         }
         event.preventDefault();
         let Data = calculateRate(event);
-        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+        let sendData = {
+            type: 'touch',
+            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+        }
         console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
         canvas.addEventListener('mousemove', mouseMoveListener);
@@ -199,7 +202,11 @@
 
         event.preventDefault();
         Data.MODE = 'MOVE';
-        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+        let sendData = {
+            type: 'touch',
+            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+        }
+
         console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
 
@@ -214,7 +221,10 @@
 
         let Data = calculateRate(event);
         Data.MODE = 'UP';
-        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+        let sendData = {
+            type: 'touch',
+            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+        }
         console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
         stopMousing();
