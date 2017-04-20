@@ -114,6 +114,7 @@
                     detail: '{{token}}'
                 }))
             }, 1000 * 30);
+            canvas.addEventListener('mousedown', mouseDownListener);
         };
         socket.onmessage = function(message) {
                 var msg = message.data;
@@ -151,6 +152,53 @@
         socket.onclose = function() {
             clearInterval(pinger)
         }
+
+
+
+        function mouseDownListener(event) {
+
+            if (event.which == 3) {
+                return;
+            }
+            event.preventDefault();
+            let Data = calculateRate(event);
+            let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+            console.log(JSON.stringify(sendData));
+            socket.send(JSON.stringify(sendData));
+            canvas.addEventListener('mousemove', mouseMoveListener);
+            document.addEventListener('mouseup', mouseUpListener);
+            canvas.addEventListener('mouseleave', mouseUpListener);
+        }
+
+        function mouseMoveListener(event) {
+            if (event.which == 3) {
+                return;
+            }
+
+            let Data = calculateRate(event);
+
+            event.preventDefault();
+            Data.MODE = 'MOVE';
+            let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+            console.log(JSON.stringify(sendData));
+            socket.send(JSON.stringify(sendData));
+
+        }
+
+        function mouseUpListener(event) {
+            if (event.which == 3) {
+                return;
+
+            }
+            event.preventDefault();
+
+            let Data = calculateRate(event);
+            Data.MODE = 'UP';
+            let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
+            console.log(JSON.stringify(sendData));
+            socket.send(JSON.stringify(sendData));
+            stopMousing();
+        }
     })();
 
     function dataLimit(data) {
@@ -175,50 +223,7 @@
         return controlData;
     }
 
-    function mouseDownListener(event) {
 
-        if (event.which == 3) {
-            return;
-        }
-        event.preventDefault();
-        let Data = calculateRate(event);
-        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
-        console.log(JSON.stringify(sendData));
-        socket.send(JSON.stringify(sendData));
-        canvas.addEventListener('mousemove', mouseMoveListener);
-        document.addEventListener('mouseup', mouseUpListener);
-        canvas.addEventListener('mouseleave', mouseUpListener);
-    }
-
-    function mouseMoveListener(event) {
-        if (event.which == 3) {
-            return;
-        }
-
-        let Data = calculateRate(event);
-
-        event.preventDefault();
-        Data.MODE = 'MOVE';
-        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
-        console.log(JSON.stringify(sendData));
-        socket.send(JSON.stringify(sendData));
-
-    }
-
-    function mouseUpListener(event) {
-        if (event.which == 3) {
-            return;
-
-        }
-        event.preventDefault();
-
-        let Data = calculateRate(event);
-        Data.MODE = 'UP';
-        let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
-        console.log(JSON.stringify(sendData));
-        socket.send(JSON.stringify(sendData));
-        stopMousing();
-    }
 
     function stopMousing() {
         canvas.removeEventListener('mousemove', mouseMoveListener);
