@@ -75,7 +75,7 @@
                 detail: '{{token}}'
             }))
         }, 1000 * 30);
-
+        canvas.addEventListener('mousedown', mouseDownListener);
 
     };
     socket.onmessage = function(message) {
@@ -119,7 +119,7 @@
                     detail: '{{token}}'
                 }))
             }, 1000 * 30);
-            canvas.addEventListener('mousedown', mouseDownListener);
+
         };
         imgsocket.onmessage = function(message) {
             var msg = message.data;
@@ -183,7 +183,7 @@
         let Data = calculateRate(event);
         let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
-        imgsocket.send(JSON.stringify(Data));
+        socket.send(JSON.stringify(Data));
         canvas.addEventListener('mousemove', mouseMoveListener);
         document.addEventListener('mouseup', mouseUpListener);
         canvas.addEventListener('mouseleave', mouseUpListener);
@@ -200,7 +200,7 @@
         Data.MODE = 'MOVE';
         let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
-        imgsocket.send(JSON.stringify(Data));
+        socket.send(JSON.stringify(Data));
 
     }
 
@@ -215,7 +215,7 @@
         Data.MODE = 'UP';
         let sendData = Data.MODE + ',' + Data.X + ',' + Data.Y;
         console.log(JSON.stringify(sendData));
-        imgsocket.send(JSON.stringify(Data));
+        socket.send(JSON.stringify(Data));
         stopMousing();
     }
 
