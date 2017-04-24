@@ -713,25 +713,23 @@
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
                         let val = nowTime - token.createTime;
-                            if (token.barPercentage.innerHTML === '') {
-                                let leftTime = Math.round((token.totalTime - val) / 1000);
-                                token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
+                        let leftTime = (token.totalTime - val) / 1000;
+                        token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
+                        let tick = setInterval(() => {
+                            nowTime = new Date().getTime();
+                            let val = nowTime - token.createTime;
+                            val = Math.max(0, val);
+                            val = Math.min(token.totalTime, val);
+                            if (val !== token.totalTime) {
+                                let percentage = Math.round((val / token.totalTime) * 100);
+                                token.barPercentage.innerHTML = percentage + '%';
+                            } else {
+                                clearInterval(tick);
+                                token.barPercentage.innerHTML = '检测完成';
+                                Vue.set(token, 'isComplete', true);
                             }
-                            let tick = setInterval(() => {
-                                nowTime = new Date().getTime();
-                                let val = nowTime - token.createTime;
-                                val = Math.max(0, val);
-                                val = Math.min(token.totalTime, val);
-                                if (val !== token.totalTime) {
-                                    let percentage = Math.round((val / token.totalTime) * 100);
-                                    token.barPercentage.innerHTML = percentage + '%';
-                                } else {
-                                    clearInterval(tick);
-                                    token.barPercentage.innerHTML = '检测完成';
-                                    Vue.set(token, 'isComplete', true);
-                                }
-                            }, 100);
-                        }
+                        }, 100);
+                    }
                 }, 1000);
                 setTimeout(() => {
                     for (let i = 0; i < this.handToken.length; i++) {
