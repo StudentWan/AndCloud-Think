@@ -1,7 +1,8 @@
-{% extends "./../basebar.html" %} {% block contentright %}
+{% extends "./../basebar.html" %}{% block headerbar %}
 <style>
     .right-content {
-        overflow: hidden;
+        overflow: auto;
+        min-height: 678;
     }
     
     .contain {
@@ -30,13 +31,12 @@
         border: 1px solid #cccccc;
     }
 </style>
+{% endblock %} {% block contentright %}
 <div class="contain">
 
     <canvas id="phone-screen"></canvas>
     <div id="app" class="log-container">
-        <pre>
-            {$logList.join('\n')$}
-        </pre>
+        <pre>{$logList.join('\n')$}</pre>
     </div>
 </div>
 
@@ -59,7 +59,7 @@
             }
         }
     });
-    // let socket = new WebSocket('ws://127.0.0.1:9002') //测试socket
+
     let socket = new WebSocket('ws://192.168.8.88:6565');
     let imgsocket = new WebSocket('ws://192.168.8.88:6566');
     let canvas = document.getElementById('phone-screen');
@@ -133,7 +133,7 @@
                 var URL = window.URL || window.webkitURL;
                 var img = new Image();
                 img.onload = function() {
-                    //console.log(img.width, img.height);
+
                     let width = (Number('{{height}}') / Number('{{wmheight}}')) * (Number('{{wmwidth}}'));
 
                     ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
