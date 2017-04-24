@@ -711,6 +711,7 @@
                 });
             },
             handleHandToken: function () {
+                this.isHandComplete = false;
                 setInterval(() => {
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
