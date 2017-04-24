@@ -734,36 +734,38 @@
                         }, 100);
                     }
                 }, 1000);
-                for (let i = 0; i < this.handToken.length; i++) {
-                    $.ajax({
-                        url: "/project/getLifeCycle",
-                        data: {projectid: this.handToken[i].projectid, type: this.handToken[i].type},
-                        method: "GET",
-                        success: data => {
-                            if (data.errno === 0) {
-                                let simulator = data.data[0];
-                                let createTime = Date.parse(simulator.createtime);
-                                let deadlineTime = Date.parse(simulator.deadlinetime);
-                                let totalTime = deadlineTime - createTime;
-                                let barFill = $('.bar-fill')[i];
-                                let barPercentage = $('.bar-percentage')[i];
+                setTimeout(() => {
+                    for (let i = 0; i < this.handToken.length; i++) {
+                        $.ajax({
+                            url: "/project/getLifeCycle",
+                            data: {projectid: this.handToken[i].projectid, type: this.handToken[i].type},
+                            method: "GET",
+                            success: data => {
+                                if (data.errno === 0) {
+                                    let simulator = data.data[0];
+                                    let createTime = Date.parse(simulator.createtime);
+                                    let deadlineTime = Date.parse(simulator.deadlinetime);
+                                    let totalTime = deadlineTime - createTime;
+                                    let barFill = $('.bar-fill')[i];
+                                    let barPercentage = $('.bar-percentage')[i];
 
-                                Vue.set($vm.handToken[i], 'testTime', (totalTime / 1000 / 60).toFixed(2));
-                                Vue.set($vm.handToken[i], 'totalTime', totalTime);
-                                Vue.set($vm.handToken[i], 'createTime', createTime);
-                                Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
-                                if (($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
-                                    Vue.set($vm.handToken[i], 'isComplete', false);
-                                } else {
-                                    Vue.set($vm.handToken[i], 'isComplete', true);
+                                    Vue.set($vm.handToken[i], 'testTime', (totalTime / 1000 / 60).toFixed(2));
+                                    Vue.set($vm.handToken[i], 'totalTime', totalTime);
+                                    Vue.set($vm.handToken[i], 'createTime', createTime);
+                                    Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
+                                    if (($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
+                                        Vue.set($vm.handToken[i], 'isComplete', false);
+                                    } else {
+                                        Vue.set($vm.handToken[i], 'isComplete', true);
+                                    }
+                                    Vue.set($vm.handToken[i], 'barFill', barFill);
+                                    Vue.set($vm.handToken[i], 'barPercentage', barPercentage);
+
                                 }
-                                Vue.set($vm.handToken[i], 'barFill', barFill);
-                                Vue.set($vm.handToken[i], 'barPercentage', barPercentage);
-
                             }
-                        }
-                    })
-                }
+                        })
+                    }
+                }, 100)
 
             },
             getApkInfo: function (projid) {
