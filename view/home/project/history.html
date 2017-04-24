@@ -488,7 +488,7 @@
 
                             </div>
 
-                            <div id="options">
+                            <div id="options" v-show="isHandComplete">
                                 <div class="info-hand" style="margin-bottom: 20px;cursor: auto;"
                                      v-for="(token,index) of handToken"
                                      :key="token">
@@ -627,6 +627,7 @@
             autoComplete: false,
             autoInterval: undefined,
             handInterval: undefined,
+            isHandComplete: false
         },
         methods: {
             getTokensEvt: function (projectid) {
@@ -709,12 +710,13 @@
                 });
             },
             handleHandToken: function () {
+                this.isHandComplete = false;
                 setInterval(() => {
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
                         let val = nowTime - token.createTime;
                             if (token.barPercentage.innerHTML === '') {
-
+                                this.isHandComplete = true;
                                 let leftTime = Math.round((token.totalTime - val) / 1000);
                                 token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                             }
