@@ -713,7 +713,8 @@
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
                         let val = nowTime - token.createTime;
-                            if (token.barPercentage.innerHTML === '') {
+                            if (token.isSet === false) {
+                                token.isSet = true;
                                 let leftTime = Math.round((token.totalTime - val) / 1000);
                                 token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                             }
@@ -759,6 +760,7 @@
                                     }
                                     Vue.set($vm.handToken[i], 'barFill', barFill);
                                     Vue.set($vm.handToken[i], 'barPercentage', barPercentage);
+                                    Vue.set($vm.handToken[i], 'isSet', false);
                                 }
                             }
                         })
