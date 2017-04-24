@@ -30,10 +30,10 @@ export default class extends Base {
             // 'height': 600,
             // 'wmwidth': 768,
             // 'wmheight': 1200
-                'width': mirrorData.width,
-                'height': mirrorData.height,
-                'wmwidth': mirrorData.wmwidth,
-                'wmheight': mirrorData.wmheight
+            'width': mirrorData.width,
+            'height': mirrorData.height,
+            'wmwidth': mirrorData.wmwidth,
+            'wmheight': mirrorData.wmheight
 
         });
         return this.display()
