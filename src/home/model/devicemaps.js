@@ -25,7 +25,6 @@ class DeviceMaps extends think.model.base {
 
   async getDeviceMap(projectid, type) {
       let data = await this.where({'projectid': projectid, 'type': type}).select();
-      console.log(data);
       return data;
   }
 }
