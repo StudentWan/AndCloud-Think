@@ -489,7 +489,7 @@
                             </div>
                             <div id="options">
                                 <div class="info-hand" style="margin-bottom: 20px;cursor: auto"
-                                     v-for="(token,index) of handToken"
+                                     v-for="(token,index) of handToken" v-if="token.isfullinfo"
                                      :key="token">
                                     <div class="container">
                                         <div class="bar">
@@ -714,9 +714,14 @@
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
                         let val = nowTime - token.createTime;
+                        if(token.barPercentage === undefined) {
+                            token.isfullinfo = false;
+                        } else {
+                            token.isfullinfo = true;
                         if (token.barPercentage.innerHTML === '') {
                             let leftTime = Math.round((token.totalTime - val) / 1000);
                             token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
+                        }
                         }
                         let tick = setInterval(() => {
                             nowTime = new Date().getTime();
