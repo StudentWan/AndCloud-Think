@@ -487,8 +487,9 @@
                                 </div>
 
                             </div>
-                            <div id="options" v-show="isHandComplete">
-                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto"
+
+                            <div id="options">
+                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto;"
                                      v-for="(token,index) of handToken"
                                      :key="token">
                                     <div class="container">
@@ -580,7 +581,6 @@
             processData: false,
             success: data => {
                 let token = data.data;
-                console.log(token);
                 $vm.handToken.push(token);
                 $vm.appTokens[projectid][type] = token;
                 $vm.handleHandToken();
@@ -627,14 +627,12 @@
             autoComplete: false,
             autoInterval: undefined,
             handInterval: undefined,
-            isHandComplete: false
         },
         methods: {
             getTokensEvt: function (projectid) {
                 this.getTokens(projectid, (tokens) => {
                     this.autoToken = tokens[0];
                     this.handToken = tokens.slice(1);
-                    console.log(this.handToken);
                     //autoToken数据处理&&动画控制
                     if (this.autoInterval) {
                         clearInterval(this.autoInterval);
@@ -711,14 +709,12 @@
                 });
             },
             handleHandToken: function () {
-                this.isHandComplete = false;
                 setInterval(() => {
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
                         let val = nowTime - token.createTime;
                             if (token.barPercentage.innerHTML === '') {
-                                this.isHandComplete = true;
-                                console.log(this.isHandComplete);
+
                                 let leftTime = Math.round((token.totalTime - val) / 1000);
                                 token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                             }
@@ -740,7 +736,6 @@
                 }, 1000);
                 setTimeout(() => {
                     for (let i = 0; i < this.handToken.length; i++) {
-                        console.log(this.isHandComplete);
                         $.ajax({
                             url: "/project/getLifeCycle",
                             data: {projectid: this.handToken[i].projectid, type: this.handToken[i].type},
