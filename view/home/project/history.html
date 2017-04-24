@@ -580,6 +580,7 @@
             processData: false,
             success: data => {
                 let token = data.data;
+                console.log(token);
                 $vm.handToken.push(token);
                 $vm.appTokens[projectid][type] = token;
                 $vm.handleHandToken();
@@ -625,12 +626,14 @@
             autoPercentage: 0,
             autoComplete: false,
             autoInterval: undefined,
+            handInterval: undefined
         },
         methods: {
             getTokensEvt: function (projectid) {
                 this.getTokens(projectid, (tokens) => {
                     this.autoToken = tokens[0];
                     this.handToken = tokens.slice(1);
+                    console.log(this.handToken);
                     //autoToken数据处理&&动画控制
                     if (this.autoInterval) {
                         clearInterval(this.autoInterval);

@@ -105,6 +105,11 @@ export default class extends Base {
             type: type
         });
         let updateTokens = await tokenModel.getTokens(projectid, userid);
+        let imageModel = this.model('images');
+        for(let token of updateTokens) {
+            let image = await imageModel.getImage(token.imageid);
+            token.imageid = image[0].name;
+        }
         for(let token of updateTokens) {
             if(token.type == type) {
                 return this.success(token);
