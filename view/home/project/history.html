@@ -466,7 +466,7 @@
                                     </p>
                                     <transition name="fade">
                                         <p v-if='autoComplete' style="">
-                                            <a v-bind:href="'/dynamicreport/index?id=51'" target="view_window"
+                                            <a v-bind:href="'/dynamicreport/index?id=' + autoToken.simulatorId" target="view_window"
                                                style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
                                                 <i class="iconfont icon-file test-link"
                                                    style="font-size: 30px;padding-top:5px;"></i></a>
@@ -514,6 +514,10 @@
                                     <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)"
                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
                                             class="iconfont icon-stop test-link"
+                                            style="font-size: 30px;padding-top:5px;"></i></a>
+                                    <a v-bind:href="'/dynamicreport/index?id=' + token.simulatorId" target="view_window" v-if="token.isComplete"
+                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
+                                            class="iconfont icon-file test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
                             </div>
@@ -648,6 +652,7 @@
                                 let deadlineTime = Date.parse(simulator.deadlinetime);
                                 let totalTime = deadlineTime - createTime;
                                 Vue.set($vm.autoToken, 'testTime', (totalTime / 1000 / 60).toFixed(2));
+                                Vue.set($vm.autoToken, 'simulatorId', simulator.id);
                                 let nowTime = new Date().getTime();
 
                                 let circle = $('#J_progress_bar');
@@ -753,6 +758,7 @@
                                     Vue.set($vm.handToken[i], 'totalTime', totalTime);
                                     Vue.set($vm.handToken[i], 'createTime', createTime);
                                     Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
+                                    Vue.set($vm.handToken[i], 'simulatorId', simulator.id);
                                     if (($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
                                         Vue.set($vm.handToken[i], 'isComplete', false);
                                     } else {
