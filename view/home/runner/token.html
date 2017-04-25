@@ -85,7 +85,7 @@
             } else {
                 $vm.addLog(msg);
             }
-            console.log(msg);
+            // console.log(msg);
         }
 
     };
@@ -183,10 +183,10 @@
         event.preventDefault();
         let Data = calculateRate(event);
         let sendData = {
-            type: 'touch',
-            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
-        }
-        console.log(JSON.stringify(sendData));
+                type: 'touch',
+                detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+            }
+            // console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
         canvas.addEventListener('mousemove', mouseMoveListener);
         document.addEventListener('mouseup', mouseUpListener);
@@ -207,7 +207,7 @@
             detail: Data.MODE + ',' + Data.X + ',' + Data.Y
         }
 
-        console.log(JSON.stringify(sendData));
+        // console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
 
     }
@@ -222,10 +222,10 @@
         let Data = calculateRate(event);
         Data.MODE = 'UP';
         let sendData = {
-            type: 'touch',
-            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
-        }
-        console.log(JSON.stringify(sendData));
+                type: 'touch',
+                detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+            }
+            // console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
         stopMousing();
     }
