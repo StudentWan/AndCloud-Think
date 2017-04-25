@@ -10,13 +10,13 @@ export default {
     log_connect: true,
     adapter: {
         mysql: {
-            // host: "127.0.0.1",
-            // port: "8889",
-            // database: "andcloud", //数据库名称
-            // user: "root", //数据库帐号
-            // password: "root", //数据库密码
-            // prefix: "",
-            // encoding: "utf8"
+          /*  host: "127.0.0.1",
+            port: "8889",
+            database: "andcloud", //数据库名称
+            user: "root", //数据库帐号
+            password: "root", //数据库密码
+            prefix: "",
+            encoding: "utf8"*/
             host: "192.168.8.88",
             port: "3306",
             database: "andcloud", //数据库名称

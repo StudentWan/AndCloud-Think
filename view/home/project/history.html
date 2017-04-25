@@ -267,8 +267,8 @@
     .bar-fill {
         height: 30px;
         display: block;
-        background: #5cb85c;
         width: 0;
+        background: #5cb85c;
         transition: width .8s ease;
     }
 
@@ -431,8 +431,7 @@
                 <!--Waiting for implement-->
                 <div class="app-action-list">
                     <div class="row">
-                        <div v-if="autoToken==undefined">
-                            shit
+                        <div v-if="apps[selectedIndex].isfullinfo === false">
                         </div>
                         <div v-else style="overflow: auto;padding: 12px;">
                             <div style="overflow: auto;margin: 15px auto;">
@@ -478,14 +477,6 @@
 
 
                             <div style="overflow: auto;margin: 15px auto; display: flex; justify-content: space-between;align-items: center">
-                                <!-- <div class="test-link pull-left col-xs-3" style="padding-top:15px">
-                                     <a :href="'/runner/token/'+autoToken.token"
-                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
-                                             class="iconfont icon-check"
-                                             style="font-size: 30px;padding-top:5px;"></i></a>
-                                 </div>-->
-                                <!--<div class="col-xs-9" style="padding: 0;">
-                                </div>-->
                                 <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
                                     手动检测
                                 </div>
@@ -496,8 +487,10 @@
                                 </div>
 
                             </div>
+
                             <div id="options">
-                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto" v-for="(token,index) of handToken"
+                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto;"
+                                     v-for="(token,index) of handToken"
                                      :key="token">
                                     <div class="container">
                                         <div class="bar">
@@ -509,7 +502,8 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="test_info" style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
+                                    <div class="test_info"
+                                         style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
                                         <p>{$ token.imageid $}</p>
                                         <p>存活时间：{$ token.testTime $} min</p>
                                     </div>
@@ -519,7 +513,7 @@
                                             style="font-size: 30px;padding-top:5px;"></i></a>
                                     <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)"
                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
-                                            class="iconfont icon-roundclose test-link"
+                                            class="iconfont icon-stop test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
                             </div>
@@ -631,6 +625,8 @@
             items: [1],
             autoPercentage: 0,
             autoComplete: false,
+            autoInterval: undefined,
+            handInterval: undefined,
         },
         methods: {
             getTokensEvt: function (projectid) {
@@ -638,6 +634,9 @@
                     this.autoToken = tokens[0];
                     this.handToken = tokens.slice(1);
                     //autoToken数据处理&&动画控制
+                    if (this.autoInterval) {
+                        clearInterval(this.autoInterval);
+                    }
                     $.ajax({
                         url: "/project/getLifeCycle",
                         data: {projectid: this.autoToken.projectid, type: this.autoToken.type},
@@ -648,12 +647,13 @@
                                 let createTime = Date.parse(simulator.createtime);
                                 let deadlineTime = Date.parse(simulator.deadlinetime);
                                 let totalTime = deadlineTime - createTime;
-                                $vm.autoToken.testTime = (totalTime / 1000 / 60).toFixed(2);
+                                Vue.set($vm.autoToken, 'testTime', (totalTime / 1000 / 60).toFixed(2));
                                 let nowTime = new Date().getTime();
 
                                 let circle = $('#J_progress_bar');
                                 let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
-                                let cycling = setInterval(() => {
+
+                                this.autoInterval = setInterval(() => {
                                     nowTime = new Date().getTime();
                                     let val = nowTime - createTime;
                                     val = Math.max(0, val);
@@ -665,11 +665,18 @@
                                         $vm.autoPercentage = '检测完成';
                                     }
                                     circle.attr('stroke-dasharray', "" + circleLength * (val / totalTime) + ', 10000');
+                                    circle.attr('stroke', '#5cb85c');
                                     if (val === totalTime) {
                                         $vm.autoComplete = true;
-                                        clearInterval(cycling);
+                                        clearInterval(this.autoInterval);
                                     }
                                 }, 100);
+                            } else {
+                                $vm.autoPercentage = "无检测数据";
+                                let circle = $('#J_progress_bar');
+                                let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
+                                circle.attr('stroke-dasharray', "" + circleLength + ', 10000');
+                                circle.attr('stroke', 'red');
                             }
                         }
                     });
@@ -701,61 +708,64 @@
                     }
                 });
             },
-            handleHandToken: function() {
+            handleHandToken: function () {
                 setInterval(() => {
-                    for(let token of this.handToken) {
+                    for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
                         let val = nowTime - token.createTime;
-                        if (token.barPercentage.innerHTML === '') {
-                            let leftTime = Math.round((token.totalTime - val) / 1000);
-                            token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
-                        }
-                        let tick = setInterval(() => {
-                            nowTime = new Date().getTime();
-                            let val = nowTime - token.createTime;
-                            val = Math.max(0, val);
-                            val = Math.min(token.totalTime, val);
-                            if (val !== token.totalTime) {
-                                let percentage = Math.round((val / token.totalTime) * 100);
-                                token.barPercentage.innerHTML = percentage + '%';
-                            } else {
-                                clearInterval(tick);
-                                token.barPercentage.innerHTML = '检测完成';
-                                Vue.set(token,'isComplete',true);
+                            if (token.isSet === false) {
+                                token.isSet = true;
+                                let leftTime = Math.round((token.totalTime - val) / 1000);
+                                token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                             }
-                        }, 100);
-                    }
-                },1000);
-                for (let i = 0; i < this.handToken.length; i++) {
-                    $.ajax({
-                        url: "/project/getLifeCycle",
-                        data: {projectid: this.handToken[i].projectid, type: this.handToken[i].type},
-                        method: "GET",
-                        success: data => {
-                            if (data.errno === 0) {
-                                let simulator = data.data[0];
-                                let createTime = Date.parse(simulator.createtime);
-                                let deadlineTime = Date.parse(simulator.deadlinetime);
-                                let totalTime = deadlineTime - createTime;
-                                let barFill = $('.bar-fill')[i];
-                                let barPercentage = $('.bar-percentage')[i];
-
-                                Vue.set($vm.handToken[i], 'testTime', (totalTime / 1000 / 60).toFixed(2));
-                                Vue.set($vm.handToken[i], 'totalTime', totalTime);
-                                Vue.set($vm.handToken[i], 'createTime', createTime);
-                                Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
-                                if(($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
-                                    Vue.set($vm.handToken[i], 'isComplete', false);
+                            let tick = setInterval(() => {
+                                nowTime = new Date().getTime();
+                                let val = nowTime - token.createTime;
+                                val = Math.max(0, val);
+                                val = Math.min(token.totalTime, val);
+                                if (val !== token.totalTime) {
+                                    let percentage = Math.round((val / token.totalTime) * 100);
+                                    token.barPercentage.innerHTML = percentage + '%';
                                 } else {
-                                    Vue.set($vm.handToken[i], 'isComplete', true);
+                                    clearInterval(tick);
+                                    token.barPercentage.innerHTML = '检测完成';
+                                    Vue.set(token, 'isComplete', true);
                                 }
-                                Vue.set($vm.handToken[i], 'barFill', barFill);
-                                Vue.set($vm.handToken[i], 'barPercentage', barPercentage);
-
-                            }
+                            }, 100);
                         }
-                    })
-                }
+                }, 1000);
+                setTimeout(() => {
+                    for (let i = 0; i < this.handToken.length; i++) {
+                        $.ajax({
+                            url: "/project/getLifeCycle",
+                            data: {projectid: this.handToken[i].projectid, type: this.handToken[i].type},
+                            method: "GET",
+                            success: data => {
+                                if (data.errno === 0) {
+                                    let simulator = data.data[0];
+                                    let createTime = Date.parse(simulator.createtime);
+                                    let deadlineTime = Date.parse(simulator.deadlinetime);
+                                    let totalTime = deadlineTime - createTime;
+                                    let barFill = $('.bar-fill')[i];
+                                    let barPercentage = $('.bar-percentage')[i];
+
+                                    Vue.set($vm.handToken[i], 'testTime', (totalTime / 1000 / 60).toFixed(2));
+                                    Vue.set($vm.handToken[i], 'totalTime', totalTime);
+                                    Vue.set($vm.handToken[i], 'createTime', createTime);
+                                    Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
+                                    if (($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
+                                        Vue.set($vm.handToken[i], 'isComplete', false);
+                                    } else {
+                                        Vue.set($vm.handToken[i], 'isComplete', true);
+                                    }
+                                    Vue.set($vm.handToken[i], 'barFill', barFill);
+                                    Vue.set($vm.handToken[i], 'barPercentage', barPercentage);
+                                    Vue.set($vm.handToken[i], 'isSet', false);
+                                }
+                            }
+                        })
+                    }
+                }, 500)
 
             },
             getApkInfo: function (projid) {
@@ -826,16 +836,16 @@
                 var layerid = 'hw-layer';
                 showLayer(layerid);
             },
-            terminateHandTest: function(token) {
+            terminateHandTest: function (token) {
                 $.ajax({
                     url: "/project/updateLifeCycle",
                     data: {projectid: token.projectid, type: token.type},
                     method: "POST",
                     success: (data) => {
-                            if(data.errno === 0) {
-                                $vm.handleHandToken();
-                                token.barFill.style.animation = 'progressbar 0s 1 forwards';
-                            }
+                        if (data.errno === 0) {
+                            $vm.handleHandToken();
+                            token.barFill.style.animation = 'progressbar 0s 1 forwards';
+                        }
                     }
                 })
             }
