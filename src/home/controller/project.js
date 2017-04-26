@@ -153,4 +153,9 @@ export default class extends Base {
         let result = await simulatorModel.updateSimulator(deviceMap[0].deviceid, deadlinetime);
         return this.success(result);
     }
+
+    getnowAction() {
+        let resTime = new Date().getTime();
+        return this.success(resTime);
+    }
 }

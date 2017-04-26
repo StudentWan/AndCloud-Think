@@ -641,23 +641,21 @@
                             if (data.errno === 0) {
                                 let simulator = data.data[0];
                                 let createTime = Date.parse(simulator.createtime);
-                                let timeGap = createTime - new Date().getTime();
                                 let deadlineTime = Date.parse(simulator.deadlinetime);
                                 let totalTime = deadlineTime - createTime;
                                 Vue.set($vm.autoToken, 'testTime', (totalTime / 1000 / 60).toFixed(2));
                                 Vue.set($vm.autoToken, 'simulatorId', simulator.id);
-                                if ((deadlineTime - new Date().getTime()) > 0) {
+                                if ((deadlineTime - $vm.getNow()) > 0) {
                                     Vue.set($vm.autoToken, 'isComplete', false);
                                 } else {
                                     Vue.set($vm.autoToken, 'isComplete', true);
                                 }
-                                let nowTime = new Date().getTime();
-
+                                let nowTime;
                                 let circle = $('#J_progress_bar');
                                 let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
 
                                 this.autoInterval = setInterval(() => {
-                                    nowTime = new Date().getTime();
+                                    nowTime = $vm.getNow();
                                     let val = nowTime - createTime;
                                     val = Math.max(0, val);
                                     val = Math.min(totalTime, val);
@@ -717,14 +715,13 @@
             handleHandToken: function () {
                 setInterval(() => {
                     for (let token of this.handToken) {
-                        let nowTime = new Date().getTime();
+                        let nowTime = $vm.getNow();
                         let val = nowTime - token.createTime;
                         if (token.isSet === false) {
                             token.isSet = true;
                             let leftTime = Math.round((token.totalTime - val) / 1000);
                             token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                         }
-                        nowTime = new Date().getTime();
                         val = Math.max(0, val);
                         val = Math.min(token.totalTime, val);
                         if (val !== token.totalTime) {
@@ -759,7 +756,7 @@
                                     Vue.set($vm.handToken[i], 'createTime', createTime);
                                     Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
                                     Vue.set($vm.handToken[i], 'simulatorId', simulator.id);
-                                    if (($vm.handToken[i].deadlineTime - new Date().getTime()) > 0) {
+                                    if (($vm.handToken[i].deadlineTime - $vm.getNow()) > 0) {
                                         Vue.set($vm.handToken[i], 'isComplete', false);
                                     } else {
                                         Vue.set($vm.handToken[i], 'isComplete', true);
@@ -869,6 +866,18 @@
                         }
                     }
                 })
+            },
+             getNow: function() {
+                let result = $.ajax({
+                    url: "/project/getNow",
+                    method: "GET",
+                    async: false,
+                    success: (data) => {
+                        return ;
+                    }
+                });
+                let time = JSON.parse(result.responseText).data
+                return time;
             }
         },
         mounted: function () {

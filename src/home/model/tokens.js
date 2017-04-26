@@ -6,7 +6,7 @@ class Tokens extends think.model.base {
         this.tableName = "T_TOKEN";
     }
 
-    addTokens(projectid, userid, vm, type) {
+    async addTokens(projectid, userid, vm, type) {
         let promiseList = [];
         promiseList.push(
             this.add({
@@ -17,6 +17,7 @@ class Tokens extends think.model.base {
                 imageid: vm
             })
         );
+
         return Promise.all(promiseList);
     }
 
