@@ -37,7 +37,7 @@
 </style>
 {% endblock %}
 {% block content %}
-
+<body>
 <div class="container " style="vertical-align: middle;height:100vh;">
     <div class="row" style="position: relative;top:50%;margin-top:-150px">
         <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-12">
@@ -79,12 +79,12 @@
         </div>
     </div>
 </div>
+</body>
 {% endblock %}
 {% block js %}
 <script lang="javascript">
     var isRegister = false;
     $('.login-switcher').on('click', function (evt) {
-
         isRegister = (function(dom){
             return dom.hasClass('pull-right');
         })($(this));
@@ -120,6 +120,7 @@
         formdata.append('username',$('#username-login').val());
         formdata.append('password',$('#password-login').val());
         formdata.append('type',isRegister?'register':'login');
+        //未做两次输入密码的验证
         $.ajax({
             url:"/user/login",
             method:"POST",

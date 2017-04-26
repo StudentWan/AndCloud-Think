@@ -22,6 +22,11 @@ class DeviceMaps extends think.model.base {
     );
     return Promise.all(promiseArr)
   }
+
+  async getDeviceMap(projectid, type) {
+      let data = await this.where({'projectid': projectid, 'type': type}).select();
+      return data;
+  }
 }
 
 export default DeviceMaps;

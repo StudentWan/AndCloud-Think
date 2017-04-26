@@ -30,6 +30,16 @@ node_modules/
 output/
 output.tar.gz
 
+#vscode setting
+.vscode/
+
 app/
 
 runtime/
+.DS_Store
+www/.DS_Store
+www/static/.DS_Store
+www/static/jQuery/.DS_Store
+
+
+run.sh

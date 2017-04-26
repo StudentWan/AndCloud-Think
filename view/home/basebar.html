@@ -1,7 +1,6 @@
-{% extends "./base.html" %}
-{% block header%}
+{% extends "./base.html" %} {% block header%}
 <style>
-    .left-nav-link{
+    .left-nav-link {
         width: 100px;
         height: 100px;
         background: rgba(30, 29, 39, 0.18);
@@ -10,40 +9,41 @@
         margin: 50px auto;
         padding-top: calc(50px - 1.4em);
     }
-    .left-bar{
-        width:220px;
+    
+    .left-bar {
+        width: 220px;
     }
-    .right-content{
-        width:calc(100% - 220px);
+    
+    .right-content {
+        width: calc(100% - 220px);
     }
-    @media screen and (max-width: 760px){
-        .right-content{
+    
+    @media screen and (max-width: 760px) {
+        .right-content {
             width: calc(100% - 150px);
         }
     }
 </style>
-{% block headerbar %}
-{% endblock %}
-{% endblock %}
-{% block content %}
+{% block headerbar %} {% endblock %} {% endblock %} {% block content %}
 
-<div class="" style="height: 100%">
-    <div class="left-bar" style="background: rgba(13, 21, 56, 0.36);height: 100%;float:left">
-        <div style="height:80px;width:100%;vertical-align: middle;text-align: center">
-            <h1 style="font-weight: 100;">AndCloud</h1>
-            <hr>
+<body>
+    <div class="" style="height: 100%">
+        <div class="left-bar" style="background: rgba(13, 21, 56, 0.36);height: 100%;float:left;overflow:hidden">
+            <div style="height:80px;width:100%;vertical-align: middle;text-align: center">
+                <h1 style="font-weight: 100;"><b>And</b>Cloud</h1>
+                <hr>
+            </div>
+            <div class="left-nav-link">
+                <a href="/project/create" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-add_light" style="font-size: 42px;line-height: 42px"></i></a>
+            </div>
+            <div class="left-nav-link">
+                <a href="/project/history" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-sortlight" style="font-size: 42px;line-height: 42px"></i></a>
+            </div>
         </div>
-        <div class="left-nav-link">
-            <a href="/project/create" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-add_light" style="font-size: 42px;line-height: 42px"></i></a>
+        <div class="right-content" id="right-content" style="background: transparent;height: 100%;float:left">
+            {% block contentright %} {% endblock %}
         </div>
-        <div class="left-nav-link">
-            <a href="/project/history" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-sortlight" style="font-size: 42px;line-height: 42px"></i></a>
-        </div>
-    </div><div class="right-content" style="background: transparent;height: 100%;float:left">
-    {% block contentright %}
-    {% endblock %}
-</div>
-</div>
-
+    </div>
+</body>
 
 {% endblock %}

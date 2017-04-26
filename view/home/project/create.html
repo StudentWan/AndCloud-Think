@@ -122,10 +122,10 @@
         </div>
         <div class="time col-md-4">
             <select name="time" id="time">
-                <option value="1">5 mins</option>
-                <option value="2">10 mins</option>
-                <option value="3">15 mins</option>
-                <option value="0">2 hours</option>
+                <option value="5">5 mins</option>
+                <option value="10">10 mins</option>
+                <option value="15">15 mins</option>
+                <option value="120">2 hours</option>
             </select>
         </div>
         <div class="confirm col-md-4"><i class="iconfont icon-check" onclick="animateToTwo()"></i></div>
@@ -151,6 +151,7 @@
     formData.append('name', 'test');
     formData.append('vm',$('#vm').val());
     formData.append('time',$('#time').val());
+    console.log();
     $.ajax({
       url: '/project/upload',
       data: formData,

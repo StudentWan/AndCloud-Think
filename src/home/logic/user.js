@@ -11,7 +11,7 @@ export default class extends think.logic.base {
      * index action logic
      * @return {} []
      */
-    loginAction() {
+    /*loginAction() {
         if(this.isPost()&&this.get("type")==="login") {
             let rules = {
                 username: {
@@ -32,5 +32,8 @@ export default class extends think.logic.base {
                 return this.error("validate error", this.errors());
             }
         }
+    }*/
+    indexAction(){
+
     }
 }
