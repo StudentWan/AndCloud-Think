@@ -725,7 +725,6 @@
                             token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                         }
                         nowTime = new Date().getTime();
-                        let val = nowTime - token.createTime;
                         val = Math.max(0, val);
                         val = Math.min(token.totalTime, val);
                         if (val !== token.totalTime) {
