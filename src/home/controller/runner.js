@@ -18,9 +18,9 @@ export default class extends Base {
         let tokenModel = this.model('tokens');
         let mirrorModel = this.model('mirror');
         let tokenData = await tokenModel.where({ token: token }).find();
-        console.log(tokenData);
+        // console.log(tokenData);
         let mirrorData = await mirrorModel.where({ id: tokenData.imageid }).find();
-        console.log(mirrorData);
+        // console.log(mirrorData);
 
 
         this.assign({
