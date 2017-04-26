@@ -97,6 +97,7 @@ export default class extends Base {
         let tokenModel = this.model('tokens');
         tokenModel.addTokens(projectid, userid, vm, type);
         let sock = global.sock;
+
         sock.sendAction("not_new_project", {
             projectid: projectid,
             uid: userid,
