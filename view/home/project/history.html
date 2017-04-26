@@ -8,6 +8,7 @@
             display: inline-block;
             vertical-align: top;
         }
+
         .app-selected {
             width: calc(50% - 3px);
             display: inline-block;
@@ -24,6 +25,7 @@
             display: inline-block;
             vertical-align: top;
         }
+
         .app-selected {
             width: 100%;
             display: inline-block;
@@ -66,7 +68,7 @@
         /*position: absolute;*/
     }
 
-    .app-item>div {
+    .app-item > div {
         /*padding-left: 70px;*/
         float: left;
         /*display: inline-block;*/
@@ -152,7 +154,8 @@
         padding: 50px;
     }
 
-    .app-info-detail {}
+    .app-info-detail {
+    }
 
     .app-info-detail .logo {
         width: 64px;
@@ -270,6 +273,7 @@
         background: #5cb85c;
         transition: width .8s ease;
     }
+
     /* Standard syntax */
 
     @keyframes progressbar {
@@ -346,7 +350,8 @@
             </h1>
         </div>
         <div class="app">
-            <transition-group tag="p" v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
+            <transition-group tag="p" v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter"
+                              v-on:leave="leave">
                 <template v-for="app,index in apps">
                     <div :class="{ active: index==selectedIndex, odd:index%2>0 }" class="app-item"
                          @click="select(index)" :key="index" :data-index="index">
@@ -388,13 +393,16 @@
                             <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后</div>
                             <div v-if="apps[selectedIndex].isfullinfo">
                                 <div class="app-name">{$apps[selectedIndex].label$}</div>
-                                <div class="app-info"><span class="info-title">包名</span> {$apps[selectedIndex].packagename$}
+                                <div class="app-info"><span class="info-title">包名</span>
+                                    {$apps[selectedIndex].packagename$}
                                 </div>
-                                <div class="app-info"><span class="info-title">文件大小</span> {$(apps[selectedIndex].size/ 1024 / 1024).toFixed(2)$}MB
+                                <div class="app-info"><span class="info-title">文件大小</span> {$(apps[selectedIndex].size/
+                                    1024 / 1024).toFixed(2)$}MB
                                 </div>
                                 <div class="app-info"><span class="info-title">文件MD5</span> {$apps[selectedIndex].md5$}
                                 </div>
-                                <div class="app-info"><span class="info-title">文件SHA1</span> {$apps[selectedIndex].sha1$}
+                                <div class="app-info"><span class="info-title">文件SHA1</span>
+                                    {$apps[selectedIndex].sha1$}
                                 </div>
                             </div>
                         </div>
@@ -402,7 +410,9 @@
                     <div class="row" v-if="apps[selectedIndex].isfullinfo" style="text-align: center; margin-top: 3px;">
                         <div class="col-xs-3"></div>
                         <div class="col-xs-9">
-                            <a class="button-btn pull-left iconfont icon-report" style="color:white; text-decoration:none; font-weight: 300;" v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id" target="view_window">APK静态分析报告
+                            <a class="button-btn pull-left iconfont icon-report"
+                               style="color:white; text-decoration:none; font-weight: 300;"
+                               v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id" target="view_window">APK静态分析报告
                             </a>
                         </div>
                     </div>
@@ -439,12 +449,15 @@
 
                                 <div class="choose_button" style="width: 30%;text-align: center">
                                     <p>
-                                        <a v-bind:href="'/runner/token/'+autoToken.token" style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
-                                            <i class="iconfont icon-creative test-link" style="font-size: 30px;padding-top:5px;"></i></a>
+                                        <a v-bind:href="'/runner/token/'+autoToken.token"
+                                           style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
+                                            <i class="iconfont icon-creative test-link"
+                                               style="font-size: 30px;padding-top:5px;"></i></a>
                                     </p>
                                     <transition name="fade">
                                         <p v-if='autoToken.isComplete' style="">
-                                            <a v-bind:href="'/dynamicreport/index?id=' + autoToken.simulatorId" target="view_window"
+                                            <a v-bind:href="'/dynamicreport/index?id=' + autoToken.simulatorId"
+                                               target="view_window"
                                                style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
                                                 <i class="iconfont icon-file test-link"
                                                    style="font-size: 30px;padding-top:5px;"></i></a>
@@ -458,14 +471,17 @@
                                 <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
                                     手动检测
                                 </div>
-                                <div v-on:click="chooseTest" data-show-layer="hw-layer" style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
-                                    <i class="iconfont icon-repairfill test-link" style="font-size: 30px;padding-top:5px;"></i>
+                                <div v-on:click="chooseTest" data-show-layer="hw-layer"
+                                     style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
+                                    <i class="iconfont icon-repairfill test-link"
+                                       style="font-size: 30px;padding-top:5px;"></i>
                                 </div>
 
                             </div>
 
                             <div id="options">
-                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto;" v-for="(token,index) of handToken" :key="token">
+                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto;"
+                                     v-for="(token,index) of handToken" :key="token">
                                     <div class="container">
                                         <div class="bar">
                                             <span class="bar-unfill">
@@ -476,17 +492,21 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="test_info" style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
+                                    <div class="test_info"
+                                         style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
                                         <p>{$ token.imageid $}</p>
                                         <p>存活时间：{$ token.testTime $} min</p>
                                     </div>
-                                    <a :href="'/runner/token/'+token.token" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                    <a :href="'/runner/token/'+token.token"
+                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
                                             class="iconfont icon-creative test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
-                                    <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
+                                    <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)"
+                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
                                             class="iconfont icon-stop test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
-                                    <a v-bind:href="'/dynamicreport/index?id=' + token.simulatorId" target="view_window" v-if="token.isComplete"
+                                    <a v-bind:href="'/dynamicreport/index?id=' + token.simulatorId" target="view_window"
+                                       v-if="token.isComplete"
                                        style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
                                             class="iconfont icon-file test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
@@ -503,7 +523,7 @@
 </div>
 {% endblock %} {% block js %}
 <script>
-    var formatDate = function(date) {
+    var formatDate = function (date) {
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
         m = m < 10 ? '0' + m : m;
@@ -527,7 +547,7 @@
         $('.hw-overlay').slideToggle();
     }
 
-    $('.confirm').on('click', function() {
+    $('.confirm').on('click', function () {
         hideLayer();
         //Wait for change
         //转成jQuery对象
@@ -560,19 +580,19 @@
             }
         })
     });
-    $('.cancel').on('click', function() {
+    $('.cancel').on('click', function () {
         hideLayer();
     });
 
     //点击或者触控弹出层外的半透明遮罩层，关闭弹出层
-    $('.hw-overlay').on('click', function(event) {
+    $('.hw-overlay').on('click', function (event) {
         if (event.target == this) {
             hideLayer();
         }
     });
 
     //按ESC键关闭弹出层
-    $(document).keyup(function(event) {
+    $(document).keyup(function (event) {
         if (event.keyCode == 27) {
             hideLayer();
         }
@@ -602,7 +622,7 @@
             handInterval: undefined,
         },
         methods: {
-            getTokensEvt: function(projectid) {
+            getTokensEvt: function (projectid) {
                 this.getTokens(projectid, (tokens) => {
                     this.autoToken = tokens[0];
                     this.handToken = tokens.slice(1);
@@ -621,6 +641,7 @@
                             if (data.errno === 0) {
                                 let simulator = data.data[0];
                                 let createTime = Date.parse(simulator.createtime);
+                                let timeGap = createTime - new Date().getTime();
                                 let deadlineTime = Date.parse(simulator.deadlinetime);
                                 let totalTime = deadlineTime - createTime;
                                 Vue.set($vm.autoToken, 'testTime', (totalTime / 1000 / 60).toFixed(2));
@@ -668,7 +689,7 @@
                     this.handleHandToken();
                 });
             },
-            getTokens: function(projectid, success_callback) {
+            getTokens: function (projectid, success_callback) {
                 if (this.appTokens[projectid] !== undefined) {
                     return success_callback(this.appTokens[projectid]);
                 }
@@ -693,7 +714,7 @@
                     }
                 });
             },
-            handleHandToken: function() {
+            handleHandToken: function () {
                 setInterval(() => {
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
@@ -703,22 +724,19 @@
                             let leftTime = Math.round((token.totalTime - val) / 1000);
                             token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                         }
-                        let tick = setInterval(() => {
-                            nowTime = new Date().getTime();
-                            let val = nowTime - token.createTime;
-                            val = Math.max(0, val);
-                            val = Math.min(token.totalTime, val);
-                            if (val !== token.totalTime) {
-                                let percentage = Math.round((val / token.totalTime) * 100);
-                                token.barPercentage.innerHTML = percentage + '%';
-                            } else {
-                                clearInterval(tick);
-                                token.barPercentage.innerHTML = '检测完成';
-                                Vue.set(token, 'isComplete', true);
-                            }
-                        }, 100);
+                        nowTime = new Date().getTime();
+                        let val = nowTime - token.createTime;
+                        val = Math.max(0, val);
+                        val = Math.min(token.totalTime, val);
+                        if (val !== token.totalTime) {
+                            let percentage = Math.round((val / token.totalTime) * 100);
+                            token.barPercentage.innerHTML = percentage + '%';
+                        } else {
+                            token.barPercentage.innerHTML = '检测完成';
+                            Vue.set(token, 'isComplete', true);
+                        }
                     }
-                }, 1000);
+                }, 100);
                 setTimeout(() => {
                     for (let i = 0; i < this.handToken.length; i++) {
                         $.ajax({
@@ -757,7 +775,7 @@
                 }, 500)
 
             },
-            getApkInfo: function(projid) {
+            getApkInfo: function (projid) {
                 $.ajax({
                     url: '/project/apkinfo',
                     data: {
@@ -771,7 +789,7 @@
                             return;
                         }
                         apkinfo = data.data[0];
-                        this.apps.forEach(function($) {
+                        this.apps.forEach(function ($) {
                             if ($.id === projid) {
                                 if (apkinfo.id) {
                                     $.isfullinfo = true;
@@ -789,15 +807,15 @@
                     }
                 });
             },
-            select: function(index) {
+            select: function (index) {
                 this.selectedIndex = index;
                 this.getTokensEvt(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
             },
-            displayTime: function(time) {
+            displayTime: function (time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
             },
-            beforeEnter: function(el, done) {
+            beforeEnter: function (el, done) {
                 el.style.opacity = 0;
                 var len = el.dataset.index * 50;
                 $.Velocity(el, {
@@ -807,9 +825,9 @@
                 });
                 //                el.style.height = 0;
             },
-            enter: function(el, done) {
+            enter: function (el, done) {
                 var delay = el.dataset.index * 150;
-                setTimeout(function() {
+                setTimeout(function () {
                     $.Velocity(
                         el, {
                             opacity: 1,
@@ -820,9 +838,9 @@
                     )
                 }, delay)
             },
-            leave: function(el, done) {
+            leave: function (el, done) {
                 var delay = el.dataset.index * 150;
-                setTimeout(function() {
+                setTimeout(function () {
                     $.Velocity(
                         el, {
                             opacity: 0,
@@ -833,11 +851,11 @@
                     )
                 }, delay)
             },
-            chooseTest: function() {
+            chooseTest: function () {
                 var layerid = 'hw-layer';
                 showLayer(layerid);
             },
-            terminateHandTest: function(token) {
+            terminateHandTest: function (token) {
                 $.ajax({
                     url: "/project/updateLifeCycle",
                     data: {
@@ -854,7 +872,7 @@
                 })
             }
         },
-        mounted: function() {
+        mounted: function () {
             $(this.$el).css('opacity', '1')
         },
     });
@@ -865,7 +883,7 @@
                 var apps = data.data;
                 setTimeout(() => {
                     $vm.isLoading = false;
-                    $vm.apps = apps.map(function(app) {
+                    $vm.apps = apps.map(function (app) {
                         app.created_time = app.uploadtime;
                         app.isfullinfo = false;
                         if (!app.label) {
