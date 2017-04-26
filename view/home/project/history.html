@@ -620,6 +620,7 @@
             autoComplete: false,
             autoInterval: undefined,
             handInterval: undefined,
+            timeGap: 0
         },
         methods: {
             getTokensEvt: function (projectid) {
@@ -645,7 +646,7 @@
                                 let totalTime = deadlineTime - createTime;
                                 Vue.set($vm.autoToken, 'testTime', (totalTime / 1000 / 60).toFixed(2));
                                 Vue.set($vm.autoToken, 'simulatorId', simulator.id);
-                                if ((deadlineTime - $vm.getNow()) > 0) {
+                                if ((deadlineTime - (new Date().getTime() + this.timeGap)) > 0) {
                                     Vue.set($vm.autoToken, 'isComplete', false);
                                 } else {
                                     Vue.set($vm.autoToken, 'isComplete', true);
@@ -655,7 +656,7 @@
                                 let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
 
                                 this.autoInterval = setInterval(() => {
-                                    nowTime = $vm.getNow();
+                                    nowTime = new Date().getTime() + this.timeGap;
                                     let val = nowTime - createTime;
                                     val = Math.max(0, val);
                                     val = Math.min(totalTime, val);
@@ -715,7 +716,7 @@
             handleHandToken: function () {
                 setInterval(() => {
                     for (let token of this.handToken) {
-                        let nowTime = $vm.getNow();
+                        let nowTime = new Date().getTime() + this.timeGap;
                         let val = nowTime - token.createTime;
                         if (token.isSet === false) {
                             token.isSet = true;
@@ -756,7 +757,7 @@
                                     Vue.set($vm.handToken[i], 'createTime', createTime);
                                     Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
                                     Vue.set($vm.handToken[i], 'simulatorId', simulator.id);
-                                    if (($vm.handToken[i].deadlineTime - $vm.getNow()) > 0) {
+                                    if (($vm.handToken[i].deadlineTime - (new Date().getTime() + this.timeGap)) > 0) {
                                         Vue.set($vm.handToken[i], 'isComplete', false);
                                     } else {
                                         Vue.set($vm.handToken[i], 'isComplete', true);
@@ -807,6 +808,7 @@
                 this.selectedIndex = index;
                 this.getTokensEvt(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
+                this.getNow();
             },
             displayTime: function (time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
@@ -868,16 +870,16 @@
                 })
             },
              getNow: function() {
-                let result = $.ajax({
+                $.ajax({
                     url: "/project/getNow",
                     method: "GET",
-                    async: false,
                     success: (data) => {
-                        return ;
+                        let serverTime = data.data;
+                        let localTime = new Date().getTime();
+                        this.timeGap = serverTime - localTime;
                     }
                 });
-                let time = JSON.parse(result.responseText).data
-                return time;
+
             }
         },
         mounted: function () {
