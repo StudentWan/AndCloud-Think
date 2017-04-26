@@ -1,6 +1,4 @@
-{% extends "./../basebar.html" %}
-{% block title %}历史列表{% endblock %}
-{% block headerbar %}
+{% extends "./../basebar.html" %} {% block title %}历史列表{% endblock %} {% block headerbar %}
 <link rel="stylesheet" href="/static/app/css/hwLayer.css">
 <style>
     @media screen and (min-width: 760px) {
@@ -10,16 +8,15 @@
             display: inline-block;
             vertical-align: top;
         }
-
         .app-selected {
             width: calc(50% - 3px);
             display: inline-block;
             height: 100vh;
-            overflow: scroll;
+            overflow: auto;
             vertical-align: top;
         }
     }
-
+    
     @media screen and (max-width: 760px) {
         .history-list {
             width: 100%;
@@ -27,41 +24,40 @@
             display: inline-block;
             vertical-align: top;
         }
-
         .app-selected {
             width: 100%;
             display: inline-block;
             height: 50vh;
-            overflow: scroll;
+            overflow: auto;
             vertical-align: top;
         }
     }
-
+    
     @media screen and (max-width: 760px) {
         .left-bar {
             width: 150px !important;
         }
     }
-
+    
     .app-item {
         padding: 10px;
         height: 50px;
         box-sizing: content-box;
         cursor: pointer;
     }
-
+    
     .app-item:hover {
         background: rgba(13, 21, 56, 0.10) !important;
     }
-
+    
     .app-item.active {
         background: rgba(13, 21, 56, 0.16);
     }
-
+    
     .app-item.odd {
         background: rgba(13, 21, 56, 0.06);
     }
-
+    
     .app-item .logo {
         padding: 5px;
         height: 50px;
@@ -69,17 +65,17 @@
         float: left;
         /*position: absolute;*/
     }
-
-    .app-item > div {
+    
+    .app-item>div {
         /*padding-left: 70px;*/
         float: left;
         /*display: inline-block;*/
     }
-
+    
     .history-list {
         position: relative;
     }
-
+    
     .history-header {
         position: absolute;
         top: 0;
@@ -88,35 +84,37 @@
         height: 80px;
         background: rgba(13, 21, 56, 0.16);
     }
-
+    
     .app {
-        overflow: scroll;
+        overflow: auto;
         height: 100%;
         padding-top: 80px;
     }
-
+    
     .app span {
         font-weight: 100;
         font-size: 1.1em;
     }
-
-    .list-enter-active, .list-leave-active {
+    
+    .list-enter-active,
+    .list-leave-active {
         transition: all 1s;
     }
-
-    .list-enter, .list-leave-active {
+    
+    .list-enter,
+    .list-leave-active {
         opacity: 0;
         transform: translateY(-30px);
     }
-
+    
     .bounce-enter-active {
         animation: bounce-in .5s;
     }
-
+    
     .bounce-leave-active {
         animation: bounce-out .5s;
     }
-
+    
     @keyframes bounce-in {
         0% {
             transform: scale(0);
@@ -128,7 +126,7 @@
             transform: scale(1);
         }
     }
-
+    
     @keyframes bounce-out {
         0% {
             transform: scale(1);
@@ -140,7 +138,7 @@
             transform: scale(0);
         }
     }
-
+    
     .empty-page {
         text-align: center;
         float: left;
@@ -149,19 +147,18 @@
         margin-left: auto;
         margin-right: auto;
     }
-
+    
     .app-selected {
         padding: 50px;
     }
-
-    .app-info-detail {
-    }
-
+    
+    .app-info-detail {}
+    
     .app-info-detail .logo {
         width: 64px;
         height: 64px;
     }
-
+    
     .app-info-detail .app-name {
         padding: 10px;
         border: 1px solid white;
@@ -169,7 +166,7 @@
         border-radius: 5px;
         text-align: center;
     }
-
+    
     .app-info .info-title {
         border-radius: .25em;
         background-color: #5cb85c;
@@ -182,12 +179,12 @@
         vertical-align: baseline;
         display: inline;
     }
-
+    
     .app-info {
         margin: 2px;
         white-space: nowrap;
     }
-
+    
     .button-btn {
         cursor: pointer;
         padding: 10px;
@@ -196,7 +193,7 @@
         border-radius: 5px;
         text-align: center;
     }
-
+    
     .info-hand {
         padding-bottom: 10px;
         border: 1px solid white;
@@ -205,7 +202,7 @@
         text-align: center;
         overflow: hidden;
     }
-
+    
     .infoblanket {
         position: relative;
         padding: 10px;
@@ -215,7 +212,7 @@
         display: flex;
         align-items: center;
     }
-
+    
     .test-link {
         width: 68px;
         height: 68px;
@@ -225,12 +222,12 @@
         text-align: center;
         padding-top: calc(50px - 1.4em);
     }
-
+    
     .demo2 {
         transform-origin: center;
         transform: rotate(-90deg);
     }
-
+    
     .mask {
         width: 110px;
         height: 110px;
@@ -242,28 +239,30 @@
         line-height: 110px;
         font-size: 16px;
     }
-
-    .fade-enter-active, .fade-leave-active {
+    
+    .fade-enter-active,
+    .fade-leave-active {
         transition: opacity .5s
     }
-
-    .fade-enter, .fade-leave-active {
+    
+    .fade-enter,
+    .fade-leave-active {
         opacity: 0
     }
-
+    
     .container {
         width: 100%;
         margin: 0 auto;
         padding: 0;
     }
-
+    
     .bar-unfill {
         height: 30px;
         display: block;
         background: #fff;
         width: 100%;
     }
-
+    
     .bar-fill {
         height: 30px;
         display: block;
@@ -271,8 +270,8 @@
         background: #5cb85c;
         transition: width .8s ease;
     }
-
     /* Standard syntax */
+    
     @keyframes progressbar {
         from {
             width: 10%
@@ -281,22 +280,22 @@
             width: 100%
         }
     }
-
+    
     .slide-fade-enter-active {
         transition: sliding-vertically .3s ease;
     }
-
+    
     .slide-fade-leave-active {
         transition: sliding-vertically .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
     }
-
-    .slide-fade-enter, .slide-fade-leave-active {
+    
+    .slide-fade-enter,
+    .slide-fade-leave-active {
         transform: translateX(10px);
         opacity: 0;
     }
 </style>
-{% endblock %}
-{% block contentright %}
+{% endblock %} {% block contentright %}
 
 <div class="hw-overlay" id="hw-layer">
     <div class="hw-layer-wrap" style="background:#5cb85c;border: 1px solid white;overflow: auto;opacity: 0.8">
@@ -347,13 +346,7 @@
             </h1>
         </div>
         <div class="app">
-            <transition-group
-                    tag="p"
-                    v-bind:css="false"
-                    v-on:before-enter="beforeEnter"
-                    v-on:enter="enter"
-                    v-on:leave="leave"
-            >
+            <transition-group tag="p" v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
                 <template v-for="app,index in apps">
                     <div :class="{ active: index==selectedIndex, odd:index%2>0 }" class="app-item"
                          @click="select(index)" :key="index" :data-index="index">
@@ -371,23 +364,18 @@
                 </template>
             </transition-group>
         </div>
-    </div><!--
+    </div>
+    <!--
     -->
     <div class="app-selected">
-        <transition
-                v-bind:css="false"
-                v-on:before-enter="beforeEnter"
-                v-on:enter="enter"
-                v-on:leave="leave">
+        <transition v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
             <div v-if="selectedIndex == -1" v-bind:key="1">
                 <div class="empty-page">
                     <div style="animation: buzz-out 3s infinite linear;">
                         <i class="iconfont icon-focus" style="font-size: 60px;margin:auto;"></i>
                     </div>
-                    <br>
-                    你啊，还没选择项目呢...
-                    <br>
-                    去左边选一个
+                    <br> 你啊，还没选择项目呢...
+                    <br> 去左边选一个
                 </div>
             </div>
             <div v-else v-bind:key="2">
@@ -400,29 +388,21 @@
                             <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后</div>
                             <div v-if="apps[selectedIndex].isfullinfo">
                                 <div class="app-name">{$apps[selectedIndex].label$}</div>
-                                <div class="app-info"><span class="info-title">包名</span>
-                                    {$apps[selectedIndex].packagename$}
+                                <div class="app-info"><span class="info-title">包名</span> {$apps[selectedIndex].packagename$}
                                 </div>
-                                <div class="app-info"><span class="info-title">文件大小</span>
-                                    {$(apps[selectedIndex].size/ 1024 / 1024).toFixed(2)$}MB
+                                <div class="app-info"><span class="info-title">文件大小</span> {$(apps[selectedIndex].size/ 1024 / 1024).toFixed(2)$}MB
                                 </div>
-                                <div class="app-info"><span class="info-title">文件MD5</span>
-                                    {$apps[selectedIndex].md5$}
+                                <div class="app-info"><span class="info-title">文件MD5</span> {$apps[selectedIndex].md5$}
                                 </div>
-                                <div class="app-info"><span class="info-title">文件SHA1</span>
-                                    {$apps[selectedIndex].sha1$}
+                                <div class="app-info"><span class="info-title">文件SHA1</span> {$apps[selectedIndex].sha1$}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row" v-if="apps[selectedIndex].isfullinfo"
-                         style="text-align: center; margin-top: 3px;">
+                    <div class="row" v-if="apps[selectedIndex].isfullinfo" style="text-align: center; margin-top: 3px;">
                         <div class="col-xs-3"></div>
                         <div class="col-xs-9">
-                            <a class="button-btn pull-left iconfont icon-report"
-                               style="color:white; text-decoration:none; font-weight: 300;"
-                               v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id"
-                               target="view_window">APK静态分析报告
+                            <a class="button-btn pull-left iconfont icon-report" style="color:white; text-decoration:none; font-weight: 300;" v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id" target="view_window">APK静态分析报告
                             </a>
                         </div>
                     </div>
@@ -459,17 +439,21 @@
 
                                 <div class="choose_button" style="width: 30%;text-align: center">
                                     <p>
-                                        <a v-bind:href="'/runner/token/'+autoToken.token"
-                                           style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
-                                            <i class="iconfont icon-creative test-link"
-                                               style="font-size: 30px;padding-top:5px;"></i></a>
+                                        <a v-bind:href="'/runner/token/'+autoToken.token" style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
+                                            <i class="iconfont icon-creative test-link" style="font-size: 30px;padding-top:5px;"></i></a>
                                     </p>
                                     <transition name="fade">
+<<<<<<< HEAD
                                         <p v-if='autoToken.isComplete' style="">
                                             <a v-bind:href="'/dynamicreport/index?id=' + autoToken.simulatorId" target="view_window"
                                                style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
                                                 <i class="iconfont icon-file test-link"
                                                    style="font-size: 30px;padding-top:5px;"></i></a>
+=======
+                                        <p v-if='autoComplete' style="">
+                                            <a v-bind:href="'/dynamicreport/index?id=51'" target="view_window" style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
+                                                <i class="iconfont icon-file test-link" style="font-size: 30px;padding-top:5px;"></i></a>
+>>>>>>> dev-s-
                                         </p>
                                     </transition>
                                 </div>
@@ -480,39 +464,32 @@
                                 <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
                                     手动检测
                                 </div>
-                                <div v-on:click="chooseTest" data-show-layer="hw-layer"
-                                     style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
-                                    <i class="iconfont icon-repairfill test-link"
-                                       style="font-size: 30px;padding-top:5px;"></i>
+                                <div v-on:click="chooseTest" data-show-layer="hw-layer" style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
+                                    <i class="iconfont icon-repairfill test-link" style="font-size: 30px;padding-top:5px;"></i>
                                 </div>
 
                             </div>
 
                             <div id="options">
-                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto;"
-                                     v-for="(token,index) of handToken"
-                                     :key="token">
+                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto;" v-for="(token,index) of handToken" :key="token">
                                     <div class="container">
                                         <div class="bar">
                                             <span class="bar-unfill">
                                                 <span class="bar-fill" style="position: relative">
                                                     <span class="bar-percentage"
                                                           style="position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);"></span>
-                                                </span>
+                                            </span>
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="test_info"
-                                         style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
+                                    <div class="test_info" style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
                                         <p>{$ token.imageid $}</p>
                                         <p>存活时间：{$ token.testTime $} min</p>
                                     </div>
-                                    <a :href="'/runner/token/'+token.token"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                    <a :href="'/runner/token/'+token.token" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
                                             class="iconfont icon-creative test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
-                                    <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
+                                    <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
                                             class="iconfont icon-stop test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
                                     <a v-bind:href="'/dynamicreport/index?id=' + token.simulatorId" target="view_window" v-if="token.isComplete"
@@ -530,11 +507,9 @@
     </transition>
 </div>
 </div>
-{% endblock %}
-{% block js %}
+{% endblock %} {% block js %}
 <script>
-
-    var formatDate = function (date) {
+    var formatDate = function(date) {
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
         m = m < 10 ? '0' + m : m;
@@ -558,7 +533,7 @@
         $('.hw-overlay').slideToggle();
     }
 
-    $('.confirm').on('click', function () {
+    $('.confirm').on('click', function() {
         hideLayer();
         //Wait for change
         //转成jQuery对象
@@ -591,19 +566,19 @@
             }
         })
     });
-    $('.cancel').on('click', function () {
+    $('.cancel').on('click', function() {
         hideLayer();
     });
 
     //点击或者触控弹出层外的半透明遮罩层，关闭弹出层
-    $('.hw-overlay').on('click', function (event) {
+    $('.hw-overlay').on('click', function(event) {
         if (event.target == this) {
             hideLayer();
         }
     });
 
     //按ESC键关闭弹出层
-    $(document).keyup(function (event) {
+    $(document).keyup(function(event) {
         if (event.keyCode == 27) {
             hideLayer();
         }
@@ -633,7 +608,7 @@
             handInterval: undefined,
         },
         methods: {
-            getTokensEvt: function (projectid) {
+            getTokensEvt: function(projectid) {
                 this.getTokens(projectid, (tokens) => {
                     this.autoToken = tokens[0];
                     this.handToken = tokens.slice(1);
@@ -643,7 +618,10 @@
                     }
                     $.ajax({
                         url: "/project/getLifeCycle",
-                        data: {projectid: this.autoToken.projectid, type: this.autoToken.type},
+                        data: {
+                            projectid: this.autoToken.projectid,
+                            type: this.autoToken.type
+                        },
                         method: "GET",
                         success: data => {
                             if (data.errno === 0) {
@@ -696,13 +674,15 @@
                     this.handleHandToken();
                 });
             },
-            getTokens: function (projectid, success_callback) {
+            getTokens: function(projectid, success_callback) {
                 if (this.appTokens[projectid] !== undefined) {
                     return success_callback(this.appTokens[projectid]);
                 }
                 $.ajax({
                     url: '/project/getTokens',
-                    data: {projectid: projectid},
+                    data: {
+                        projectid: projectid
+                    },
                     method: "POST",
                     success: data => {
                         if (data.errno !== 0) {
@@ -719,37 +699,40 @@
                     }
                 });
             },
-            handleHandToken: function () {
+            handleHandToken: function() {
                 setInterval(() => {
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime();
                         let val = nowTime - token.createTime;
-                            if (token.isSet === false) {
-                                token.isSet = true;
-                                let leftTime = Math.round((token.totalTime - val) / 1000);
-                                token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
-                            }
-                            let tick = setInterval(() => {
-                                nowTime = new Date().getTime();
-                                let val = nowTime - token.createTime;
-                                val = Math.max(0, val);
-                                val = Math.min(token.totalTime, val);
-                                if (val !== token.totalTime) {
-                                    let percentage = Math.round((val / token.totalTime) * 100);
-                                    token.barPercentage.innerHTML = percentage + '%';
-                                } else {
-                                    clearInterval(tick);
-                                    token.barPercentage.innerHTML = '检测完成';
-                                    Vue.set(token, 'isComplete', true);
-                                }
-                            }, 100);
+                        if (token.isSet === false) {
+                            token.isSet = true;
+                            let leftTime = Math.round((token.totalTime - val) / 1000);
+                            token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                         }
+                        let tick = setInterval(() => {
+                            nowTime = new Date().getTime();
+                            let val = nowTime - token.createTime;
+                            val = Math.max(0, val);
+                            val = Math.min(token.totalTime, val);
+                            if (val !== token.totalTime) {
+                                let percentage = Math.round((val / token.totalTime) * 100);
+                                token.barPercentage.innerHTML = percentage + '%';
+                            } else {
+                                clearInterval(tick);
+                                token.barPercentage.innerHTML = '检测完成';
+                                Vue.set(token, 'isComplete', true);
+                            }
+                        }, 100);
+                    }
                 }, 1000);
                 setTimeout(() => {
                     for (let i = 0; i < this.handToken.length; i++) {
                         $.ajax({
                             url: "/project/getLifeCycle",
-                            data: {projectid: this.handToken[i].projectid, type: this.handToken[i].type},
+                            data: {
+                                projectid: this.handToken[i].projectid,
+                                type: this.handToken[i].type
+                            },
                             method: "GET",
                             success: data => {
                                 if (data.errno === 0) {
@@ -780,10 +763,12 @@
                 }, 500)
 
             },
-            getApkInfo: function (projid) {
+            getApkInfo: function(projid) {
                 $.ajax({
                     url: '/project/apkinfo',
-                    data: {proj: projid},
+                    data: {
+                        proj: projid
+                    },
                     method: "GET",
                     success: data => {
                         var apkinfo = null;
@@ -792,7 +777,7 @@
                             return;
                         }
                         apkinfo = data.data[0];
-                        this.apps.forEach(function ($) {
+                        this.apps.forEach(function($) {
                             if ($.id === projid) {
                                 if (apkinfo.id) {
                                     $.isfullinfo = true;
@@ -810,48 +795,61 @@
                     }
                 });
             },
-            select: function (index) {
+            select: function(index) {
                 this.selectedIndex = index;
                 this.getTokensEvt(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
             },
-            displayTime: function (time) {
+            displayTime: function(time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
             },
-            beforeEnter: function (el, done) {
+            beforeEnter: function(el, done) {
                 el.style.opacity = 0;
                 var len = el.dataset.index * 50;
-                $.Velocity(el, {translateY: len + "px"}, {complete: done});
-//                el.style.height = 0;
+                $.Velocity(el, {
+                    translateY: len + "px"
+                }, {
+                    complete: done
+                });
+                //                el.style.height = 0;
             },
-            enter: function (el, done) {
+            enter: function(el, done) {
                 var delay = el.dataset.index * 150;
-                setTimeout(function () {
+                setTimeout(function() {
                     $.Velocity(
-                        el,
-                        {opacity: 1, translateY: "0px"},
-                        {complete: done}
+                        el, {
+                            opacity: 1,
+                            translateY: "0px"
+                        }, {
+                            complete: done
+                        }
                     )
                 }, delay)
             },
-            leave: function (el, done) {
+            leave: function(el, done) {
                 var delay = el.dataset.index * 150;
-                setTimeout(function () {
+                setTimeout(function() {
                     $.Velocity(
-                        el,
-                        {opacity: 0, translateY: "200px"},
-                        {complete: done}
+                        el, {
+                            opacity: 0,
+                            translateY: "200px"
+                        }, {
+                            complete: done
+                        }
                     )
                 }, delay)
             },
-            chooseTest: function () {
+            chooseTest: function() {
                 var layerid = 'hw-layer';
                 showLayer(layerid);
             },
-            terminateHandTest: function (token) {
+            terminateHandTest: function(token) {
                 $.ajax({
                     url: "/project/updateLifeCycle",
-                    data: {projectid: token.projectid, type: token.type},
+                    data: {
+                        projectid: token.projectid,
+                        type: token.type
+                    },
                     method: "POST",
                     success: (data) => {
                         if (data.errno === 0) {
@@ -862,7 +860,7 @@
                 })
             }
         },
-        mounted: function () {
+        mounted: function() {
             $(this.$el).css('opacity', '1')
         },
     });
@@ -873,7 +871,7 @@
                 var apps = data.data;
                 setTimeout(() => {
                     $vm.isLoading = false;
-                    $vm.apps = apps.map(function (app) {
+                    $vm.apps = apps.map(function(app) {
                         app.created_time = app.uploadtime;
                         app.isfullinfo = false;
                         if (!app.label) {
