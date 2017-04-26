@@ -6,28 +6,36 @@
     
     .right-content {
         overflow: auto;
+        position: relative;
     }
     
     .screen-container {
         width: 500px;
         height: 100%;
-        position: relative;
-        float: left;
+        position: absolute;
         min-height: 700px;
+    }
+    
+    #phone-screen {
+        border: 1px solid #cccccc;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -180px;
+        margin-top: -290px;
     }
     
     .log-container {
-        float: right;
-        width: calc(100% - 530px);
-        height: calc(100% - 22px);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 500px;
         min-height: 700px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        margin-right: 10px;
+        padding: 15px;
     }
     
     .log-title {
-        width: 100%;
         height: 50px;
         background-color: rgba(41, 40, 40, 0.28);
         font-size: 17px;
@@ -42,23 +50,13 @@
     }
     
     pre {
-        height: calc(100% - 50px);
-        width: 100%;
+        height: calc(100% - 53px);
         background-color: rgba(14, 14, 14, 0.14);
         border: none;
         border-radius: 5px;
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
         color: white;
-    }
-    
-    #phone-screen {
-        border: 1px solid #cccccc;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-left: -180px;
-        margin-top: -290px;
     }
 </style>
 {% endblock %} {% block contentright %}
@@ -205,13 +203,10 @@
 
 
         let offsetY = (document.getElementById('screen-container').offsetHeight - canvas.height) / 2;
-        // console.log(offsetY);
         let offsetX = canvas.offsetLeft + 220;
-        // console.log(document.getElementById('right-content').scrollTop);
-        // console.log('pageX:' + event.pageX + ';pageY:' + (event.y + document.getElementById('right-content').scrollTop) + ';canvasL:' + canvas.offsetLeft + ';canvasT:' + offsetY);
         controlData.X = dataLimit((event.pageX - offsetX) / canvas.width);
-        controlData.Y = dataLimit((event.y + document.getElementById('right-content').scrollTop - offsetY) / canvas.height);
-        /////////loading
+        controlData.Y = dataLimit((event.pageY + document.getElementById('right-content').scrollTop - offsetY) / canvas.height);
+
         return controlData;
     }
 
