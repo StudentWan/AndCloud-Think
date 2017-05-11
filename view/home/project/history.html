@@ -825,7 +825,12 @@
                 //                el.style.height = 0;
             },
             enter: function (el, done) {
-                var delay = el.dataset.index * 150;
+                var delay;
+                if(el.dataset.index > 10) {
+                    delay = 500;
+                } else {
+                    delay = el.dataset.index * 50;
+                }
                 setTimeout(function () {
                     $.Velocity(
                         el, {
