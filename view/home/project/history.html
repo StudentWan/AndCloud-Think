@@ -734,14 +734,13 @@
                         let nowTime = new Date().getTime() + this.timeGap;
                         let val = nowTime - token.createTime;
                         let percentage = Math.round((val / token.totalTime) * 100);
-                        let keyframe = findKeyframesRule('progressbar');
-                        keyframe.deleteRule('0%');
-                        keyframe.appendRule('0% { width: ' + percentage + '%; }');
-                       //修改
 
                         if (token.isSet === false) {
                             token.isSet = true;
                             let leftTime = Math.round((token.totalTime - val) / 1000);
+                            let keyframe = findKeyframesRule('progressbar');
+                            keyframe.deleteRule('0%');
+                            keyframe.appendRule('0% { width: ' + percentage + '%; }');
                             token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                         }
                         val = Math.max(0, val);
