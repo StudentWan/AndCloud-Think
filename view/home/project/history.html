@@ -271,7 +271,7 @@
         display: block;
         width: 0;
         background: #5cb85c;
-        transition: width .8s ease;
+        transition: width .5s ease;
     }
 
     /* Standard syntax */
@@ -523,7 +523,7 @@
 </div>
 {% endblock %} {% block js %}
 <script>
-    /*function findKeyframesRule(animName) {
+    function findKeyframesRule(animName) {
         var rule;
         var ss = document.styleSheets;
         for (var i = 0; i < ss.length; ++i) {
@@ -535,10 +535,8 @@
                     return rule;
                 }
             }
-
         }
-
-    }*/
+    }
     var formatDate = function (date) {
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -733,15 +731,19 @@
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime() + this.timeGap;
                         let val = nowTime - token.createTime;
+                        val = Math.max(0, val);
+                        val = Math.min(token.totalTime, val);
+                        let percentage = Math.round((val / token.totalTime) * 100);
                         if (token.isSet === false) {
                             token.isSet = true;
                             let leftTime = Math.round((token.totalTime - val) / 1000);
+                            let keyframe = findKeyframesRule('progressbar');
+                            keyframe.deleteRule('0%');
+                            keyframe.appendRule('0% { width: ' + percentage + '%; }');
                             token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                         }
-                        val = Math.max(0, val);
-                        val = Math.min(token.totalTime, val);
+
                         if (val !== token.totalTime) {
-                            let percentage = Math.round((val / token.totalTime) * 100);
                             token.barPercentage.innerHTML = percentage + '%';
                         } else {
                             token.barPercentage.innerHTML = '检测完成';
