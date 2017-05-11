@@ -117,6 +117,18 @@
             return;
         }
         var formdata = new FormData();
+        if(isRegister) {
+            var passConfirm = $('#password-register').val();
+            if(passConfirm.length == 0) {
+                addBuzz($('#password-register'));
+                return;
+            }
+
+            if(passConfirm !== password) {
+                errMessage('Confirm your password!');
+                return;
+            }
+        }
         formdata.append('username',$('#username-login').val());
         formdata.append('password',$('#password-login').val());
         formdata.append('type',isRegister?'register':'login');
@@ -129,23 +141,27 @@
             processData:false,
             success:function(data){
                 if(data.errno!==0){
-                    var message = data.errmsg;
-                    var lastText = $("#error-reason").text();
-                    var btn = $("#error-reason").parent();
-                    var lastColor = btn.css('color');
-                    $("#error-reason").text(" "+message);
-                    btn.css("color","red");
-                    btn.addClass("animate-buzz");
-                    setTimeout(function(){
-                        $("#error-reason").parent().removeClass("animate-buzz");
-                        $("#error-reason").text(lastText);
-                        btn.css('color',lastColor);
-                    },1000);
+                    errMessage(data.errmsg);
                 }else{
                     window.location.href = "/user/index";
                 }
             }
         });
     })
+
+    function errMessage(errmsg) {
+        var message = errmsg;
+        var lastText = $("#error-reason").text();
+        var btn = $("#error-reason").parent();
+        var lastColor = btn.css('color');
+        $("#error-reason").text(" "+message);
+        btn.css("color","red");
+        btn.addClass("animate-buzz");
+        setTimeout(function(){
+            $("#error-reason").parent().removeClass("animate-buzz");
+            $("#error-reason").text(lastText);
+            btn.css('color',lastColor);
+        },1000);
+    }
 </script>
 {% endblock %}

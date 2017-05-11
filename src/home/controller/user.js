@@ -34,7 +34,6 @@ export default class extends Base {
           retJson.reason = 'wrong password';
           return this.fail(retJson.reason);
         }
-
       } else {
         let name_re = this.post("username");
         let pass = this.post("password");
