@@ -523,6 +523,22 @@
 </div>
 {% endblock %} {% block js %}
 <script>
+    function findKeyframesRule(animName) {
+        var rule;
+        var ss = document.styleSheets;
+        for (var i = 0; i < ss.length; ++i) {
+            for (var x = 0; x < ss[i].cssRules.length; ++x) {
+
+                rule = ss[i].cssRules[x];
+
+                if (rule.name == animName && (rule.type== CSSRule.KEYFRAMES_RULE || ss[i].cssRules[j].type == CSSRule.WEBKIT_KEYFRAMES_RULE )){
+                    return rule;
+                }
+            }
+
+        }
+
+    }
     var formatDate = function (date) {
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -551,10 +567,7 @@
 
     $('.confirm').on('click', function () {
         hideLayer();
-        //Wait for change
-        //转成jQuery对象
-
-        const projectid = $vm.apps[$vm.selectedIndex].id;
+        let projectid = $vm.apps[$vm.selectedIndex].id;
         let type = 0;
         let tokens = $vm.appTokens[projectid];
         for (var token of tokens) {
@@ -720,6 +733,12 @@
                     for (let token of this.handToken) {
                         let nowTime = new Date().getTime() + this.timeGap;
                         let val = nowTime - token.createTime;
+                        let percentage = Math.round((val / token.totalTime) * 100);
+                        let keyframe = findKeyframesRule('progressbar');
+                        keyframe.deleteRule('0%');
+                        keyframe.appendRule('0% { width: ' + percentage + '%; }');
+                       //修改
+
                         if (token.isSet === false) {
                             token.isSet = true;
                             let leftTime = Math.round((token.totalTime - val) / 1000);
@@ -728,7 +747,6 @@
                         val = Math.max(0, val);
                         val = Math.min(token.totalTime, val);
                         if (val !== token.totalTime) {
-                            let percentage = Math.round((val / token.totalTime) * 100);
                             token.barPercentage.innerHTML = percentage + '%';
                         } else {
                             token.barPercentage.innerHTML = '检测完成';
@@ -771,8 +789,7 @@
                             }
                         })
                     }
-                }, 500)
-
+                }, 800)
             },
             getApkInfo: function (projid) {
                 $.ajax({
@@ -826,7 +843,7 @@
             },
             enter: function (el, done) {
                 var delay;
-                if(el.dataset.index > 10) {
+                if (el.dataset.index > 10) {
                     delay = 500;
                 } else {
                     delay = el.dataset.index * 50;
@@ -875,7 +892,7 @@
                     }
                 })
             },
-             getNow: function() {
+            getNow: function () {
                 $.ajax({
                     url: "/project/getNow",
                     method: "GET",
