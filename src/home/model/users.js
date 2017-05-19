@@ -24,7 +24,7 @@ class Users extends think.model.base {
 
     async getUserViaId(id){
         try {
-            return await this.where({"id": id}).find();
+            return await this.field('id, username').where({"id": id}).find();
         }catch(e){
             return false;
         }

@@ -55,4 +55,15 @@ export default class extends Base {
     }
   }
 
+  async getuserinfoAction() {
+    let userModel = this.model('users');
+    let user_id = await this.session('user_id');
+    let res = await userModel.getUserViaId(user_id);
+
+    return this.success(res);
+  }
+    async logoutAction() {
+      await this.session();
+      return this.display("login");
+    }
 }

@@ -12,16 +12,38 @@
     
     .left-bar {
         width: 220px;
+        position: relative;
     }
     
     .right-content {
         width: calc(100% - 220px);
+    }
+
+    .sign-out {
+        height: 80px;
+        width: 100%;
+        background: rgba(30, 29, 39, 0.18);
+        position: absolute;
+        bottom:0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     
     @media screen and (max-width: 760px) {
         .right-content {
             width: calc(100% - 150px);
         }
+    }
+
+    .button-btn {
+        cursor: pointer;
+        padding: 10px;
+        border: 1px solid white;
+        margin: 5px 0px;
+        border-radius: 5px;
+        text-align: center;
     }
 </style>
 {% block headerbar %} {% endblock %} {% endblock %} {% block content %}
@@ -39,11 +61,25 @@
             <div class="left-nav-link">
                 <a href="/project/history" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-sortlight" style="font-size: 42px;line-height: 42px"></i></a>
             </div>
+            <div class="sign-out">
+                <p>User:  <span id="user-name"></span></p>
+                <a class="button-btn" style="padding: 1px 5px;text-decoration: none;color: white;" href="/user/logout">登出</a>
+            </div>
         </div>
         <div class="right-content" id="right-content" style="background: transparent;height: 100%;float:left">
             {% block contentright %} {% endblock %}
         </div>
     </div>
 </body>
-
+<script>
+    $.ajax({
+        url: '/user/getuserinfo',
+        success: (data) => {
+            if(data.errno === 0){
+                console.log(data);
+                $("#user-name")[0].innerHTML = data.data.username;
+            }
+        }
+    })
+</script>
 {% endblock %}
