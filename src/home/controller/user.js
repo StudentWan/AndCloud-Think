@@ -14,7 +14,7 @@ export default class extends Base {
 
   async indexAction() {
     this.assign("user", this.user);
-    return this.display();
+    return this.redirect('/project/history')
   }
 
   async loginAction() {
@@ -51,7 +51,7 @@ export default class extends Base {
         }
       }
     } else {
-      return this.display("login");
+      return this.display("user/login");
     }
   }
 

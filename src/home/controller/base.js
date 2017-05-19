@@ -16,7 +16,7 @@ export default class extends think.controller.base { //创建controller，继承
                     think.log(e.message);
                 }
             } else {
-                return this.redirect('/user/login');
+                 return this.redirect('/user/login');
             }
         }
     }
