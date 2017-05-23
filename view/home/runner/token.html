@@ -16,13 +16,28 @@
         min-height: 700px;
     }
     
+    .phone-shell {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -150px;
+        margin-top: -290px;
+        width: 300px;
+        height: 578px;
+        background: url(/static/img/phone-shell.png);
+        background-size: 300px 578px;
+        background-repeat: no-repeat;
+        padding: 70px 20px 71px 20px;
+    }
+    
     #phone-screen {
-        border: 1px solid #cccccc;
+        /*border: 1px solid #cccccc;
         position: absolute;
         top: 50%;
         left: 50%;
         margin-left: -180px;
-        margin-top: -290px;
+        margin-top: -290px;*/
+        background-color: #181818;
     }
     
     .log-container {
@@ -61,7 +76,10 @@
 </style>
 {% endblock %} {% block contentright %}
 <div class="screen-container" id="screen-container">
-    <canvas id="phone-screen"></canvas>
+    <div class="phone-shell">
+        <canvas id="phone-screen"></canvas>
+    </div>
+
 </div>
 <div id="app" class="log-container">
     <div class="log-title">
@@ -69,10 +87,8 @@
     </div>
     <pre>{$logList.join('\n')$}</pre>
 </div>
-
 {% endblock %}{% block js %}
 <script src="/static/socket/socket.io.js"></script>
-
 <script>
     var $vm = new Vue({
         el: '#app',
@@ -89,10 +105,8 @@
             }
         }
     });
-
     let socket = new WebSocket('ws://192.168.8.88:6565');
     let imgsocket = new WebSocket('ws://192.168.8.88:6566');
-
     let canvas = document.getElementById('phone-screen');
     var pinger = null;
     socket.onopen = function() {
@@ -106,7 +120,6 @@
                 detail: '{{token}}'
             }))
         }, 1000 * 30);
-
     };
     socket.onmessage = function(message) {
         if (message) {
@@ -118,27 +131,19 @@
             }
             // console.log(msg);
         }
-
     };
     socket.onclose = function() {
         clearInterval(pinger)
     };
-
     (function() {
         var BLANK_IMG =
             'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
         var canvas = document.getElementById('phone-screen');
         var ctx = canvas.getContext('2d');
-
-
-
-        canvas.width = 360;
-        canvas.height = 578;
-
-
+        canvas.width = 260;
+        canvas.height = 435;
         var pinger = null;
         imgsocket.onopen = function() {
-
             imgsocket.send(JSON.stringify({
                 type: 'auth',
                 detail: '{{token}}'
@@ -150,8 +155,6 @@
                 }))
             }, 1000 * 30);
             canvas.addEventListener('mousedown', mouseDownListener);
-
-
         };
         imgsocket.onmessage = function(message) {
             var msg = message.data;
@@ -164,9 +167,7 @@
                 var URL = window.URL || window.webkitURL;
                 var img = new Image();
                 img.onload = function() {
-
                     let width = (Number('{{height}}') / Number('{{wmheight}}')) * (Number('{{wmwidth}}'));
-
                     ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
                     img.onload = null;
                     img.src = BLANK_IMG;
@@ -178,7 +179,6 @@
                 img.src = u
             }
         }
-
         imgsocket.onclose = function() {
             clearInterval(pinger)
         }
@@ -191,7 +191,6 @@
             data = 1;
         }
         return data;
-
     }
 
     function calculateRate(event) {
@@ -200,18 +199,14 @@
             X: 0,
             Y: 0
         };
-
-
         let offsetY = (document.getElementById('screen-container').offsetHeight - canvas.height) / 2;
         let offsetX = canvas.offsetLeft + 220;
         controlData.X = dataLimit((event.pageX - offsetX) / canvas.width);
         controlData.Y = dataLimit((event.pageY + document.getElementById('right-content').scrollTop - offsetY) / canvas.height);
-
         return controlData;
     }
 
     function mouseDownListener(event) {
-
         if (event.which == 3) {
             return;
         }
@@ -232,28 +227,22 @@
         if (event.which == 3) {
             return;
         }
-
         let Data = calculateRate(event);
-
         event.preventDefault();
         Data.MODE = 'MOVE';
         let sendData = {
-            type: 'touch',
-            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
-        }
-
-        // console.log(JSON.stringify(sendData));
+                type: 'touch',
+                detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+            }
+            // console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
-
     }
 
     function mouseUpListener(event) {
         if (event.which == 3) {
             return;
-
         }
         event.preventDefault();
-
         let Data = calculateRate(event);
         Data.MODE = 'UP';
         let sendData = {
