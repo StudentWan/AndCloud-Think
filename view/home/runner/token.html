@@ -71,6 +71,7 @@
         border-radius: 5px;
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
+        overflow-x: hidden;
         color: white;
     }
 </style>
@@ -142,6 +143,9 @@
         var ctx = canvas.getContext('2d');
         canvas.width = 260;
         canvas.height = 435;
+        ctx.fillStyle = '#fff';
+        ctx.font = "16px serif";
+        ctx.fillText('请稍后...', 100, 220);
         var pinger = null;
         imgsocket.onopen = function() {
             imgsocket.send(JSON.stringify({
