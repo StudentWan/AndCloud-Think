@@ -9,7 +9,7 @@ export default class extends think.controller.base { //创建controller，继承
             if (!think.isEmpty(this.user_id)) {
                return this.redirect('/user');
             } else {
-                return this.display('main/main');
+                return this.display('index/index');
             }
 
     }
