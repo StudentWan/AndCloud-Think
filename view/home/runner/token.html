@@ -200,7 +200,7 @@
             Y: 0
         };
         let offsetY = (document.getElementById('screen-container').offsetHeight - canvas.height) / 2;
-        let offsetX = canvas.offsetLeft + 370;
+        let offsetX = canvas.offsetLeft + 320;
         controlData.X = dataLimit((event.pageX - offsetX) / canvas.width);
         controlData.Y = dataLimit((event.pageY + document.getElementById('right-content').scrollTop - offsetY) / canvas.height);
         return controlData;
