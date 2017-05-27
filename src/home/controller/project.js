@@ -68,11 +68,9 @@ export default class extends Base {
     }
     async createanddeadAction() {
         console.log('createtime');
-        let reprotid = this.get('reportid');
-        let dynamicreportModel = this.model('dynamicreport');
-        let reportInfo = await dynamicreportModel.getDynamicReportInfoViaId(reprotid);
+        let reportid = this.get('reportid');
         let simulatorsModel = this.model('simulators');
-        let simulatorsInfo = await simulatorsModel.getSimulator(reportInfo.simulatorid);
+        let simulatorsInfo = await simulatorsModel.getSimulator(reportid);
 
         console.log(simulatorsInfo);
 
