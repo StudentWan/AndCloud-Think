@@ -1,6 +1,4 @@
-{% extends "./../base.html" %}
-{%block title%}Static Analysis{%endblock%}
-{% block header %}
+{% extends "./../base.html" %} {%block title%}Static Analysis{%endblock%} {% block header %}
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/static/css/font-awesome.min.css">
 <!-- Ionicons -->
@@ -22,488 +20,488 @@
         color: black;
     }
 </style>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <!--<body class="skin-blue fixed" data-spy="scroll" data-target="#scrollspy">-->
+
 <body class="skin-purple fixed" data-spy="scroll" data-target="#scrollspy">
-<div id="app" class="wrapper">
+    <div id="app" class="wrapper">
 
 
-    <header class="main-header">
-        <!-- Logo -->
-        <a href="../" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>And</b>Cloud</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>And</b>Cloud</span>
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-
-                <span class="sr-only">Toggle navigation</span>
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="../" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>And</b>Cloud</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>And</b>Cloud</span>
             </a>
-        </nav>
-    </header>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+            </nav>
+        </header>
 
 
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <div class="sidebar" id="scrollspy">
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="nav sidebar-menu">
-                <li class="header">Static Analysis</li>
-                <li class="active"><a href="#information"><i class="glyphicon glyphicon-info-sign"></i> Information</a>
-                </li>
-                <li><a href="#certificate"><i class="fa fa-certificate"></i> Signer Certificate</a></li>
-                <li><a href="#permissions"><i class="fa fa-align-justify"></i> Permissions</a></li>
-                <li><a href="#manifest"><i class="fa fa-credit-card"></i> Manifest</a></li>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <div class="sidebar" id="scrollspy">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="nav sidebar-menu">
+                    <li class="header">Static Analysis</li>
+                    <li class="active"><a href="#information"><i class="glyphicon glyphicon-info-sign"></i> Information</a>
+                    </li>
+                    <li><a href="#certificate"><i class="fa fa-certificate"></i> Signer Certificate</a></li>
+                    <li><a href="#permissions"><i class="fa fa-align-justify"></i> Permissions</a></li>
+                    <li><a href="#manifest"><i class="fa fa-credit-card"></i> Manifest</a></li>
 
 
-                <li class="treeview">
-                    <a href="javascript::;"><i class="fa fa-bullseye"></i> Components</a>
-                    <ul class="nav treeview-menu">
-                        <li><a href="#activities"><i class="fa fa-language"></i> Activities</a></li>
-                        <li><a href="#services"><i class="fa fa-gears"></i> Services</a></li>
-                        <li><a href="#receivers"><i class="fa fa-sort-amount-desc"></i> Receivers</a></li>
-                        <li><a href="#providers"><i class="fa fa-database"></i> Providers</a></li>
-                        <li><a href="#files"><i class="fa fa-files-o"></i> Files</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!-- /.sidebar -->
-    </aside>
+                    <li class="treeview">
+                        <a href="javascript::;"><i class="fa fa-bullseye"></i> Components</a>
+                        <ul class="nav treeview-menu">
+                            <li><a href="#activities"><i class="fa fa-language"></i> Activities</a></li>
+                            <li><a href="#services"><i class="fa fa-gears"></i> Services</a></li>
+                            <li><a href="#receivers"><i class="fa fa-sort-amount-desc"></i> Receivers</a></li>
+                            <li><a href="#providers"><i class="fa fa-database"></i> Providers</a></li>
+                            <li><a href="#files"><i class="fa fa-files-o"></i> Files</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar -->
+        </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- Main content -->
-        <div class="content body">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- Main content -->
+            <div class="content body">
 
-            <section id="information">
-                <h2 class="page-header"></h2>
-                <p class="lead">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">File Information</h3>
-                                    <span class="label label-primary pull-right"><i
+                <section id="information">
+                    <h2 class="page-header"></h2>
+                    <p class="lead">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">File Information</h3>
+                                        <span class="label label-primary pull-right"><i
                                             class="glyphicon glyphicon-file"></i></span>
-                                </div><!-- /.box-header -->
-                                <div class="box-body">
-                                    <div class="list-group">
-                <p>
-                    <span class="label label-primary">Name</span>
-                    {$apkInfo.label$}
-                </p>
-                <p>
-                    <span class="label label-primary">Size</span>
-                    {$apkInfo.size$} MB
-                </p>
-                <p>
-                    <span class="label label-primary">MD5</span>
-                    {$apkInfo.md5$}
-                </p>
-                <p>
-                    <span class="label label-primary">SHA1</span>
-                    {$apkInfo.sha1$}
-                </p>
-                <p>
-                    <span class="label label-primary">SHA256</span>
-                    {$apkInfo.sha256$}
-                </p>
-        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="list-group">
+                                            <p>
+                                                <span class="label label-primary">Name</span> {$apkInfo.label$}
+                                            </p>
+                                            <p>
+                                                <span class="label label-primary">Size</span> {$apkInfo.size$} MB
+                                            </p>
+                                            <p>
+                                                <span class="label label-primary">MD5</span> {$apkInfo.md5$}
+                                            </p>
+                                            <p>
+                                                <span class="label label-primary">SHA1</span> {$apkInfo.sha1$}
+                                            </p>
+                                            <p>
+                                                <span class="label label-primary">SHA256</span> {$apkInfo.sha256$}
+                                            </p>
+                                        </div>
 
-    </div><!-- /.box-body -->
-</div><!-- /.box -->
-</div><!-- /.col -->
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.col -->
 
-<div class="col-sm-5">
-    <div class="box box-danger">
-        <div class="box-header with-border">
-            <h3 class="box-title">App Information</h3>
-            <span class="label label-danger pull-right"><i class="glyphicon glyphicon-info-sign"></i></span>
-        </div><!-- /.box-header -->
-        <div class="box-body">
-            <div class="list-group">
-                <p>
-                    <span class="label label-primary">Package Name</span>
-                    {$apkInfo.packagename$}
-                </p>
-                <p>
-                    <span class="label label-primary">Main Activity</span>
-                    {$apkInfo.mainactivity$}
-                </p>
-                <p>
-                    <span class="label label-primary">Target SDK</span>
-                    {$apkInfo.targetsdk$}
-                    <span class="label label-primary">Min SDK</span>
-                    {$apkInfo.minsdk$}
-                    <span class="label label-primary">Max SDK</span>
-                    {$apkInfo.maxsdk$}
-                </p>
-                <p>
-                    <span class="label label-primary">Android Version Name</span>
-                    {$apkInfo.versionname$}
-                </p>
-                <p>
-                    <span class="label label-primary">Android Version Code</span>
-                    {$apkInfo.versioncode$}
-                </p>
-            </div>
+                            <div class="col-sm-5">
+                                <div class="box box-danger">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">App Information</h3>
+                                        <span class="label label-danger pull-right"><i class="glyphicon glyphicon-info-sign"></i></span>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="list-group">
+                                            <p>
+                                                <span class="label label-primary">Package Name</span> {$apkInfo.packagename$}
+                                            </p>
+                                            <p>
+                                                <span class="label label-primary">Main Activity</span> {$apkInfo.mainactivity$}
+                                            </p>
+                                            <p>
+                                                <span class="label label-primary">Target SDK</span> {$apkInfo.targetsdk$}
+                                                <span class="label label-primary">Min SDK</span> {$apkInfo.minsdk$}
+                                                <span class="label label-primary">Max SDK</span> {$apkInfo.maxsdk$}
+                                            </p>
+                                            <p>
+                                                <span class="label label-primary">Android Version Name</span> {$apkInfo.versionname$}
+                                            </p>
+                                            <p>
+                                                <span class="label label-primary">Android Version Code</span> {$apkInfo.versioncode$}
+                                            </p>
+                                        </div>
 
-        </div><!-- /.box-body -->
-    </div><!-- /.box -->
-</div><!-- /.col -->
-<!---Components-->
-</div><!-- /.row -->
-<!-- Small boxes (Stat box) -->
-<div class="row">
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-aqua">
-            <div class="inner">
-                <h3>{$apkInfo.activitiesnum$}</h3>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.col -->
+                            <!---Components-->
+                        </div>
+                        <!-- /.row -->
+                        <!-- Small boxes (Stat box) -->
+                        <div class="row">
+                            <div class="col-lg-3 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-aqua">
+                                    <div class="inner">
+                                        <h3>{$apkInfo.activitiesnum$}</h3>
 
-                <p>ACTIVITIES</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-language"></i>
-            </div>
-            <a href="#activities" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-            <div class="inner">
-                <h3>{$apkInfo.servicesnum$}</h3>
+                                        <p>ACTIVITIES</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-language"></i>
+                                    </div>
+                                    <a href="#activities" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3>{$apkInfo.servicesnum$}</h3>
 
-                <p>SERVICES</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-gears"></i>
-            </div>
-            <a href="#services" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                <h3>{$apkInfo.receiversnum$}</h3>
+                                        <p>SERVICES</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-gears"></i>
+                                    </div>
+                                    <a href="#services" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3>{$apkInfo.receiversnum$}</h3>
 
-                <p>RECEIVERS</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-sort-amount-desc"></i>
-            </div>
-            <a href="#receivers" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-red">
-            <div class="inner">
-                <h3>{$apkInfo.providersnum$}</h3>
+                                        <p>RECEIVERS</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-sort-amount-desc"></i>
+                                    </div>
+                                    <a href="#receivers" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-red">
+                                    <div class="inner">
+                                        <h3>{$apkInfo.providersnum$}</h3>
 
-                <p>PROVIDERS</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-database"></i>
-            </div>
-            <a href="#providers" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-</div>
-<!-- /.row -->
+                                        <p>PROVIDERS</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-database"></i>
+                                    </div>
+                                    <a href="#providers" class="small-box-footer">View <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                        </div>
+                        <!-- /.row -->
 
-<!--Exported Components-->
-<div class="row">
+                        <!--Exported Components-->
+                        <div class="row">
 
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-language"></i></span>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-aqua"><i class="fa fa-language"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Exported </br>Activities</span>
-                <span class="info-box-number">{$apkInfo.exportedactivitiesnum$}</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-gears"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Exported </br>Activities</span>
+                                        <span class="info-box-number">{$apkInfo.exportedactivitiesnum$}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-green"><i class="fa fa-gears"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Exported </br>Services</span>
-                <span class="info-box-number">{$apkInfo.exportedservicesnum$}</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Exported </br>Services</span>
+                                        <span class="info-box-number">{$apkInfo.exportedservicesnum$}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
 
-    <!-- fix for small devices only -->
-    <div class="clearfix visible-sm-block"></div>
+                            <!-- fix for small devices only -->
+                            <div class="clearfix visible-sm-block"></div>
 
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="fa fa-sort-amount-desc"></i></span>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-yellow"><i class="fa fa-sort-amount-desc"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Exported </br>Receivers</span>
-                <span class="info-box-number">{$apkInfo.exportedreceiversnum$}</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-database"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Exported </br>Receivers</span>
+                                        <span class="info-box-number">{$apkInfo.exportedreceiversnum$}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-red"><i class="fa fa-database"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Exported </br>Providers</span>
-                <span class="info-box-number">{$apkInfo.exportedprovidersnum$}</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-</div>
-<!--End of Exported -->
-</section><!-- /#introduction -->
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Exported </br>Providers</span>
+                                        <span class="info-box-number">{$apkInfo.exportedprovidersnum$}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!--End of Exported -->
+                </section>
+                <!-- /#introduction -->
 
 
-<!-- ============================================================= -->
-<!-- ============================================================= -->
+                <!-- ============================================================= -->
+                <!-- ============================================================= -->
 
-<section id="certificate">
-    <h2 class="page-header"></h2>
-    <div class="box-header">
-        <!-- /.box-header -->
-        <h3 class="box-title"><i class="fa fa-certificate"></i> Signer Certificate</h3>
-    </div>
-    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
+                <section id="certificate">
+                    <h2 class="page-header"></h2>
+                    <div class="box-header">
+                        <!-- /.box-header -->
+                        <h3 class="box-title"><i class="fa fa-certificate"></i> Signer Certificate</h3>
+                    </div>
+                    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
         {$apkInfo.signercertificate$}
         <strong>Certicate Status: </strong><span v-if="apkInfo.certissued == 'good'" class="label label-success">Good</span><span v-if="apkInfo.certissued == 'missing'" class="label label-danger">Missing</span><span v-if="apkInfo.certissued == 'broken'" class="label label-danger">Broken</span><span v-if="apkInfo.certissued == 'bad'" class="label label-warning">Bad</span>
         <!--其他情况-->
 </code></pre>
-</section>
+                </section>
 
 
-<!-- ============================================================= -->
+                <!-- ============================================================= -->
 
-<!-- ============================================================= -->
-
-
-<section id="permissions">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <!-- /.box-header -->
-            <h3 class="box-title"><i class="fa fa-align-justify"></i> Android Permissions</h3>
-        </div>
-        <div class="box-body no-padding">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>PERMISSION</th>
-                        <th>STATUS</th>
-                        <th>INFO</th>
-                        <th>DESCRIPTION</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="permission of permissions">
-                        <td>{$ permission.permName $}</td>
-                        <td>
-                            <span v-if="permission.status == 'normal'" class="label label-info">normal</span>
-                            <span v-if="permission.status == 'dangerous'" class="label label-danger">dangerous</span>
-                            <span v-if="permission.status == 'signature'" class="label label-warning">signature</span>
-                            <span v-if="permission.status == 'signatureOrSystem'" class="label label-warning">signatureOrSystem</span>
-                            <span v-if="permission.status == 'signature|development|appop'" class="label label-warning">signature|development|appop</span>
-                            <span v-if="permission.status == 'signature|system'" class="label label-warning">signature|system</span>
-                            <span v-if="permission.status == 'signature|system|development'" class="label label-warning">signature|system|development</span>
-                            <span v-if="permission.status == 'system|signature'" class="label label-warning">system|signature</span>
-                        </td>
-                        <td>{$ permission.info $}</td>
-                        <td>
-                            {$ permission.description $}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-    </div>
-</section>
+                <!-- ============================================================= -->
 
 
-<!-- ============================================================= -->
-<section id="manifest">
-    <h2 class="page-header"></h2>
-    <div class="box-header">
-        <!-- /.box-header -->
-        <h3 class="box-title"><i class="fa fa-credit-card"></i> Manifest</h3>
-    </div>
-    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
+                <section id="permissions">
+                    <h2 class="page-header"></h2>
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <!-- /.box-header -->
+                            <h3 class="box-title"><i class="fa fa-align-justify"></i> Android Permissions</h3>
+                        </div>
+                        <div class="box-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>PERMISSION</th>
+                                            <th>STATUS</th>
+                                            <th>INFO</th>
+                                            <th>DESCRIPTION</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="permission of permissions">
+                                            <td>{$ permission.permName $}</td>
+                                            <td>
+                                                <span v-if="permission.status == 'normal'" class="label label-info">normal</span>
+                                                <span v-if="permission.status == 'dangerous'" class="label label-danger">dangerous</span>
+                                                <span v-if="permission.status == 'signature'" class="label label-warning">signature</span>
+                                                <span v-if="permission.status == 'signatureOrSystem'" class="label label-warning">signatureOrSystem</span>
+                                                <span v-if="permission.status == 'signature|development|appop'" class="label label-warning">signature|development|appop</span>
+                                                <span v-if="permission.status == 'signature|system'" class="label label-warning">signature|system</span>
+                                                <span v-if="permission.status == 'signature|system|development'" class="label label-warning">signature|system|development</span>
+                                                <span v-if="permission.status == 'system|signature'" class="label label-warning">system|signature</span>
+                                            </td>
+                                            <td>{$ permission.info $}</td>
+                                            <td>
+                                                {$ permission.description $}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </section>
+
+
+                <!-- ============================================================= -->
+                <section id="manifest">
+                    <h2 class="page-header"></h2>
+                    <div class="box-header">
+                        <!-- /.box-header -->
+                        <h3 class="box-title"><i class="fa fa-credit-card"></i> Manifest</h3>
+                    </div>
+                    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
         {$ apkInfo.manifest $}
     </code></pre>
-</section>
-<!-- ============================================================= -->
+                </section>
+                <!-- ============================================================= -->
 
-<section id="activities">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
+                <section id="activities">
+                    <h2 class="page-header"></h2>
+                    <!-- /.box -->
 
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="fa fa-language"></i> Activities</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="list-group">
-                <p v-for='activity in activities'>{$ activity $}</p>
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"><i class="fa fa-language"></i> Activities</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="list-group">
+                                <p v-for='activity in activities'>{$ activity $}</p>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </section>
+
+
+                <!-- ============================================================= -->
+
+                <section id="services">
+                    <h2 class="page-header"></h2>
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"><i class="fa fa-gears"></i> Services</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="list-group">
+                                <p v-for='service in services'>{$ service $}</p>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </section>
+
+                <!-- ============================================================= -->
+
+                <section id="receivers">
+                    <h2 class="page-header"></h2>
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"><i class="fa fa-sort-amount-desc"></i> Broadcast Receivers</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="list-group">
+                                <p v-for='receiver in receivers'>{$ receiver $}</p>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </section>
+
+                <!-- ============================================================= -->
+
+                <section id="providers">
+                    <h2 class="page-header"></h2>
+
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"><i class="fa fa-database"></i> Content Providers</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="list-group">
+                                <p v-for='provider in providers'>{$ provider $}</p>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </section>
+
+                <!-- ============================================================= -->
+
+                <section id="files">
+                    <h2 class="page-header"></h2>
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"><i class="fa fa-files-o"></i> Files</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="list-group">
+                                <p v-for='file in files'>{$ file $}</p>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </section>
             </div>
+            <!-- /.content -->
         </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
+        <!-- /.content-wrapper -->
 
 
-<!-- ============================================================= -->
+        <footer class="main-footer">
+            <strong>© 2017 SafeCode Technology - SafeCode </strong>
+        </footer>
 
-<section id="services">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="fa fa-gears"></i> Services</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="list-group">
-                <p v-for='service in services'>{$ service $}</p>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <div class="pad">
+                Console logs will be shown here.
             </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-<!-- ============================================================= -->
-
-<section id="receivers">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="fa fa-sort-amount-desc"></i> Broadcast Receivers</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="list-group">
-                <p v-for='receiver in receivers'>{$ receiver $}</p>
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-<!-- ============================================================= -->
-
-<section id="providers">
-    <h2 class="page-header"></h2>
-
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="fa fa-database"></i> Content Providers</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="list-group">
-                <p v-for='provider in providers'>{$ provider $}</p>
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-
-<!-- ============================================================= -->
-
-<section id="files">
-    <h2 class="page-header"></h2>
-    <!-- /.box -->
-
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title"><i class="fa fa-files-o"></i> Files</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="list-group">
-                <p v-for='file in files'>{$ file $}</p>
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-</section>
-</div><!-- /.content -->
-</div><!-- /.content-wrapper -->
-
-
-<footer class="main-footer">
-    <strong>© 2017 SafeCode Technology - SafeCode </strong>
-</footer>
-
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <div class="pad">
-        Console logs will be shown here.
-    </div>
-</aside><!-- /.control-sidebar -->
-<!-- Add the sidebar's background. This div must be placed
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
      immediately after the control sidebar -->
-<div class="control-sidebar-bg"></div>
+        <div class="control-sidebar-bg"></div>
 
-</div><!-- ./wrapper -->
+    </div>
+    <!-- ./wrapper -->
 </body>
-{% endblock %}
-{% block js %}
+{% endblock %} {% block js %}
 <!-- FastClick -->
 <script src="/static/plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE App -->
@@ -529,11 +527,14 @@
     });
     $.ajax({
         url: "/project/staticinfo",
-        data: {proj: "{{id}}"},
+        data: {
+            proj: "{{id}}"
+        },
         method: "GET",
-        success: function (data) {
+        success: function(data) {
             let permissions;
             data.data[0].size = (data.data[0].size / 1024 / 1024).toFixed(2);
+            console.log(data);
             $vm.apkInfo = data.data[0];
             $vm.activities = JSON.parse($vm.apkInfo.activities);
             $vm.services = JSON.parse($vm.apkInfo.services);
@@ -541,10 +542,12 @@
             $vm.providers = JSON.parse($vm.apkInfo.providers);
             $vm.files = JSON.parse($vm.apkInfo.files);
             permissions = JSON.parse($vm.apkInfo.permissions);
-            for(var permission of permissions) {
+            for (var permission of permissions) {
                 $.ajax({
                     url: "/permission/staticpermission",
-                    data: {permission: permission},
+                    data: {
+                        permission: permission
+                    },
                     method: "GET",
                     success: function(data) {
                         $vm.permissions.push(data.data[0]);

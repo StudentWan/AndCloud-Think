@@ -19,9 +19,10 @@ class Projects extends think.model.base {
     }
 
     async getProjectViaId(id) {
-        let data = await this.where({"id": id}).find();
+        let data = await this.where({ "id": id }).find();
         return data;
     }
+
 
     async getProjectByUserID(user_id) {
         let data = await this.alias('project')
@@ -31,7 +32,7 @@ class Projects extends think.model.base {
                 as: 'info',
                 on: ['apkinfoid', 'info.id']
             }])
-            .where({'userid': user_id}).select();
+            .where({ 'userid': user_id }).select();
         data.forEach($ => {
             $.uploadtime = moment($.uploadtime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
         });
@@ -46,7 +47,7 @@ class Projects extends think.model.base {
                 as: 'info',
                 on: ['apkinfoid', 'info.id']
             }])
-            .where({"project.id": proj_id, "project.userid": user_id}).select();
+            .where({ "project.id": proj_id, "project.userid": user_id }).select();
         return data;
     }
 
@@ -63,7 +64,7 @@ class Projects extends think.model.base {
                 as: 'components',
                 on: ['apkinfoid', 'components.apkinfoid']
             }])
-            .where({"static.id": proj_id, "static.userid": user_id}).select();
+            .where({ "static.id": proj_id, "static.userid": user_id }).select();
         return data;
     }
 }

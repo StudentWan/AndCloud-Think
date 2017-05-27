@@ -55,7 +55,30 @@ export default class extends Base {
         let result = await dynamicModel.getDynamicInfoBySimId(sim);
         return this.success(result);
     }
+    async mirrorimageAction() {
+        let projectid = this.get('projectid')
+        let projectModel = this.model('projects');
+        let projectresult = await projectModel.getProjectViaId(projectid);
 
+        let mirrorModel = this.model('mirror');
+        let mirrorresult = await mirrorModel.getMirrorViaId(projectresult.mirrorid);
+        console.log(mirrorresult);
+        return this.success(mirrorresult.name);
+
+    }
+    async createanddeadAction() {
+        console.log('createtime');
+        let reprotid = this.get('reportid');
+        let dynamicreportModel = this.model('dynamicreport');
+        let reportInfo = await dynamicreportModel.getDynamicReportInfoViaId(reprotid);
+        let simulatorsModel = this.model('simulators');
+        let simulatorsInfo = await simulatorsModel.getSimulator(reportInfo.simulatorid);
+
+        console.log(simulatorsInfo);
+
+        return this.success(simulatorsInfo);
+
+    }
     async uploadAction() {
         let file = this.file('apk');
         let vm = this.post("vm");
@@ -79,7 +102,7 @@ export default class extends Base {
                 });
                 let tokens = that.model('tokens');
                 tokens.addTokens(insertID, this.user_id, vm, 0);
-                return this.success({"id": insertID, "name": name});
+                return this.success({ "id": insertID, "name": name });
             } catch (e) {
                 this.fail("i do not know");
             }
@@ -107,12 +130,12 @@ export default class extends Base {
         });
         let updateTokens = await tokenModel.getTokens(projectid, userid);
         let imageModel = this.model('images');
-        for(let token of updateTokens) {
+        for (let token of updateTokens) {
             let image = await imageModel.getImage(token.imageid);
             token.imageid = image[0].name;
         }
-        for(let token of updateTokens) {
-            if(token.type == type) {
+        for (let token of updateTokens) {
+            if (token.type == type) {
                 return this.success(token);
             }
         }
@@ -125,7 +148,7 @@ export default class extends Base {
         let tokenModel = this.model('tokens');
         let tokens = await tokenModel.getTokens(projectid, userid);
         let imageModel = this.model('images');
-        for(let token of tokens) {
+        for (let token of tokens) {
             let image = await imageModel.getImage(token.imageid);
             token.imageid = image[0].name;
         }

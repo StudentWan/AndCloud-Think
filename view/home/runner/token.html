@@ -145,7 +145,7 @@
         canvas.height = 435;
         ctx.fillStyle = '#fff';
         ctx.font = "16px serif";
-        ctx.fillText('请稍后...', 100, 220);
+        ctx.fillText('虚拟器连接中...', 50, 220);
         var pinger = null;
         imgsocket.onopen = function() {
             imgsocket.send(JSON.stringify({
