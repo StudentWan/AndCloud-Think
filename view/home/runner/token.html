@@ -71,6 +71,7 @@
         border-radius: 5px;
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
+        overflow-x: hidden;
         color: white;
     }
 </style>
@@ -79,6 +80,7 @@
     <div class="phone-shell">
         <canvas id="phone-screen"></canvas>
     </div>
+
 </div>
 <div id="app" class="log-container">
     <div class="log-title">
@@ -141,6 +143,11 @@
         var ctx = canvas.getContext('2d');
         canvas.width = 260;
         canvas.height = 435;
+
+        ctx.fillStyle = '#fff';
+        ctx.font = "16px serif";
+        ctx.fillText('虚拟器连接中...', 50, 220);
+
         var pinger = null;
         imgsocket.onopen = function() {
             imgsocket.send(JSON.stringify({
@@ -226,10 +233,12 @@
         event.preventDefault();
         Data.MODE = 'MOVE';
         let sendData = {
+
             type: 'touch',
             detail: Data.MODE + ',' + Data.X + ',' + Data.Y
         }
-        // console.log(JSON.stringify(sendData));
+        
+
         imgsocket.send(JSON.stringify(sendData));
     }
     function mouseUpListener(event) {

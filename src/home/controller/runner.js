@@ -14,7 +14,7 @@ export default class extends Base {
 
     async tokenAction() {
         let token = this.http.pathname.split('/').pop();
-        console.log(token);
+        // console.log(token);
         let tokenModel = this.model('tokens');
         let mirrorModel = this.model('mirror');
         let tokenData = await tokenModel.where({ token: token }).find();
