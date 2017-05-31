@@ -1,36 +1,49 @@
 {% extends "./base.html" %} {% block header%}
 <style>
     .left-nav-link {
-        width: 100px;
-        height: 100px;
-        background: rgba(30, 29, 39, 0.18);
-        border-radius: 50px;
+        width: 60px;
+        height: 60px;
+        /*background: rgba(30, 29, 39, 0.18);*/
+        /*border-radius: 50px;*/
         text-align: center;
-        margin: 50px auto;
-        padding-top: calc(50px - 1.4em);
+
+        /*padding-top: calc(50px - 1.4em);*/
+
     }
-    
-    .left-bar {
-        width: 220px;
-        position: relative;
+    #yingyongtianjia{
+        margin-top: 100px;
+        padding-top: 17px;
+        padding-bottom: 17px;
     }
-    
-    .right-content {
-        width: calc(100% - 220px);
+    #lishi {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    /*#yingyongtianjia:hover {
+        border-left: 2px solid #49a2f5;
+        background: rgba(30, 29, 39, 0.18) ;
+    }
+    #yingyongtianjia:hover a {
+        background-image: url("/static/img/yingyongtianjia-xuanze.png");
     }
 
-    .sign-out {
-        height: 80px;
-        width: 100%;
-        background: rgba(30, 29, 39, 0.18);
-        position: absolute;
-        bottom:0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    #lishi:hover {
+        border-left: 2px solid #49a2f5;
+        background: rgba(30, 29, 39, 0.18) ;
     }
-    
+    #lishi:hover a {
+        background-image: url("/static/img/lishi-xuanze.png");
+    }*/
+
+    .left-bar {
+        width: 60px;
+        position: relative;
+    }
+
+    .right-content {
+        width: calc(100% - 60px);
+    }
+
     @media screen and (max-width: 760px) {
         .right-content {
             width: calc(100% - 150px);
@@ -45,37 +58,83 @@
         border-radius: 5px;
         text-align: center;
     }
+
+    #yingyongtianjia a{
+        color: white;
+        text-decoration: none;
+        font-weight: 100;
+        font-size: 1.5em;
+        background-image: url('/static/img/yingyongtianjia-weixuanze.png');
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+    }
+
+    #lishi a {
+        color: white;
+        text-decoration: none;
+        font-weight: 100;
+        font-size: 1.5em;
+        background-image: url('/static/img/lishi-weixuanze.png');
+        display: inline-block;
+        width: 26px;
+        height: 28px;
+    }
+
+    .nav-bar {
+        width: 100%;
+        height: 50px;
+        background: #ffffff;
+        color: #8696aa;
+        font-weight:500;
+        padding-left:30px;
+        padding-right: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .sign-out{
+        
+    }
 </style>
 {% block headerbar %} {% endblock %} {% endblock %} {% block content %}
 
 <body>
-    <div class="" style="height: 100%">
-        <div class="left-bar" style="background: rgba(13, 21, 56, 0.36);height: 100%;float:left;overflow:hidden">
-            <div style="height:80px;width:100%;vertical-align: middle;text-align: center">
-                <h1 style="font-weight: 100;"><b>And</b>Cloud</h1>
-                <hr>
-            </div>
-            <div class="left-nav-link">
-                <a href="/project/create" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-add_light" style="font-size: 42px;line-height: 42px"></i></a>
-            </div>
-            <div class="left-nav-link">
-                <a href="/project/history" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i class="iconfont icon-sortlight" style="font-size: 42px;line-height: 42px"></i></a>
+<div class="" style="height: 100%">
+    <div class="left-bar" style="background: #27384f;height: 100%;float:left;overflow:hidden">
+        <div style="height:50px;width:100%;vertical-align: middle;text-align: center;background: #49a2f5">
+            <!--<h1 style="font-weight: 100;">One</h1>-->
+            <!--<hr>-->
+        </div>
+        <div class="left-nav-link" id="yingyongtianjia">
+            <a  href="/project/create"></a>
+        </div>
+        <div class="left-nav-link" id="lishi">
+            <a href="/project/history"></a>
+        </div>
+
+    </div>
+    <div class="right-content" id="right-content" style="background: transparent;height: 100%;float:left">
+        <div class="nav-bar">
+            <div class="platinfo" style="width:200px;text-align: justify;">
+                <p style="margin-bottom: 0;font-size: 14px">安码科技移动应用检测平台</p>
+                <p style="margin-bottom: 0;font-size: 5px">SAFE-CODE MOBILE</p>
             </div>
             <div class="sign-out">
-                <p>用户:  <span id="user-name"></span></p>
-                <a class="button-btn" style="padding: 1px 20px;text-decoration: none;color: white;" href="/user/logout">登出</a>
+                <span id="user-name" style="font-size: 12px"></span>
+                <a href="/user/logout"><img src="/static/img/tuichu.png" alt="" style="width: 17px;height: 17px"></a>
             </div>
         </div>
-        <div class="right-content" id="right-content" style="background: transparent;height: 100%;float:left">
-            {% block contentright %} {% endblock %}
-        </div>
+        {% block contentright %} {% endblock %}
     </div>
+</div>
 </body>
 <script>
     $.ajax({
         url: '/user/getuserinfo',
         success: (data) => {
-            if(data.errno === 0){
+            if (data.errno === 0) {
                 console.log(data);
                 $("#user-name")[0].innerHTML = data.data.username;
             }

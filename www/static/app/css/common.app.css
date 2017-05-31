@@ -1,8 +1,9 @@
 body {
     width: 100vw;
     height: 100vh;
-    background-image: radial-gradient(circle at 80% 80%, RGBA(53, 97, 149, 1.00) 0%, transparent),
-    radial-gradient(circle farthest-corner at 20% 20%, RGBA(101, 77, 143, 1.00) 0%, RGBA(54, 70, 132, 1.00) 70%);
+    /*background-image: radial-gradient(circle at 80% 80%, RGBA(53, 97, 149, 1.00) 0%, transparent),
+    radial-gradient(circle farthest-corner at 20% 20%, RGBA(101, 77, 143, 1.00) 0%, RGBA(54, 70, 132, 1.00) 70%);*/
+    background: #EBEFF5;
 }
 .form-control{
     color:white;
