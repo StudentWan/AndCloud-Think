@@ -112,7 +112,7 @@
 <!--<div style="width:100%;height:80px;background: rgba(13, 21, 56, 0.36)">-->
 
 <!--</div>-->
-<div class="contain-upload" style="height: calc(100% - 50px);">
+<div class="contain-upload" style="height: calc(100% - 140px);">
 <div id="file_drag" class="step-container" >
     <div class="info-an" id="" style="">拖拽到此上传 &nbsp;OR&nbsp;
         点击这个框
@@ -152,6 +152,8 @@
 {% endblock %}
 {% block js %}
 <script>
+    $('.guide-bar p')[0].firstChild.nodeValue = '添加应用';
+    $('.guide-bar p')[0].childNodes[1].firstChild.nodeValue = ' / ADD APP';
   function uploadFile(file) {
 
     var name = file.name;

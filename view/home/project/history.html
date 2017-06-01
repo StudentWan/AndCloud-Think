@@ -1,18 +1,26 @@
-{% extends "./../basebar.html" %} {% block title %}历史列表{% endblock %} {% block headerbar %}
+{% extends "./../basebar.html" %}
+
+{% block title %}历史列表{% endblock %}
+
+{% block headerbar %}
 <link rel="stylesheet" href="/static/app/css/hwLayer.css">
 <style>
+    #app {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
     @media screen and (min-width: 760px) {
         .history-list {
-            width: calc(50% - 3px);
-            height: calc(100vh - 50px);
+            width: calc(40% - 3px);
+            height: calc(100vh - 160px);
             display: inline-block;
             vertical-align: top;
         }
 
         .app-selected {
-            width: calc(50% - 3px);
+            width: calc(60% - 3px);
             display: inline-block;
-            height: calc(100vh - 50px);
+            height: calc(100vh - 160px);
             overflow: auto;
             vertical-align: top;
         }
@@ -37,22 +45,27 @@
     
     .app-item {
         padding: 10px;
+        margin: 5px auto;
         height: 50px;
         box-sizing: content-box;
-        cursor: pointer;
+        border: 1px solid lightgray;
+        /*cursor: pointer;*/
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 400;
+        background-color: #ffffff;
+    }
+
+    .app-item div span {
+        font-weight: 400;
     }
     
     .app-item:hover {
-        background: rgba(13, 21, 56, 0.10) !important;
+        border: 1px solid #49a2f5 !important;
     }
-    
-    .app-item.active {
-        background: rgba(13, 21, 56, 0.16);
-    }
-    
-    .app-item.odd {
-        background: rgba(13, 21, 56, 0.06);
-    }
+
     
     .app-item .logo {
         padding: 5px;
@@ -66,6 +79,20 @@
         /*padding-left: 70px;*/
         float: left;
         /*display: inline-block;*/
+    }
+
+    .app-item .detail-info {
+        color: #49a2f5;
+        border: 1px solid #49a2f5;
+        border-radius: 2px;
+        padding: 2px;
+        cursor: pointer;
+    }
+
+    .app-item .detail-info:hover {
+        /*border: none;*/
+        background-color: #49a2f5 !important;
+        color: #ffffff !important;
     }
     
     .history-list {
@@ -82,9 +109,9 @@
     }
     
     .app {
-        overflow: auto;
+        overflow: hidden;
         height: 100%;
-        padding-top: 80px;
+        /*padding-top: 80px;*/
     }
     
     .app span {
@@ -303,8 +330,9 @@
         background-image: url("/static/img/lishi-xuanze.png");
     }
 </style>
-{% endblock %} {% block contentright %}
+{% endblock %}
 
+{% block contentright %}
 <div class="hw-overlay" id="hw-layer">
     <div class="hw-layer-wrap" style="background:#5cb85c;border: 1px solid white;overflow: auto;opacity: 0.8">
         <div class="row">
@@ -343,39 +371,39 @@
         </div>
     </div>
 </div>
-
 <div id="app" style="opacity: 0">
     <div class="history-list">
-        <div class="history-header" style="z-index: 2">
+        <!--<div class="history-header" style="z-index: 2">
             <h1 style="font-weight:100;padding-left: 10px">历史列表
                 <transition name="bounce">
                     <p style="float:right" v-if="isLoading">Loading...</p>
                 </transition>
             </h1>
-        </div>
+        </div>-->
         <div class="app">
-            <transition-group tag="p" v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter"
-                              v-on:leave="leave">
+            <!--<transition-group tag="p" v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter"-->
+                              <!--v-on:leave="leave">-->
+            <p style="font-weight: 400;font-size: 12px">已检测项目 <img src="/static/img/xiaosanjiao.png" alt=""></p>
                 <template v-for="app,index in apps">
-                    <div :class="{ active: index==selectedIndex, odd:index%2>0 }" class="app-item"
-                         @click="select(index)" :key="index" :data-index="index">
+                    <div  class="app-item"
+                          :key="index" :data-index="index">
                         <img :src="app.logo" alt="" class="logo">
-                        <div style="">
+                        <div style="flex-grow: 2;padding-left: 30px">
                             <div>
-                                <span><i class="iconfont icon-news_hot_light"></i></span> <span> {$app.label$}</span>
+                                <span >应用名称：</span> <span > {$app.label$}</span>
                             </div>
                             <div>
-                                <span><i class="iconfont icon-time"></i> </span> <span> {$displayTime(app.created_time)$}</span>
+                                <span >检测日期：</span> <span > {$displayTime(app.created_time)$}</span>
                             </div>
                         </div>
-                        <div style="clear:both;"></div>
+                        <div class="detail-info" @click="select(index)">查看详情</div>
+                        <!--<div style="clear:both;"></div>-->
                     </div>
                 </template>
-            </transition-group>
+            <!--</transition-group>-->
         </div>
     </div>
-    <!--
-    -->
+
     <div class="app-selected">
         <transition v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
             <div v-if="selectedIndex == -1" v-bind:key="1">
@@ -520,8 +548,12 @@
     </transition>
 </div>
 </div>
-{% endblock %} {% block js %}
+{% endblock %}
+
+{% block js %}
 <script>
+    $('.guide-bar p')[0].firstChild.nodeValue = '历史记录';
+    $('.guide-bar p')[0].childNodes[1].firstChild.nodeValue = ' / HISTORICAL RECORD';
     var formatDate = function (date) {
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -814,6 +846,14 @@
                 this.selectedIndex = index;
                 this.getTokensEvt(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
+                for(let item of $('.app-item')) {
+                    item.style.border = '1px solid lightgray';
+                    item.childNodes[4].style.backgroundColor = '#ffffff';
+                    item.childNodes[4].style.color = '#49a2f5';
+                }
+                $('.app-item')[index].style.border = '1px solid #49a2f5';
+                $('.app-item')[index].childNodes[4].style.backgroundColor = '#49a2f5';
+                $('.app-item')[index].childNodes[4].style.color = '#ffffff';
             },
             displayTime: function (time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
@@ -887,7 +927,6 @@
                         let serverTime = data.data;
                         let localTime = new Date().getTime();
                         this.timeGap = serverTime - localTime;
-                        console.log(this.timeGap);
                     }
                 });
 

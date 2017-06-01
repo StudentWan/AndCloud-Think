@@ -91,6 +91,8 @@
 {% endblock %}{% block js %}
 <script src="/static/socket/socket.io.js"></script>
 <script>
+    $('.guide-bar p')[0].firstChild.nodeValue = '检测日志';
+    $('.guide-bar p')[0].childNodes[1].firstChild.nodeValue = ' / TEST LOG';
     var $vm = new Vue({
         el: '#app',
         delimiters: ['{$', '$}'],

@@ -11,7 +11,7 @@
 
     }
     #yingyongtianjia{
-        margin-top: 100px;
+        margin-top: 150px;
         padding-top: 17px;
         padding-bottom: 17px;
     }
@@ -42,6 +42,7 @@
 
     .right-content {
         width: calc(100% - 60px);
+
     }
 
     @media screen and (max-width: 760px) {
@@ -83,7 +84,7 @@
 
     .nav-bar {
         width: 100%;
-        height: 50px;
+        height: 60px;
         background: #ffffff;
         color: #8696aa;
         font-weight:500;
@@ -94,16 +95,22 @@
         align-items: center;
     }
     
-    .sign-out{
-        
+    .guide-bar {
+        width: 100%;
+        height: 80px;
+        font-weight:400;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
     }
+
 </style>
 {% block headerbar %} {% endblock %} {% endblock %} {% block content %}
 
 <body>
 <div class="" style="height: 100%">
     <div class="left-bar" style="background: #27384f;height: 100%;float:left;overflow:hidden">
-        <div style="height:50px;width:100%;vertical-align: middle;text-align: center;background: #49a2f5">
+        <div style="height:60px;width:100%;vertical-align: middle;text-align: center;background: #49a2f5">
             <!--<h1 style="font-weight: 100;">One</h1>-->
             <!--<hr>-->
         </div>
@@ -122,9 +129,13 @@
                 <p style="margin-bottom: 0;font-size: 5px">SAFE-CODE MOBILE</p>
             </div>
             <div class="sign-out">
-                <span id="user-name" style="font-size: 12px"></span>
-                <a href="/user/logout"><img src="/static/img/tuichu.png" alt="" style="width: 17px;height: 17px"></a>
+                <span id="user-name" ></span>
+                <a href="/user/logout"><img src="/static/img/tuichu.png" alt="" style="width: 20px;height: 20px"></a>
             </div>
+        </div>
+        <div class="guide-bar">
+            <p>历史记录<span style="color: #49a2f5;"> / HISTORICAL RECORD</span></p>
+            <div style="width: 100%;height: 1px;background-color: #8696aa;margin-bottom: 20px;"></div>
         </div>
         {% block contentright %} {% endblock %}
     </div>
@@ -135,7 +146,6 @@
         url: '/user/getuserinfo',
         success: (data) => {
             if (data.errno === 0) {
-                console.log(data);
                 $("#user-name")[0].innerHTML = data.data.username;
             }
         }
