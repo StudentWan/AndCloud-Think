@@ -10,6 +10,7 @@ const uuidV4 = require('uuid/v4');
 const pathOS = require('path');
 
 
+
 const ALLOW_LIST = ["apk", "pdf"];
 
 export default class extends Base {
@@ -31,7 +32,10 @@ export default class extends Base {
 
     async getlistAction() {
         let projectModel = this.model('projects');
-        let result = await projectModel.getProjectByUserID(this.user_id);
+        let perPage = this.get('perPage');
+        let getPage = this.get('getPage');
+        let result = await projectModel.getProjectByUserID(this.user_id,perPage,getPage);
+        result.data = result.data.reverse();
         return this.success(result);
     }
 

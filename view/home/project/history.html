@@ -46,7 +46,7 @@
     .app-item {
         padding: 10px;
         margin: 5px auto;
-        height: 50px;
+        height: 35px;
         box-sizing: content-box;
         border: 1px solid lightgray;
         /*cursor: pointer;*/
@@ -384,7 +384,7 @@
             <!--<transition-group tag="p" v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter"-->
                               <!--v-on:leave="leave">-->
             <p style="font-weight: 400;font-size: 12px">已检测项目 <img src="/static/img/xiaosanjiao.png" alt=""></p>
-                <template v-for="app,index in apps">
+            <template v-for="app,index in apps">
                     <div  class="app-item"
                           :key="index" :data-index="index">
                         <img :src="app.logo" alt="" class="logo">
@@ -400,6 +400,9 @@
                         <!--<div style="clear:both;"></div>-->
                     </div>
                 </template>
+            <div>
+                <span v-for="n in pageCount" @click="getData(n)">{$ n $}</span>
+            </div>
             <!--</transition-group>-->
         </div>
     </div>
@@ -650,7 +653,9 @@
             autoComplete: false,
             autoInterval: undefined,
             handInterval: undefined,
-            timeGap: 0
+            timeGap: 0,
+            pageCount: '',
+            currentPage: ''
         },
         methods: {
             getTokensEvt: function (projectid) {
@@ -930,17 +935,55 @@
                     }
                 });
 
+            },
+            getData: function(n) {
+                $.ajax({
+                    url: "/project/getlist",
+                    data: {
+                        perPage: 9,
+                        getPage: n
+                    },
+                    success: data => {
+                        if (data.errno == 0) {
+                            var apps = data.data.data;
+                            $vm.pageCount = data.data.totalPages;
+                            $vm.currentPage = data.data.currentPage;
+                            console.log(apps);
+                            $vm.getNow();
+                            setTimeout(() => {
+                                $vm.isLoading = false;
+                                $vm.apps = apps.map(function (app) {
+                                    app.created_time = app.uploadtime;
+                                    app.isfullinfo = false;
+                                    if (!app.label) {
+                                        app.label = "正在检测...";
+                                    }
+                                    if (!app.logo) {
+                                        app.logo = "/static/images/loading.gif";
+                                    }
+                                    return app;
+                                });
+                            }, 100);
+                        }
+                    }
+                });
             }
         },
         mounted: function () {
             $(this.$el).css('opacity', '1')
-        },
+        }
     });
     $.ajax({
         url: "/project/getlist",
+        data: {
+            perPage: 9,
+            getPage: 1
+        },
         success: data => {
             if (data.errno == 0) {
-                var apps = data.data;
+                var apps = data.data.data;
+                $vm.pageCount = data.data.totalPages;
+                $vm.currentPage = data.data.currentPage;
                 $vm.getNow();
                 setTimeout(() => {
                     $vm.isLoading = false;

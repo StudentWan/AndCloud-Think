@@ -1,6 +1,6 @@
 'use strict';
 
-import moment from 'moment'
+import moment from 'moment';
 moment.locale('zh-CN');
 class Projects extends think.model.base {
     init(...args) {
@@ -24,7 +24,7 @@ class Projects extends think.model.base {
     }
 
 
-    async getProjectByUserID(user_id) {
+    async getProjectByUserID(user_id,perPage,getPage) {
         let data = await this.alias('project')
             .field('project.id as id, name, uploadtime, info.iconimg as logo, label')
             .join([{
@@ -32,11 +32,12 @@ class Projects extends think.model.base {
                 as: 'info',
                 on: ['apkinfoid', 'info.id']
             }])
-            .where({ 'userid': user_id }).select();
-        data.forEach($ => {
+            .where({ 'userid': user_id }).page(getPage,perPage).countSelect();
+        //console.log(data);
+        data.data.forEach($ => {
             $.uploadtime = moment($.uploadtime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
         });
-        return data.reverse();
+        return data;
     }
 
     async getApkInfoByProjectIdAndUserId(proj_id, user_id) {
