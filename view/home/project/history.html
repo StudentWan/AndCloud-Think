@@ -9,6 +9,7 @@
         padding-left: 30px;
         padding-right: 30px;
     }
+
     @media screen and (min-width: 760px) {
         .history-list {
             width: calc(40% - 3px);
@@ -42,10 +43,10 @@
             vertical-align: top;
         }
     }
-    
+
     .app-item {
         padding: 10px;
-        margin: 5px auto;
+        margin: 4px auto;
         height: 35px;
         box-sizing: content-box;
         border: 1px solid lightgray;
@@ -61,12 +62,11 @@
     .app-item div span {
         font-weight: 400;
     }
-    
+
     .app-item:hover {
         border: 1px solid #49a2f5 !important;
     }
 
-    
     .app-item .logo {
         padding: 5px;
         height: 50px;
@@ -74,8 +74,8 @@
         float: left;
         /*position: absolute;*/
     }
-    
-    .app-item>div {
+
+    .app-item > div {
         /*padding-left: 70px;*/
         float: left;
         /*display: inline-block;*/
@@ -94,11 +94,11 @@
         background-color: #49a2f5 !important;
         color: #ffffff !important;
     }
-    
+
     .history-list {
         position: relative;
     }
-    
+
     .history-header {
         position: absolute;
         top: 0;
@@ -107,37 +107,68 @@
         height: 80px;
         background: rgba(13, 21, 56, 0.16);
     }
-    
+
     .app {
+        position: relative;
         overflow: hidden;
         height: 100%;
         /*padding-top: 80px;*/
     }
-    
+
     .app span {
         font-weight: 100;
         font-size: 1.1em;
     }
-    
+
+    .app .pagination {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .app .pagination span {
+        width: 25px;
+        height: 25px;
+        line-height:25px;
+        white-space: nowrap;
+        text-align: center;
+        background-color: #ffffff;
+        margin: auto 2px;
+        font-size: 12px;
+        font-weight: 400;
+        border: 1px solid lightgray;
+        cursor: pointer;
+    }
+
+    .app .pagination span img{
+        vertical-align: baseline;
+        width: 12px;
+        height: 7.5px;
+    }
+
     .list-enter-active,
     .list-leave-active {
         transition: all 1s;
     }
-    
+
     .list-enter,
     .list-leave-active {
         opacity: 0;
         transform: translateY(-30px);
     }
-    
+
     .bounce-enter-active {
         animation: bounce-in .5s;
     }
-    
+
     .bounce-leave-active {
         animation: bounce-out .5s;
     }
-    
+
     @keyframes bounce-in {
         0% {
             transform: scale(0);
@@ -149,7 +180,7 @@
             transform: scale(1);
         }
     }
-    
+
     @keyframes bounce-out {
         0% {
             transform: scale(1);
@@ -161,7 +192,7 @@
             transform: scale(0);
         }
     }
-    
+
     .empty-page {
         text-align: center;
         float: left;
@@ -170,7 +201,7 @@
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     .app-selected {
         padding: 50px;
     }
@@ -182,7 +213,7 @@
         width: 64px;
         height: 64px;
     }
-    
+
     .app-info-detail .app-name {
         padding: 10px;
         border: 1px solid white;
@@ -190,7 +221,7 @@
         border-radius: 5px;
         text-align: center;
     }
-    
+
     .app-info .info-title {
         border-radius: .25em;
         background-color: #5cb85c;
@@ -203,13 +234,12 @@
         vertical-align: baseline;
         display: inline;
     }
-    
+
     .app-info {
         margin: 2px;
         white-space: nowrap;
     }
 
-    
     .button-btn {
         cursor: pointer;
         padding: 10px;
@@ -218,7 +248,6 @@
         border-radius: 5px;
         text-align: center;
     }
-    
 
     .info-hand {
         padding-bottom: 10px;
@@ -228,7 +257,7 @@
         text-align: center;
         overflow: hidden;
     }
-    
+
     .infoblanket {
         position: relative;
         padding: 10px;
@@ -238,7 +267,7 @@
         display: flex;
         align-items: center;
     }
-    
+
     .test-link {
         width: 68px;
         height: 68px;
@@ -248,12 +277,12 @@
         text-align: center;
         padding-top: calc(50px - 1.4em);
     }
-    
+
     .demo2 {
         transform-origin: center;
         transform: rotate(-90deg);
     }
-    
+
     .mask {
         width: 110px;
         height: 110px;
@@ -265,30 +294,30 @@
         line-height: 110px;
         font-size: 16px;
     }
-    
+
     .fade-enter-active,
     .fade-leave-active {
         transition: opacity .5s
     }
-    
+
     .fade-enter,
     .fade-leave-active {
         opacity: 0
     }
-    
+
     .container {
         width: 100%;
         margin: 0 auto;
         padding: 0;
     }
-    
+
     .bar-unfill {
         height: 30px;
         display: block;
         background: #fff;
         width: 100%;
     }
-    
+
     .bar-fill {
         height: 30px;
         display: block;
@@ -298,7 +327,7 @@
     }
 
     /* Standard syntax */
-    
+
     @keyframes progressbar {
         from {
             width: 10%
@@ -307,15 +336,15 @@
             width: 100%
         }
     }
-    
+
     .slide-fade-enter-active {
         transition: sliding-vertically .3s ease;
     }
-    
+
     .slide-fade-leave-active {
         transition: sliding-vertically .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
     }
-    
+
     .slide-fade-enter,
     .slide-fade-leave-active {
         transform: translateX(10px);
@@ -324,8 +353,9 @@
 
     #lishi {
         border-left: 2px solid #49a2f5;
-        background: rgba(30, 29, 39, 0.18) ;
+        background: rgba(30, 29, 39, 0.18);
     }
+
     #lishi a {
         background-image: url("/static/img/lishi-xuanze.png");
     }
@@ -382,26 +412,28 @@
         </div>-->
         <div class="app">
             <!--<transition-group tag="p" v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter"-->
-                              <!--v-on:leave="leave">-->
+            <!--v-on:leave="leave">-->
             <p style="font-weight: 400;font-size: 12px">已检测项目 <img src="/static/img/xiaosanjiao.png" alt=""></p>
             <template v-for="app,index in apps">
-                    <div  class="app-item"
-                          :key="index" :data-index="index">
-                        <img :src="app.logo" alt="" class="logo">
-                        <div style="flex-grow: 2;padding-left: 30px">
-                            <div>
-                                <span >应用名称：</span> <span > {$app.label$}</span>
-                            </div>
-                            <div>
-                                <span >检测日期：</span> <span > {$displayTime(app.created_time)$}</span>
-                            </div>
+                <div class="app-item"
+                     :key="index" :data-index="index">
+                    <img :src="app.logo" alt="" class="logo">
+                    <div style="flex-grow: 2;padding-left: 30px">
+                        <div>
+                            <span>应用名称：</span> <span> {$app.label$}</span>
                         </div>
-                        <div class="detail-info" @click="select(index)">查看详情</div>
-                        <!--<div style="clear:both;"></div>-->
+                        <div>
+                            <span>检测日期：</span> <span> {$displayTime(app.created_time)$}</span>
+                        </div>
                     </div>
-                </template>
-            <div>
-                <span v-for="n in pageCount" @click="getData(n)">{$ n $}</span>
+                    <div class="detail-info" @click="select(index)">查看详情</div>
+                    <!--<div style="clear:both;"></div>-->
+                </div>
+            </template>
+            <div class="pagination">
+                <span v-show="currentPage > 1" @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
+                <span v-for="n in pageCount"  v-if="" @click="getData(n)">{$ n $}</span>
+                <span v-show="currentPage < pageCount" @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
             </div>
             <!--</transition-group>-->
         </div>
@@ -492,8 +524,11 @@
                                     <transition name="fade">
                                         <p v-if='autoToken.isComplete' style="">
 
-                                            <a v-bind:href="'/dynamicreport/index?dynamicid=' + autoToken.simulatorId+'&staticid='+apps[selectedIndex].id+'&auto=1'+'&projectid='+autoToken.projectid" target="view_window" style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
-                                                <i class="iconfont icon-file test-link" style="font-size: 30px;padding-top:5px;"></i></a>
+                                            <a v-bind:href="'/dynamicreport/index?dynamicid=' + autoToken.simulatorId+'&staticid='+apps[selectedIndex].id+'&auto=1'+'&projectid='+autoToken.projectid"
+                                               target="view_window"
+                                               style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
+                                                <i class="iconfont icon-file test-link"
+                                                   style="font-size: 30px;padding-top:5px;"></i></a>
                                         </p>
                                     </transition>
                                 </div>
@@ -539,7 +574,11 @@
                                             class="iconfont icon-stop test-link"
                                             style="font-size: 30px;padding-top:5px;"></i></a>
 
-                                    <a v-bind:href="'/dynamicreport/index?dynamicid=' + token.simulatorId+'&staticid='+apps[selectedIndex].id+'&auto=0'+'&projectid='+token.projectid" target="view_window" v-if="token.isComplete" style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i class="iconfont icon-file test-link" style="font-size: 30px;padding-top:5px;"></i></a>
+                                    <a v-bind:href="'/dynamicreport/index?dynamicid=' + token.simulatorId+'&staticid='+apps[selectedIndex].id+'&auto=0'+'&projectid='+token.projectid"
+                                       target="view_window" v-if="token.isComplete"
+                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
+                                            class="iconfont icon-file test-link"
+                                            style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -637,6 +676,7 @@
     moment.locale('zh-CN');
     Vue.config.debug = true;
     Vue.config.silent = false;
+
 
     var $vm = new Vue({
         el: '#app',
@@ -760,9 +800,9 @@
                             token.isSet = true;
                             let leftTime = Math.round((token.totalTime - val) / 1000);
                             /*let keyframe = findKeyframesRule('progressbar');
-                            keyframe.deleteRule('0%');
-                            keyframe.appendRule('0% { width: ' + percentage + '%; }');*/
-                            if(leftTime !== 0) {
+                             keyframe.deleteRule('0%');
+                             keyframe.appendRule('0% { width: ' + percentage + '%; }');*/
+                            if (leftTime !== 0) {
                                 token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
                             } else {
                                 token.barFill.style.animation = 'progressbar 0.5s 1 forwards';
@@ -851,7 +891,7 @@
                 this.selectedIndex = index;
                 this.getTokensEvt(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
-                for(let item of $('.app-item')) {
+                for (let item of $('.app-item')) {
                     item.style.border = '1px solid lightgray';
                     item.childNodes[4].style.backgroundColor = '#ffffff';
                     item.childNodes[4].style.color = '#49a2f5';
@@ -936,7 +976,7 @@
                 });
 
             },
-            getData: function(n) {
+            getData: function (n) {
                 $.ajax({
                     url: "/project/getlist",
                     data: {
@@ -948,7 +988,6 @@
                             var apps = data.data.data;
                             $vm.pageCount = data.data.totalPages;
                             $vm.currentPage = data.data.currentPage;
-                            console.log(apps);
                             $vm.getNow();
                             setTimeout(() => {
                                 $vm.isLoading = false;
@@ -1002,5 +1041,8 @@
             }
         }
     });
+
+    console.log($vm.currentPage);
+
 </script>
 {% endblock %}
