@@ -133,7 +133,7 @@
     .app .pagination span {
         width: 25px;
         height: 25px;
-        line-height:25px;
+        line-height: 25px;
         white-space: nowrap;
         text-align: center;
         background-color: #ffffff;
@@ -144,10 +144,16 @@
         cursor: pointer;
     }
 
-    .app .pagination span img{
+    .app .pagination span img {
         vertical-align: baseline;
         width: 12px;
         height: 7.5px;
+    }
+
+    .app .pagination .active {
+        border: 1px solid #49a2f5;
+        background-color: #49a2f5;
+        color: #FFFFFF;
     }
 
     .list-enter-active,
@@ -431,9 +437,10 @@
                 </div>
             </template>
             <div class="pagination">
-                <span v-show="currentPage > 1" @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
-                <span v-for="n in pageCount"  v-if="" @click="getData(n)">{$ n $}</span>
-                <span v-show="currentPage < pageCount" @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
+                <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
+                <span :class="{active: n==currentPage}" v-for="n in pageCount"
+                      v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
+                <span @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
             </div>
             <!--</transition-group>-->
         </div>
@@ -977,6 +984,9 @@
 
             },
             getData: function (n) {
+                if (n > this.pageCount || n < 1) {
+                    return;
+                }
                 $.ajax({
                     url: "/project/getlist",
                     data: {
@@ -1006,6 +1016,12 @@
                         }
                     }
                 });
+                this.selectedIndex = -1;
+                for (let item of $('.app-item')) {
+                    item.style.border = '1px solid lightgray';
+                    item.childNodes[4].style.backgroundColor = '#ffffff';
+                    item.childNodes[4].style.color = '#49a2f5';
+                }
             }
         },
         mounted: function () {
@@ -1038,11 +1054,9 @@
                         return app;
                     });
                 }, 100);
+
             }
         }
     });
-
-    console.log($vm.currentPage);
-
 </script>
 {% endblock %}
