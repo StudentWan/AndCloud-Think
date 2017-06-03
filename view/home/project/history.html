@@ -22,7 +22,7 @@
             width: calc(60% - 3px);
             display: inline-block;
             height: calc(100vh - 160px);
-            overflow: auto;
+            /*overflow: auto;*/
             vertical-align: top;
         }
     }
@@ -39,7 +39,6 @@
             width: 100%;
             display: inline-block;
             height: 50vh;
-            overflow: auto;
             vertical-align: top;
         }
     }
@@ -206,10 +205,12 @@
         width: 100%;
         margin-left: auto;
         margin-right: auto;
+        font-weight:400;
     }
 
     .app-selected {
-        padding: 50px;
+        padding-left: 50px;
+        /*padding-right: 50px;*/
     }
 
     .app-info-detail {
@@ -218,6 +219,10 @@
     .app-info-detail .logo {
         width: 64px;
         height: 64px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
     }
 
     .app-info-detail .app-name {
@@ -228,7 +233,7 @@
         text-align: center;
     }
 
-    .app-info .info-title {
+    /*.app-info .info-title {
         border-radius: .25em;
         background-color: #5cb85c;
         font-size: 75%;
@@ -239,6 +244,31 @@
         white-space: nowrap;
         vertical-align: baseline;
         display: inline;
+    }*/
+
+    .app-info-detail .content-wrapper {
+        border: 1px solid lightgray;
+        font-size: 12px;
+    }
+
+    .app-info-detail .title {
+        height: 30px;
+        background-color: #49a2f5;
+        color: #FFFFFF;
+        font-weight: 400;
+        line-height:30px;
+        white-space: nowrap;
+        overflow: auto;
+    }
+
+    .app-info-detail .content {
+        height: 120px;
+        background-color: #FFFFFF;
+        position: relative;
+    }
+
+    .app-info-detail .content p{
+        margin: 1px;
     }
 
     .app-info {
@@ -449,7 +479,7 @@
     <div class="app-selected">
         <transition v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave">
             <div v-if="selectedIndex == -1" v-bind:key="1">
-                <div class="empty-page">
+                <div class="empty-page" >
                     <div style="animation: buzz-out 3s infinite linear;">
                         <i class="iconfont icon-focus" style="font-size: 60px;margin:auto;"></i>
                     </div>
@@ -458,8 +488,11 @@
                 </div>
             </div>
             <div v-else v-bind:key="2">
+                <div class="test-result-title">
+                    <p style="font-weight: 400; font-size: 12px">检测结果<span style="color: #49a2f5"> / DETECTION RESULT</span></p>
+                </div>
                 <div class="app-info-detail">
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-xs-3">
                             <img :src="apps[selectedIndex].logo" alt="" class="logo">
                         </div>
@@ -489,11 +522,35 @@
                                v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id" target="view_window">APK静态分析报告
                             </a>
                         </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="content-wrapper">
+                            <div class="title" style="text-align: center">应用名称：{$ apps[selectedIndex].label $}</div>
+                            <div class="content">
+                                <img :src="apps[selectedIndex].logo" alt="" class="logo">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <div class="content-wrapper">
+                            <div class="title" style="padding-left: 15px;display: flex;justify-content: space-between;align-items: center">文件分析报告 <a  v-if="apps[selectedIndex].isfullinfo"  style="text-decoration: none;color: #FFFFFF;border-left: 1px solid #FFFFFF;padding-left: 5px;padding-right: 5px;background-color: #49a2f3" v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id" target="view_window"><img
+                                    src="/static/img/baogao.png" style="width: 10.8px;height: 12px;vertical-align: -5%" alt=""> 静态检测报告</a></div>
+                            <div class="content" style="padding: 23px 15px;font-size: 10px;font-weight: 400">
+                                        <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后......</div>
+                                        <div v-if="apps[selectedIndex].isfullinfo">
+                                            <p>包名：{$ apps[selectedIndex].packagename $}</p>
+                                            <p>文件大小：{$(apps[selectedIndex].size/ 1024 / 1024).toFixed(2)$}MB</p>
+                                            <p>文件MD5： {$apps[selectedIndex].md5$}</p>
+                                            <p>文件SHA1：{$apps[selectedIndex].sha1$}</p>
+                                        </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
-                    <hr>
                 </div>
                 <!--Waiting for implement-->
-                <div class="app-action-list">
+                <!--<div class="app-action-list">
                     <div class="row">
                         <div v-if="apps[selectedIndex].isfullinfo === false">
                         </div>
@@ -590,7 +647,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
 
     </div>
