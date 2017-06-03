@@ -35,7 +35,6 @@ export default class extends Base {
         let perPage = this.get('perPage');
         let getPage = this.get('getPage');
         let result = await projectModel.getProjectByUserID(this.user_id,perPage,getPage);
-        result.data = result.data.reverse();
         return this.success(result);
     }
 

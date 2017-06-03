@@ -32,7 +32,7 @@ class Projects extends think.model.base {
                 as: 'info',
                 on: ['apkinfoid', 'info.id']
             }])
-            .where({ 'userid': user_id }).page(getPage,perPage).countSelect();
+            .where({ 'userid': user_id }).order('id DESC').page(getPage,perPage).countSelect();
         //console.log(data);
         data.data.forEach($ => {
             $.uploadtime = moment($.uploadtime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
