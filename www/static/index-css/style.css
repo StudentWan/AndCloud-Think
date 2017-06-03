@@ -27,7 +27,7 @@ h4 {
 	margin-bottom: 20px;
 	font-size: 16px;
 	font-weight: 700;
-	color: #a765d0;
+	color: #8696aa;
 }
 p{
 	font-size: 13px;
@@ -39,7 +39,7 @@ a {
 }
 a:hover,
 a:focus{
-	color: #a765d0;
+	color: #8696aa;
 	text-decoration: none;
 }
 
@@ -113,9 +113,9 @@ a:focus{
 	letter-spacing: 1px;
 }
 
-#tf-menu.navbar-default .navbar-nav > li > a:hover, 
+#tf-menu.navbar-default .navbar-nav > li > a:hover,
 #tf-menu.navbar-default .navbar-nav > li > a:focus {
-	color: #a765d0;
+	color: #8696aa;
 	background-color: transparent;
 }
 .copyrights{
@@ -130,13 +130,13 @@ a:focus{
 }
 
 #tf-service{
-	padding: 7% 0; 
+	padding: 7% 0;
 }
 
 .media-left.media-middle i {
 	padding: 20px 30px 20px 0;
 	font-size: 30px;
-	color: #a765d0;
+	color: #8696aa;
 
 }
 
@@ -144,7 +144,7 @@ a:focus{
 	margin-bottom: 20px;
 	font-size: 16px;
 	font-weight: 700;
-	color: #a765d0;
+	color: #8696aa;
 }
 
 #tf-portfolio{
@@ -154,7 +154,7 @@ a:focus{
 }
 
 .section-title hr{
-	border-color: #a765d0;
+	border-color: #8696aa;
 	width: 60px;
 }
 
@@ -166,7 +166,7 @@ a.btn {
 }
 button.btn.btn-primary.my-btn,
 a.btn.btn-primary.my-btn {
-	background: #a765d0;
+	background: #8696aa;
 	border-color: transparent;
 	border-radius: 0px;
 	border-width: 2px;
@@ -178,8 +178,8 @@ a.btn.btn-primary.my-btn {
 }
 button.btn.btn-primary.my-btn:hover,
 a.btn.btn-primary.my-btn:hover{
-	background: #FFFFFF;
-	color: #a765d0;
+	background: #ffffff;
+	color: #8696aa;
 	border-color: transparent;
 }
 button.btn.btn-primary.my-btn.dark:hover,
@@ -202,24 +202,24 @@ a.btn.btn-primary.my-btn2 {
 }
 
 a.btn.btn-primary.my-btn2:hover{
-	background: #a765d0;
-	color: #ffffff;
+	background: #ffffff;
+	color: #8696aa;
 	border-color: transparent;
 }
 
 ul.cat.list-inline li a {
-	border: 1px solid #a765d0;
+	border: 1px solid #8696aa;
 	padding: 5px 15px;
 	font-size: 11px;
 	text-transform: uppercase;
 	font-weight: 600;
 	letter-spacing: 1px;
-	color: #a765d0;
+	color: #8696aa;
 	transition: all 0.5s;
 }
 
 ul.cat.list-inline li a:hover{
-	background: #a765d0;
+	background: #8696aa;
 	color: #ffffff;
 }
 
@@ -300,7 +300,7 @@ form#contact {
 }
 #tf-contact .form-control:focus,
 #tf-contact .form-control:hover{
-	border-top: 2px solid #a765d0;
+	border-top: 2px solid #8696aa;
 }
 nav#tf-footer {
 	background: #222222;
