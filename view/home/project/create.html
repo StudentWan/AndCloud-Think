@@ -2,7 +2,7 @@
 {% block headerbar %}
 <style>
 
-    #contain-upload {
+    .contain-upload {
         padding-left: 30px;
         padding-right: 30px;
         display: flex;
@@ -166,8 +166,8 @@
 <!--<div style="width:100%;height:80px;background: rgba(13, 21, 56, 0.36)">-->
 
 <!--</div>-->
-<div id="contain-upload" style="height: calc(100% - 140px);">
-    <div class="apk-list">
+<div class="contain-upload" style="height: calc(100% - 140px);">
+    <div class="apk-list" id="apk-list">
         <div style="height: 45px;padding-top: 15px;font-weight: 400;font-size: 12px">添加历史 <span style="color: #49a2f5"> / HISTORICAL RECORD</span>
         </div>
         <div style="height:35px;font-weight: 400;font-size: 10px;display: flex;justify-content: space-between;align-items: center">
@@ -272,6 +272,7 @@
         });
     }
 
+
     $("#file").on('change', function (evt) {
         global_file = this.files[0];
         animateToOne();
@@ -360,8 +361,8 @@
     Vue.config.debug = true;
     Vue.config.silent = false;
 
-    var vm = new Vue({
-        el: '#contain-upload',
+    var $vm = new Vue({
+        el: '#apk-list',
         delimiters: ['{$', '$}'],
         data: {
             pageCount: '',
@@ -384,10 +385,10 @@
         success: data => {
             if (data.errno == 0) {
                 var apps = data.data.data;
-                vm.pageCount = data.data.totalPages;
-                vm.currentPage = data.data.currentPage;
+                $vm.pageCount = data.data.totalPages;
+                $vm.currentPage = data.data.currentPage;
                 setTimeout(() => {
-                    vm.apps = apps.map(function (app) {
+                    $vm.apps = apps.map(function (app) {
                         app.created_time = app.uploadtime;
                         app.isfullinfo = false;
                         if (!app.label) {
