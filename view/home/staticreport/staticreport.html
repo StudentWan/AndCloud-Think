@@ -23,7 +23,7 @@
 {% endblock %} {% block content %}
 <!--<body class="skin-blue fixed" data-spy="scroll" data-target="#scrollspy">-->
 
-<body class="skin-purple fixed" data-spy="scroll" data-target="#scrollspy">
+<body class="skin-blue fixed" data-spy="scroll" data-target="#scrollspy">
     <div id="app" class="wrapper">
 
 
@@ -31,9 +31,9 @@
             <!-- Logo -->
             <a href="../" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>And</b>Cloud</span>
+                <span class="logo-mini"><b>Safe</b>Code</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>And</b>Cloud</span>
+                <span class="logo-lg"><b>Safe</b>Code</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -53,21 +53,21 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="nav sidebar-menu">
                     <li class="header">Static Analysis</li>
-                    <li class="active"><a href="#information"><i class="glyphicon glyphicon-info-sign"></i> Information</a>
+                    <li class="active"><a href="#information"><i class="glyphicon glyphicon-info-sign"></i> 信息</a>
                     </li>
-                    <li><a href="#certificate"><i class="fa fa-certificate"></i> Signer Certificate</a></li>
-                    <li><a href="#permissions"><i class="fa fa-align-justify"></i> Permissions</a></li>
-                    <li><a href="#manifest"><i class="fa fa-credit-card"></i> Manifest</a></li>
+                    <li><a href="#certificate"><i class="fa fa-certificate"></i> 签名证书</a></li>
+                    <li><a href="#permissions"><i class="fa fa-align-justify"></i> 权限</a></li>
+                    <li><a href="#manifest"><i class="fa fa-credit-card"></i> 配置文件</a></li>
 
 
                     <li class="treeview">
-                        <a href="javascript::;"><i class="fa fa-bullseye"></i> Components</a>
+                        <a href="javascript::;"><i class="fa fa-bullseye"></i> 组件</a>
                         <ul class="nav treeview-menu">
-                            <li><a href="#activities"><i class="fa fa-language"></i> Activities</a></li>
-                            <li><a href="#services"><i class="fa fa-gears"></i> Services</a></li>
-                            <li><a href="#receivers"><i class="fa fa-sort-amount-desc"></i> Receivers</a></li>
-                            <li><a href="#providers"><i class="fa fa-database"></i> Providers</a></li>
-                            <li><a href="#files"><i class="fa fa-files-o"></i> Files</a></li>
+                            <li><a href="#activities"><i class="fa fa-language"></i> 活动</a></li>
+                            <li><a href="#services"><i class="fa fa-gears"></i> 服务</a></li>
+                            <li><a href="#receivers"><i class="fa fa-sort-amount-desc"></i> 接收器</a></li>
+                            <li><a href="#providers"><i class="fa fa-database"></i> 内容提供者</a></li>
+                            <li><a href="#files"><i class="fa fa-files-o"></i> 文件</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -88,7 +88,7 @@
                             <div class="col-sm-7">
                                 <div class="box box-primary">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">File Information</h3>
+                                        <h3 class="box-title">文件信息</h3>
                                         <span class="label label-primary pull-right"><i
                                             class="glyphicon glyphicon-file"></i></span>
                                     </div>
@@ -96,10 +96,10 @@
                                     <div class="box-body">
                                         <div class="list-group">
                                             <p>
-                                                <span class="label label-primary">Name</span> {$apkInfo.label$}
+                                                <span class="label label-primary">名称</span> {$apkInfo.label$}
                                             </p>
                                             <p>
-                                                <span class="label label-primary">Size</span> {$apkInfo.size$} MB
+                                                <span class="label label-primary">大小</span> {$apkInfo.size$} MB
                                             </p>
                                             <p>
                                                 <span class="label label-primary">MD5</span> {$apkInfo.md5$}
@@ -122,28 +122,28 @@
                             <div class="col-sm-5">
                                 <div class="box box-danger">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">App Information</h3>
+                                        <h3 class="box-title">应用信息</h3>
                                         <span class="label label-danger pull-right"><i class="glyphicon glyphicon-info-sign"></i></span>
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
                                         <div class="list-group">
                                             <p>
-                                                <span class="label label-primary">Package Name</span> {$apkInfo.packagename$}
+                                                <span class="label label-primary">包名</span> {$apkInfo.packagename$}
                                             </p>
                                             <p>
-                                                <span class="label label-primary">Main Activity</span> {$apkInfo.mainactivity$}
+                                                <span class="label label-primary">主活动</span> {$apkInfo.mainactivity$}
                                             </p>
                                             <p>
-                                                <span class="label label-primary">Target SDK</span> {$apkInfo.targetsdk$}
-                                                <span class="label label-primary">Min SDK</span> {$apkInfo.minsdk$}
-                                                <span class="label label-primary">Max SDK</span> {$apkInfo.maxsdk$}
+                                                <span class="label label-primary">目标 SDK</span> {$apkInfo.targetsdk$}
+                                                <span class="label label-primary">最低 SDK</span> {$apkInfo.minsdk$}
+                                                <span class="label label-primary">最高 SDK</span> {$apkInfo.maxsdk$}
                                             </p>
                                             <p>
-                                                <span class="label label-primary">Android Version Name</span> {$apkInfo.versionname$}
+                                                <span class="label label-primary">版本名称</span> {$apkInfo.versionname$}
                                             </p>
                                             <p>
-                                                <span class="label label-primary">Android Version Code</span> {$apkInfo.versioncode$}
+                                                <span class="label label-primary">版本号</span> {$apkInfo.versioncode$}
                                             </p>
                                         </div>
 
@@ -164,7 +164,7 @@
                                     <div class="inner">
                                         <h3>{$apkInfo.activitiesnum$}</h3>
 
-                                        <p>ACTIVITIES</p>
+                                        <p>活动</p>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-language"></i>
@@ -179,7 +179,7 @@
                                     <div class="inner">
                                         <h3>{$apkInfo.servicesnum$}</h3>
 
-                                        <p>SERVICES</p>
+                                        <p>服务</p>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-gears"></i>
@@ -194,7 +194,7 @@
                                     <div class="inner">
                                         <h3>{$apkInfo.receiversnum$}</h3>
 
-                                        <p>RECEIVERS</p>
+                                        <p>接收器</p>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-sort-amount-desc"></i>
@@ -209,7 +209,7 @@
                                     <div class="inner">
                                         <h3>{$apkInfo.providersnum$}</h3>
 
-                                        <p>PROVIDERS</p>
+                                        <p>内容提供者</p>
                                     </div>
                                     <div class="icon">
                                         <i class="fa fa-database"></i>
@@ -229,7 +229,7 @@
                                     <span class="info-box-icon bg-aqua"><i class="fa fa-language"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Exported </br>Activities</span>
+                                        <span class="info-box-text">导出 </br>活动</span>
                                         <span class="info-box-number">{$apkInfo.exportedactivitiesnum$}</span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -242,7 +242,7 @@
                                     <span class="info-box-icon bg-green"><i class="fa fa-gears"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Exported </br>Services</span>
+                                        <span class="info-box-text">导出 </br>服务</span>
                                         <span class="info-box-number">{$apkInfo.exportedservicesnum$}</span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -259,7 +259,7 @@
                                     <span class="info-box-icon bg-yellow"><i class="fa fa-sort-amount-desc"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Exported </br>Receivers</span>
+                                        <span class="info-box-text">导出 </br>接收器</span>
                                         <span class="info-box-number">{$apkInfo.exportedreceiversnum$}</span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -272,7 +272,7 @@
                                     <span class="info-box-icon bg-red"><i class="fa fa-database"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Exported </br>Providers</span>
+                                        <span class="info-box-text">导出 </br>内容提供者</span>
                                         <span class="info-box-number">{$apkInfo.exportedprovidersnum$}</span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -293,11 +293,10 @@
                     <h2 class="page-header"></h2>
                     <div class="box-header">
                         <!-- /.box-header -->
-                        <h3 class="box-title"><i class="fa fa-certificate"></i> Signer Certificate</h3>
+                        <h3 class="box-title"><i class="fa fa-certificate"></i> 签名证书</h3>
                     </div>
-                    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
-        {$apkInfo.signercertificate$}
-        <strong>Certicate Status: </strong><span v-if="apkInfo.certissued == 'good'" class="label label-success">Good</span><span v-if="apkInfo.certissued == 'missing'" class="label label-danger">Missing</span><span v-if="apkInfo.certissued == 'broken'" class="label label-danger">Broken</span><span v-if="apkInfo.certissued == 'bad'" class="label label-warning">Bad</span>
+                    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">{$apkInfo.signercertificate$}
+        <strong>签名状态: </strong><span v-if="apkInfo.certissued == 'good'" class="label label-success">Good</span><span v-if="apkInfo.certissued == 'missing'" class="label label-danger">Missing</span><span v-if="apkInfo.certissued == 'broken'" class="label label-danger">Broken</span><span v-if="apkInfo.certissued == 'bad'" class="label label-warning">Bad</span>
         <!--其他情况-->
 </code></pre>
                 </section>
@@ -315,17 +314,17 @@
                     <div class="box">
                         <div class="box-header">
                             <!-- /.box-header -->
-                            <h3 class="box-title"><i class="fa fa-align-justify"></i> Android Permissions</h3>
+                            <h3 class="box-title"><i class="fa fa-align-justify"></i> 权限</h3>
                         </div>
                         <div class="box-body no-padding">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th>PERMISSION</th>
-                                            <th>STATUS</th>
-                                            <th>INFO</th>
-                                            <th>DESCRIPTION</th>
+                                            <th>权限</th>
+                                            <th>状态</th>
+                                            <th>信息</th>
+                                            <th>描述</th>
 
                                         </tr>
                                     </thead>
@@ -364,10 +363,9 @@
                     <h2 class="page-header"></h2>
                     <div class="box-header">
                         <!-- /.box-header -->
-                        <h3 class="box-title"><i class="fa fa-credit-card"></i> Manifest</h3>
+                        <h3 class="box-title"><i class="fa fa-credit-card"></i> 配置文件</h3>
                     </div>
-                    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">
-        {$ apkInfo.manifest $}
+                    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">{$ apkInfo.manifest $}
     </code></pre>
                 </section>
                 <!-- ============================================================= -->
@@ -378,7 +376,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title"><i class="fa fa-language"></i> Activities</h3>
+                            <h3 class="box-title"><i class="fa fa-language"></i> 活动</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -400,7 +398,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title"><i class="fa fa-gears"></i> Services</h3>
+                            <h3 class="box-title"><i class="fa fa-gears"></i> 服务</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -421,7 +419,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title"><i class="fa fa-sort-amount-desc"></i> Broadcast Receivers</h3>
+                            <h3 class="box-title"><i class="fa fa-sort-amount-desc"></i> 广播接收器</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -443,7 +441,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title"><i class="fa fa-database"></i> Content Providers</h3>
+                            <h3 class="box-title"><i class="fa fa-database"></i> 内容提供者</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -464,7 +462,7 @@
 
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title"><i class="fa fa-files-o"></i> Files</h3>
+                            <h3 class="box-title"><i class="fa fa-files-o"></i> 文件</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
