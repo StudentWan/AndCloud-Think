@@ -12,6 +12,7 @@
     .apk-list {
         width: calc(40% - 3px);
         height: 100%;
+        position: relative;
         /*background: #ffffff;*/
     }
 
@@ -160,6 +161,42 @@
         width: 40px;
         height: 40px;
     }
+
+    .apk-list .pagination {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .apk-list .pagination span {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        white-space: nowrap;
+        text-align: center;
+        background-color: #ffffff;
+        margin: auto 2px;
+        font-size: 12px;
+        font-weight: 400;
+        border: 1px solid lightgray;
+        cursor: pointer;
+    }
+
+    .apk-list .pagination span img {
+        vertical-align: baseline;
+        width: 12px;
+        height: 7.5px;
+    }
+
+    .apk-list .pagination .active {
+        border: 1px solid #49a2f5;
+        background-color: #49a2f5;
+        color: #FFFFFF;
+    }
 </style>
 {% endblock %}
 {% block contentright %}
@@ -179,15 +216,18 @@
             <span class="">{$app.label$}</span>
             <span class="">{$ displayTime(app.created_time) $}</span>
         </div>
+        <div class="pagination">
+            <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
+            <span :class="{active: n==currentPage}" v-for="n in pageCount"
+                  v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
+            <span @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
+        </div>
     </div>
     <div class="uploadfile-container">
         <div style="height: 80px;padding-top: 15px;font-weight: 400;font-size: 12px">添加新应用 <span style="color: #49a2f5"> / ADD NEW APP</span>
         </div>
         <div class="uploadfile">
             <div id="file_drag" class="step-container">
-                <!--<div class="info-an" id="" style="">拖拽到此上传 &nbsp;OR&nbsp;
-                    点击这个框
-                </div>-->
                 <img src="/static/img/daicon.png"
                      style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 164px;height: 250px"
                      alt="">
@@ -372,6 +412,39 @@
         methods: {
             displayTime: function (time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
+            },
+            getData: function (n) {
+                if (n > this.pageCount || n < 1) {
+                    return;
+                }
+                $.ajax({
+                    url: "/project/getlist",
+                    data: {
+                        perPage: 9,
+                        getPage: n
+                    },
+                    success: data => {
+                        if (data.errno == 0) {
+                            var apps = data.data.data;
+                            $vm.pageCount = data.data.totalPages;
+                            $vm.currentPage = data.data.currentPage;
+                            setTimeout(() => {
+                                $vm.isLoading = false;
+                                $vm.apps = apps.map(function (app) {
+                                    app.created_time = app.uploadtime;
+                                    app.isfullinfo = false;
+                                    if (!app.label) {
+                                        app.label = "正在检测...";
+                                    }
+                                    if (!app.logo) {
+                                        app.logo = "/static/images/loading.gif";
+                                    }
+                                    return app;
+                                });
+                            }, 100);
+                        }
+                    }
+                });
             }
         }
     });
