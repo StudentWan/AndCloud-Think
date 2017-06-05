@@ -43,7 +43,7 @@ class Projects extends think.model.base {
 
     async getApkInfoByProjectIdAndUserId(proj_id, user_id) {
         let data = await this.alias('project')
-            .field('uploadtime, info.iconimg as logo, info.*')
+            .field('project.uploadtime as uploadtime, info.iconimg as logo, info.*')
             .join([{
                 table: 'T_APKINFO',
                 as: 'info',
