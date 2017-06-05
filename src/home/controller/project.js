@@ -38,6 +38,14 @@ export default class extends Base {
         return this.success(result);
     }
 
+    async getlistapkinfoAction() {
+        let projectModel = this.model('projects');
+        let perPage = this.get('perPage');
+        let getPage = this.get('getPage');
+        let result = await projectModel.getApkInfoByUserId(this.user_id,perPage,getPage);
+        return this.success(result);
+    }
+
     async apkinfoAction() {
         let projId = this.get("proj");
         let projectModel = this.model('projects');

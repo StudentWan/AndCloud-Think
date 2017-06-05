@@ -33,7 +33,24 @@ class Projects extends think.model.base {
                 on: ['apkinfoid', 'info.id']
             }])
             .where({ 'userid': user_id }).order('id DESC').page(getPage,perPage).countSelect();
-        //console.log(data);
+        console.log(data);
+        data.data.forEach($ => {
+            $.uploadtime = moment($.uploadtime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
+        });
+        return data;
+    }
+
+    async getApkInfoByUserId(user_id,perPage,getPage) {
+        let data = await this.alias('project')
+            .distinct('apkinfoid')
+            .field('apkinfoid, info.iconimg as logo, label, info.uploadtime as uploadtime')
+            .join([{
+                table: 'T_APKINFO',
+                join: 'inner',
+                as: 'info',
+                on: ['apkinfoid', 'info.id']
+            }])
+            .where({ 'userid': user_id }).order('apkinfoid DESC').page(getPage,perPage).countSelect();
         data.data.forEach($ => {
             $.uploadtime = moment($.uploadtime, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss")
         });
