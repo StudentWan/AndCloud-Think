@@ -39,10 +39,10 @@ export default class extends Base {
     }
 
     async getlistapkinfoAction() {
-        let projectModel = this.model('projects');
+        let apkInfoModel = this.model('apkinfo');
         let perPage = this.get('perPage');
         let getPage = this.get('getPage');
-        let result = await projectModel.getApkInfoByUserId(this.user_id,perPage,getPage);
+        let result = await apkInfoModel.getApkInfoByUserId(this.user_id,perPage,getPage);
         return this.success(result);
     }
 
