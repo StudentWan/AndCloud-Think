@@ -3,43 +3,13 @@
     body {
         min-width: 1000px;
     }
-
+    
     .right-content {
         overflow: auto;
         position: relative;
     }
-
-    .screen-container {
-        width: 500px;
-        height: 100%;
-        position: absolute;
-        min-height: 700px;
-    }
-
-    .phone-shell {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-left: -150px;
-        margin-top: -290px;
-        width: 300px;
-        height: 578px;
-        background: url(/static/img/phone-shell.png);
-        background-size: 300px 578px;
-        background-repeat: no-repeat;
-        padding: 70px 20px 71px 20px;
-    }
-
-    #phone-screen {
-        /*border: 1px solid #cccccc;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-left: -180px;
-        margin-top: -290px;*/
-        background-color: #181818;
-    }
-
+    /*
+    
     .log-container {
         position: absolute;
         top: 0;
@@ -49,7 +19,7 @@
         min-height: 700px;
         padding: 15px;
     }
-
+    
     .log-title {
         height: 50px;
         background-color: rgba(41, 40, 40, 0.28);
@@ -63,7 +33,7 @@
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-
+    
     pre {
         height: calc(100% - 53px);
         background-color: rgba(14, 14, 14, 0.14);
@@ -73,13 +43,90 @@
         border-top-right-radius: 0px;
         overflow-x: hidden;
         color: white;
+    }*/
+    
+    .screen-log {
+        width: 100%;
+        height: 85%;
+        padding-left: 30px;
+        padding-right: 30px;
+        display: flex;
+        flex-direction: row;
+        flex: 0 1 auto;
+    }
+    
+    .screen {
+        width: 700px;
+    }
+    
+    .log {
+        width: 100%;
+        margin-left: 15px;
+    }
+    
+    div.title {
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        height: 40px;
+        padding-top: 15px;
+    }
+    
+    div.title span {
+        color: #49a2f5;
+    }
+    
+    .screen .br,
+    .log .br {
+        width: 100%;
+        height: 40px;
+        border-bottom: 1px solid #b7b7b7;
+        background-color: white;
+    }
+    
+    .screen-container {
+        width: 100%;
+        min-height: 613px;
+        height: 87%;
+        position: relative;
+        background-color: white;
+    }
+    
+    .phone-shell {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -130px;
+        margin-top: -255px;
+        width: 260px;
+        height: 510px;
+        background: url(/static/img/phone-shell.png);
+        background-size: 260px 510px;
+        background-repeat: no-repeat;
+        padding: 62px 17px 65px 17px;
+    }
+    
+    #phone-screen {
+        background-color: #181818;
+    }
+    
+    .log-container {
+        height: 87%;
+        background-color: white;
+    }
+    
+    pre {
+        min-height: 613px;
+        height: 100%;
+        background-color: white;
+        border: none;
+        overflow-x: hidden;
+        color: #b7b7b7;
     }
 </style>
 {% endblock %} {% block contentright %}
-<div class="screen-container" id="screen-container">
-    <div class="phone-shell">
-        <canvas id="phone-screen"></canvas>
-    </div>
+<!--<div class="screen-container" id="screen-container">
+
 
 </div>
 <div id="app" class="log-container">
@@ -87,6 +134,26 @@
         <p>检测日志</p>
     </div>
     <pre>{$logList.join('\n')$}</pre>
+</div>-->
+
+<div class="screen-log">
+    <div class="screen">
+        <div class="title">检测应用 <span>/ MONITORING APPLICATION</span></div>
+        <div class="br"></div>
+        <div class="screen-container">
+            <div class="phone-shell">
+                <canvas id="phone-screen"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="log">
+        <div class="title">检测日志 <span>/ TEST LOG</span></div>
+        <div class="br"></div>
+        <div class="log-container" id="app">
+            <pre>{$logList.join('\n')$}</pre>
+        </div>
+    </div>
+
 </div>
 {% endblock %}{% block js %}
 <script src="/static/socket/socket.io.js"></script>
@@ -143,12 +210,12 @@
             'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
         var canvas = document.getElementById('phone-screen');
         var ctx = canvas.getContext('2d');
-        canvas.width = 260;
-        canvas.height = 435;
+        canvas.width = 226;
+        canvas.height = 383;
 
         ctx.fillStyle = '#fff';
-        ctx.font = "16px serif";
-        ctx.fillText('虚拟器连接中...', 50, 220);
+        ctx.font = "14px serif";
+        ctx.fillText('虚拟器连接中...', 60, 200);
 
         var pinger = null;
         imgsocket.onopen = function() {
@@ -175,8 +242,10 @@
                 var URL = window.URL || window.webkitURL;
                 var img = new Image();
                 img.onload = function() {
-                    let width = (Number('{{height}}') / Number('{{wmheight}}')) * (Number('{{wmwidth}}'));
-                    ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
+                    // let width = (Number('{{height}}') / Number('{{wmheight}}')) * (Number('{{wmwidth}}'));
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    // ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
+
                     img.onload = null;
                     img.src = BLANK_IMG;
                     img = null;
@@ -191,6 +260,7 @@
             clearInterval(pinger)
         }
     })();
+
     function dataLimit(data) {
         if (data < 0) {
             data = 0;
@@ -199,6 +269,7 @@
         }
         return data;
     }
+
     function calculateRate(event) {
         let controlData = {
             MODE: 'DOWN',
@@ -206,11 +277,12 @@
             Y: 0
         };
         let offsetY = (document.getElementById('screen-container').offsetHeight - canvas.height) / 2;
-        let offsetX = canvas.offsetLeft + 320;
+        let offsetX = canvas.offsetLeft + 186;
         controlData.X = dataLimit((event.pageX - offsetX) / canvas.width);
         controlData.Y = dataLimit((event.pageY + document.getElementById('right-content').scrollTop - offsetY) / canvas.height);
         return controlData;
     }
+
     function mouseDownListener(event) {
         if (event.which == 3) {
             return;
@@ -218,15 +290,16 @@
         event.preventDefault();
         let Data = calculateRate(event);
         let sendData = {
-            type: 'touch',
-            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
-        }
-        // console.log(JSON.stringify(sendData));
+                type: 'touch',
+                detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+            }
+            // console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
         canvas.addEventListener('mousemove', mouseMoveListener);
         canvas.addEventListener('mouseup', mouseUpListener);
         canvas.addEventListener('mouseleave', mouseUpListener);
     }
+
     function mouseMoveListener(event) {
         if (event.which == 3) {
             return;
@@ -239,10 +312,11 @@
             type: 'touch',
             detail: Data.MODE + ',' + Data.X + ',' + Data.Y
         }
-        
+
 
         imgsocket.send(JSON.stringify(sendData));
     }
+
     function mouseUpListener(event) {
         if (event.which == 3) {
             return;
@@ -251,13 +325,14 @@
         let Data = calculateRate(event);
         Data.MODE = 'UP';
         let sendData = {
-            type: 'touch',
-            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
-        }
-        // console.log(JSON.stringify(sendData));
+                type: 'touch',
+                detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+            }
+            // console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
         stopMousing();
     }
+
     function stopMousing() {
         canvas.removeEventListener('mousemove', mouseMoveListener);
         canvas.removeEventListener('mouseup', mouseUpListener);
