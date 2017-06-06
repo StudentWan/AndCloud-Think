@@ -612,6 +612,37 @@
 
 {% block js %}
 <script>
+    if(location.hash === '') {
+        location.hash = '1#0';
+    }
+    let storeHash = location.hash.split('#').splice(1);
+    if(storeHash.length !== 2) {
+        location.hash = '1#0';
+        storeHash = location.hash.split('#').splice(1);
+    } else {
+        if(isNumber(storeHash[0])){
+            storeHash[0] = parseInt(storeHash[0]);
+        } else {
+            storeHash[0] = 1;
+        }
+        if(isNumber(storeHash[1])){
+            storeHash[1] = parseInt(storeHash[1]);
+            if(storeHash[1] >=9 || storeHash[1] < 0) {
+                storeHash[1] = 0;
+            }
+        } else {
+            storeHash[1] = 0;
+        }
+    }
+
+
+    let lastPage = storeHash[0],
+        lastIndex = storeHash[1];
+
+    function isNumber(obj) {
+        return !isNaN(parseFloat(obj)) && isFinite(obj);
+    }
+
     $('.guide-bar p')[0].firstChild.nodeValue = '历史记录';
     $('.guide-bar p')[0].childNodes[1].firstChild.nodeValue = ' / HISTORICAL RECORD';
     var formatDate = function (date) {
@@ -919,6 +950,7 @@
                     $('.app-item')[index].childNodes[4].style.backgroundColor = '#49a2f5';
                     $('.app-item')[index].childNodes[4].style.color = '#ffffff';
                 },100)
+                location.hash = `${this.currentPage}#${this.selectedIndex}`;
             },
             displayTime: function (time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
@@ -1027,6 +1059,7 @@
                                 });
                                 this.selectedIndex = 0;
                                 this.select(this.selectedIndex);
+
                             }, 100);
                         }
                     }
@@ -1043,37 +1076,48 @@
             $(this.$el).css('opacity', '1')
         }
     });
-    $.ajax({
-        url: "/project/getlist",
-        data: {
-            perPage: 9,
-            getPage: 1
-        },
-        success: data => {
+    function getList() {
+        $.ajax({
+            url: "/project/getlist",
+            data: {
+                perPage: 9,
+                getPage: lastPage
+            },
+            success: data => {
 
-            if (data.errno == 0) {
-                var apps = data.data.data;
-                $vm.pageCount = data.data.totalPages;
-                $vm.currentPage = data.data.currentPage;
-                $vm.getNow();
-                setTimeout(() => {
-                    $vm.isLoading = false;
-                    $vm.apps = apps.map(function (app) {
-                        app.created_time = app.uploadtime;
-                        app.isfullinfo = false;
-                        if (!app.label) {
-                            app.label = "正在检测...";
+                if (data.errno == 0) {
+                    var apps = data.data.data;
+                    $vm.pageCount = data.data.totalPages;
+                    $vm.currentPage = data.data.currentPage;
+                    $vm.getNow();
+                    if(lastPage > $vm.pageCount || lastPage < 1) {
+                        lastPage = 1;
+                        if($vm.pageCount !== 0) {
+                            getList();
                         }
-                        if (!app.logo) {
-                            app.logo = "/static/images/loading.gif";
-                        }
-                        return app;
-                    });
-                    $vm.selectedIndex = 0;
-                    $vm.select($vm.selectedIndex);
-                }, 100);
+                        return ;
+                    }
+                    setTimeout(() => {
+                        $vm.isLoading = false;
+                        $vm.apps = apps.map(function (app) {
+                            app.created_time = app.uploadtime;
+                            app.isfullinfo = false;
+                            if (!app.label) {
+                                app.label = "正在检测...";
+                            }
+                            if (!app.logo) {
+                                app.logo = "/static/images/loading.gif";
+                            }
+                            return app;
+                        });
+                        $vm.selectedIndex = lastIndex;
+                        $vm.select($vm.selectedIndex);
+                    }, 100);
+                }
             }
-        }
-    });
+        });
+    }
+    getList();
+
 </script>
 {% endblock %}
