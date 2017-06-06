@@ -8,60 +8,24 @@
         overflow: auto;
         position: relative;
     }
-    /*
-    
-    .log-container {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 500px;
-        min-height: 700px;
-        padding: 15px;
-    }
-    
-    .log-title {
-        height: 50px;
-        background-color: rgba(41, 40, 40, 0.28);
-        font-size: 17px;
-        font-weight: 400;
-        padding-top: 12px;
-        padding-left: 20px;
-        margin-bottom: 3px;
-        color: #ffffff;
-        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-    
-    pre {
-        height: calc(100% - 53px);
-        background-color: rgba(14, 14, 14, 0.14);
-        border: none;
-        border-radius: 5px;
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-        overflow-x: hidden;
-        color: white;
-    }*/
     
     .screen-log {
         width: 100%;
         height: 85%;
         padding-left: 30px;
         padding-right: 30px;
-        display: flex;
-        flex-direction: row;
-        flex: 0 1 auto;
     }
     
     .screen {
-        width: 700px;
+        width: 452px;
+        float: left;
+        height: 100%;
     }
     
     .log {
+        padding-left: 470px;
         width: 100%;
-        margin-left: 15px;
+        height: 100%;
     }
     
     div.title {
@@ -87,7 +51,7 @@
     .screen-container {
         width: 100%;
         min-height: 613px;
-        height: 87%;
+        height: calc(100% - 100px);
         position: relative;
         background-color: white;
     }
@@ -111,36 +75,31 @@
     }
     
     .log-container {
-        height: 87%;
+        height: calc(100% - 100px);
+        min-height: 613px;
         background-color: white;
     }
     
     pre {
-        min-height: 613px;
+        overflow-y: auto;
         height: 100%;
         background-color: white;
         border: none;
         overflow-x: hidden;
         color: #b7b7b7;
+        word-break: break-all;
     }
 </style>
 {% endblock %} {% block contentright %}
-<!--<div class="screen-container" id="screen-container">
 
-
-</div>
-<div id="app" class="log-container">
-    <div class="log-title">
-        <p>检测日志</p>
-    </div>
-    <pre>{$logList.join('\n')$}</pre>
-</div>-->
 
 <div class="screen-log">
+
     <div class="screen">
+
         <div class="title">检测应用 <span>/ MONITORING APPLICATION</span></div>
         <div class="br"></div>
-        <div class="screen-container">
+        <div class="screen-container" id="screen-container">
             <div class="phone-shell">
                 <canvas id="phone-screen"></canvas>
             </div>
@@ -153,6 +112,7 @@
             <pre>{$logList.join('\n')$}</pre>
         </div>
     </div>
+
 
 </div>
 {% endblock %}{% block js %}
@@ -242,9 +202,8 @@
                 var URL = window.URL || window.webkitURL;
                 var img = new Image();
                 img.onload = function() {
-                    // let width = (Number('{{height}}') / Number('{{wmheight}}')) * (Number('{{wmwidth}}'));
+
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    // ctx.drawImage(img, (Number('{{width}}') - width) / 2, 0, width, '{{height}}', 0, 0, canvas.width, canvas.height);
 
                     img.onload = null;
                     img.src = BLANK_IMG;
@@ -276,7 +235,7 @@
             X: 0,
             Y: 0
         };
-        let offsetY = (document.getElementById('screen-container').offsetHeight - canvas.height) / 2;
+        let offsetY = (document.getElementById('screen-container').offsetHeight - canvas.height) / 2 + 200;
         let offsetX = canvas.offsetLeft + 186;
         controlData.X = dataLimit((event.pageX - offsetX) / canvas.width);
         controlData.Y = dataLimit((event.pageY + document.getElementById('right-content').scrollTop - offsetY) / canvas.height);
@@ -313,7 +272,7 @@
             detail: Data.MODE + ',' + Data.X + ',' + Data.Y
         }
 
-
+        // console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
     }
 
@@ -325,10 +284,10 @@
         let Data = calculateRate(event);
         Data.MODE = 'UP';
         let sendData = {
-                type: 'touch',
-                detail: Data.MODE + ',' + Data.X + ',' + Data.Y
-            }
-            // console.log(JSON.stringify(sendData));
+            type: 'touch',
+            detail: Data.MODE + ',' + Data.X + ',' + Data.Y
+        };
+        // console.log(JSON.stringify(sendData));
         imgsocket.send(JSON.stringify(sendData));
         stopMousing();
     }
