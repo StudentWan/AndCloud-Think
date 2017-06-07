@@ -43,6 +43,10 @@
         }
     }
 
+    .app-item-wrapper {
+        padding-bottom: 30px;
+    }
+
     .app-item {
         padding: 10px;
         margin: 4px auto;
@@ -108,10 +112,18 @@
     }
 
     .app {
-        position: relative;
-        overflow: hidden;
+
+        overflow: auto;
         height: 100%;
+
         /*padding-top: 80px;*/
+    }
+
+    .app-wrapper {
+        position: relative;
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
     }
 
     .app span {
@@ -123,13 +135,14 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        margin: 0;
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        margin: 0;
     }
 
     .app .pagination span {
+
         width: 25px;
         height: 25px;
         line-height: 25px;
@@ -205,7 +218,7 @@
         width: 100%;
         margin-left: auto;
         margin-right: auto;
-        font-weight:400;
+        font-weight: 400;
     }
 
     .app-selected {
@@ -222,7 +235,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
     }
 
     .app-info-detail .app-name {
@@ -256,7 +269,7 @@
         background-color: #49a2f5;
         color: #FFFFFF;
         font-weight: 400;
-        line-height:30px;
+        line-height: 30px;
         white-space: nowrap;
         overflow: auto;
     }
@@ -267,7 +280,7 @@
         position: relative;
     }
 
-    .app-info-detail .content p{
+    .app-info-detail .content p {
         margin: 1px;
     }
 
@@ -447,163 +460,174 @@
             </h1>
         </div>-->
         <div class="app">
-            <p style="font-weight: 400;font-size: 12px">已检测项目 <img src="/static/img/xiaosanjiao.png" alt=""></p>
-            <template v-for="app,index in apps">
-                <div class="app-item"
-                     :key="index" :data-index="index">
-                    <img :src="app.logo" alt="" class="logo">
-                    <div style="flex-grow: 2;padding-left: 30px">
-                        <div>
-                            <span>应用名称：</span> <span> {$app.label$}</span>
+            <div class="app-wrapper">
+                <p style="font-weight: 400;font-size: 12px">已检测项目 <img src="/static/img/xiaosanjiao.png" alt=""></p>
+                <div class="app-item-wrapper">
+                    <template v-for="app,index in apps">
+                        <div class="app-item"
+                             :key="index" :data-index="index">
+                            <img :src="app.logo" alt="" class="logo">
+                            <div style="flex-grow: 2;padding-left: 30px">
+                                <div>
+                                    <span>应用名称：</span> <span> {$app.label$}</span>
+                                </div>
+                                <div>
+                                    <span>检测日期：</span> <span> {$displayTime(app.created_time)$}</span>
+                                </div>
+                            </div>
+                            <div class="detail-info" @click="select(index)">查看详情</div>
                         </div>
-                        <div>
-                            <span>检测日期：</span> <span> {$displayTime(app.created_time)$}</span>
-                        </div>
-                    </div>
-                    <div class="detail-info" @click="select(index)">查看详情</div>
+                    </template>
                 </div>
-            </template>
-            <div class="pagination">
-                <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
-                <span :class="{active: n==currentPage}" v-for="n in pageCount"
-                      v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
-                <span @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
+                <div class="pagination">
+                    <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
+                    <span :class="{active: n==currentPage}" v-for="n in pageCount"
+                          v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
+                    <span @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="app-selected">
-            <div v-if="selectedIndex > -1" v-bind:key="2">
-                <div class="test-result-title">
-                    <p style="font-weight: 400; font-size: 12px">检测结果<span style="color: #49a2f5"> / DETECTION RESULT</span></p>
-                </div>
-                <div class="app-info-detail">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <div class="content-wrapper">
+        <div v-if="selectedIndex > -1" v-bind:key="2">
+            <div class="test-result-title">
+                <p style="font-weight: 400; font-size: 12px">检测结果<span style="color: #49a2f5"> / DETECTION RESULT</span>
+                </p>
+            </div>
+            <div class="app-info-detail">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="content-wrapper">
                             <div class="title" style="text-align: center">应用名称：{$ apps[selectedIndex].label $}</div>
                             <div class="content">
                                 <img :src="apps[selectedIndex].logo" alt="" class="logo">
                             </div>
-                            </div>
                         </div>
-                        <div class="col-xs-9">
-                            <div class="content-wrapper">
-                            <div class="title" style="padding-left: 15px;display: flex;justify-content: space-between;align-items: center">文件分析报告 <a  v-if="apps[selectedIndex].isfullinfo"  style="text-decoration: none;color: #FFFFFF;border-left: 1px solid #FFFFFF;padding-left: 5px;padding-right: 5px;background-color: #49a2f3" v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id" target="view_window"><img
-                                    src="/static/img/baogao.png" style="width: 10.8px;height: 12px;vertical-align: -5%" alt=""> 静态检测报告</a></div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="content-wrapper">
+                            <div class="title"
+                                 style="padding-left: 15px;display: flex;justify-content: space-between;align-items: center">
+                                文件分析报告 <a v-if="apps[selectedIndex].isfullinfo"
+                                          style="text-decoration: none;color: #FFFFFF;border-left: 1px solid #FFFFFF;padding-left: 5px;padding-right: 5px;background-color: #49a2f3"
+                                          v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id"
+                                          target="view_window"><img
+                                    src="/static/img/baogao.png" style="width: 10.8px;height: 12px;vertical-align: -5%"
+                                    alt=""> 静态检测报告</a></div>
                             <div class="content" style="padding: 23px 15px;font-size: 10px;font-weight: 400">
-                                        <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后......</div>
-                                        <div v-if="apps[selectedIndex].isfullinfo">
-                                            <p>包名：{$ apps[selectedIndex].packagename $}</p>
-                                            <p>文件大小：{$(apps[selectedIndex].size/ 1024 / 1024).toFixed(2)$}MB</p>
-                                            <p>文件MD5： {$apps[selectedIndex].md5$}</p>
-                                            <p>文件SHA1：{$apps[selectedIndex].sha1$}</p>
-                                        </div>
-                            </div>
+                                <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后......</div>
+                                <div v-if="apps[selectedIndex].isfullinfo">
+                                    <p>包名：{$ apps[selectedIndex].packagename $}</p>
+                                    <p>文件大小：{$(apps[selectedIndex].size/ 1024 / 1024).toFixed(2)$}MB</p>
+                                    <p>文件MD5： {$apps[selectedIndex].md5$}</p>
+                                    <p>文件SHA1：{$apps[selectedIndex].sha1$}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--Waiting for implement-->
-                <div class="app-action-list">
-                    <div class="row">
-                        <div v-if="apps[selectedIndex].isfullinfo === false">
+            </div>
+            <!--Waiting for implement-->
+            <div class="app-action-list">
+                <div class="row">
+                    <div v-if="apps[selectedIndex].isfullinfo === false">
+                    </div>
+                    <div v-else style="overflow: auto;padding: 12px;">
+                        <div style="overflow: auto;margin: 15px auto;">
+                            <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
+                                自动检测
+                            </div>
                         </div>
-                        <div v-else style="overflow: auto;padding: 12px;">
-                            <div style="overflow: auto;margin: 15px auto;">
-                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
-                                    自动检测
-                                </div>
+
+
+                        <div class="infoblanket">
+                            <div class='process_bar' style="width: 30%;">
+                                <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
+                                    <circle cx="55" cy="55" r="50" fill="none" stroke="white" stroke-width="5"
+                                            stroke-linecap="round"/>
+                                    <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50" fill="none"
+                                            stroke="#5cb85c" stroke-width="5" stroke-dasharray="157,10000"/>
+                                </svg>
+                                <div class="mask">{$autoPercentage$}</div>
                             </div>
 
+                            <div class="test_info" style="width: 40%;text-align: center">
+                                <p>{$ autoToken.imageid $}</p>
+                                <p>存活时间：{$ autoToken.testTime $} min</p>
+                            </div>
 
-                            <div class="infoblanket">
-                                <div class='process_bar' style="width: 30%;">
-                                    <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
-                                        <circle cx="55" cy="55" r="50" fill="none" stroke="white" stroke-width="5"
-                                                stroke-linecap="round"/>
-                                        <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50" fill="none"
-                                                stroke="#5cb85c" stroke-width="5" stroke-dasharray="157,10000"/>
-                                    </svg>
-                                    <div class="mask">{$autoPercentage$}</div>
-                                </div>
+                            <div class="choose_button" style="width: 30%;text-align: center">
+                                <p>
+                                    <a v-bind:href="'/runner/token/'+autoToken.token"
+                                       style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
+                                        <i class="iconfont icon-creative test-link"
+                                           style="font-size: 30px;padding-top:5px;"></i></a>
+                                </p>
+                                <transition name="fade">
+                                    <p v-if='autoToken.isComplete' style="">
 
-                                <div class="test_info" style="width: 40%;text-align: center">
-                                    <p>{$ autoToken.imageid $}</p>
-                                    <p>存活时间：{$ autoToken.testTime $} min</p>
-                                </div>
-
-                                <div class="choose_button" style="width: 30%;text-align: center">
-                                    <p>
-                                        <a v-bind:href="'/runner/token/'+autoToken.token"
+                                        <a v-bind:href="'/dynamicreport/index?dynamicid=' + autoToken.simulatorId+'&staticid='+apps[selectedIndex].id+'&auto=1'+'&projectid='+autoToken.projectid"
+                                           target="view_window"
                                            style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
-                                            <i class="iconfont icon-creative test-link"
+                                            <i class="iconfont icon-file test-link"
                                                style="font-size: 30px;padding-top:5px;"></i></a>
                                     </p>
-                                    <transition name="fade">
-                                        <p v-if='autoToken.isComplete' style="">
+                                </transition>
+                            </div>
+                        </div>
 
-                                            <a v-bind:href="'/dynamicreport/index?dynamicid=' + autoToken.simulatorId+'&staticid='+apps[selectedIndex].id+'&auto=1'+'&projectid='+autoToken.projectid"
-                                               target="view_window"
-                                               style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
-                                                <i class="iconfont icon-file test-link"
-                                                   style="font-size: 30px;padding-top:5px;"></i></a>
-                                        </p>
-                                    </transition>
-                                </div>
+
+                        <div style="overflow: auto;margin: 15px auto; display: flex; justify-content: space-between;align-items: center">
+                            <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
+                                手动检测
+                            </div>
+                            <div v-on:click="chooseTest" data-show-layer="hw-layer"
+                                 style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
+                                <i class="iconfont icon-repairfill test-link"
+                                   style="font-size: 30px;padding-top:5px;"></i>
                             </div>
 
+                        </div>
 
-                            <div style="overflow: auto;margin: 15px auto; display: flex; justify-content: space-between;align-items: center">
-                                <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
-                                    手动检测
-                                </div>
-                                <div v-on:click="chooseTest" data-show-layer="hw-layer"
-                                     style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
-                                    <i class="iconfont icon-repairfill test-link"
-                                       style="font-size: 30px;padding-top:5px;"></i>
-                                </div>
-
-                            </div>
-
-                            <div id="options">
-                                <div class="info-hand" style="margin-bottom: 20px;cursor: auto;"
-                                     v-for="(token,index) of handToken" :key="token">
-                                    <div class="container">
-                                        <div class="bar">
+                        <div id="options">
+                            <div class="info-hand" style="margin-bottom: 20px;cursor: auto;"
+                                 v-for="(token,index) of handToken" :key="token">
+                                <div class="container">
+                                    <div class="bar">
                                             <span class="bar-unfill">
                                                 <span class="bar-fill" style="position: relative">
                                                     <span class="bar-percentage"
                                                           style="position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);"></span>
                                             </span>
                                             </span>
-                                        </div>
                                     </div>
-                                    <div class="test_info"
-                                         style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
-                                        <p>{$ token.imageid $}</p>
-                                        <p>存活时间：{$ token.testTime $} min</p>
-                                    </div>
-                                    <a :href="'/runner/token/'+token.token"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
-                                            class="iconfont icon-creative test-link"
-                                            style="font-size: 30px;padding-top:5px;"></i></a>
-                                    <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
-                                            class="iconfont icon-stop test-link"
-                                            style="font-size: 30px;padding-top:5px;"></i></a>
-
-                                    <a v-bind:href="'/dynamicreport/index?dynamicid=' + token.simulatorId+'&staticid='+apps[selectedIndex].id+'&auto=0'+'&projectid='+token.projectid"
-                                       target="view_window" v-if="token.isComplete"
-                                       style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
-                                            class="iconfont icon-file test-link"
-                                            style="font-size: 30px;padding-top:5px;"></i></a>
                                 </div>
+                                <div class="test_info"
+                                     style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
+                                    <p>{$ token.imageid $}</p>
+                                    <p>存活时间：{$ token.testTime $} min</p>
+                                </div>
+                                <a :href="'/runner/token/'+token.token"
+                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
+                                        class="iconfont icon-creative test-link"
+                                        style="font-size: 30px;padding-top:5px;"></i></a>
+                                <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)"
+                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
+                                        class="iconfont icon-stop test-link"
+                                        style="font-size: 30px;padding-top:5px;"></i></a>
+
+                                <a v-bind:href="'/dynamicreport/index?dynamicid=' + token.simulatorId+'&staticid='+apps[selectedIndex].id+'&auto=0'+'&projectid='+token.projectid"
+                                   target="view_window" v-if="token.isComplete"
+                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
+                                        class="iconfont icon-file test-link"
+                                        style="font-size: 30px;padding-top:5px;"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
     </div>
 </div>
@@ -612,22 +636,22 @@
 
 {% block js %}
 <script>
-    if(location.hash === '') {
+    if (location.hash === '') {
         location.hash = '1#0';
     }
     let storeHash = location.hash.split('#').splice(1);
-    if(storeHash.length !== 2) {
+    if (storeHash.length !== 2) {
         location.hash = '1#0';
         storeHash = location.hash.split('#').splice(1);
     } else {
-        if(isNumber(storeHash[0])){
+        if (isNumber(storeHash[0])) {
             storeHash[0] = parseInt(storeHash[0]);
         } else {
             storeHash[0] = 1;
         }
-        if(isNumber(storeHash[1])){
+        if (isNumber(storeHash[1])) {
             storeHash[1] = parseInt(storeHash[1]);
-            if(storeHash[1] >=9 || storeHash[1] < 0) {
+            if (storeHash[1] >= 9 || storeHash[1] < 0) {
                 storeHash[1] = 0;
             }
         } else {
@@ -940,7 +964,7 @@
                 this.selectedIndex = index;
                 this.getTokensEvt(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
-                setTimeout(function() {
+                setTimeout(function () {
                     for (let item of $('.app-item')) {
                         item.style.border = '1px solid lightgray';
                         item.childNodes[4].style.backgroundColor = '#ffffff';
@@ -949,7 +973,7 @@
                     $('.app-item')[index].style.border = '1px solid #49a2f5';
                     $('.app-item')[index].childNodes[4].style.backgroundColor = '#49a2f5';
                     $('.app-item')[index].childNodes[4].style.color = '#ffffff';
-                },100)
+                }, 100)
                 location.hash = `${this.currentPage}#${this.selectedIndex}`;
             },
             displayTime: function (time) {
@@ -1090,12 +1114,12 @@
                     $vm.pageCount = data.data.totalPages;
                     $vm.currentPage = data.data.currentPage;
                     $vm.getNow();
-                    if(lastPage > $vm.pageCount || lastPage < 1) {
+                    if (lastPage > $vm.pageCount || lastPage < 1) {
                         lastPage = 1;
-                        if($vm.pageCount !== 0) {
+                        if ($vm.pageCount !== 0) {
                             getList();
                         }
-                        return ;
+                        return;
                     }
                     setTimeout(() => {
                         $vm.isLoading = false;

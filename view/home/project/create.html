@@ -12,8 +12,15 @@
     .apk-list {
         width: calc(40% - 3px);
         height: 100%;
-        position: relative;
+        overflow: auto;
         /*background: #ffffff;*/
+    }
+
+    .apk-list-wrapper {
+        position: relative;
+        height: auto !important;
+        height: 100%;
+        min-height:100%;
     }
 
     .uploadfile-container {
@@ -140,6 +147,10 @@
         background-image: url("/static/img/yingyongtianjia-xuanze.png");
     }
 
+    .app-item-wrapper {
+        padding-bottom: 30px;
+    }
+
     .app-item {
         padding: 10px;
         margin-bottom: 4px;
@@ -205,8 +216,10 @@
 <!--</div>-->
 <div class="contain-upload" style="height: calc(100% - 140px);">
     <div class="apk-list" id="apk-list">
+        <div class="apk-list-wrapper">
         <div style="height: 45px;padding-top: 15px;font-weight: 400;font-size: 12px">添加历史 <span style="color: #49a2f5"> / HISTORICAL RECORD</span>
         </div>
+            <div class="app-item-wrapper">
         <div style="height:35px;font-weight: 400;font-size: 10px;display: flex;justify-content: space-between;align-items: center">
             <span style="width: 80px;text-align: center;">应用程序图标</span><span style="width: 80px;text-align: center;">应用程序名称</span><span
                 style="width: 80px;text-align: left;">检测时间</span></div>
@@ -216,11 +229,13 @@
             <span class="">{$app.label$}</span>
             <span class="">{$ displayTime(app.created_time) $}</span>
         </div>
+            </div>
         <div class="pagination">
             <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
             <span :class="{active: n==currentPage}" v-for="n in pageCount"
                   v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
             <span @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
+        </div>
         </div>
     </div>
     <div class="uploadfile-container">
