@@ -21,7 +21,7 @@ class Apkinfo extends think.model.base {
             }])
             .where({ 'project.userid': user_id }).order('info.id DESC').page(getPage,perPage).countSelect();
 
-        let res = await this.query("SELECT DISTINCT info.id FROM T_APKINFO AS info INNER JOIN `T_PROJECT` AS `project` ON info.id = `project`.`apkinfoid` WHERE ( project.userid = '5' )");
+        let res = await this.query("SELECT DISTINCT info.id FROM T_APKINFO AS info INNER JOIN `T_PROJECT` AS `project` ON info.id = `project`.`apkinfoid` WHERE ( project.userid = '" +user_id+"' )");
         data.count = res.length;
         data.totalPages = Math.ceil(data.count / 9);
         data.data.forEach($ => {
