@@ -1,45 +1,43 @@
-{% extends "./../basebar.html" %}
-{% block headerbar %}
+{% extends "./../basebar.html" %} {% block headerbar %}
 <style>
-
     .contain-upload {
         padding-left: 30px;
         padding-right: 30px;
         display: flex;
         justify-content: space-between;
     }
-
+    
     .apk-list {
         width: calc(40% - 3px);
         height: 100%;
         position: relative;
         /*background: #ffffff;*/
     }
-
+    
     .uploadfile-container {
         width: calc(55% - 3px);
         height: 100%;
     }
-
+    
     .uploadfile {
         height: calc(100% - 115px);
         background: #FFFFFF;
         border: 1px solid lightgray;
     }
-
+    
     .selector-container {
         display: flex;
         justify-content: space-around;
         align-items: center;
     }
-
+    
     .info-an {
         transition: all 100ms ease;
         position: relative;
         top: 50%;
         margin-top: -0.5em
     }
-
+    
     .wave-position {
         transition: all 1000ms ease;
         height: 166px;
@@ -49,7 +47,7 @@
         width: 4592px;
         transform: translateY(100%);
     }
-
+    
     @keyframes background-move {
         0% {
             box-shadow: black 0px 0px 50px;
@@ -61,11 +59,11 @@
             box-shadow: black 0px 0px 50px;
         }
     }
-
+    
     .right-content {
         overflow: hidden;
     }
-
+    
     .step-container {
         -webkit-transition: all 1s;
         -moz-transition: all 1s;
@@ -78,15 +76,15 @@
         text-align: center;
         overflow: hidden;
     }
-
+    
     .step-container:not(:first-child) {
         transform: translateY(0) scale(0);
     }
-
+    
     #file_drag {
         position: relative;
     }
-
+    
     input[type='file'] {
         width: 100%;
         height: 100%;
@@ -95,19 +93,19 @@
         margin-top: -1em;
         opacity: 0
     }
-
+    
     .wave-high {
         transition: all 1000ms ease;
         top: 100%;
         position: relative;
     }
-
+    
     .wave-holder {
         background: rgba(13, 21, 56, 0.36);
         height: 1000px;
         margin-top: 1px
     }
-
+    
     #selector_vm_machine {
         /*position: fixed;*/
         /*top: 0;*/
@@ -117,29 +115,29 @@
         /*background: rgba(1, 1, 1, 0.57);*/
         margin-top: -40px;
     }
-
+    
     #selector_vm_machine select {
         background: transparent;
         outline: 0;
     }
-
+    
     #selector_vm_machine option {
         background: transparent;
     }
-
-    #selector_vm_machine .container > div {
+    
+    #selector_vm_machine .container>div {
         top: 50%;
     }
-
+    
     #yingyongtianjia {
         border-left: 2px solid #49a2f5;
         background: rgba(30, 29, 39, 0.18);
     }
-
+    
     #yingyongtianjia a {
         background-image: url("/static/img/yingyongtianjia-xuanze.png");
     }
-
+    
     .app-item {
         padding: 10px;
         margin-bottom: 4px;
@@ -151,17 +149,17 @@
         font-weight: 400;
         background-color: #ffffff;
     }
-
+    
     .app-item span {
         width: 80px;
         text-align: center;
     }
-
+    
     .logo {
         width: 40px;
         height: 40px;
     }
-
+    
     .apk-list .pagination {
         position: absolute;
         bottom: 0;
@@ -171,7 +169,7 @@
         justify-content: flex-end;
         align-items: center;
     }
-
+    
     .apk-list .pagination span {
         width: 25px;
         height: 25px;
@@ -185,21 +183,31 @@
         border: 1px solid lightgray;
         cursor: pointer;
     }
-
+    
     .apk-list .pagination span img {
         vertical-align: baseline;
         width: 12px;
         height: 7.5px;
     }
-
+    
     .apk-list .pagination .active {
         border: 1px solid #49a2f5;
         background-color: #49a2f5;
         color: #FFFFFF;
     }
+    
+    span.staticreport a:visited,
+    span.staticreport a:link {
+        text-decoration: none;
+        color: #428bca;
+    }
+    
+    span.staticreport a:hover {
+        text-decoration: none;
+        color: #2a6496;
+    }
 </style>
-{% endblock %}
-{% block contentright %}
+{% endblock %} {% block contentright %}
 <!--<div style="width:100%;height:80px;background: rgba(13, 21, 56, 0.36)">-->
 
 <!--</div>-->
@@ -208,18 +216,16 @@
         <div style="height: 45px;padding-top: 15px;font-weight: 400;font-size: 12px">添加历史 <span style="color: #49a2f5"> / HISTORICAL RECORD</span>
         </div>
         <div style="height:35px;font-weight: 400;font-size: 10px;display: flex;justify-content: space-between;align-items: center">
-            <span style="width: 80px;text-align: center;">应用程序图标</span><span style="width: 80px;text-align: center;">应用程序名称</span><span
-                style="width: 80px;text-align: left;">检测时间</span></div>
-        <div class="app-item" v-for=" app in apps"
-             style="display: flex;justify-content: space-between;align-items: center">
+            <span style="width: 80px;text-align: center;">应用程序图标</span><span style="width: 80px;text-align: center;">应用程序名称</span><span style="width: 80px;text-align: left;">检测时间</span></div>
+        <div class="app-item" v-for=" app in apps" style="display: flex;justify-content: space-between;align-items: center">
             <span><img :src="app.logo" alt="" class="logo"></span>
             <span class="">{$app.label$}</span>
             <span class="">{$ displayTime(app.created_time) $}</span>
+            <span class="staticreport"><a v-bind:href="'/staticreport/index?apkinfoid=' + app.id" target="view_window">静态报告</a></span>
         </div>
         <div class="pagination">
             <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
-            <span :class="{active: n==currentPage}" v-for="n in pageCount"
-                  v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
+            <span :class="{active: n==currentPage}" v-for="n in pageCount" v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
             <span @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
         </div>
     </div>
@@ -228,9 +234,7 @@
         </div>
         <div class="uploadfile">
             <div id="file_drag" class="step-container">
-                <img src="/static/img/daicon.png"
-                     style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 164px;height: 250px"
-                     alt="">
+                <img src="/static/img/daicon.png" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 164px;height: 250px" alt="">
                 <input type="file" style="" id="file">
             </div>
             <div></div>
@@ -265,13 +269,13 @@
         </div>
     </div>
 </div>
-{% endblock %}
-{% block js %}
+{% endblock %} {% block js %}
 <script src="/static/app/js/moment-with-locales.js"></script>
 <script>
     moment.locale('zh-CN');
     $('.guide-bar p')[0].firstChild.nodeValue = '添加应用';
     $('.guide-bar p')[0].childNodes[1].firstChild.nodeValue = ' / ADD APP';
+
     function uploadFile(file) {
 
         var name = file.name;
@@ -287,21 +291,23 @@
             method: 'POST',
             contentType: false,
             processData: false,
-            xhr: function () {        //这是关键  获取原生的xhr对象  做以前做的所有事情
+            xhr: function() { //这是关键  获取原生的xhr对象  做以前做的所有事情
                 var xhr = jQuery.ajaxSettings.xhr();
-                xhr.upload.onload = function () {
+                xhr.upload.onload = function() {
 
                 };
-                xhr.upload.onprogress = function (ev) {
+                xhr.upload.onprogress = function(ev) {
                     if (ev.lengthComputable) {
-                        var percent = new Intl.NumberFormat('en-IN', {maximumSignificantDigits: 2}).format(100 * ev.loaded / ev.total);
+                        var percent = new Intl.NumberFormat('en-IN', {
+                            maximumSignificantDigits: 2
+                        }).format(100 * ev.loaded / ev.total);
                         message("上传 <i>" + name + "</i> " + percent + "%");
                         updateProgress(percent + "%");
                     }
                 };
                 return xhr;
             },
-            success: function (data) {
+            success: function(data) {
                 hide();
                 if (data.errno === 0) {
                     message("上传 <i>" + name + "</i> 成功");
@@ -313,7 +319,7 @@
     }
 
 
-    $("#file").on('change', function (evt) {
+    $("#file").on('change', function(evt) {
         global_file = this.files[0];
         animateToOne();
     });
@@ -323,7 +329,7 @@
         switch (status) {
             case "success":
                 $("#message").css('color', 'green');
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#message").css('color', 'white');
                 }, 3000);
                 break;
@@ -341,11 +347,13 @@
     function show() {
         updateProgress("0%");
     }
+
     function hide() {
         updateProgress("-166px");
     }
+
     function updateProgress(precent) {
-        $(".wave-high").each(function (ele) {
+        $(".wave-high").each(function(ele) {
             if (precent.indexOf('%') > 0) {
                 $(this).css('top', "calc(100% - " + precent + " - 166px)");
             } else {
@@ -354,12 +362,12 @@
         });
     }
     var isOver = false;
-    $("body").get(0).ondragleave = function (evt) {
+    $("body").get(0).ondragleave = function(evt) {
         $('#file_drag').css('animation', 'none');
         isOver = false;
         return false;
     };
-    $("body").get(0).ondragover = function (evt) {
+    $("body").get(0).ondragover = function(evt) {
         evt.preventDefault();
         if (!isOver) {
             $('#file_drag').css('animation', 'background-move 2000ms ease infinite');
@@ -368,7 +376,7 @@
     };
 
     var global_file = null;
-    $('#file_drag').get(0).addEventListener('drop', function (e) {
+    $('#file_drag').get(0).addEventListener('drop', function(e) {
         e.preventDefault(); // 阻止默认事件
         isOver = false;
         $('#file_drag').css('animation', 'none');
@@ -377,6 +385,7 @@
     }, false);
 
     var global_curIndex = 0;
+
     function animateToOne() {
         $("#file_drag").css('transform', 'translateY(-100%) scale(0)');
         $("#file_drag").css('opacity', '0');
@@ -393,7 +402,7 @@
         $(".step-container").eq(2).css('opacity', '1');
         hide();
         show();
-        setTimeout(function () {
+        setTimeout(function() {
             uploadFile(global_file);
         }, 1000);
     }
@@ -410,10 +419,10 @@
             apps: []
         },
         methods: {
-            displayTime: function (time) {
+            displayTime: function(time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
             },
-            getData: function (n) {
+            getData: function(n) {
                 if (n > this.pageCount || n < 1) {
                     return;
                 }
@@ -430,7 +439,7 @@
                             $vm.currentPage = data.data.currentPage;
                             setTimeout(() => {
                                 $vm.isLoading = false;
-                                $vm.apps = apps.map(function (app) {
+                                $vm.apps = apps.map(function(app) {
                                     app.created_time = app.uploadtime;
                                     app.isfullinfo = false;
                                     if (!app.label) {
@@ -461,7 +470,7 @@
                 $vm.pageCount = data.data.totalPages;
                 $vm.currentPage = data.data.currentPage;
                 setTimeout(() => {
-                    $vm.apps = apps.map(function (app) {
+                    $vm.apps = apps.map(function(app) {
                         app.created_time = app.uploadtime;
                         app.isfullinfo = false;
                         if (!app.label) {
@@ -476,7 +485,5 @@
             }
         }
     })
-
-
 </script>
 {% endblock %}

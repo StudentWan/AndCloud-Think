@@ -34,7 +34,7 @@ export default class extends Base {
         let projectModel = this.model('projects');
         let perPage = this.get('perPage');
         let getPage = this.get('getPage');
-        let result = await projectModel.getProjectByUserID(this.user_id,perPage,getPage);
+        let result = await projectModel.getProjectByUserID(this.user_id, perPage, getPage);
         return this.success(result);
     }
 
@@ -42,7 +42,7 @@ export default class extends Base {
         let apkInfoModel = this.model('apkinfo');
         let perPage = this.get('perPage');
         let getPage = this.get('getPage');
-        let result = await apkInfoModel.getApkInfoByUserId(this.user_id,perPage,getPage);
+        let result = await apkInfoModel.getApkInfoByUserId(this.user_id, perPage, getPage);
         return this.success(result);
     }
 
@@ -54,9 +54,9 @@ export default class extends Base {
     }
 
     async staticinfoAction() {
-        let projId = this.get("proj");
-        let projectModel = this.model('projects');
-        let result = await projectModel.getStaticInfoByProjectIdAndUserId(projId, this.user_id);
+        let apkinfoid = this.get("apkinfoid");
+        let apkinfoModel = this.model('apkinfo');
+        let result = await apkinfoModel.getStaticInfoByApkinfoid(apkinfoid);
         return this.success(result);
     }
 

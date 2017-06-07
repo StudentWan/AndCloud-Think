@@ -16,7 +16,7 @@
     
     <![endif]-->
 <style>
-    .stick-header{
+    .stick-header {
         position: sticky;
         top: 40px;
         z-index: 1000;
@@ -951,7 +951,7 @@
     $.ajax({
         url: "/project/staticinfo",
         data: {
-            proj: "{{dynamicReport.static}}",
+            apkinfoid: "{{dynamicReport.apkinfo}}",
         },
         method: "GET",
         success: function(data) {
@@ -1008,13 +1008,13 @@
                     // console.log(params)
                     let res = params.name;
                     let value;
-                    if (params.value != 0) {
-                        value = params.value - 1;
-                    } else {
-                        value = params.value;
-                    }
+                    // if (params.value != 0) {
+                    //     value = params.value - 1;
+                    // } else {
+                    //     value = params.value;
+                    // }
 
-                    res += '  ' + value;
+                    res += '  ' + params.value;;
                     return res;
                 }
             },
@@ -1037,7 +1037,7 @@
 
             series: [{
                 // name: 'API监控',
-                barMinHeight: '3',
+                // barMinHeight: '3',
                 type: 'bar',
                 itemStyle: {
                     normal: {
@@ -1057,26 +1057,26 @@
                     }
                 },
 
-                // data: [$vm.fileio.length + 1, $vm.networkcall.length + 1, $vm.bindercall.length + 1, $vm.crypto.length + 1, $vm.deviceinfo.length + 1, $vm.base64.length + 1,
-                //     $vm.content.length + 1, $vm.sms.length + 1, $vm.devicedata.length + 1, $vm.dexclassloader.length + 1, $vm.reflection.length + 1, $vm.sysmanager.length + 1, $vm.process.length + 1
-                // ],
-                data: [specialDisplay($vm.fileio.length), specialDisplay($vm.networkcall.length), specialDisplay($vm.bindercall.length), specialDisplay($vm.crypto.length), specialDisplay($vm.deviceinfo.length), specialDisplay($vm.base64.length),
-                    specialDisplay($vm.content.length), specialDisplay($vm.sms.length), specialDisplay($vm.devicedata.length), specialDisplay($vm.dexclassloader.length), specialDisplay($vm.reflection.length), specialDisplay($vm.sysmanager.length), specialDisplay($vm.process.length)
+                data: [$vm.fileio.length, $vm.networkcall.length, $vm.bindercall.length, $vm.crypto.length, $vm.deviceinfo.length, $vm.base64.length,
+                    $vm.content.length, $vm.sms.length, $vm.devicedata.length, $vm.dexclassloader.length, $vm.reflection.length, $vm.sysmanager.length, $vm.process.length
                 ],
+                // data: [specialDisplay($vm.fileio.length), specialDisplay($vm.networkcall.length), specialDisplay($vm.bindercall.length), specialDisplay($vm.crypto.length), specialDisplay($vm.deviceinfo.length), specialDisplay($vm.base64.length),
+                //     specialDisplay($vm.content.length), specialDisplay($vm.sms.length), specialDisplay($vm.devicedata.length), specialDisplay($vm.dexclassloader.length), specialDisplay($vm.reflection.length), specialDisplay($vm.sysmanager.length), specialDisplay($vm.process.length)
+                // ],
 
             }]
         };
         echarts_column.setOption(option);
     }
 
-    function specialDisplay(length) {
-        let temp = length;
-        if (length > 0) {
-            length += 1;
-        }
-        return length;
+    // function specialDisplay(length) {
+    //     let temp = length;
+    //     if (length > 0) {
+    //         length += 1;
+    //     }
+    //     return length;
 
-    }
+    // }
 
     function renderPieCharts() {
         let echarts_pie = echarts.init(document.getElementById('echarts-pie'));
