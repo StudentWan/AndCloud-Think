@@ -376,7 +376,7 @@
             <div id="upload_result" class="step-container" style="margin-top: -40px;">
                 <div class="upload_anim_title">上传结果</div>
                 <div class="upload_result_container">
-                    <div id="result_message"><a>上传成功</a></div>
+                    <div id="result_message"></div>
                     <div><a href="/project/create" class="reupload">重新上传</a></div>
                     <div>
                         <a href="/project/history" class="history">历史记录</a>
@@ -432,39 +432,47 @@
                 animateToThree();
                 if (data.errno === 0) {
 
-                    $('#result_message').html("<a>上传成功</a>");
-                    $('#result_message a').hover(() => {
-                        $('#result_message a').css({
-                            "background-color": "#49a2f5",
-                            "color": "white"
-                        });
-                    }, () => {
-                        $('#result_message a').css({
-                            "background-color": "transparent",
-                            "color": "#428bca"
-                        });
+                    $('#result_message').html("<i class='iconfont icon-check' ></i><br><span>上传成功</span>");
+                    $('#result_message i').css({
+                        "color": "white",
+                        "display": "inline - block",
+                        "font-size": "30px",
+                        "border-radius": "21px",
+                        "width": "42px",
+                        "height": "42px",
+                        "background-color": "green",
+
+                    });
+                    $('#result_message span').css({
+                        "margin-bottom": "20px",
+
+                        "display": "inline-block",
+                        "font-weight": "300"
                     })
+
+
 
 
 
                 } else {
+                    $('#result_message').html("<i class='iconfont icon-close'></i><br><span>上传失败</span>");
+                    $('#result_message i').css({
+                        "color": "white",
+                        "display": "inline - block",
+                        "font-size": "30px",
+                        "border-radius": "21px",
+                        "width": "42px",
+                        "height": "42px",
+                        "background-color": "red",
 
-                    $('#result_message').html("<a>上传失败</a>");
-                    $('#result_message a').css({
-
-                        "color": "red"
                     });
-                    $('#result_message a').hover(() => {
-                        $('#result_message a').css({
-                            "background-color": "red",
-                            "color": "white"
-                        });
-                    }, () => {
-                        $('#result_message a').css({
-                            "background-color": "transparent",
-                            "color": "red"
-                        });
+                    $('#result_message span').css({
+                        "margin-bottom": "20px",
+
+                        "display": "inline-block",
+                        "font-weight": "300"
                     })
+
                 }
             }
         });
