@@ -41,6 +41,11 @@ class Apkinfo extends think.model.base {
         return data;
 
     }
+    async getReportIdByApkinfoid(apkinfoid) {
+        let data = await this.alias('info').field('info.identify').where({ "info.id": apkinfoid }).select();
+        return data;
+    }
+
 
 }
 
