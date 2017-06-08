@@ -1,10 +1,5 @@
 {% extends "./../basebar.html" %} {% block headerbar %}
 <style>
-    body {
-        min-width: 1000px;
-        min-height: 800px;
-    }
-    
     .contain-upload {
         padding-left: 30px;
         padding-right: 30px;
@@ -14,9 +9,7 @@
     
     .apk-list {
         width: calc(40% - 3px);
-        max-height: 680px;
         height: 100%;
-        position: relative;
         overflow: auto;
         /*background: #ffffff;*/
     }
@@ -31,7 +24,6 @@
     .uploadfile-container {
         width: calc(55% - 3px);
         height: 100%;
-        max-height: 680px;
     }
     
     .uploadfile {
@@ -42,10 +34,8 @@
     
     .selector-container {
         display: flex;
-        flex-direction: column;
-        text-align: center;
-        flex: 1 1 auto;
-        padding-top: 100px;
+        justify-content: space-around;
+        align-items: center;
     }
     
     .info-an {
@@ -89,9 +79,8 @@
         transition: all 1s;
         height: calc(100% - 80px);
         margin: 40px;
-        /*border: dotted rgba(13, 21, 56, 0.36) 3px;*/
-        border: 1px dotted lightgray;
-        /*text-align: center;*/
+        border: dotted rgba(13, 21, 56, 0.36) 3px;
+        text-align: center;
         overflow: hidden;
     }
     
@@ -125,37 +114,22 @@
     }
     
     #selector_vm_machine {
+        /*position: fixed;*/
+        /*top: 0;*/
+        /*right: 0;*/
+        /*left: 0;*/
+        /*bottom: 0;*/
+        /*background: rgba(1, 1, 1, 0.57);*/
         margin-top: -40px;
     }
     
     #selector_vm_machine select {
         background: transparent;
         outline: 0;
-        width: 100px;
-        margin-bottom: 40px;
-    }
-    
-    #selector_vm_machine span {
-        width: 200px;
-        margin-right: 10px;
-        margin-bottom: 30px;
     }
     
     #selector_vm_machine option {
         background: transparent;
-    }
-    
-    #selector_vm_machine button {
-        background-color: transparent;
-        border: 1px solid lightgray;
-        border-radius: 5px;
-        width: 200px;
-        margin-top: 8px;
-    }
-    
-    #selector_vm_machine button:hover {
-        background-color: #49a2f5;
-        color: white;
     }
     
     #selector_vm_machine .container>div {
@@ -232,71 +206,6 @@
         background-color: #49a2f5;
         color: #FFFFFF;
     }
-    
-    span.staticreport a:visited,
-    span.staticreport a:link {
-        text-decoration: none;
-        color: #428bca;
-    }
-    
-    span.staticreport a:hover {
-        text-decoration: none;
-        color: #2a6496;
-    }
-    
-    .uploadfile-title {
-        height: 40px;
-        background-color: white;
-        border: 1px solid lightgray;
-        border-bottom: none;
-        padding-top: 10px;
-        padding-left: 40px;
-        font-size: 12px;
-        font-weight: 400;
-        letter-spacing: 1px;
-    }
-    
-    .file_drag_title,
-    .selector_vm_machine_title,
-    .upload_anim_title,
-    .upload_anim_title {
-        background-color: #ebeff5;
-        height: 40px;
-        padding-top: 10px;
-        color: #49a2f5;
-        font-weight: 400;
-        font-size: 13px;
-        padding-left: 5px;
-    }
-    
-    .info-an {
-        text-align: center;
-    }
-    
-    .upload_result_container {
-        text-align: center;
-        padding-top: 100px;
-    }
-    
-    .upload_result_container a {
-        margin-bottom: 30px;
-        display: inline-block;
-        border: 1px solid lightgray;
-        border-radius: 5px;
-        width: 140px;
-        height: 30px;
-        vertical-align: center;
-        padding-top: 4px;
-        text-decoration: none;
-        font-weight: 400;
-        font-size: 13px;
-    }
-    
-    a.reupload:hover,
-    a.history:hover {
-        background-color: #49a2f5;
-        color: white;
-    }
 </style>
 {% endblock %} {% block contentright %}
 <!--<div style="width:100%;height:80px;background: rgba(13, 21, 56, 0.36)">-->
@@ -314,7 +223,6 @@
                     <span><img :src="app.logo" alt="" class="logo"></span>
                     <span class="">{$app.label$}</span>
                     <span class="">{$ displayTime(app.created_time) $}</span>
-                    <span class="staticreport"><a v-bind:href="'/staticreport/index?apkinfoid=' + app.id" target="view_window">静态报告</a></span>
                 </div>
             </div>
             <div class="pagination">
@@ -327,64 +235,39 @@
     <div class="uploadfile-container">
         <div style="height: 80px;padding-top: 15px;font-weight: 400;font-size: 12px">添加新应用 <span style="color: #49a2f5"> / ADD NEW APP</span>
         </div>
-        <div class="uploadfile-title">上传应用 UPLOAD APPLICATION</div>
         <div class="uploadfile">
-
             <div id="file_drag" class="step-container">
-                <div class="file_drag_title">选择文件</div>
                 <img src="/static/img/daicon.png" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 164px;height: 250px" alt="">
                 <input type="file" style="" id="file">
             </div>
             <div></div>
             <div id="selector_vm_machine" class="step-container">
-                <div class="selector_vm_machine_title">选择模拟器</div>
                 <div class="selector-container" style="height: 100%;">
-
-
-                    <div>
-                        <span class="selcetor-title">选择检测系统</span>
+                    <div class="vm col-md-4">
                         <select name="vm" id="vm">
                             {% for item in mirrorlist %}
                             <option value="{{item.id}}">{{item.name}}</option>
                             {% endfor %}
-                            </select>
+                        </select>
                     </div>
-                    <div>
-                        <span class="selcetor-title">选择检测时间</span>
+                    <div class="time col-md-4">
                         <select name="time" id="time">
                             <option value="5">5 mins</option>
                             <option value="10">10 mins</option>
                             <option value="15">15 mins</option>
                             <option value="120">2 hours</option>
-                            </select>
+                        </select>
                     </div>
-                    <div>
-                        <button onclick="animateToTwo()">开始上传</button>
-                    </div>
-                    <!--<div class="confirm col-md-4"><i class="iconfont icon-check" onclick="animateToTwo()"></i></div>-->
+                    <div class="confirm col-md-4"><i class="iconfont icon-check" onclick="animateToTwo()"></i></div>
                 </div>
             </div>
             <div id="upload_anim" class="step-container" style="margin-top: -40px;">
-                <div class="upload_anim_title">开始上传</div>
-                <div class="info-an" id="message" style="">
+                <div class="info-an" id="message" style="">上传中。。。
                 </div>
                 <div class="wave-high">
                     <div class="wave wave-position"></div>
                     <div class=" wave-holder"></div>
                 </div>
-            </div>
-            <div id="upload_result" class="step-container" style="margin-top: -40px;">
-                <div class="upload_anim_title">上传结果</div>
-                <div class="upload_result_container">
-                    <div id="result_message"><a>上传成功</a></div>
-                    <div><a href="/project/create" class="reupload">重新上传</a></div>
-                    <div>
-                        <a href="/project/history" class="history">历史记录</a>
-                    </div>
-
-                </div>
-
-
             </div>
         </div>
     </div>
@@ -429,42 +312,10 @@
             },
             success: function(data) {
                 hide();
-                animateToThree();
                 if (data.errno === 0) {
-
-                    $('#result_message').html("<a>上传成功</a>");
-                    $('#result_message a').hover(() => {
-                        $('#result_message a').css({
-                            "background-color": "#49a2f5",
-                            "color": "white"
-                        });
-                    }, () => {
-                        $('#result_message a').css({
-                            "background-color": "transparent",
-                            "color": "#428bca"
-                        });
-                    })
-
-
-
+                    message("上传 <i>" + name + "</i> 成功");
                 } else {
-
-                    $('#result_message').html("<a>上传失败</a>");
-                    $('#result_message a').css({
-
-                        "color": "red"
-                    });
-                    $('#result_message a').hover(() => {
-                        $('#result_message a').css({
-                            "background-color": "red",
-                            "color": "white"
-                        });
-                    }, () => {
-                        $('#result_message a').css({
-                            "background-color": "transparent",
-                            "color": "red"
-                        });
-                    })
+                    message("上传 <i>" + name + "</i> 失败，" + data.errmsg);
                 }
             }
         });
@@ -517,7 +368,6 @@
     $("body").get(0).ondragleave = function(evt) {
         $('#file_drag').css('animation', 'none');
         isOver = false;
-
         return false;
     };
     $("body").get(0).ondragover = function(evt) {
@@ -558,18 +408,6 @@
         setTimeout(function() {
             uploadFile(global_file);
         }, 1000);
-    }
-
-    function animateToThree() {
-        $(".step-container").eq(2).css('transform', 'translateY(-300%) scale(0)');
-        $(".step-container").eq(2).css('opacity', '0');
-        // global_curIndex = 3;
-        $(".step-container").eq(3).css('transform', 'translateY(-300%) scale(1)');
-        $(".step-container").eq(3).css('opacity', '1');
-
-
-
-
     }
 
     Vue.config.debug = true;
