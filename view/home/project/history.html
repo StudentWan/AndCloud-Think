@@ -5,6 +5,10 @@
         padding-left: 30px;
         padding-right: 30px;
     }
+    
+    .right-content {
+        overflow: auto;
+    }
 
     @media screen and (min-width: 760px) {
         .history-list {
@@ -104,11 +108,11 @@
     }
 
     .app {
-
-        overflow: auto;
-        height: 100%;
-
+        position: relative;
+        overflow: hidden;
+        /*height: 100%;*/
         /*padding-top: 80px;*/
+        height: 680px;
     }
 
     .app span {
