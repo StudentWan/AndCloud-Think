@@ -193,6 +193,7 @@
                             <li><a href="#process"><i class="fa fa-bar-chart-o"></i> 进程</a></li>
                         </ul>
                     </li>
+                    <li><a href="#screenshots"><i class="fa fa-camera"></i> 屏幕截图</a></li>
                 </ul>
             </div>
             <!-- /.sidebar -->
@@ -828,6 +829,26 @@
                     <!-- /.box -->
                 </section>
 
+                <section id="screenshots">
+                    <h2 class="page-header"></h2>
+                    <!-- /.box -->
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"><i class="fa fa-camera"></i> 屏幕截图</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+                            <span class="list-group " v-for="item in imgbase64" style="width: 50%;display: inline-block">
+                                <img alt="Screenshot" v-bind:src="item" class="img-thumbnail" height="600" width="350">
+                            </span>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </section>
+
             </div>
             <!-- /.content -->
         </div>
@@ -888,7 +909,8 @@
             apkinfo: {},
             mirrorimage: '',
             createtime: '',
-            lifetime: ''
+            lifetime: '',
+            imgbase64: '',
         }
     });
 
@@ -982,7 +1004,7 @@
     $.ajax({
         url: "/project/createanddead",
         data: {
-            reportid: "{{dynamicReport.dynamic}}",
+            sim: "{{dynamicReport.dynamic}}",
         },
         method: "GET",
         success: function(data) {
@@ -996,6 +1018,17 @@
             return;
         }
     });
+    $.ajax({
+        url: "/project/screenshot",
+        data: {
+            sim: "{{dynamicReport.dynamic}}",
+        },
+        method: "GET",
+        success: function(data) {
+            $vm.imgbase64 = data.data;
+            return;
+        }
+    })
 
     function renderColumnCharts() {
         let echarts_column = echarts.init(document.getElementById('echarts-column'));

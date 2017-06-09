@@ -11,5 +11,5 @@ export default {
     zmq: {
         url: 'tcp://127.0.0.1:12001'
     },
-    reportbaseurl: '/opt/andcloud-workspace/'
+    workspace: '/opt/andcloud-workspace/'
 }

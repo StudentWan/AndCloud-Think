@@ -12,12 +12,7 @@ export default class extends Base {
         let apkinfoid = this.get('apkinfoid');
         let apkinfoModel = this.model('apkinfo');
         let reportid = await apkinfoModel.getReportIdByApkinfoid(apkinfoid);
-
-        // let reportUrl = '/opt/andcloud-workspace/' + new String(reportid[0].identify) + '/report.pdf';
-        let reportUrl = this.config('reportbaseurl') + new String(reportid[0].identify) + '/report.pdf';
-
-
-        console.log(reportUrl);
+        let reportUrl = this.config('workspace') + new String(reportid[0].identify) + '/report.pdf';
         return this.download(reportUrl);
 
     }
