@@ -1,11 +1,15 @@
 {% extends "./../basebar.html" %} {% block headerbar %}
 <style>
-    body {
+    .body {
         min-width: 1000px;
-        min-height: 800px;
+    }
+    
+    .right-content {
+        overflow: auto;
     }
     
     .contain-upload {
+        min-height: 650px;
         padding-left: 30px;
         padding-right: 30px;
         display: flex;
@@ -75,10 +79,6 @@
         100% {
             box-shadow: black 0px 0px 50px;
         }
-    }
-    
-    .right-content {
-        overflow: hidden;
     }
     
     .step-container {
