@@ -113,6 +113,13 @@
     .wrapper {
         overflow: visible;
     }
+    
+    .screenshotitem {
+        /*width: 50%;*/
+        display: inline-block;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 </style>
 {% endblock %} {% block content %}
 
@@ -840,7 +847,7 @@
                         <!-- /.box-header -->
                         <div class="box-body">
 
-                            <span class="list-group " v-for="item in imgbase64" style="width: 50%;display: inline-block">
+                            <span class="list-group screenshotitem" v-for="item in imgbase64">
                                 <img alt="Screenshot" v-bind:src="item" class="img-thumbnail" height="600" width="350">
                             </span>
                         </div>

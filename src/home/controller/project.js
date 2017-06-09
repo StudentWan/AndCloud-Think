@@ -99,12 +99,12 @@ export default class extends Base {
         for (let item of screenShotsPath) {
 
             let imgurl = this.config('workspace') + basePath + '/screenshots/' + item;
-            // console.log(imgurl);
+            console.log(imgurl);
             let bitmap = fs.readFileSync(imgurl);
             imgbase64.push("data:image/png;base64," + new Buffer(bitmap).toString('base64'))
         }
 
-        // console.log('imgbase64 length:' + imgbase64.length);
+        console.log('imgbase64 length:' + imgbase64.length);
         return this.success(imgbase64);
 
     }
