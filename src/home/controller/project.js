@@ -34,7 +34,7 @@ export default class extends Base {
         let projectModel = this.model('projects');
         let perPage = this.get('perPage');
         let getPage = this.get('getPage');
-        let result = await projectModel.getProjectByUserID(this.user_id,perPage,getPage);
+        let result = await projectModel.getProjectByUserID(this.user_id, perPage, getPage);
         return this.success(result);
     }
 
@@ -42,7 +42,7 @@ export default class extends Base {
         let apkInfoModel = this.model('apkinfo');
         let perPage = this.get('perPage');
         let getPage = this.get('getPage');
-        let result = await apkInfoModel.getApkInfoByUserId(this.user_id,perPage,getPage);
+        let result = await apkInfoModel.getApkInfoByUserId(this.user_id, perPage, getPage);
         return this.success(result);
     }
 
@@ -54,9 +54,9 @@ export default class extends Base {
     }
 
     async staticinfoAction() {
-        let projId = this.get("proj");
-        let projectModel = this.model('projects');
-        let result = await projectModel.getStaticInfoByProjectIdAndUserId(projId, this.user_id);
+        let apkinfoid = this.get("apkinfoid");
+        let apkinfoModel = this.model('apkinfo');
+        let result = await apkinfoModel.getStaticInfoByApkinfoid(apkinfoid);
         return this.success(result);
     }
 
@@ -79,15 +79,37 @@ export default class extends Base {
     }
     async createanddeadAction() {
         console.log('createtime');
-        let reportid = this.get('reportid');
+        let simid = this.get('sim');
         let simulatorsModel = this.model('simulators');
-        let simulatorsInfo = await simulatorsModel.getSimulator(reportid);
+        let simulatorsInfo = await simulatorsModel.getSimulator(simid);
 
         console.log(simulatorsInfo);
 
         return this.success(simulatorsInfo);
 
     }
+    async screenshotAction() {
+        let imgbase64 = [];
+        let deviceid = this.get('sim');
+        let dynamicInfoModel = this.model('dynamicinfo');
+        let screenShotsPathRowData = await dynamicInfoModel.getScreenShotsByDeviceid(deviceid);
+        let screenShotsPath = JSON.parse(screenShotsPathRowData[0].screenShotsPath);
+        let basePath = screenShotsPathRowData[0].basePath;
+        console.log();
+        for (let item of screenShotsPath) {
+
+            let imgurl = this.config('workspace') + basePath + '/screenshots/' + item;
+            console.log(imgurl);
+            let bitmap = fs.readFileSync(imgurl);
+            imgbase64.push("data:image/png;base64," + new Buffer(bitmap).toString('base64'))
+        }
+
+        console.log('imgbase64 length:' + imgbase64.length);
+        return this.success(imgbase64);
+
+    }
+
+
     async uploadAction() {
         let file = this.file('apk');
         let vm = this.post("vm");
