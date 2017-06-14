@@ -1,11 +1,11 @@
-{% extends "./../basebar.html" %} {% block title %}历史列表{% endblock %} {% block headerbar %}
+{% extends "./../basebar.html" %}{% block title %}历史列表{% endblock %}{% block headerbar %}
 <link rel="stylesheet" href="/static/app/css/hwLayer.css">
 <style>
     #app {
         padding-left: 30px;
         padding-right: 30px;
     }
-    
+
     .right-content {
         overflow: auto;
     }
@@ -325,8 +325,8 @@
         width: 110px;
         height: 110px;
         border-radius: 50%;
-        left: 10px;
-        top: 10px;
+        left: 0;
+        top: 0;
         position: absolute;
         text-align: center;
         line-height: 110px;
@@ -397,46 +397,158 @@
     #lishi a {
         background-image: url("/static/img/lishi-xuanze.png");
     }
+
+    .automatic {
+        width: 100%;
+    }
+
+    .automatic .left-progress {
+        width: 50%;
+        float: left;
+        padding-right: 5px;
+    }
+
+    .automatic .right-info {
+        width: 50%;
+        float: left;
+        padding-left: 5px;
+    }
+
+    .automatic .s-panel {
+        height: 180px;
+        border: 1px solid lightgray;
+        background: #fff;
+    }
+
+    .automatic .s-panel .title {
+        padding-left: 30px;
+        height: 30px;
+        line-height: 30px;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .automatic .s-panel .content {
+        font-size: 10px;
+        margin: 20px 10px;
+    }
+
+    .automatic .button {
+        width: 100%;
+        margin-top: 6px;
+    }
+
+    .un-automatic .s-panel {
+        border: 1px solid lightgray;
+        background: #fff;
+        margin-top: 5px;
+    }
+
+    .un-automatic .s-panel .title {
+        height: 30px;
+        line-height: 30px;
+        border-bottom: 1px solid lightgray;
+        padding-left: 30px;
+    }
+
+    .un-automatic .s-panel .title .right-button {
+        float: right;
+        border-left: 1px solid lightgray;
+    }
+
+    .un-automatic .s-panel .content .right {
+        float: right;
+        padding: 15px 12px;
+        width: 130px;
+    }
+
+    .un-automatic .s-panel .content .left {
+        padding: 5px 0px 5px 30px;
+        font-size: 13px;
+        margin-right: 130px;
+    }
+
+    .un-automatic .info-item {
+        display: inline-block;
+    }
+
+    .un-automatic .button {
+        width: 100px;
+        margin-top: 5px;
+    }
+
+    .button {
+        background: #fff;
+        border: 2px solid #49a2f5;
+        color: #49a2f5;
+        height: 30px;
+        line-height: 30px;
+        font-size: 10px;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none !important;
+    }
+
+    .button:hover {
+        background: #49a2f5;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .button.rose {
+        background: #fff;
+        color: #f5498e;
+        border: 2px solid #f5498e;
+    }
+
+    .button.rose:hover {
+        background: #f5498e;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .button.disable {
+        border: 2px solid #ced6e1;
+        background: #ced6e1;
+        color: #fff;
+    }
+
+    .button.disable:hover {
+        background: #ced6e1;
+        color: #fff;
+        cursor: not-allowed;
+    }
+
+    .s-progress-container {
+        height: 60px;
+        border: 1px solid lightgray;
+        width: 100%;
+        margin: 10px 0;
+        position: relative;
+    }
+
+    .s-progress-container .s-progress-bar {
+        height: 100%;
+        background: -webkit-linear-gradient(left, rgba(219, 237, 253, 0), rgba(219, 237, 253, 1));
+        background: -o-linear-gradient(right, rgba(219, 237, 253, 0), rgba(219, 237, 253, 1));
+        background: -moz-linear-gradient(right, rgba(219, 237, 253, 0), rgba(219, 237, 253, 1));
+        background: linear-gradient(to right, rgba(219, 237, 253, 0), rgba(219, 237, 253, 1));
+        -webkit-transition: width .6s ease;
+        -o-transition: width .6s ease;
+        transition: width .6s ease;
+    }
+
+    .s-progress-container .s-progress-text {
+        position: absolute;
+        top: 0;
+        left: 10px;
+        line-height: 60px;
+        font-size: 30px;
+    }
+
 </style>
-{% endblock %} {% block contentright %}
-<div class="hw-overlay" id="hw-layer">
-    <div class="hw-layer-wrap" style="background:#5cb85c;border: 1px solid white;overflow: auto;opacity: 0.8">
-        <div class="row">
-            <div class="col-md-3 col-sm-12">
-                <p><b>And</b>Cloud</p>
-                <p>Static Options</p>
-            </div>
-            <div class="col-md-9 col-sm-12">
-                <div>
-                    <h4>选择</h4>
-                </div>
-                <div style="margin:20px 0 20px;color:black">
-                    <form>
-                        <select name="version" id="version">
-                            {% for item in mirrorlist %}
-                            <option value="{{item.id}}">{{item.name}}</option>
-                            {% endfor %}
-                        </select>
-                        <label for="version" style="color: white;font-weight: 100">Version</label>
-                        <br/>
-                        <select name="time" id="time">
-                            <option value="5">5 mins</option>
-                            <option value="10">10 mins</option>
-                            <option value="15">15 mins</option>
-                            <option value="120">2 hours</option>
-                        </select>
-                        <label for="time" style="color: white;font-weight: 100">Time</label>
-                        <br/>
-                    </form>
-                </div>
-                <div style="overflow: hidden">
-                    <span style="float:left" class="button-btn confirm">确 定</span>
-                    <span style="margin-left:5px;float:left" class="button-btn cancel">取 消</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% endblock %}
+
+{% block contentright %}
 <div id="app" style="opacity: 0">
     <div class="history-list">
         <!--<div class="history-header" style="z-index: 2">
@@ -486,7 +598,7 @@
                 <div class="row">
                     <div class="col-xs-3">
                         <div class="content-wrapper">
-                            <div class="title" style="text-align: center">应用名称：{$ apps[selectedIndex].label $}</div>
+                            <div class="title" style="text-align: center">应用图标</div>
                             <div class="content">
                                 <img :src="apps[selectedIndex].logo" alt="" class="logo">
                             </div>
@@ -496,17 +608,16 @@
                         <div class="content-wrapper">
                             <div class="title"
                                  style="padding-left: 15px;display: flex;justify-content: space-between;align-items: center">
-                                文件分析报告
-                                <a v-if="apps[selectedIndex].isfullinfo"
-                                   style="text-decoration: none;color: #FFFFFF;border-left: 1px solid #FFFFFF;padding-left: 5px;padding-right: 5px;background-color: #49a2f3"
-                                   v-bind:href="'/staticreport/index?apkinfoid=' + apps[selectedIndex].infoid"
-                                   target="view_window"><img src="/static/img/baogao.png"
-                                                             style="width: 10.8px;height: 12px;vertical-align: -5%"
-                                                             alt=""> 静态检测报告</a>
-                            </div>
+                                文件分析报告 <a v-if="apps[selectedIndex].isfullinfo"
+                                          style="text-decoration: none;color: #FFFFFF;border-left: 1px solid #FFFFFF;padding-left: 5px;padding-right: 5px;background-color: #49a2f3"
+                                          v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id"
+                                          target="_blank"><img
+                                    src="/static/img/baogao.png" style="width: 10.8px;height: 12px;vertical-align: -5%"
+                                    alt=""> 静态检测报告</a></div>
                             <div class="content" style="padding: 23px 15px;font-size: 10px;font-weight: 400">
                                 <div v-if="!apps[selectedIndex].isfullinfo">正在检测，请稍后......</div>
                                 <div v-if="apps[selectedIndex].isfullinfo">
+                                    <p>应用名称：{$ apps[selectedIndex].label $}</p>
                                     <p>包名：{$ apps[selectedIndex].packagename $}</p>
                                     <p>文件大小：{$(apps[selectedIndex].size/ 1024 / 1024).toFixed(2)$}MB</p>
                                     <p>文件MD5： {$apps[selectedIndex].md5$}</p>
@@ -520,107 +631,214 @@
             <!--Waiting for implement-->
             <div class="app-action-list">
                 <div class="row">
-                    <div v-if="apps[selectedIndex].isfullinfo === false">
-                    </div>
+                    <div v-if="apps[selectedIndex].isfullinfo === false"></div>
                     <div v-else style="overflow: auto;padding: 12px;">
-                        <div style="overflow: auto;margin: 15px auto;">
-                            <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
-                                自动检测
-                            </div>
+                        <div class="test-result-title">
+                            <p style="font-weight: 400; font-size: 12px">自动检测<span style="color: #49a2f5"> / AUTOMATIC DETECTION</span>
+                            </p>
                         </div>
 
-
-                        <div class="infoblanket">
-                            <div class='process_bar' style="width: 30%;">
-                                <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
-                                    <circle cx="55" cy="55" r="50" fill="none" stroke="white" stroke-width="5"
-                                            stroke-linecap="round"/>
-                                    <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50" fill="none"
-                                            stroke="#5cb85c" stroke-width="5" stroke-dasharray="157,10000"/>
-                                </svg>
-                                <div class="mask">{$autoPercentage$}</div>
-                            </div>
-
-                            <div class="test_info" style="width: 40%;text-align: center">
-                                <p>{$ autoToken.imageid $}</p>
-                                <p>存活时间：{$ autoToken.testTime $} min</p>
-                            </div>
-
-                            <div class="choose_button" style="width: 30%;text-align: center">
-                                <p>
-                                    <a v-bind:href="'/runner/token/'+autoToken.token"
-                                       style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
-                                        <i class="iconfont icon-creative test-link"
-                                           style="font-size: 30px;padding-top:5px;"></i></a>
-                                </p>
-                                <transition name="fade">
-                                    <p v-if='autoToken.isComplete' style="">
-                                        <a v-bind:href="'/dynamicreport/index?dynamicid=' + autoToken.simulatorId+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=1'+'&projectid='+autoToken.projectid"
-                                           target="view_window"
-                                           style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;margin-right:2%;text-align:right;">
-                                            <i class="iconfont icon-file test-link"
-                                               style="font-size: 30px;padding-top:5px;"></i></a>
-                                    </p>
-                                </transition>
-                            </div>
-                        </div>
-
-
-                        <div style="overflow: auto;margin: 15px auto; display: flex; justify-content: space-between;align-items: center">
-                            <div style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
-                                手动检测
-                            </div>
-                            <div v-on:click="chooseTest" data-show-layer="hw-layer"
-                                 style="cursor: pointer;color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;">
-                                <i class="iconfont icon-repairfill test-link"
-                                   style="font-size: 30px;padding-top:5px;"></i>
-                            </div>
-
-                        </div>
-
-                        <div id="options">
-                            <div class="info-hand" style="margin-bottom: 20px;cursor: auto;"
-                                 v-for="(token,index) of handToken" :key="token">
-                                <div class="container">
-                                    <div class="bar">
-                                        <span class="bar-unfill">
-                                                <span class="bar-fill" style="position: relative">
-                                                    <span class="bar-percentage"
-                                                          style="position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);"></span>
-                                        </span>
-                                        </span>
+                        <div class="automatic">
+                            <div class="left-progress">
+                                <div class="s-panel">
+                                    <div class="title">检测进度&nbsp;&nbsp;TEST&nbsp;PROGRESS</div>
+                                    <div class="content"
+                                         style="text-align: center; margin-left: 50%; position: relative;">
+                                        <div class='process_bar' style="margin-left:-55px; position: absolute;">
+                                            <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
+                                                <circle cx="55" cy="55" r="50" fill="none" stroke="white"
+                                                        stroke-width="5"
+                                                        stroke-linecap="round"/>
+                                                <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50"
+                                                        fill="none"
+                                                        stroke="#5cb85c" stroke-width="5" stroke-dasharray="157,10000"/>
+                                            </svg>
+                                            <div class="mask">{$autoPercentage$}</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="test_info"
-                                     style="width:100%;text-align: center;margin: 0 auto;padding: 10px">
-                                    <p>{$ token.imageid $}</p>
-                                    <p>存活时间：{$ token.testTime $} min</p>
-                                </div>
-                                <a :href="'/runner/token/'+token.token"
-                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em"><i
-                                        class="iconfont icon-creative test-link"
-                                        style="font-size: 30px;padding-top:5px;"></i></a>
-                                <a v-on:click="terminateHandTest(token)" v-if="!(token.isComplete)"
-                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
-                                        class="iconfont icon-stop test-link"
-                                        style="font-size: 30px;padding-top:5px;"></i></a>
-
-                                <a v-bind:href="'/dynamicreport/index?dynamicid=' + token.simulatorId+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=0'+'&projectid='+token.projectid"
-                                   target="view_window" v-if="token.isComplete"
-                                   style="color:white;text-decoration: none;font-weight: 100;font-size: 1.5em;cursor: pointer"><i
-                                        class="iconfont icon-file test-link"
-                                        style="font-size: 30px;padding-top:5px;"></i></a>
+                                <a v-bind:href="'/runner/token/'+autoDomainInfo.token" v-if="autoDomainInfo.state==1"
+                                   target="_blank" class="button rose">进入检测页面</a>
+                                <div v-if="!(autoDomainInfo.state==1)" class="button disable">进入检测页面</div>
                             </div>
+                            <div class="right-info">
+                                <div class="s-panel">
+                                    <div class="title">检测信息&nbsp;&nbsp;TEST&nbsp;INFORMATION</div>
+                                    <div class="content">
+                                        <p>检测引擎：{$ autoDomainInfo.imagename $}</p>
+                                        <p>检测时间：{$ (autoDomainInfo.testtime / 60000).toFixed(2) $} min</p>
+                                        <p>开始时间：{$ autoDomainInfo.begintime $}</p>
+                                        <p>结束时间：{$ autoDomainInfo.endtime $}</p>
+                                        <p>当前状态：{$ getStateName(autoDomainInfo.state) $}</p>
+                                    </div>
+                                </div>
+                                <a v-bind:href="'/dynamicreport/index?dynamicid='+autoDomainInfo.did+'&staticid='+apps[selectedIndex].id+'&auto=1'+'&projectid='+autoDomainInfo.pid"
+                                   v-if="autoDomainInfo.state==3" target="_blank" class="button">进入报告页面</a>
+                                <div v-if="!(autoDomainInfo.state==3)" class="button disable">进入报告页面</div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="test-result-title" style="margin-top: 20px;">
+                            <p style="font-weight: 400; font-size: 12px">手动检测<span style="color: #49a2f5"> / MANUAL INSPECTION</span>
+                            </p>
+                        </div>
+                        <div class="un-automatic">
+                            <div class="s-panel">
+                                <div class="title">
+                                    创建检测
+                                    <div class="right-button" v-on:click="showCreateLayout=!showCreateLayout">创建</div>
+                                </div>
+                                <div class="content" v-if="showCreateLayout">
+                                    <div class="right">
+                                        <div class="button" v-on:click="createNewTest()">添加手动检测</div>
+                                    </div>
+                                    <form class="left">
+                                        <label for="version" style="font-weight: 100">检测器版本</label>
+                                        <select name="version" id="version">
+                                            {% for item in mirrorlist %}
+                                            <option value="{{item.id}}">{{item.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <br/>
+                                        <label for="time" style="font-weight: 100">检测时间&emsp;</label>
+                                        <select name="time" id="time">
+                                            <option value="5">5 mins</option>
+                                            <option value="10">10 mins</option>
+                                            <option value="15">15 mins</option>
+                                            <option value="120">2 hours</option>
+                                        </select>
+                                        <br/>
+                                    </form>
+                                </div>
+                            </div>
+                            <template v-for="item in domainInfo">
+                                <div class="s-panel" v-if="!item.iserror && !item.iscomplete">
+                                    <div class="title">
+                                        检测进度 TEST PROGRESS - {$ item.imagename $}
+                                        <div class="right-button">
+                                            <div v-on:click="terminateHandTest(item)">停止</div>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="right">
+                                            <a v-bind:href="'/runner/token/'+item.token" v-if="item.state==1"
+                                               target="_blank" class="button rose">进入检测页面</a>
+                                            <div v-if="!(item.state==1)" class="button disable">进入检测页面</div>
+                                            <div class="button disable">进入报告页面</div>
+                                        </div>
+                                        <div class="left">
+                                            <div>
+                                                <div class="info-item" style="width: 150px">当前状态：{$
+                                                    getStateName(item.state) $}
+                                                </div>
+                                                <div class="info-item" style="width: 185px">开始时间：{$ item.begintime $}
+                                                </div>
+                                                <div class="info-item" style="width: 185px">结束时间：{$ item.endtime $}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="s-progress-container">
+                                                    <div class="s-progress-bar"
+                                                         v-bind:style="{width: (item.percentvalue*100).toFixed(0)+'%'}"></div>
+                                                    <div class="s-progress-text">{$ parseInt(item.lefttime / 60000)
+                                                        $}:{$ (item.lefttime/1000).toFixed(0)%60 $}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="s-panel" v-if="!item.iserror && item.iscomplete">
+                                    <div class="title">
+                                        检测进度 TEST PROGRESS - {$ item.imagename $}
+                                    </div>
+                                    <div class="content">
+                                        <div class="right">
+                                            <a v-bind:href="'/dynamicreport/index?dynamicid='+item.did+'&staticid='+apps[selectedIndex].id+'&auto=0'+'&projectid='+item.pid"
+                                               target="_blank" class="button">进入报告页面</a>
+                                        </div>
+                                        <div class="left">
+                                            <div style="margin-top:16px;">
+                                                <div class="info-item" style="width: 130px">当前状态：{$
+                                                    getStateName(item.state) $}
+                                                </div>
+                                                <div class="info-item" style="width: 190px">开始时间：{$ item.begintime $}
+                                                </div>
+                                                <div class="info-item" style="width: 190px">持续时间：{$ (item.testtime /
+                                                    60000).toFixed(2) $} min
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="s-panel" v-if="item.iserror">
+                                    <div class="title">
+                                        检测进度 TEST PROGRESS - {$ item.imagename $}
+                                    </div>
+                                    <div class="content">
+                                        <div class="left">
+                                            <div style="margin-top:16px;">
+                                                <div class="info-item" style="width: 130px">当前状态：{$
+                                                    getStateName(item.state) $}
+                                                </div>
+                                                <div class="info-item" style="width: 190px">开始时间：{$ item.begintime $}
+                                                </div>
+                                                <div class="info-item" style="width: 190px">持续时间：{$ (item.testtime /
+                                                    60000).toFixed(2) $} min
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-</div>
-{% endblock %} {% block js %}
+{% endblock %}
+
+{% block js %}
+<script>
+    Date.prototype.pattern = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时
+            "H+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        var week = {
+            "0": "/u65e5",
+            "1": "/u4e00",
+            "2": "/u4e8c",
+            "3": "/u4e09",
+            "4": "/u56db",
+            "5": "/u4e94",
+            "6": "/u516d"
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        if (/(E+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "/u661f/u671f" : "/u5468") : "") + week[this.getDay() + ""]);
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+</script>
 <script>
     if (location.hash === '') {
         location.hash = '1#0';
@@ -663,71 +881,6 @@
         d = d < 10 ? ('0' + d) : d;
         return y + '-' + m + '-' + d;
     };
-    //展示层
-
-
-    function showLayer(id) {
-        var layer = $('#' + id),
-            layerwrap = layer.find('.hw-layer-wrap');
-        layer.slideToggle();
-        //屏幕居中
-        layerwrap.css({
-            'margin-top': -layerwrap.outerHeight() / 2
-        });
-    }
-
-    //隐藏层
-    function hideLayer() {
-        $('.hw-overlay').slideToggle();
-    }
-
-    $('.confirm').on('click', function () {
-        hideLayer();
-        let projectid = $vm.apps[$vm.selectedIndex].id;
-        let type = 0;
-        let tokens = $vm.appTokens[projectid];
-        for (var token of tokens) {
-            if (token.type > type) {
-                type = token.type;
-            }
-        }
-        type++;
-        let formData = new FormData();
-        formData.append('type', type);
-        formData.append('projectid', projectid);
-        formData.append('vm', $('#version').val());
-        formData.append('time', $('#time').val());
-        $.ajax({
-            url: '/project/uploadhandful',
-            data: formData,
-            method: 'POST',
-            contentType: false,
-            processData: false,
-            success: data => {
-                let token = data.data;
-                $vm.handToken.push(token);
-                $vm.appTokens[projectid][type] = token;
-                $vm.handleHandToken();
-            }
-        })
-    });
-    $('.cancel').on('click', function () {
-        hideLayer();
-    });
-
-    //点击或者触控弹出层外的半透明遮罩层，关闭弹出层
-    $('.hw-overlay').on('click', function (event) {
-        if (event.target == this) {
-            hideLayer();
-        }
-    });
-
-    //按ESC键关闭弹出层
-    $(document).keyup(function (event) {
-        if (event.keyCode == 27) {
-            hideLayer();
-        }
-    });
 </script>
 <script src="/static/app/js/velocity.min.js"></script>
 <script src="/static/app/js/moment-with-locales.js"></script>
@@ -744,88 +897,113 @@
             isLoading: true,
             selectedIndex: -1,
             apps: [],
-            appTokens: {},
-            autoToken: {},
-            handToken: [],
-            items: [1],
             autoPercentage: 0,
-            autoComplete: false,
-            autoInterval: undefined,
-            handInterval: undefined,
-            timeGap: 0,
             pageCount: '',
-            currentPage: ''
+            currentPage: '',
+            showCreateLayout: false,
+            domainInfo: [],
+            autoDomainInfo: {},
+            serverTime: null,
+            lastUpdateTime: null
+        },
+        created: function () {
+            let that = this;
+            that.getServerTime();
+            setInterval(function () {
+                that.getServerTime();
+            }, 60000);
+            setInterval(function () {
+                that.updateTime();
+            }, 1000);
         },
         methods: {
-            getTokensEvt: function (projectid) {
-                this.getTokens(projectid, (tokens) => {
-                    this.autoToken = tokens[0];
-                    this.handToken = tokens.slice(1);
-                    //autoToken数据处理&&动画控制
-                    if (this.autoInterval) {
-                        clearInterval(this.autoInterval);
-                    }
-                    $.ajax({
-                        url: "/project/getLifeCycle",
-                        data: {
-                            projectid: this.autoToken.projectid,
-                            type: this.autoToken.type
-                        },
-                        method: "GET",
-                        success: data => {
-                            if (data.errno === 0) {
-                                let simulator = data.data[0];
-                                let createTime = Date.parse(simulator.createtime);
-                                let deadlineTime = Date.parse(simulator.deadlinetime);
-                                let totalTime = deadlineTime - createTime;
-                                Vue.set($vm.autoToken, 'testTime', (totalTime / 1000 / 60).toFixed(2));
-                                Vue.set($vm.autoToken, 'simulatorId', simulator.id);
-                                if ((deadlineTime - (new Date().getTime() + this.timeGap)) > 0) {
-                                    Vue.set($vm.autoToken, 'isComplete', false);
-                                } else {
-                                    Vue.set($vm.autoToken, 'isComplete', true);
-                                }
-                                let nowTime;
-                                let circle = $('#J_progress_bar');
-                                let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
+            getStateName(state){
+                switch (state) {
+                    case 0:
+                        return "模拟器创建中";
+                    case 1:
+                        return "正在检测";
+                    case 2:
+                        return "报告生成中";
+                    case 3:
+                        return "检测已完成";
+                    default:
+                        return "未知状态";
+                }
+            },
+            getState: function (begin, end, current) {
+                if (end <= begin || current < begin) return -1;
+                if (current - end > 60000) return 3;
+                if (current >= end) return 2;
+                if (current - begin < 60000) return 0;
+                return 1;
+            },
+            updateTime: function () {
+                let that = this;
+                this.serverTime += 1000;
+                // 更新自动检测
+                let circle = $('#J_progress_bar');
+                let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
 
-                                this.autoInterval = setInterval(() => {
-                                    nowTime = new Date().getTime() + this.timeGap;
-                                    let val = nowTime - createTime;
-                                    val = Math.max(0, val);
-                                    val = Math.min(totalTime, val);
-                                    let percentage = Math.round((val / totalTime) * 100);
-                                    if (percentage !== 100) {
-                                        $vm.autoPercentage = Math.round((val / totalTime) * 100) + '%';
-                                    } else {
-                                        $vm.autoPercentage = '检测完成';
-                                    }
-                                    circle.attr('stroke-dasharray', "" + circleLength * (val / totalTime) + ', 10000');
-                                    circle.attr('stroke', '#5cb85c');
-                                    if (val === totalTime) {
-                                        $vm.autoComplete = true;
-                                        clearInterval(this.autoInterval);
-                                        Vue.set($vm.autoToken, 'isComplete', true);
-                                    }
-                                }, 100);
-                            } else {
-                                $vm.autoPercentage = "无检测数据";
-                                let circle = $('#J_progress_bar');
-                                let circleLength = Math.floor(2 * Math.PI * circle.attr('r'));
-                                circle.attr('stroke-dasharray', "" + circleLength + ', 10000');
-                                circle.attr('stroke', 'red');
-                            }
-                        }
+                let autoStartTime = new Date(this.autoDomainInfo.createtime);
+                let autoEndTime = new Date(this.autoDomainInfo.deadlinetime);
+
+                this.autoDomainInfo.state = this.getState(autoStartTime.getTime(), autoEndTime.getTime(), this.serverTime);
+                let circleValue = (this.serverTime - autoStartTime.getTime()) / (autoEndTime.getTime() - autoStartTime.getTime());
+                if (circleValue > 1) {
+                    circleValue = 1.0;
+                    this.autoPercentage = "检测完成"
+                } else {
+                    this.autoPercentage = Math.round(circleValue * 100) + '%';
+                }
+                circle.attr('stroke-dasharray', "" + circleLength * circleValue + ', 10000');
+                circle.attr('stroke', '#5cb85c');
+
+                // 更新手动检测
+                this.domainInfo.forEach(function (item) {
+                    if (item.iserror) return;
+                    //if (item.iscomplete) return;
+                    let startTime = new Date(item.createtime);
+                    let endTime = new Date(item.deadlinetime);
+                    item['iscomplete'] = that.serverTime >= endTime.getTime();
+                    item['state'] = that.getState(startTime.getTime(), endTime.getTime(), that.serverTime);
+                    item['lefttime'] = endTime.getTime() - that.serverTime;
+                    item['percentvalue'] = (that.serverTime - startTime.getTime()) / (endTime.getTime() - startTime.getTime());
+//                    console.log("update item", item);
+                });
+                if (this.autoDomainInfo.iserror) {
+                    this.getDomainInfoByType(this.autoDomainInfo.pid, this.autoDomainInfo.type, function (info) {
+                        if (info.iserror) return;
+                        that.copyDomainInfoToItem(info, that.autoDomainInfo);
                     });
-
-                    //handToken数据处理&&动画控制
-                    this.handleHandToken();
+                }
+                this.domainInfo.forEach(function (item) {
+                    if (!item.iserror) return;
+                    that.getDomainInfoByType(item.pid, item.type, function (info) {
+                        if (info.iserror) return;
+                        that.copyDomainInfoToItem(info, item);
+                    });
                 });
             },
-            getTokens: function (projectid, success_callback) {
-                if (this.appTokens[projectid] !== undefined) {
-                    return success_callback(this.appTokens[projectid]);
-                }
+            getServerTime: function () {
+                let that = this;
+                $.ajax({
+                    url: "/project/getNow",
+                    method: "GET",
+                    success: (data) => {
+                        if (data.errno === 0) {
+                            that.serverTime = data.data;
+                            that.lastUpdateTime = new Date().getTime();
+                        } else {
+                            that.serverTime = new Date().getTime();
+                            that.lastUpdateTime = that.serverTime;
+                        }
+                    }
+                });
+            },
+            getDomainList: function (projectid) {
+                let that = this;
+                this.domainInfo = [];
                 $.ajax({
                     url: '/project/getTokens',
                     data: {
@@ -833,86 +1011,144 @@
                     },
                     method: "POST",
                     success: data => {
-                        if (data.errno !== 0) {
-                            return alert(data.errmsg);
-                        }
-                        data.data.forEach($ => {
-                            var projectid = $.projectid;
-                            if (this.appTokens[projectid] === undefined) {
-                                this.appTokens[projectid] = [];
-                            }
-                            this.appTokens[projectid][$.type] = $;
+                        if (data.errno !== 0)
+                            return console.log(data.errmsg);
+                        if (data.data.length === 0)
+                            return console.log("error length");
+                        data.data.forEach(function (item) {
+                            that.getDomainInfoByType(item.projectid, item.type, function (info) {
+                                if (!info['iserror']) {
+                                    info['imagename'] = item.imageid;
+                                    let deadlineTime = new Date(info.deadlinetime);
+                                    let startTime = new Date(info.createtime);
+                                    info['iscomplete'] = that.serverTime >= deadlineTime.getTime();
+                                    info['testtime'] = deadlineTime.getTime() - startTime.getTime();
+                                    info['begintime'] = startTime.pattern("yyyy-MM-dd hh:mm:ss");
+                                    info['endtime'] = deadlineTime.pattern("yyyy-MM-dd hh:mm:ss");
+                                    info['state'] = that.getState(startTime.getTime(), deadlineTime.getTime(), that.serverTime);
+                                    info['pid'] = projectid;
+                                    info['token'] = item.token;
+                                    info['lefttime'] = deadlineTime.getTime() - that.serverTime;
+                                    info['percentvalue'] = 0;
+                                } else {
+                                    info['imagename'] = item.imageid;
+                                    info['iscomplete'] = false;
+                                    info['testtime'] = -1;
+                                    info['begintime'] = "-";
+                                    info['endtime'] = "-";
+                                    info['state'] = -1;
+                                    info['pid'] = projectid;
+                                    info['token'] = item.token;
+                                    info['lefttime'] = -1;
+                                    info['percentvalue'] = 0;
+                                }
+                                if (item.type === 0) {
+                                    Vue.set($vm, "autoDomainInfo", info);
+                                } else {
+                                    that.domainInfo.push(info);
+                                }
+                            });
                         });
-                        success_callback(this.appTokens[projectid]);
                     }
                 });
             },
-            handleHandToken: function () {
-                setInterval(() => {
-                    for (let token of this.handToken) {
-                        let nowTime = new Date().getTime() + this.timeGap;
-                        let val = nowTime - token.createTime;
-                        val = Math.max(0, val);
-                        val = Math.min(token.totalTime, val);
-                        let percentage = Math.round((val / token.totalTime) * 100);
-                        if (token.isSet === false) {
-                            token.isSet = true;
-                            let leftTime = Math.round((token.totalTime - val) / 1000);
-                            /*let keyframe = findKeyframesRule('progressbar');
-                             keyframe.deleteRule('0%');
-                             keyframe.appendRule('0% { width: ' + percentage + '%; }');*/
-                            if (leftTime !== 0) {
-                                token.barFill.style.animation = 'progressbar ' + leftTime + 's 1 forwards';
-                            } else {
-                                token.barFill.style.animation = 'progressbar 0.5s 1 forwards';
-
-                            }
-                        }
-
-                        if (val !== token.totalTime) {
-                            token.barPercentage.innerHTML = percentage + '%';
+            getDomainInfoByType: function (projectid, type, success) {
+                $.ajax({
+                    url: "/project/getLifeCycle",
+                    data: {
+                        projectid: projectid,
+                        type: type
+                    },
+                    method: "GET",
+                    success: data => {
+                        if (data.errno === 0) {
+                            return success({
+                                iserror: false,
+                                type: type,
+                                did: data.data[0].id,
+                                createtime: data.data[0].createtime,
+                                deadlinetime: data.data[0].deadlinetime
+                            });
                         } else {
-                            token.barPercentage.innerHTML = '✌️';
-                            Vue.set(token, 'isComplete', true);
+                            console.log(type, data.errmsg);
+                            return success({
+                                iserror: true,
+                                type: type,
+                                did: -1,
+                                createtime: -1,
+                                deadlinetime: -1
+                            });
                         }
                     }
-                }, 100);
-                setTimeout(() => {
-                    for (let i = 0; i < this.handToken.length; i++) {
-                        $.ajax({
-                            url: "/project/getLifeCycle",
-                            data: {
-                                projectid: this.handToken[i].projectid,
-                                type: this.handToken[i].type
-                            },
-                            method: "GET",
-                            success: data => {
-                                if (data.errno === 0) {
-                                    let simulator = data.data[0];
-                                    let createTime = Date.parse(simulator.createtime);
-                                    let deadlineTime = Date.parse(simulator.deadlinetime);
-                                    let totalTime = deadlineTime - createTime;
-                                    let barFill = $('.bar-fill')[i];
-                                    let barPercentage = $('.bar-percentage')[i];
+                });
+            },
+            copyDomainInfoToItem: function (info, item) {
+                item.iserror = false;
+                item["did"] = info["did"];
+                item['createtime'] = info["createtime"];
+                item["deadlinetime"] = info["deadlinetime"];
+                let deadlineTime = new Date(info.deadlinetime);
+                let startTime = new Date(info.createtime);
+                item['iscomplete'] = this.serverTime >= deadlineTime.getTime();
+                item['testtime'] = deadlineTime.getTime() - startTime.getTime();
+                item['begintime'] = startTime.pattern("yyyy-MM-dd hh:mm:ss");
+                item['endtime'] = deadlineTime.pattern("yyyy-MM-dd hh:mm:ss");
+                item['state'] = this.getState(startTime.getTime(), deadlineTime.getTime(), this.serverTime);
+                item['lefttime'] = deadlineTime.getTime() - this.serverTime;
+                item['percentvalue'] = 0;
+                return item;
+            },
+            createNewTest: function () {
+                let that = this;
+                this.showCreateLayout = false;
 
-                                    Vue.set($vm.handToken[i], 'testTime', (totalTime / 1000 / 60).toFixed(2));
-                                    Vue.set($vm.handToken[i], 'totalTime', totalTime);
-                                    Vue.set($vm.handToken[i], 'createTime', createTime);
-                                    Vue.set($vm.handToken[i], 'deadlineTime', deadlineTime);
-                                    Vue.set($vm.handToken[i], 'simulatorId', simulator.id);
-                                    if (($vm.handToken[i].deadlineTime - (new Date().getTime() + this.timeGap)) > 0) {
-                                        Vue.set($vm.handToken[i], 'isComplete', false);
-                                    } else {
-                                        Vue.set($vm.handToken[i], 'isComplete', true);
-                                    }
-                                    Vue.set($vm.handToken[i], 'barFill', barFill);
-                                    Vue.set($vm.handToken[i], 'barPercentage', barPercentage);
-                                    Vue.set($vm.handToken[i], 'isSet', false);
-                                }
-                            }
-                        })
+                let projectid = $vm.apps[$vm.selectedIndex].id;
+                let formData = new FormData();
+                formData.append('projectid', projectid);
+                formData.append('vm', $('#version').val());
+                formData.append('time', $('#time').val());
+                $.ajax({
+                    url: '/project/uploadhandful',
+                    data: formData,
+                    method: 'POST',
+                    contentType: false,
+                    processData: false,
+                    success: data => {
+                        let token = data.data;
+                        that.domainInfo.unshift({
+                            iserror: true,
+                            type: token.type,
+                            createtime: -1,
+                            deadlinetime: -1,
+                            imagename: token.imageid,
+                            iscomplete: false,
+                            testtime: -1,
+                            begintime: "-",
+                            endtime: -1,
+                            state: -1,
+                            pid: projectid,
+                            token: token.token,
+                            lefttime: -1,
+                            percentvalue: 0
+                        });
                     }
-                }, 800)
+                });
+            },
+            terminateHandTest: function (item) {
+                var that = this;
+                $.ajax({
+                    url: "/project/updateLifeCycle",
+                    data: {
+                        projectid: item.pid,
+                        type: item.type
+                    },
+                    method: "POST",
+                    success: (data) => {
+                        if (data.errno === 0) {
+                            item.deadlinetime = that.serverTime;
+                        }
+                    }
+                })
             },
             getApkInfo: function (projid) {
                 $.ajax({
@@ -948,7 +1184,7 @@
             },
             select: function (index) {
                 this.selectedIndex = index;
-                this.getTokensEvt(this.apps[this.selectedIndex].id);
+                this.getDomainList(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
                 setTimeout(function () {
                     for (let item of $('.app-item')) {
@@ -959,7 +1195,7 @@
                     $('.app-item')[index].style.border = '1px solid #49a2f5';
                     $('.app-item')[index].childNodes[4].style.backgroundColor = '#49a2f5';
                     $('.app-item')[index].childNodes[4].style.color = '#ffffff';
-                }, 100)
+                }, 100);
                 location.hash = `${this.currentPage}#${this.selectedIndex}`;
             },
             displayTime: function (time) {
@@ -1005,26 +1241,6 @@
                         }
                     )
                 }, delay)
-            },
-            chooseTest: function () {
-                var layerid = 'hw-layer';
-                showLayer(layerid);
-            },
-            terminateHandTest: function (token) {
-                $.ajax({
-                    url: "/project/updateLifeCycle",
-                    data: {
-                        projectid: token.projectid,
-                        type: token.type
-                    },
-                    method: "POST",
-                    success: (data) => {
-                        if (data.errno === 0) {
-                            $vm.handleHandToken();
-                            token.barFill.style.animation = 'progressbar 0.5s 1 forwards';
-                        }
-                    }
-                })
             },
             getNow: function () {
                 $.ajax({
