@@ -10,7 +10,6 @@ const uuidV4 = require('uuid/v4');
 const pathOS = require('path');
 
 
-
 const ALLOW_LIST = ["apk", "pdf"];
 
 export default class extends Base {
@@ -34,7 +33,7 @@ export default class extends Base {
         let projectModel = this.model('projects');
         let perPage = this.get('perPage');
         let getPage = this.get('getPage');
-        let result = await projectModel.getProjectByUserID(this.user_id,perPage,getPage);
+        let result = await projectModel.getProjectByUserID(this.user_id, perPage, getPage);
         return this.success(result);
     }
 
@@ -42,7 +41,7 @@ export default class extends Base {
         let apkInfoModel = this.model('apkinfo');
         let perPage = this.get('perPage');
         let getPage = this.get('getPage');
-        let result = await apkInfoModel.getApkInfoByUserId(this.user_id,perPage,getPage);
+        let result = await apkInfoModel.getApkInfoByUserId(this.user_id, perPage, getPage);
         return this.success(result);
     }
 
@@ -66,6 +65,7 @@ export default class extends Base {
         let result = await dynamicModel.getDynamicInfoBySimId(sim);
         return this.success(result);
     }
+
     async mirrorimageAction() {
         let projectid = this.get('projectid')
         let projectModel = this.model('projects');
@@ -77,6 +77,7 @@ export default class extends Base {
         return this.success(mirrorresult.name);
 
     }
+
     async createanddeadAction() {
         console.log('createtime');
         let reportid = this.get('reportid');
@@ -88,6 +89,7 @@ export default class extends Base {
         return this.success(simulatorsInfo);
 
     }
+
     async uploadAction() {
         let file = this.file('apk');
         let vm = this.post("vm");
@@ -111,7 +113,7 @@ export default class extends Base {
                 });
                 let tokens = that.model('tokens');
                 tokens.addTokens(insertID, this.user_id, vm, 0);
-                return this.success({ "id": insertID, "name": name });
+                return this.success({"id": insertID, "name": name});
             } catch (e) {
                 this.fail("i do not know");
             }
@@ -123,10 +125,10 @@ export default class extends Base {
     async uploadhandfulAction() {
         let vm = this.post("vm");
         let projectid = this.post("projectid");
-        let type = this.post("type");
         let userid = await this.session('user_id');
         let time = this.post("time");
         let tokenModel = this.model('tokens');
+        let type = await tokenModel.getTokensCount(projectid, userid);
         tokenModel.addTokens(projectid, userid, vm, type);
         let sock = global.sock;
 
@@ -140,11 +142,9 @@ export default class extends Base {
         let updateTokens = await tokenModel.getTokens(projectid, userid);
         let imageModel = this.model('images');
         for (let token of updateTokens) {
-            let image = await imageModel.getImage(token.imageid);
-            token.imageid = image[0].name;
-        }
-        for (let token of updateTokens) {
             if (token.type == type) {
+                let image = await imageModel.getImage(token.imageid);
+                token.imageid = image[0].name;
                 return this.success(token);
             }
         }

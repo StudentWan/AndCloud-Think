@@ -27,6 +27,13 @@ class Tokens extends think.model.base {
             projectid: projectid,
         }).select();
     }
+
+    async getTokensCount(projectid, userid) {
+        return await this.where({
+            userid: userid,
+            projectid: projectid
+        }).count();
+    }
 }
 
 export default Tokens;
