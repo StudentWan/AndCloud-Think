@@ -62,7 +62,8 @@
     }
     
     tr:hover .table-args,
-    tr:hover .table-ret {
+    tr:hover .table-ret,
+    tr:hover .table-time {
         border-left: 1px solid white;
     }
     
@@ -91,9 +92,17 @@
     }
     
     .table-args {
-        width: 70%;
+        width: 50%;
         padding: 4px 20px;
         line-height: 23px;
+        word-break: break-all;
+    }
+    
+    .table-time {
+        width: 20%;
+        padding: 4px 20px;
+        line-height: 23px;
+        text-align: center;
         word-break: break-all;
     }
     
@@ -322,6 +331,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -330,6 +340,8 @@
                                             <td class="table-args">{$ fileinfo.args $}</td>
                                             <td class="table-ret" v-if="fileinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ fileinfo.ret $}</td>
+                                            <td class="table-time" v-if="fileinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ fileinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -365,6 +377,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -373,6 +386,8 @@
                                             <td class="table-args">{$ networkinfo.args $}</td>
                                             <td class="table-ret" v-if="networkinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ networkinfo.ret $}</td>
+                                            <td class="table-time" v-if="networkinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ networkinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -409,6 +424,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -417,6 +433,8 @@
                                             <td class="table-args">{$ binderinfo.args $}</td>
                                             <td class="table-ret" v-if="binderinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ binderinfo.ret $}</td>
+                                            <td class="table-time" v-if="binderinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ binderinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -453,6 +471,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -461,6 +480,8 @@
                                             <td class="table-args">{$ cryptoinfo.args $}</td>
                                             <td class="table-ret" v-if="cryptoinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ cryptoinfo.ret $}</td>
+                                            <td class="table-time" v-if="cryptoinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ cryptoinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -495,6 +516,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -503,6 +525,8 @@
                                             <td class="table-args">{$ devinfo.args $}</td>
                                             <td class="table-ret" v-if="devinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ devinfo.ret $}</td>
+                                            <td class="table-time" v-if="devinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ devinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -537,6 +561,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -545,6 +570,8 @@
                                             <td class="table-args">{$ baseinfo.args $}</td>
                                             <td class="table-ret" v-if="baseinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ baseinfo.ret $}</td>
+                                            <td class="table-time" v-if="baseinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ baseinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -578,6 +605,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -586,6 +614,8 @@
                                             <td class="table-args">{$ contentinfo.args $}</td>
                                             <td class="table-ret" v-if="contentinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ contentinfo.ret $}</td>
+                                            <td class="table-time" v-if="contentinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ contentinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -616,6 +646,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -624,6 +655,8 @@
                                             <td class="table-args">{$ smsinfo.args $}</td>
                                             <td class="table-ret" v-if="smsinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ smsinfo.ret $}</td>
+                                            <td class="table-time" v-if="smsinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ smsinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -654,6 +687,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -662,6 +696,8 @@
                                             <td class="table-args">{$ devicedatainfo.args $}</td>
                                             <td class="table-ret" v-if="devicedatainfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ devicedatainfo.ret $}</td>
+                                            <td class="table-time" v-if="devicedatainfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ devicedatainfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -689,19 +725,22 @@
                             <div class="alert " role="alert">
 
                                 <table>
-                                    <thead v-if='devicedata.length>0'>
+                                    <thead v-if='dexclassloader.length>0'>
                                         <tr>
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for='devicedatainfo in devicedata'>
-                                            <td class="table-method">{$ devicedatainfo.mtd $}</td>
-                                            <td class="table-args">{$ devicedatainfo.args $}</td>
-                                            <td class="table-ret" v-if="devicedatainfo.ret == 'No Return Data'">—</td>
-                                            <td class="table-ret" v-else>{$ devicedatainfo.ret $}</td>
+                                        <tr v-for='dexclass in dexclassloader'>
+                                            <td class="table-method">{$ dexclass.mtd $}</td>
+                                            <td class="table-args">{$ dexclass.args $}</td>
+                                            <td class="table-ret" v-if="dexclass.ret == 'No Return Data'">—</td>
+                                            <td class="table-ret" v-else>{$ dexclass.ret $}</td>
+                                            <td class="table-time" v-if="dexclass.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ dexclass.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -733,6 +772,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -741,6 +781,8 @@
                                             <td class="table-args">{$ efinfo.args $}</td>
                                             <td class="table-ret" v-if="efinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ efinfo.ret $}</td>
+                                            <td class="table-time" v-if="efinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ efinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -775,6 +817,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -783,6 +826,8 @@
                                             <td class="table-args">{$ sysinfo.args $}</td>
                                             <td class="table-ret" v-if="sysinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ sysinfo.ret $}</td>
+                                            <td class="table-time" v-if="sysinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ sysinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -818,6 +863,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
+                                            <th class="table-time">时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -826,6 +872,8 @@
                                             <td class="table-args">{$ processinfo.args $}</td>
                                             <td class="table-ret" v-if="processinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ processinfo.ret $}</td>
+                                            <td class="table-time" v-if="processinfo.timestamp == null">-</td>
+                                            <td class="table-time" v-else>{$ processinfo.timestamp $}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -931,8 +979,14 @@
         success: function(data) {
             // console.log(data);
             for (var info of data.data) {
+                if (info.timestamp != null) {
+                    info.timestamp = moment(new Date(info.timestamp)).format('YYYY-MM-DD HH:mm:ss');
+
+                }
+
                 switch (info.type) {
                     case "API_FILEIO":
+
                         $vm.fileio.push(info);
                         console.log(info.ret);
                         break;

@@ -403,6 +403,7 @@
         var formData = new FormData();
         formData.append('apk', file);
         formData.append('name', 'test');
+        formData.append('apkfilename', name);
         formData.append('vm', $('#vm').val());
         formData.append('time', $('#time').val());
         $.ajax({
@@ -659,4 +660,5 @@
         }
     })
 </script>
+
 {% endblock %}

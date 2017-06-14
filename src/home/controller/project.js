@@ -10,7 +10,7 @@ const uuidV4 = require('uuid/v4');
 const pathOS = require('path');
 
 
-const ALLOW_LIST = ["apk", "pdf"];
+const ALLOW_LIST = ["apk", "APK"];
 
 export default class extends Base {
 
@@ -117,6 +117,7 @@ export default class extends Base {
         let time = this.post("time");
         let ext = file.originalFilename.split('.').pop();
         let name = this.post("name");
+        let apkfilename = this.post("apkfilename");
         if (ALLOW_LIST.indexOf(ext) >= 0) {
             let path = file.path;
             let newPath = pathOS.join(think.RESOURCE_PATH, 'upload', uuidV4() + "." + ext);
@@ -124,7 +125,7 @@ export default class extends Base {
             try {
                 fs.renameSync(path, newPath);
                 let projectModel = that.model('projects');
-                let insertID = await projectModel.addProject(name, newPath, this.user_id, vm);
+                let insertID = await projectModel.addProject(name, newPath, this.user_id, vm, apkfilename);
                 let sock = global.sock;
                 sock.sendAction("new_project", {
                     projectid: insertID,
@@ -134,7 +135,7 @@ export default class extends Base {
                 });
                 let tokens = that.model('tokens');
                 tokens.addTokens(insertID, this.user_id, vm, 0);
-                return this.success({"id": insertID, "name": name});
+                return this.success({ "id": insertID, "name": name });
             } catch (e) {
                 this.fail("i do not know");
             }
