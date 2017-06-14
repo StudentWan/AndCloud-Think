@@ -10,7 +10,6 @@ const uuidV4 = require('uuid/v4');
 const pathOS = require('path');
 
 
-
 const ALLOW_LIST = ["apk", "APK"];
 
 export default class extends Base {
@@ -66,6 +65,7 @@ export default class extends Base {
         let result = await dynamicModel.getDynamicInfoBySimId(sim);
         return this.success(result);
     }
+
     async mirrorimageAction() {
         let projectid = this.get('projectid')
         let projectModel = this.model('projects');
@@ -77,6 +77,7 @@ export default class extends Base {
         return this.success(mirrorresult.name);
 
     }
+
     async createanddeadAction() {
         console.log('createtime');
         let simid = this.get('sim');
@@ -88,6 +89,7 @@ export default class extends Base {
         return this.success(simulatorsInfo);
 
     }
+
     async screenshotAction() {
         let imgbase64 = [];
         let deviceid = this.get('sim');
@@ -108,7 +110,6 @@ export default class extends Base {
         return this.success(imgbase64);
 
     }
-
 
     async uploadAction() {
         let file = this.file('apk');
@@ -146,10 +147,10 @@ export default class extends Base {
     async uploadhandfulAction() {
         let vm = this.post("vm");
         let projectid = this.post("projectid");
-        let type = this.post("type");
         let userid = await this.session('user_id');
         let time = this.post("time");
         let tokenModel = this.model('tokens');
+        let type = await tokenModel.getTokensCount(projectid, userid);
         tokenModel.addTokens(projectid, userid, vm, type);
         let sock = global.sock;
 
@@ -163,11 +164,9 @@ export default class extends Base {
         let updateTokens = await tokenModel.getTokens(projectid, userid);
         let imageModel = this.model('images');
         for (let token of updateTokens) {
-            let image = await imageModel.getImage(token.imageid);
-            token.imageid = image[0].name;
-        }
-        for (let token of updateTokens) {
             if (token.type == type) {
+                let image = await imageModel.getImage(token.imageid);
+                token.imageid = image[0].name;
                 return this.success(token);
             }
         }
