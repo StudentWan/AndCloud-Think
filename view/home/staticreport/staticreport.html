@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/static/dash/css/AdminLTE.min.css">
 <link rel="stylesheet" href="/static/dash/css/skins/_all-skins.min.css">
 <link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/static/highlightjs/styles/default.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -363,7 +364,7 @@
                         <!-- /.box-header -->
                         <h3 class="box-title"><i class="fa fa-certificate"></i> 签名证书</h3>
                     </div>
-                    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">{$apkInfo.signercertificate$}
+                    <pre class="hierarchy bring-up"><code >{$apkInfo.signercertificate$}
         <strong>签名状态: </strong><span v-if="apkInfo.certissued == 'good'" class="label label-success">Good</span><span v-if="apkInfo.certissued == 'missing'" class="label label-danger">Missing</span><span v-if="apkInfo.certissued == 'broken'" class="label label-danger">Broken</span><span v-if="apkInfo.certissued == 'bad'" class="label label-warning">Bad</span>
         <!--其他情况-->
 </code></pre>
@@ -433,7 +434,7 @@
                         <!-- /.box-header -->
                         <h3 class="box-title"><i class="fa fa-credit-card"></i> 配置文件</h3>
                     </div>
-                    <pre class="hierarchy bring-up"><code class="language-bash" data-lang="bash">{$ apkInfo.manifest $}
+                    <pre class="bring-up" id='manifestcode'><code class="html">{$ apkInfo.manifest $}
     </code></pre>
                 </section>
                 <!-- ============================================================= -->
@@ -576,6 +577,7 @@
 <script src="/static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- <script src="/static/js/run_prettify.js"></script>-->
 <script src="/static/js/docs.js"></script>
+<script src="/static/highlightjs/highlight.pack.js"></script>
 <script>
     Vue.config.silent = false;
     var $vm = new Vue({
@@ -594,6 +596,13 @@
             obfusData: {},
             reflectData: {},
             rnativeData: {},
+
+        },
+        updated: function() {
+
+            $('#manifestcode code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
 
         }
     });
@@ -642,4 +651,6 @@
         }
     });
 </script>
+
+
 {% endblock %}

@@ -5,15 +5,17 @@ body {
     radial-gradient(circle farthest-corner at 20% 20%, RGBA(101, 77, 143, 1.00) 0%, RGBA(54, 70, 132, 1.00) 70%);*/
     background: #EBEFF5;
 }
-.form-control{
-    color:white;
+
+.form-control {
+    color: white;
 }
 
-.animate-buzz{
+.animate-buzz {
     animation-name: buzz-out;
     animation-duration: 1s;
     animation-timing-function: ease;
 }
+
 @keyframes buzz-out {
     0% {
         transform: translateX(3px);
@@ -38,7 +40,6 @@ body {
     }
 }
 
-
 .wave {
     background: url(wave.svg);
     background-repeat: repeat-x;
@@ -47,15 +48,34 @@ body {
     transform: translate3d(0, 0, 0);
 }
 
+
 /*.ocean {*/
-    /*background: rgb(129, 191, 193);*/
-    /*display:inline-block;*/
-    /*height: 90px;*/
-    /*width:100%;*/
-    /*position:absolute;*/
-    /*z-index:0;*/
-    /*bottom:0;*/
-    /*left:0;*/
+
+
+/*background: rgb(129, 191, 193);*/
+
+
+/*display:inline-block;*/
+
+
+/*height: 90px;*/
+
+
+/*width:100%;*/
+
+
+/*position:absolute;*/
+
+
+/*z-index:0;*/
+
+
+/*bottom:0;*/
+
+
+/*left:0;*/
+
+
 /*}*/
 
 @keyframes wave {
@@ -76,8 +96,8 @@ body {
     }
 }
 
-@keyframes spin{
-    from{
+@keyframes spin {
+    from {
         transform: rotate(0turn) translateY(-150px) translateY(50%) rotate(1turn);
     }
     to {
