@@ -1,13 +1,13 @@
-{% extends "./../basebar.html" %}
-
-{% block title %}历史列表{% endblock %}
-
-{% block headerbar %}
+{% extends "./../basebar.html" %}{% block title %}历史列表{% endblock %}{% block headerbar %}
 <link rel="stylesheet" href="/static/app/css/hwLayer.css">
 <style>
     #app {
         padding-left: 30px;
         padding-right: 30px;
+    }
+
+    .right-content {
+        overflow: auto;
     }
 
     @media screen and (min-width: 760px) {
@@ -41,10 +41,6 @@
             height: 50vh;
             vertical-align: top;
         }
-    }
-
-    .app-item-wrapper {
-        padding-bottom: 30px;
     }
 
     .app-item {
@@ -112,18 +108,11 @@
     }
 
     .app {
-
-        overflow: auto;
-        height: 100%;
-
-        /*padding-top: 80px;*/
-    }
-
-    .app-wrapper {
         position: relative;
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
+        overflow: hidden;
+        /*height: 100%;*/
+        /*padding-top: 80px;*/
+        height: 680px;
     }
 
     .app span {
@@ -693,7 +682,6 @@
                             <p style="font-weight: 400; font-size: 12px">手动检测<span style="color: #49a2f5"> / MANUAL INSPECTION</span>
                             </p>
                         </div>
-
                         <div class="un-automatic">
                             <div class="s-panel">
                                 <div class="title">
@@ -1314,6 +1302,7 @@
             $(this.$el).css('opacity', '1')
         }
     });
+
     function getList() {
         $.ajax({
             url: "/project/getlist",
@@ -1356,6 +1345,5 @@
         });
     }
     getList();
-
 </script>
 {% endblock %}
