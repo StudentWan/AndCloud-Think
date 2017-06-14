@@ -610,7 +610,7 @@
                                  style="padding-left: 15px;display: flex;justify-content: space-between;align-items: center">
                                 文件分析报告 <a v-if="apps[selectedIndex].isfullinfo"
                                           style="text-decoration: none;color: #FFFFFF;border-left: 1px solid #FFFFFF;padding-left: 5px;padding-right: 5px;background-color: #49a2f3"
-                                          v-bind:href="'/staticreport/index?id=' + apps[selectedIndex].id"
+                                          v-bind:href="'/staticreport/index?apkinfoid=' + apps[selectedIndex].infoid"
                                           target="_blank"><img
                                     src="/static/img/baogao.png" style="width: 10.8px;height: 12px;vertical-align: -5%"
                                     alt=""> 静态检测报告</a></div>
@@ -672,7 +672,7 @@
                                         <p>当前状态：{$ getStateName(autoDomainInfo.state) $}</p>
                                     </div>
                                 </div>
-                                <a v-bind:href="'/dynamicreport/index?dynamicid='+autoDomainInfo.did+'&staticid='+apps[selectedIndex].id+'&auto=1'+'&projectid='+autoDomainInfo.pid"
+                                <a v-bind:href="'/dynamicreport/index?dynamicid='+autoDomainInfo.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=1'+'&projectid='+autoDomainInfo.pid"
                                    v-if="autoDomainInfo.state==3" target="_blank" class="button">进入报告页面</a>
                                 <div v-if="!(autoDomainInfo.state==3)" class="button disable">进入报告页面</div>
                             </div>
@@ -755,7 +755,7 @@
                                     </div>
                                     <div class="content">
                                         <div class="right">
-                                            <a v-bind:href="'/dynamicreport/index?dynamicid='+item.did+'&staticid='+apps[selectedIndex].id+'&auto=0'+'&projectid='+item.pid"
+                                            <a v-bind:href="'/dynamicreport/index?dynamicid='+item.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=0'+'&projectid='+item.pid"
                                                target="_blank" class="button">进入报告页面</a>
                                         </div>
                                         <div class="left">
