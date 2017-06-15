@@ -22,7 +22,8 @@
             width: calc(60% - 3px);
             display: inline-block;
             height: calc(100vh - 160px);
-            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
             vertical-align: top;
         }
     }
@@ -211,8 +212,8 @@
     }
 
     .app-selected {
-        padding-left: 50px;
-        /*padding-right: 50px;*/
+        padding-left: 20px;
+        padding-right: 10px;
     }
 
     .app-info-detail {
@@ -630,9 +631,8 @@
             </div>
             <!--Waiting for implement-->
             <div class="app-action-list">
-                <div class="row">
                     <div v-if="apps[selectedIndex].isfullinfo === false"></div>
-                    <div v-else style="overflow: auto;padding: 12px;">
+                    <div v-else style="padding-top: 15px">
                         <div class="test-result-title">
                             <p style="font-weight: 400; font-size: 12px">自动检测<span style="color: #49a2f5"> / AUTOMATIC DETECTION</span>
                             </p>
@@ -796,7 +796,6 @@
                             </template>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
