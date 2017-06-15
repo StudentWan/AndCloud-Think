@@ -15,11 +15,21 @@ mysqld start
 
 ## Start server
 
+
+In development env:
 ```
 npm start
 ```
 
+In production env:
+
+```
+npm run product
+```
+
 ## Deploy with pm2
+
+### Notice: Not deployed yet.
 
 Use pm2 to deploy app on production enviroment.
 
