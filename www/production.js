@@ -12,4 +12,9 @@ var instance = new thinkjs({
     env: 'production'
 });
 
-instance.run(true);
+// Build code from src to app directory.
+instance.compile({
+    log: true
+});
+
+instance.run();
