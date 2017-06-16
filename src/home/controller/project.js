@@ -73,19 +73,15 @@ export default class extends Base {
 
         let mirrorModel = this.model('mirror');
         let mirrorresult = await mirrorModel.getMirrorViaId(projectresult.mirrorid);
-        console.log(mirrorresult);
         return this.success(mirrorresult.name);
 
     }
 
     async createanddeadAction() {
-        console.log('createtime');
+        // console.log('createtime');
         let simid = this.get('sim');
         let simulatorsModel = this.model('simulators');
         let simulatorsInfo = await simulatorsModel.getSimulator(simid);
-
-        console.log(simulatorsInfo);
-
         return this.success(simulatorsInfo);
 
     }
@@ -97,16 +93,15 @@ export default class extends Base {
         let screenShotsPathRowData = await dynamicInfoModel.getScreenShotsByDeviceid(deviceid);
         let screenShotsPath = JSON.parse(screenShotsPathRowData[0].screenShotsPath);
         let basePath = screenShotsPathRowData[0].basePath;
-        console.log();
         for (let item of screenShotsPath) {
 
             let imgurl = this.config('workspace') + basePath + '/screenshots/' + item;
-            console.log(imgurl);
+            // console.log(imgurl);
             let bitmap = fs.readFileSync(imgurl);
             imgbase64.push("data:image/png;base64," + new Buffer(bitmap).toString('base64'))
         }
 
-        console.log('imgbase64 length:' + imgbase64.length);
+        // console.log('imgbase64 length:' + imgbase64.length);
         return this.success(imgbase64);
 
     }

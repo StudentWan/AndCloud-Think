@@ -2,15 +2,14 @@
   "apps": [{
     "name": "AndCloud-Think",
     "script": "www/production.js",
-    "cwd": "/Users/zoolsher/Documents/AndCloud-Think",
+    "cwd": "/opt/AndCloud-Think",
     "exec_mode": "cluster",
+    "watch": true,
     "instances": 0,
     "max_memory_restart": "1G",
     "autorestart": true,
     "node_args": [],
     "args": [],
-    "env": {
-      
-    }
+    "env": {}
   }]
 }
