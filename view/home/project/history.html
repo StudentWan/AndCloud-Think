@@ -745,12 +745,12 @@
                                         </div>
                                         <div class="left">
                                             <div>
-                                                <div class="info-item" style="width: 150px">当前状态：{$
+                                                <div class="info-item" style="margin-right: 5px;">当前状态：{$
                                                     getStateName(item.state) $}
                                                 </div>
-                                                <div class="info-item" style="width: 185px">开始时间：{$ item.begintime $}
+                                                <div class="info-item" style="margin-right: 5px">开始时间：{$ item.begintime $}
                                                 </div>
-                                                <div class="info-item" style="width: 185px">结束时间：{$ item.endtime $}
+                                                <div class="info-item" style="">结束时间：{$ item.endtime $}
                                                 </div>
                                             </div>
                                             <div>
@@ -776,13 +776,13 @@
                                                target="_blank" class="button manual">进入报告页面</a>
                                         </div>
                                         <div class="left">
-                                            <div style="margin-top:16px;">
-                                                <div class="info-item" style="width: 130px">当前状态：{$
+                                            <div style="margin-top:16px;display: flex;">
+                                                <div class="info-item" style="margin-right: 10px;">当前状态：{$
                                                     getStateName(item.state) $}
                                                 </div>
-                                                <div class="info-item" style="width: 190px">开始时间：{$ item.begintime $}
+                                                <div class="info-item" style="margin-right: 10px;">开始时间：{$ item.begintime $}
                                                 </div>
-                                                <div class="info-item" style="width: 190px">持续时间：{$ (item.testtime /
+                                                <div class="info-item" style="">持续时间：{$ (item.testtime /
                                                     60000).toFixed(2) $} min
                                                 </div>
                                             </div>
@@ -797,10 +797,10 @@
                                     <div class="content">
                                         <div class="left">
                                             <div style="margin-top:16px;display: flex;">
-                                                <div class="info-item" style="margin-right: 5px;">当前状态：{$
+                                                <div class="info-item" style="margin-right: 10px;">当前状态：{$
                                                     getStateName(item.state) $}
                                                 </div>
-                                                <div class="info-item" style="margin-right: 5px;">开始时间：{$ item.begintime $}
+                                                <div class="info-item" style="margin-right: 10px;">开始时间：{$ item.begintime $}
                                                 </div>
                                                 <div class="info-item">持续时间：{$ (item.testtime /
                                                     60000).toFixed(2) $} min
