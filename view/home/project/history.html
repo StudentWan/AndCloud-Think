@@ -430,7 +430,7 @@
 
     .automatic .s-panel .content {
         font-size: 10px;
-        margin: 20px 10px;
+        margin: 10px 10px;
     }
 
     .automatic .button {
@@ -454,6 +454,8 @@
     .un-automatic .s-panel .title .right-button {
         float: right;
         border-left: 1px solid lightgray;
+        padding: 0 20px;
+        cursor: pointer;
     }
 
     .un-automatic .s-panel .content .right {
@@ -478,9 +480,9 @@
     }
 
     .button {
-        background: #fff;
-        border: 2px solid #49a2f5;
-        color: #49a2f5;
+        background: #49a2f5;
+        /*border: 2px solid #49a2f5;*/
+        color: #fff;
         height: 30px;
         line-height: 30px;
         font-size: 10px;
@@ -489,21 +491,36 @@
         text-decoration: none !important;
     }
 
+
+
     .button:hover {
-        background: #49a2f5;
-        color: #fff;
+        background: #fff;
+        border: 2px solid #49a2f5;
+        color: #49a2f5;
         cursor: pointer;
     }
 
-    .button.rose {
+    .button.manual {
         background: #fff;
-        color: #f5498e;
-        border: 2px solid #f5498e;
+        border: 2px solid #49a2f5;
+        color: #49a2f5;
+    }
+
+    .button.manual:hover {
+        background: #49a2f5;
+        color: #fff;
+    }
+
+    .button.rose {
+        background: #f5498e;
+        color: #fff;
+        /*border: 2px solid #f5498e;*/
     }
 
     .button.rose:hover {
-        background: #f5498e;
-        color: #fff;
+        background: #fff;
+        color: #f5498e;
+        border: 2px solid #f5498e;
         cursor: pointer;
     }
 
@@ -632,7 +649,7 @@
             <!--Waiting for implement-->
             <div class="app-action-list">
                     <div v-if="apps[selectedIndex].isfullinfo === false"></div>
-                    <div v-else style="padding-top: 15px">
+                    <div v-else style="padding-top: 15px;font-size: 12px;font-weight: 400;">
                         <div class="test-result-title">
                             <p style="font-weight: 400; font-size: 12px">自动检测<span style="color: #49a2f5"> / AUTOMATIC DETECTION</span>
                             </p>
@@ -643,7 +660,7 @@
                                 <div class="s-panel">
                                     <div class="title">检测进度&nbsp;&nbsp;TEST&nbsp;PROGRESS</div>
                                     <div class="content"
-                                         style="text-align: center; margin-left: 50%; position: relative;">
+                                         style="text-align: center; margin-left: 50%; position: relative;margin-top:20px">
                                         <div class='process_bar' style="margin-left:-55px; position: absolute;">
                                             <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
                                                 <circle cx="55" cy="55" r="50" fill="none" stroke="white"
@@ -685,12 +702,12 @@
                         <div class="un-automatic">
                             <div class="s-panel">
                                 <div class="title">
-                                    创建检测
+                                    创建检测 CREATE TEST
                                     <div class="right-button" v-on:click="showCreateLayout=!showCreateLayout">创建</div>
                                 </div>
                                 <div class="content" v-if="showCreateLayout">
                                     <div class="right">
-                                        <div class="button" v-on:click="createNewTest()">添加手动检测</div>
+                                        <div class="button manual" v-on:click="createNewTest()">添加手动检测</div>
                                     </div>
                                     <form class="left">
                                         <label for="version" style="font-weight: 100">检测器版本</label>
@@ -756,7 +773,7 @@
                                     <div class="content">
                                         <div class="right">
                                             <a v-bind:href="'/dynamicreport/index?dynamicid='+item.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=0'+'&projectid='+item.pid"
-                                               target="_blank" class="button">进入报告页面</a>
+                                               target="_blank" class="button manual">进入报告页面</a>
                                         </div>
                                         <div class="left">
                                             <div style="margin-top:16px;">
@@ -779,13 +796,13 @@
                                     </div>
                                     <div class="content">
                                         <div class="left">
-                                            <div style="margin-top:16px;">
-                                                <div class="info-item" style="width: 130px">当前状态：{$
+                                            <div style="margin-top:16px;display: flex;">
+                                                <div class="info-item" style="margin-right: 5px;">当前状态：{$
                                                     getStateName(item.state) $}
                                                 </div>
-                                                <div class="info-item" style="width: 190px">开始时间：{$ item.begintime $}
+                                                <div class="info-item" style="margin-right: 5px;">开始时间：{$ item.begintime $}
                                                 </div>
-                                                <div class="info-item" style="width: 190px">持续时间：{$ (item.testtime /
+                                                <div class="info-item">持续时间：{$ (item.testtime /
                                                     60000).toFixed(2) $} min
                                                 </div>
                                             </div>
