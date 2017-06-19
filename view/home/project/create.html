@@ -1,5 +1,9 @@
 {% extends "./../basebar.html" %} {% block headerbar %}
 <style>
+    body {
+        font-weight:400;
+    }
+
     .body {
         min-width: 1000px;
     }
@@ -158,7 +162,7 @@
         color: white;
     }
 
-    #selector_vm_machine .container>div {
+    #selector_vm_machine .container > div {
         top: 50%;
     }
 
@@ -297,6 +301,21 @@
         background-color: #49a2f5;
         color: white;
     }
+
+    .tab-head {
+        height: 35px;
+        font-weight: 400;
+        font-size: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    .tab-head span {
+        width: 80px;
+        text-align: center;
+    }
 </style>
 {% endblock %} {% block contentright %}
 <!--<div style="width:100%;height:80px;background: rgba(13, 21, 56, 0.36)">-->
@@ -305,21 +324,25 @@
 <div class="contain-upload" style="height: calc(100% - 140px);">
     <div class="apk-list" id="apk-list">
         <div class="apk-list-wrapper">
-            <div style="height: 45px;padding-top: 15px;font-weight: 400;font-size: 12px">添加历史 <span style="color: #49a2f5"> / HISTORICAL RECORD</span>
+            <div style="height: 45px;padding-top: 15px;font-weight: 400;font-size: 12px">添加历史 <span
+                    style="color: #49a2f5"> / HISTORICAL RECORD</span>
             </div>
             <div class="app-item-wrapper">
-                <div style="height:35px;font-weight: 400;font-size: 10px;display: flex;justify-content: space-between;align-items: center">
-                    <span style="width: 80px;text-align: center;">应用程序图标</span><span style="width: 80px;text-align: center;">应用程序名称</span><span style="width: 80px;text-align: left;">检测时间</span></div>
-                <div class="app-item" v-for=" app in apps" style="display: flex;justify-content: space-between;align-items: center">
+                <div class="tab-head" style="">
+                    <span>图标</span><span>名称</span><span>检测时间</span><span>查看报告</span></div>
+                <div class="app-item" v-for=" app in apps"
+                     style="display: flex;justify-content: space-between;align-items: center">
                     <span><img :src="app.logo" alt="" class="logo"></span>
                     <span class="">{$app.label$}</span>
                     <span class="">{$ displayTime(app.created_time) $}</span>
-                    <span class="staticreport"><a v-bind:href="'/staticreport/index?apkinfoid=' + app.id" target="view_window">静态报告</a></span>
+                    <span class="staticreport"><a v-bind:href="'/staticreport/index?apkinfoid=' + app.id"
+                                                  target="view_window">静态报告</a></span>
                 </div>
             </div>
             <div class="pagination">
                 <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
-                <span :class="{active: n==currentPage}" v-for="n in pageCount" v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
+                <span :class="{active: n==currentPage}" v-for="n in pageCount"
+                      v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
                 <span @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
             </div>
         </div>
@@ -332,7 +355,9 @@
 
             <div id="file_drag" class="step-container">
                 <div class="file_drag_title">选择文件</div>
-                <img src="/static/img/daicon.png" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 164px;height: 250px" alt="">
+                <img src="/static/img/daicon.png"
+                     style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 164px;height: 250px"
+                     alt="">
                 <input type="file" style="" id="file">
             </div>
             <div></div>
@@ -412,12 +437,12 @@
             method: 'POST',
             contentType: false,
             processData: false,
-            xhr: function() { //这是关键  获取原生的xhr对象  做以前做的所有事情
+            xhr: function () { //这是关键  获取原生的xhr对象  做以前做的所有事情
                 var xhr = jQuery.ajaxSettings.xhr();
-                xhr.upload.onload = function() {
+                xhr.upload.onload = function () {
 
                 };
-                xhr.upload.onprogress = function(ev) {
+                xhr.upload.onprogress = function (ev) {
                     if (ev.lengthComputable) {
                         var percent = new Intl.NumberFormat('en-IN', {
                             maximumSignificantDigits: 2
@@ -428,7 +453,7 @@
                 };
                 return xhr;
             },
-            success: function(data) {
+            success: function (data) {
                 hide();
                 animateToThree();
                 if (data.errno === 0) {
@@ -450,9 +475,6 @@
                         "display": "inline-block",
                         "font-weight": "300"
                     })
-
-
-
 
 
                 } else {
@@ -480,7 +502,7 @@
     }
 
 
-    $("#file").on('change', function(evt) {
+    $("#file").on('change', function (evt) {
         global_file = this.files[0];
         animateToOne();
     });
@@ -490,7 +512,7 @@
         switch (status) {
             case "success":
                 $("#message").css('color', 'green');
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#message").css('color', 'white');
                 }, 3000);
                 break;
@@ -514,7 +536,7 @@
     }
 
     function updateProgress(precent) {
-        $(".wave-high").each(function(ele) {
+        $(".wave-high").each(function (ele) {
             if (precent.indexOf('%') > 0) {
                 $(this).css('top', "calc(100% - " + precent + " - 166px)");
             } else {
@@ -523,13 +545,13 @@
         });
     }
     var isOver = false;
-    $("body").get(0).ondragleave = function(evt) {
+    $("body").get(0).ondragleave = function (evt) {
         $('#file_drag').css('animation', 'none');
         isOver = false;
 
         return false;
     };
-    $("body").get(0).ondragover = function(evt) {
+    $("body").get(0).ondragover = function (evt) {
         evt.preventDefault();
         if (!isOver) {
             $('#file_drag').css('animation', 'background-move 2000ms ease infinite');
@@ -538,7 +560,7 @@
     };
 
     var global_file = null;
-    $('#file_drag').get(0).addEventListener('drop', function(e) {
+    $('#file_drag').get(0).addEventListener('drop', function (e) {
         e.preventDefault(); // 阻止默认事件
         isOver = false;
         $('#file_drag').css('animation', 'none');
@@ -564,7 +586,7 @@
         $(".step-container").eq(2).css('opacity', '1');
         hide();
         show();
-        setTimeout(function() {
+        setTimeout(function () {
             uploadFile(global_file);
         }, 1000);
     }
@@ -575,8 +597,6 @@
         // global_curIndex = 3;
         $(".step-container").eq(3).css('transform', 'translateY(-300%) scale(1)');
         $(".step-container").eq(3).css('opacity', '1');
-
-
 
 
     }
@@ -593,10 +613,10 @@
             apps: []
         },
         methods: {
-            displayTime: function(time) {
+            displayTime: function (time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
             },
-            getData: function(n) {
+            getData: function (n) {
                 if (n > this.pageCount || n < 1) {
                     return;
                 }
@@ -613,7 +633,7 @@
                             $vm.currentPage = data.data.currentPage;
                             setTimeout(() => {
                                 $vm.isLoading = false;
-                                $vm.apps = apps.map(function(app) {
+                                $vm.apps = apps.map(function (app) {
                                     app.created_time = app.uploadtime;
                                     app.isfullinfo = false;
                                     if (!app.label) {
@@ -644,7 +664,7 @@
                 $vm.pageCount = data.data.totalPages;
                 $vm.currentPage = data.data.currentPage;
                 setTimeout(() => {
-                    $vm.apps = apps.map(function(app) {
+                    $vm.apps = apps.map(function (app) {
                         app.created_time = app.uploadtime;
                         app.isfullinfo = false;
                         if (!app.label) {
