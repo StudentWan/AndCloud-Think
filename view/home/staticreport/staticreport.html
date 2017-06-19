@@ -613,6 +613,7 @@
         },
         method: "GET",
         success: function(data) {
+            // console.log(data);
             let permissions;
             data.data[0].size = (data.data[0].size / 1024 / 1024).toFixed(2);
 
@@ -635,18 +636,19 @@
 
             permissions = JSON.parse($vm.apkInfo.permissions);
 
-            for (var permission of permissions) {
-                $.ajax({
-                    url: "/permission/staticpermission",
-                    data: {
-                        permission: permission
-                    },
-                    method: "GET",
-                    success: function(data) {
-                        $vm.permissions.push(data.data[0]);
-                    }
-                });
-            }
+            $.ajax({
+                url: "/permission/staticpermission",
+                data: {
+                    permissions: $vm.apkInfo.permissions
+                },
+                method: "GET",
+                success: function(data) {
+                    $vm.permissions = data.data;
+                },
+
+
+            });
+
             return;
         }
     });
