@@ -563,6 +563,10 @@
         font-size: 30px;
     }
 
+    #J_progress_bar {
+        stroke-linecap: round;
+        transition: stroke-dasharray .5s ease;
+    }
 </style>
 {% endblock %}
 
@@ -663,12 +667,12 @@
                                          style="text-align: center; margin-left: 50%; position: relative;margin-top:20px">
                                         <div class='process_bar' style="margin-left:-55px; position: absolute;">
                                             <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
-                                                <circle cx="55" cy="55" r="50" fill="none" stroke="white"
-                                                        stroke-width="5"
+                                                <circle cx="55" cy="55" r="50" fill="none" stroke="lightgrey"
+                                                        stroke-width="10"
                                                         stroke-linecap="round"/>
                                                 <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50"
                                                         fill="none"
-                                                        stroke="#5cb85c" stroke-width="5" stroke-dasharray="157,10000"/>
+                                                        stroke="#f5498e" stroke-width="5" stroke-dasharray="157,10000"/>
                                             </svg>
                                             <div class="mask">{$autoPercentage$}</div>
                                         </div>
@@ -905,7 +909,6 @@
     Vue.config.debug = true;
     Vue.config.silent = false;
 
-
     var $vm = new Vue({
         el: '#app',
         delimiters: ['{$', '$}'],
@@ -973,7 +976,7 @@
                     this.autoPercentage = Math.round(circleValue * 100) + '%';
                 }
                 circle.attr('stroke-dasharray', "" + circleLength * circleValue + ', 10000');
-                circle.attr('stroke', '#5cb85c');
+                circle.attr('stroke', '#f5498e');
 
                 // 更新手动检测
                 this.domainInfo.forEach(function (item) {
