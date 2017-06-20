@@ -330,7 +330,8 @@
             <div class="app-item-wrapper">
                 <div class="tab-head" style="">
                     <span>图标</span><span>名称</span><span>检测时间</span><span>查看报告</span></div>
-                <div class="app-item" v-for=" app in apps"
+                <template  v-for="app in apps">
+                <div class="app-item"
                      style="display: flex;justify-content: space-between;align-items: center">
                     <span><img :src="app.logo" alt="" class="logo"></span>
                     <span class="">{$app.label$}</span>
@@ -338,6 +339,7 @@
                     <span class="staticreport"><a v-bind:href="'/staticreport/index?apkinfoid=' + app.id"
                                                   target="view_window">静态报告</a></span>
                 </div>
+                </template>
             </div>
             <div class="pagination">
                 <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
