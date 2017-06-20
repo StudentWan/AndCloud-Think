@@ -129,6 +129,39 @@
         margin-left: 20px;
         margin-right: 20px;
     }
+    
+    .navbar {
+        background-color: white !important;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+    
+    .navbar p {
+        font-weight: 800;
+    }
+    
+    .main-header .logo {
+        background-color: #49a2f5 !important;
+    }
+    
+    .content {
+        margin-top: 30px;
+    }
+    
+    .treeview-menu {
+        background: #27384f !important;
+    }
+    
+    .header {
+        background: #27384f !important;
+        color: #66828e !important;
+    }
+    
+    .sidebar-menu>li>a,
+    .sidebar-menu>li.active>a {
+        background: #1b2839 !important;
+        border-left-color: #49a2f5;
+    }
 </style>
 {% endblock %} {% block content %}
 
@@ -138,7 +171,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="../" class="logo">
+            <a href="" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>Safe</b>Code</span>
                 <!-- logo for regular state and mobile devices -->
@@ -146,25 +179,9 @@
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-
-                        <!--Menu Items--
-
-                    <!-- Control Sidebar Toggle Button -->
-                        <!--
-                    <li>
-                      <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i> Tools</a>
-                    </li>
-                  -->
-                    </ul>
-                </div>
+                <p style="margin-bottom: 0;font-size: 14px">安码科技移动应用检测平台</p>
+                <p style="margin-bottom: 0;font-size: 5px">SAFE-CODE MOBILE</p>
             </nav>
         </header>
 
@@ -215,16 +232,21 @@
             <!-- /.sidebar -->
         </aside>
 
-        <!-- Content Wrapper. Contains page content -->
         <div id="app" class="content-wrapper">
             <!-- Content Header (Page header) -->
             <!-- Main content -->
+            <template>
+
+            
             <div class="content body">
 
                 <!--overview-->
                 <!--===============================================================-->
                 <section id="apkinfo">
                     <div class="row">
+                       
+
+                        
                         <div class="col-sm-7">
                             <div class="box box-primary">
                                 <div class="box-header with-border">
@@ -255,6 +277,7 @@
                                     </div>
 
                                 </div>
+
                                 <!-- /.box-body -->
                             </div>
                             <!-- /.box -->
@@ -294,6 +317,7 @@
                             </div>
                             <!-- /.box -->
                         </div>
+                       
                         <!-- /.col -->
                         <!---Components-->
                     </div>
@@ -318,7 +342,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header  alert-info stick-header">
+                        <div class="box-header  alert-danger stick-header">
                             <h3 class="box-title"><i class="glyphicon glyphicon-file"></i>文件读取</h3>
                         </div>
                         <!-- /.box-header -->
@@ -331,7 +355,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -341,7 +365,7 @@
                                             <td class="table-ret" v-if="fileinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ fileinfo.ret $}</td>
                                             <td class="table-time" v-if="fileinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ fileinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ fileinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -362,7 +386,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header alert-success stick-header">
+                        <div class="box-header alert-danger stick-header">
                             <h3 class="box-title"><i class="fa fa-plug"></i> 网络请求</h3>
                         </div>
                         <!-- /.box-header -->
@@ -377,7 +401,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -387,7 +411,7 @@
                                             <td class="table-ret" v-if="networkinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ networkinfo.ret $}</td>
                                             <td class="table-time" v-if="networkinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ networkinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ networkinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -409,7 +433,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header alert-warning stick-header">
+                        <div class="box-header alert-danger stick-header">
                             <h3 class="box-title"><i class="fa fa-cubes"></i> 绑定请求</h3>
                         </div>
                         <!-- /.box-header -->
@@ -424,7 +448,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -434,7 +458,7 @@
                                             <td class="table-ret" v-if="binderinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ binderinfo.ret $}</td>
                                             <td class="table-time" v-if="binderinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ binderinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ binderinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -471,7 +495,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -481,7 +505,7 @@
                                             <td class="table-ret" v-if="cryptoinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ cryptoinfo.ret $}</td>
                                             <td class="table-time" v-if="cryptoinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ cryptoinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ cryptoinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -500,7 +524,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header alert-info stick-header">
+                        <div class="box-header alert-warning stick-header">
                             <h3 class="box-title"><i class="fa fa-info"></i> 设备信息</h3>
                         </div>
                         <!-- /.box-header -->
@@ -516,7 +540,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -526,7 +550,7 @@
                                             <td class="table-ret" v-if="devinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ devinfo.ret $}</td>
                                             <td class="table-time" v-if="devinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ devinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ devinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -545,7 +569,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header alert-success stick-header">
+                        <div class="box-header alert-warning stick-header">
                             <h3 class="box-title"><i class="fa fa-puzzle-piece"></i> Base64</h3>
                         </div>
                         <!-- /.box-header -->
@@ -561,7 +585,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -571,7 +595,7 @@
                                             <td class="table-ret" v-if="baseinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ baseinfo.ret $}</td>
                                             <td class="table-time" v-if="baseinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ baseinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ baseinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -605,7 +629,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -615,7 +639,7 @@
                                             <td class="table-ret" v-if="contentinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ contentinfo.ret $}</td>
                                             <td class="table-time" v-if="contentinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ contentinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ contentinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -634,7 +658,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header alert-danger stick-header">
+                        <div class="box-header alert-warning stick-header">
                             <h3 class="box-title"><i class="fa fa-comments"></i> 信息</h3>
                         </div>
                         <!-- /.box-header -->
@@ -646,7 +670,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -656,7 +680,7 @@
                                             <td class="table-ret" v-if="smsinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ smsinfo.ret $}</td>
                                             <td class="table-time" v-if="smsinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ smsinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ smsinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -687,7 +711,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -717,7 +741,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header alert-warning stick-header">
+                        <div class="box-header alert-success stick-header">
                             <h3 class="box-title"><i class="fa fa-asterisk"></i> Dex类加载</h3>
                         </div>
                         <!-- /.box-header -->
@@ -730,7 +754,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -740,7 +764,7 @@
                                             <td class="table-ret" v-if="dexclass.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ dexclass.ret $}</td>
                                             <td class="table-time" v-if="dexclass.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ dexclass.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ dexclass.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -760,7 +784,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header alert-info stick-header">
+                        <div class="box-header alert-success stick-header">
                             <h3 class="box-title"><i class="fa fa-object-ungroup"></i> 反射</h3>
                         </div>
                         <!-- /.box-header -->
@@ -772,7 +796,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -782,7 +806,7 @@
                                             <td class="table-ret" v-if="efinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ efinfo.ret $}</td>
                                             <td class="table-time" v-if="efinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ efinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ efinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -803,7 +827,7 @@
                     <!-- /.box -->
 
                     <div class="box">
-                        <div class="box-header alert-danger stick-header">
+                        <div class="box-header alert-success stick-header">
                             <h3 class="box-title"><i class="fa fa-cogs"></i> 系统管理</h3>
                         </div>
                         <!-- /.box-header -->
@@ -817,7 +841,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -827,7 +851,7 @@
                                             <td class="table-ret" v-if="sysinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ sysinfo.ret $}</td>
                                             <td class="table-time" v-if="sysinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ sysinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ sysinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -863,7 +887,7 @@
                                             <th class="table-method">方法</th>
                                             <th class="table-args">参数</th>
                                             <th class="table-ret">返回值</th>
-                                            <th class="table-time">时间</th>
+                                            <th class="table-time">时间戳</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -873,7 +897,7 @@
                                             <td class="table-ret" v-if="processinfo.ret == 'No Return Data'">—</td>
                                             <td class="table-ret" v-else>{$ processinfo.ret $}</td>
                                             <td class="table-time" v-if="processinfo.timestamp == null">-</td>
-                                            <td class="table-time" v-else>{$ processinfo.timestamp $}}</td>
+                                            <td class="table-time" v-else>{$ processinfo.timestamp $}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -905,9 +929,10 @@
                 </section>
 
             </div>
+            </template>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
+
 
 
 
@@ -979,10 +1004,10 @@
         success: function(data) {
             // console.log(data);
             for (var info of data.data) {
-                if (info.timestamp != null) {
-                    info.timestamp = moment(new Date(info.timestamp)).format('YYYY-MM-DD HH:mm:ss');
+                // if (info.timestamp != null) {
+                //     info.timestamp = moment(new Date(info.timestamp)).format('YYYY-MM-DD HH:mm:ss');
 
-                }
+                // }
 
                 switch (info.type) {
                     case "API_FILEIO":

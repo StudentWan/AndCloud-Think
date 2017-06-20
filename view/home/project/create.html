@@ -1,17 +1,17 @@
 {% extends "./../basebar.html" %} {% block headerbar %}
 <style>
     body {
-        font-weight:400;
+        font-weight: 400;
     }
-
+    
     .body {
         min-width: 1000px;
     }
-
+    
     .right-content {
         overflow: auto;
     }
-
+    
     .contain-upload {
         min-height: 650px;
         padding-left: 30px;
@@ -19,7 +19,7 @@
         display: flex;
         justify-content: space-between;
     }
-
+    
     .apk-list {
         width: calc(40% - 3px);
         max-height: 680px;
@@ -28,26 +28,26 @@
         overflow: auto;
         /*background: #ffffff;*/
     }
-
+    
     .apk-list-wrapper {
         position: relative;
         height: auto !important;
         height: 100%;
         min-height: 100%;
     }
-
+    
     .uploadfile-container {
         width: calc(55% - 3px);
         height: 100%;
         max-height: 680px;
     }
-
+    
     .uploadfile {
         height: calc(100% - 115px);
         background: #FFFFFF;
         border: 1px solid lightgray;
     }
-
+    
     .selector-container {
         display: flex;
         flex-direction: column;
@@ -55,14 +55,14 @@
         flex: 1 1 auto;
         padding-top: 100px;
     }
-
+    
     .info-an {
         transition: all 100ms ease;
         position: relative;
         top: 50%;
         margin-top: -0.5em
     }
-
+    
     .wave-position {
         transition: all 1000ms ease;
         height: 166px;
@@ -72,7 +72,7 @@
         width: 4592px;
         transform: translateY(100%);
     }
-
+    
     @keyframes background-move {
         0% {
             box-shadow: black 0px 0px 50px;
@@ -84,7 +84,7 @@
             box-shadow: black 0px 0px 50px;
         }
     }
-
+    
     .step-container {
         -webkit-transition: all 1s;
         -moz-transition: all 1s;
@@ -98,15 +98,15 @@
         /*text-align: center;*/
         overflow: hidden;
     }
-
+    
     .step-container:not(:first-child) {
         transform: translateY(0) scale(0);
     }
-
+    
     #file_drag {
         position: relative;
     }
-
+    
     input[type='file'] {
         width: 100%;
         height: 100%;
@@ -115,40 +115,40 @@
         margin-top: -1em;
         opacity: 0
     }
-
+    
     .wave-high {
         transition: all 1000ms ease;
         top: 100%;
         position: relative;
     }
-
+    
     .wave-holder {
         background: rgba(13, 21, 56, 0.36);
         height: 1000px;
         margin-top: 1px
     }
-
+    
     #selector_vm_machine {
         margin-top: -40px;
     }
-
+    
     #selector_vm_machine select {
         background: transparent;
         outline: 0;
         width: 100px;
         margin-bottom: 40px;
     }
-
+    
     #selector_vm_machine span {
         width: 200px;
         margin-right: 10px;
         margin-bottom: 30px;
     }
-
+    
     #selector_vm_machine option {
         background: transparent;
     }
-
+    
     #selector_vm_machine button {
         background-color: transparent;
         border: 1px solid lightgray;
@@ -156,29 +156,29 @@
         width: 200px;
         margin-top: 8px;
     }
-
+    
     #selector_vm_machine button:hover {
         background-color: #49a2f5;
         color: white;
     }
-
-    #selector_vm_machine .container > div {
+    
+    #selector_vm_machine .container>div {
         top: 50%;
     }
-
+    
     #yingyongtianjia {
         border-left: 2px solid #49a2f5;
         background: rgba(30, 29, 39, 0.18);
     }
-
+    
     #yingyongtianjia a {
         background-image: url("/static/img/yingyongtianjia-xuanze.png");
     }
-
+    
     .app-item-wrapper {
         padding-bottom: 30px;
     }
-
+    
     .app-item {
         padding: 10px;
         margin-bottom: 4px;
@@ -190,17 +190,17 @@
         font-weight: 400;
         background-color: #ffffff;
     }
-
+    
     .app-item span {
         width: 80px;
         text-align: center;
     }
-
+    
     .logo {
         width: 40px;
         height: 40px;
     }
-
+    
     .apk-list .pagination {
         position: absolute;
         bottom: 0;
@@ -210,7 +210,7 @@
         justify-content: flex-end;
         align-items: center;
     }
-
+    
     .apk-list .pagination span {
         width: 25px;
         height: 25px;
@@ -224,30 +224,40 @@
         border: 1px solid lightgray;
         cursor: pointer;
     }
-
+    
     .apk-list .pagination span img {
         vertical-align: baseline;
         width: 12px;
         height: 7.5px;
     }
-
+    
     .apk-list .pagination .active {
         border: 1px solid #49a2f5;
         background-color: #49a2f5;
         color: #FFFFFF;
     }
-
+    
+    span.staticreport {
+        border: 1px solid #49a2f5;
+        width: 50px;
+        height: 20px;
+        padding-top: 2px;
+        color: #49a2f5;
+        border-radius: 3px;
+    }
+    
     span.staticreport a:visited,
     span.staticreport a:link {
         text-decoration: none;
-        color: #428bca;
+        color: #49a2f5;
     }
-
-    span.staticreport a:hover {
-        text-decoration: none;
-        color: #2a6496;
+    
+    span.staticreport:hover,
+    span.staticreport:hover a {
+        color: white;
+        background-color: #49a2f5;
     }
-
+    
     .uploadfile-title {
         height: 40px;
         background-color: white;
@@ -259,7 +269,7 @@
         font-weight: 400;
         letter-spacing: 1px;
     }
-
+    
     .file_drag_title,
     .selector_vm_machine_title,
     .upload_anim_title,
@@ -272,16 +282,16 @@
         font-size: 13px;
         padding-left: 5px;
     }
-
+    
     .info-an {
         text-align: center;
     }
-
+    
     .upload_result_container {
         text-align: center;
         padding-top: 100px;
     }
-
+    
     .upload_result_container a {
         margin-bottom: 30px;
         display: inline-block;
@@ -295,13 +305,13 @@
         font-weight: 400;
         font-size: 13px;
     }
-
+    
     a.reupload:hover,
     a.history:hover {
         background-color: #49a2f5;
         color: white;
     }
-
+    
     .tab-head {
         height: 35px;
         font-weight: 400;
@@ -311,10 +321,17 @@
         align-items: center;
         padding: 0 10px;
     }
-
+    
     .tab-head span {
         width: 80px;
         text-align: center;
+    }
+    
+    .noItemTip {
+        top: 300px;
+        left: 100px;
+        z-index: 10;
+        position: absolute;
     }
 </style>
 {% endblock %} {% block contentright %}
@@ -324,27 +341,30 @@
 <div class="contain-upload" style="height: calc(100% - 140px);">
     <div class="apk-list" id="apk-list">
         <div class="apk-list-wrapper">
-            <div style="height: 45px;padding-top: 15px;font-weight: 400;font-size: 12px">添加历史 <span
-                    style="color: #49a2f5"> / HISTORICAL RECORD</span>
+            <div style="height: 45px;padding-top: 15px;font-weight: 400;font-size: 12px">添加历史 <span style="color: #49a2f5"> / HISTORICAL RECORD</span>
             </div>
             <div class="app-item-wrapper">
+
                 <div class="tab-head" style="">
                     <span>图标</span><span>名称</span><span>检测时间</span><span>查看报告</span></div>
-                <template  v-for="app in apps">
+                <template v-for="app in apps">
                 <div class="app-item"
                      style="display: flex;justify-content: space-between;align-items: center">
                     <span><img :src="app.logo" alt="" class="logo"></span>
                     <span class="">{$app.label$}</span>
                     <span class="">{$ displayTime(app.created_time) $}</span>
-                    <span class="staticreport"><a v-bind:href="'/staticreport/index?apkinfoid=' + app.id"
-                                                  target="view_window">静态报告</a></span>
+                    <span class="staticreport">
+                        <a v-bind:href="'/staticreport/index?apkinfoid=' + app.id" target="view_window">静态报告</a>
+                   </span>
                 </div>
                 </template>
+                <div class="noItemTip" id="noItemTip">
+                    尚未上传应用，到右边上传一个吧 ：）
+                </div>
             </div>
             <div class="pagination">
                 <span @click="getData(currentPage - 1)"><img src="/static/img/backward.png" alt=""></span>
-                <span :class="{active: n==currentPage}" v-for="n in pageCount"
-                      v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
+                <span :class="{active: n==currentPage}" v-for="n in pageCount" v-if="(n-currentPage) >= -2 && (n-currentPage) <= 2" @click="getData(n)">{$ n $}</span>
                 <span @click="getData(currentPage + 1)"><img src="/static/img/forward.png" alt=""></span>
             </div>
         </div>
@@ -357,9 +377,7 @@
 
             <div id="file_drag" class="step-container">
                 <div class="file_drag_title">选择文件</div>
-                <img src="/static/img/daicon.png"
-                     style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 164px;height: 250px"
-                     alt="">
+                <img src="/static/img/daicon.png" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 164px;height: 250px" alt="">
                 <input type="file" style="" id="file">
             </div>
             <div></div>
@@ -439,12 +457,12 @@
             method: 'POST',
             contentType: false,
             processData: false,
-            xhr: function () { //这是关键  获取原生的xhr对象  做以前做的所有事情
+            xhr: function() { //这是关键  获取原生的xhr对象  做以前做的所有事情
                 var xhr = jQuery.ajaxSettings.xhr();
-                xhr.upload.onload = function () {
+                xhr.upload.onload = function() {
 
                 };
-                xhr.upload.onprogress = function (ev) {
+                xhr.upload.onprogress = function(ev) {
                     if (ev.lengthComputable) {
                         var percent = new Intl.NumberFormat('en-IN', {
                             maximumSignificantDigits: 2
@@ -455,21 +473,17 @@
                 };
                 return xhr;
             },
-            success: function (data) {
+            success: function(data) {
                 hide();
                 animateToThree();
                 if (data.errno === 0) {
 
                     $('#result_message').html("<i class='iconfont icon-check' ></i><br><span>上传成功</span>");
                     $('#result_message i').css({
-                        "color": "white",
+                        "color": "#50b749",
                         "display": "inline - block",
-                        "font-size": "30px",
-                        "border-radius": "21px",
-                        "width": "42px",
-                        "height": "42px",
-                        "background-color": "green",
-
+                        "font-size": "80px",
+                        "font-weight": "600",
                     });
                     $('#result_message span').css({
                         "margin-bottom": "20px",
@@ -482,13 +496,10 @@
                 } else {
                     $('#result_message').html("<i class='iconfont icon-close'></i><br><span>上传失败</span>");
                     $('#result_message i').css({
-                        "color": "white",
+                        "color": "red",
                         "display": "inline - block",
-                        "font-size": "30px",
-                        "border-radius": "21px",
-                        "width": "42px",
-                        "height": "42px",
-                        "background-color": "red",
+                        "font-size": "80px",
+                        "font-weight": "600",
 
                     });
                     $('#result_message span').css({
@@ -504,7 +515,7 @@
     }
 
 
-    $("#file").on('change', function (evt) {
+    $("#file").on('change', function(evt) {
         global_file = this.files[0];
         animateToOne();
     });
@@ -514,7 +525,7 @@
         switch (status) {
             case "success":
                 $("#message").css('color', 'green');
-                setTimeout(function () {
+                setTimeout(function() {
                     $("#message").css('color', 'white');
                 }, 3000);
                 break;
@@ -538,7 +549,7 @@
     }
 
     function updateProgress(precent) {
-        $(".wave-high").each(function (ele) {
+        $(".wave-high").each(function(ele) {
             if (precent.indexOf('%') > 0) {
                 $(this).css('top', "calc(100% - " + precent + " - 166px)");
             } else {
@@ -547,13 +558,13 @@
         });
     }
     var isOver = false;
-    $("body").get(0).ondragleave = function (evt) {
+    $("body").get(0).ondragleave = function(evt) {
         $('#file_drag').css('animation', 'none');
         isOver = false;
 
         return false;
     };
-    $("body").get(0).ondragover = function (evt) {
+    $("body").get(0).ondragover = function(evt) {
         evt.preventDefault();
         if (!isOver) {
             $('#file_drag').css('animation', 'background-move 2000ms ease infinite');
@@ -562,7 +573,7 @@
     };
 
     var global_file = null;
-    $('#file_drag').get(0).addEventListener('drop', function (e) {
+    $('#file_drag').get(0).addEventListener('drop', function(e) {
         e.preventDefault(); // 阻止默认事件
         isOver = false;
         $('#file_drag').css('animation', 'none');
@@ -588,7 +599,7 @@
         $(".step-container").eq(2).css('opacity', '1');
         hide();
         show();
-        setTimeout(function () {
+        setTimeout(function() {
             uploadFile(global_file);
         }, 1000);
     }
@@ -615,10 +626,10 @@
             apps: []
         },
         methods: {
-            displayTime: function (time) {
+            displayTime: function(time) {
                 return moment(time, 'YYYY-MM-DD HH:mm:ss').fromNow()
             },
-            getData: function (n) {
+            getData: function(n) {
                 if (n > this.pageCount || n < 1) {
                     return;
                 }
@@ -633,9 +644,10 @@
                             var apps = data.data.data;
                             $vm.pageCount = data.data.totalPages;
                             $vm.currentPage = data.data.currentPage;
+
                             setTimeout(() => {
                                 $vm.isLoading = false;
-                                $vm.apps = apps.map(function (app) {
+                                $vm.apps = apps.map(function(app) {
                                     app.created_time = app.uploadtime;
                                     app.isfullinfo = false;
                                     if (!app.label) {
@@ -665,8 +677,13 @@
                 var apps = data.data.data;
                 $vm.pageCount = data.data.totalPages;
                 $vm.currentPage = data.data.currentPage;
+                if (apps.length > 0) {
+                    $('#noItemTip').css({
+                        "display": "none"
+                    });
+                }
                 setTimeout(() => {
-                    $vm.apps = apps.map(function (app) {
+                    $vm.apps = apps.map(function(app) {
                         app.created_time = app.uploadtime;
                         app.isfullinfo = false;
                         if (!app.label) {

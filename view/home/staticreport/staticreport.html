@@ -37,6 +37,36 @@
     #nature .col-sm-4 {
         padding: 0;
     }
+    
+    .navbar {
+        background-color: white !important;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+    
+    .navbar p {
+        font-weight: 800;
+        color: #8696aa;
+    }
+    
+    .main-header .logo {
+        background-color: #49a2f5 !important;
+    }
+    
+    .treeview-menu {
+        background: #27384f !important;
+    }
+    
+    .header {
+        background: #27384f !important;
+        color: #66828e !important;
+    }
+    
+    .sidebar-menu>li>a,
+    .sidebar-menu>li.active>a {
+        background: #1b2839 !important;
+        border-left-color: #49a2f5;
+    }
 </style>
 {% endblock %} {% block content %}
 <!--<body class="skin-blue fixed" data-spy="scroll" data-target="#scrollspy">-->
@@ -47,7 +77,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="../" class="logo">
+            <a href="" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>Safe</b>Code</span>
                 <!-- logo for regular state and mobile devices -->
@@ -55,11 +85,9 @@
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <p style="margin-bottom: 0;font-size: 14px">安码科技移动应用检测平台</p>
+                <p style="margin-bottom: 0;font-size: 5px">SAFE-CODE MOBILE</p>
 
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
             </nav>
         </header>
 
