@@ -1165,6 +1165,7 @@
                     success: (data) => {
                         if (data.errno === 0) {
                             item.deadlinetime = that.serverTime;
+                            item.testtime = that.serverTime - new Date(item.createtime).getTime();
                         }
                     }
                 })
