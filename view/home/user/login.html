@@ -1,8 +1,16 @@
 {% extends "./../base.html" %}
 {% block header %}
 <style>
+
     body {
-        background: url("/static/img/safe-code.png") no-repeat center 50%/95% auto #EBEFF5;
+        background: url("/static/img/login-background.jpg") center top;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    .main {
+        /*background-color: rgba(0,0,0);*/
     }
 
     .form-control {
@@ -14,31 +22,32 @@
         cursor: pointer;
     }
 
-    .form-group-register{
+    .form-group-register {
         transition: all 0.5s ease;
         overflow: hidden;
     }
-    .form-group-register-inactive{
-       display: none;
+
+    .form-group-register-inactive {
+        display: none;
     }
-    .form-group-register-active{
+
+    .form-group-register-active {
 
     }
 
-    .zo-button{
+    .zo-button {
         cursor: pointer;
     }
 
     .container {
-       position: relative;
+        position: static;
+        height:100vh;
+        display: flex;
+        align-items: center;
     }
 
     .row {
-        position: absolute;
-        top:50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        width: 90%;
+        width: 100%;
     }
 
     .login-container {
@@ -46,31 +55,65 @@
     }
 
     .login-container .login-title {
+        color: #fff;
     }
 
     .login-container .login-content {
-        background: #ffffff;
-        border: 1px solid lightgray;
         margin-top: 40px;
         padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
+        z-index: 100;
+        padding: 50px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .login-container .login-content:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url(/static/img/login-background.jpg);
+        background-position: center top;
+        background-size: cover;
+        background-attachment: fixed;
+        filter: blur(5px);
+        margin: -30px;
+        z-index: -2;
+    }
+
+    .login-container .login-content:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background-color: rgba(0,0,0,.3);
     }
 
     form input {
         width: 100%;
         height: 35px;
         margin: 20px auto;
-        border: 1px solid #8696aa;
+        border: 1px solid #fff;
         outline: none;
         font-weight: 400;
         padding: 0 10px 0 10px;
+        border: ;
+        border-bottom: 1px solid #fff;
+        background: rgba(255,255,255,0);
+        color:#fff;
     }
 
     form input::-webkit-input-placeholder {
-        color: #8696aa;
+        color: #fff;
         text-align: center;
         font-size: 12px;
     }
-
 
     form #submit {
         width: 100%;
@@ -89,63 +132,31 @@
         color: #49a2f5;
         cursor: pointer;
     }
+
+    .login-switcher {
+        color: #fff;
+    }
 </style>
 {% endblock %}
 {% block content %}
 <body>
-<div class="container " style="vertical-align: middle;height:100vh;">
-    <!--<div class="row" style="position: relative;top:50%;margin-top:-150px">
-        <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-12">
-            <h1><span class="login-switcher">登录</span><span class="pull-right login-switcher"
-                                                            style="color:rgba(255,255,255,0.3)">注册</span></h1>
-            <hr>
-            <div style="overflow: hidden">
-                <form class="form-horizontal fly-form" role="form" method="post" action="">
-                    <div class="form-group">
-                        <input type="text" hidden name="type" value="login"/>
-                        <label for="username-login" class="col-sm-3 control-label">用户</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username-login" placeholder="username"
-                                   name="username">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password-login" class="col-sm-3 control-label">密码</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password-login" placeholder="Password"
-                                   name="password">
-                        </div>
-                    </div>
-                    <div class="form-group form-group-register form-group-register-inactive">
-                        <label for="password-register" class="col-sm-3 control-label">重复密码</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password-register" placeholder="Repeat Password"
-                                   name="password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="zo-button" id="submit">提交<span id="error-reason"></span></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>-->
+<div class="main">
+<div class="container " style="height:100vh;">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 login-container">
             <div class="login-title col-md-8 col-md-offset-2">
-                <span style="font-size: 21px;font-weight: 400">安码科技移动应用检测平台</span>
+                <span style="font-size: 21px;font-weight: 400;letter-spacing: 2px;">安码科技移动应用检测平台</span>
                 <br>
                 <span style="font-size: 12px;font-weight: 400">SAFE-CODE MOBILE APP TEST PLATFORM</span>
             </div>
             <div class="login-content col-md-8 col-md-offset-2">
-                <p id="log-hint" style="font-weight: 400">登录 <span style="color: #49a2f5"> / LOGIN</span></p>
+                <p id="log-hint" style="font-weight: 400;color: #fff;">登录 <span style="color: #49a2f5"> / LOGIN</span></p>
                 <hr style="color: #8696aa">
                 <form method="post" action="">
                     <input id="username-login" type="text" placeholder="USERNAME">
                     <input id="password-login" type="password" placeholder="PASSWORD">
-                    <input id="password-register" class="form-group-register form-group-register-inactive" type="password" placeholder="CONFIRM PASSWORD">
+                    <input id="password-register" class="form-group-register form-group-register-inactive"
+                           type="password" placeholder="CONFIRM PASSWORD">
                     <div class="zo-button" id="submit">登录<span id="error-reason"></span></div>
                     <span class="login-switcher">现在注册</span>
                 </form>
@@ -153,13 +164,14 @@
         </div>
     </div>
 </div>
+</div>
 </body>
 {% endblock %}
 {% block js %}
 <script lang="javascript">
     var isRegister = false;
     $('.login-switcher').on('click', function (evt) {
-        if($('#password-register').hasClass('form-group-register-inactive')) {
+        if ($('#password-register').hasClass('form-group-register-inactive')) {
             isRegister = true;
             $('#log-hint')[0].childNodes[0].data = '注册'
             $('#log-hint')[0].childNodes[1].innerHTML = ' / RESGISTER';
@@ -174,57 +186,57 @@
             $('#submit')[0].childNodes[0].data = '登录';
         }
 
-        if(isRegister){
+        if (isRegister) {
             $('.form-group-register').removeClass('form-group-register-inactive').addClass('form-group-register-active');
-        }else{
+        } else {
             $('.form-group-register').removeClass('form-group-register-active').addClass('form-group-register-inactive');
         }
 
     });
-    function addBuzz($dom){
+    function addBuzz($dom) {
         $dom.addClass("animate-buzz");
-        setTimeout(function(){
+        setTimeout(function () {
             $dom.removeClass("animate-buzz");
-        },1000);
+        }, 1000);
     }
-    $('#submit').on('click',function(evt){
+    $('#submit').on('click', function (evt) {
         var username = $("#username-login").val();
-        if(username.length == 0){
+        if (username.length == 0) {
             addBuzz($("#username-login"));
             return;
         }
         var password = $("#password-login").val();
-        if(password.length == 0){
+        if (password.length == 0) {
             addBuzz($("#password-login"));
             return;
         }
         var formdata = new FormData();
-        if(isRegister) {
+        if (isRegister) {
             var passConfirm = $('#password-register').val();
-            if(passConfirm.length == 0) {
+            if (passConfirm.length == 0) {
                 addBuzz($('#password-register'));
                 return;
             }
 
-            if(passConfirm !== password) {
+            if (passConfirm !== password) {
                 errMessage('Confirm your password!');
                 return;
             }
         }
-        formdata.append('username',$('#username-login').val());
-        formdata.append('password',$('#password-login').val());
-        formdata.append('type',isRegister?'register':'login');
+        formdata.append('username', $('#username-login').val());
+        formdata.append('password', $('#password-login').val());
+        formdata.append('type', isRegister ? 'register' : 'login');
         //未做两次输入密码的验证
         $.ajax({
-            url:"/user/login",
-            method:"POST",
-            data:formdata,
+            url: "/user/login",
+            method: "POST",
+            data: formdata,
             contentType: false,
-            processData:false,
-            success:function(data){
-                if(data.errno!==0){
+            processData: false,
+            success: function (data) {
+                if (data.errno !== 0) {
                     errMessage(data.errmsg);
-                }else{
+                } else {
                     window.location.href = "/project/history";
                 }
             }
@@ -236,15 +248,15 @@
         var lastText = $("#error-reason").text();
         var btn = $("#error-reason").parent();
         var lastColor = btn.css('color');
-        $("#error-reason").text(" "+message);
-        $("#error-reason").css('color','red');
-        btn.css("color","red");
+        $("#error-reason").text(" " + message);
+        $("#error-reason").css('color', 'red');
+        btn.css("color", "red");
         btn.addClass("animate-buzz");
-        setTimeout(function(){
+        setTimeout(function () {
             $("#error-reason").parent().removeClass("animate-buzz");
             $("#error-reason").text(lastText);
-            btn.css('color',lastColor);
-        },1000);
+            btn.css('color', lastColor);
+        }, 1000);
     }
 </script>
 {% endblock %}
