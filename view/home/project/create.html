@@ -239,11 +239,15 @@
     
     span.staticreport {
         border: 1px solid #49a2f5;
-        width: 50px;
+        width: 60px;
         height: 20px;
-        padding-top: 2px;
         color: #49a2f5;
         border-radius: 3px;
+        vertical-align: middle;
+    }
+
+    span.staticreport a {
+        text-align: center;
     }
     
     span.staticreport a:visited,
@@ -326,10 +330,15 @@
         width: 80px;
         text-align: center;
     }
+
+    .tab-head span:last-child {
+        width: 60px;
+    }
     
     .noItemTip {
-        top: 300px;
-        left: 100px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: 10;
         position: absolute;
     }

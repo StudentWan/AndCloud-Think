@@ -10,15 +10,18 @@
         /*padding-top: calc(50px - 1.4em);*/
 
     }
-    #yingyongtianjia{
+
+    #yingyongtianjia {
         margin-top: 150px;
         padding-top: 17px;
         padding-bottom: 17px;
     }
+
     #lishi {
         padding-top: 16px;
         padding-bottom: 16px;
     }
+
     /*#yingyongtianjia:hover {
         border-left: 2px solid #49a2f5;
         background: rgba(30, 29, 39, 0.18) ;
@@ -60,7 +63,7 @@
         text-align: center;
     }
 
-    #yingyongtianjia a{
+    #yingyongtianjia a {
         color: white;
         text-decoration: none;
         font-weight: 100;
@@ -68,7 +71,7 @@
         background-image: url('/static/img/yingyongtianjia-weixuanze.png');
         display: inline-block;
         -webkit-background-size: 20px 21px;
-        background-size:20px 21px;
+        background-size: 20px 21px;
         width: 20px;
         height: 21px;
     }
@@ -80,7 +83,7 @@
         font-size: 1.5em;
         background-image: url('/static/img/lishi-weixuanze.png');
         -webkit-background-size: 20px 21px;
-        background-size:20px 21px;
+        background-size: 20px 21px;
         display: inline-block;
         width: 20px;
         height: 21px;
@@ -91,35 +94,44 @@
         height: 60px;
         background: #ffffff;
         color: #8696aa;
-        font-weight:500;
-        padding-left:30px;
+        font-weight: 500;
+        padding-left: 30px;
         padding-right: 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    
+
     .guide-bar {
         width: 100%;
         height: 60px;
-        font-weight:400;
+        font-weight: 400;
         padding-left: 30px;
         padding-right: 30px;
         padding-top: 20px;
     }
 
+    .logo-container {
+        height: 60px;
+        width: 100%;
+        vertical-align: middle;
+        text-align: center;
+        background: #49a2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 {% block headerbar %} {% endblock %} {% endblock %} {% block content %}
 
 <body>
 <div class="" style="height: 100%">
     <div class="left-bar" style="background: #27384f;height: 100%;float:left;overflow:hidden">
-        <div style="height:60px;width:100%;vertical-align: middle;text-align: center;background: #49a2f5">
-            <!--<h1 style="font-weight: 100;">One</h1>-->
-            <!--<hr>-->
+        <div class="logo-container" style="">
+            <iframe src="/static/img/logo_all_white.svg" frameborder="0" width="50px" height="50px"></iframe>
         </div>
         <div class="left-nav-link" id="yingyongtianjia">
-            <a  href="/project/create"></a>
+            <a href="/project/create"></a>
         </div>
         <div class="left-nav-link" id="lishi">
             <a href="/project/history"></a>
@@ -133,7 +145,7 @@
                 <p style="margin-bottom: 0;font-size: 5px">SAFE-CODE MOBILE</p>
             </div>
             <div class="sign-out">
-                <span id="user-name" ></span>
+                <span id="user-name"></span>
                 <a href="/user/logout"><img src="/static/img/tuichu.png" alt="" style="width: 20px;height: 20px"></a>
             </div>
         </div>
