@@ -10,7 +10,7 @@ const uuidV4 = require('uuid/v4');
 const pathOS = require('path');
 
 
-const ALLOW_LIST = ["apk", "APK"];
+const ALLOW_LIST = ["apk"];
 
 export default class extends Base {
 
@@ -110,7 +110,7 @@ export default class extends Base {
         let file = this.file('apk');
         let vm = this.post("vm");
         let time = this.post("time");
-        let ext = file.originalFilename.split('.').pop();
+        let ext = file.originalFilename.split('.').pop().toLowerCase();
         let name = this.post("name");
         let apkfilename = this.post("apkfilename");
         if (ALLOW_LIST.indexOf(ext) >= 0) {
