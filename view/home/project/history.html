@@ -990,6 +990,8 @@
                 circle.attr('stroke-dasharray', "" + circleLength * circleValue + ', 10000');
                 circle.attr('stroke', '#f5498e');
 
+                this.domainInfo.sort((a, b) => b.type - a.type);
+
                 // 更新手动检测
                 this.domainInfo.forEach(function (item) {
                     if (item.iserror) return;
@@ -1214,7 +1216,8 @@
                     }
                 });
             },
-            select: function (index) {
+            select: function (index, force) {
+                if(!force && this.selectedIndex === index) return;
                 this.selectedIndex = index;
                 this.getDomainList(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
@@ -1305,8 +1308,7 @@
                                     }
                                     return app;
                                 });
-                                this.selectedIndex = 0;
-                                this.select(this.selectedIndex);
+                                this.select(0,true);
 
                             }, 100);
                         }
@@ -1353,8 +1355,7 @@
                             }
                             return app;
                         });
-                        $vm.selectedIndex = lastIndex;
-                        $vm.select($vm.selectedIndex);
+                        $vm.select(lastIndex, true);
                     }, 100);
                 }
             }
