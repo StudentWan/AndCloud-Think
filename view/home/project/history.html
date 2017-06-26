@@ -773,13 +773,10 @@
                                                 <div class="s-progress-container">
                                                     <div class="s-progress-bar"
                                                          v-bind:style="{width: (item.percentvalue*100).toFixed(0)+'%'}"></div>
-                                                    <div class="s-progress-text" v-if="(item.lefttime/1000).toFixed(0)%60 >= 10">{$ parseInt(item.lefttime / 60000)
+                                                    <div class="s-progress-text" v-if="(item.lefttime/1000).toFixed(0)%60 >= 10">{$ parseInt((item.lefttime / 1000).toFixed(0) / 60)
                                                         $}:{$ (item.lefttime/1000).toFixed(0)%60 $}
                                                     </div>
-                                                    <div class="s-progress-text" v-else-if="(item.lefttime/1000).toFixed(0)%60 > 0">{$ parseInt(item.lefttime / 60000)
-                                                        $}:{$ "0" + (item.lefttime/1000).toFixed(0)%60 $}
-                                                    </div>
-                                                    <div class="s-progress-text" v-else>{$ Math.ceil(item.lefttime / 60000)
+                                                    <div class="s-progress-text" v-else>{$ parseInt((item.lefttime / 1000).toFixed(0) / 60)
                                                         $}:{$ "0" + (item.lefttime/1000).toFixed(0)%60 $}
                                                     </div>
                                                 </div>
@@ -1062,8 +1059,8 @@
                                     let startTime = new Date(info.createtime);
                                     info['iscomplete'] = that.serverTime >= deadlineTime.getTime();
                                     info['testtime'] = deadlineTime.getTime() - startTime.getTime();
-                                    info['begintime'] = startTime.pattern("yyyy-MM-dd hh:mm:ss");
-                                    info['endtime'] = deadlineTime.pattern("yyyy-MM-dd hh:mm:ss");
+                                    info['begintime'] = startTime.pattern("yyyy-MM-dd HH:mm:ss");
+                                    info['endtime'] = deadlineTime.pattern("yyyy-MM-dd HH:mm:ss");
                                     info['state'] = that.getState(startTime.getTime(), deadlineTime.getTime(), that.serverTime);
                                     info['pid'] = projectid;
                                     info['token'] = item.token;
@@ -1130,8 +1127,8 @@
                 let startTime = new Date(info.createtime);
                 item['iscomplete'] = this.serverTime >= deadlineTime.getTime();
                 item['testtime'] = deadlineTime.getTime() - startTime.getTime();
-                item['begintime'] = startTime.pattern("yyyy-MM-dd hh:mm:ss");
-                item['endtime'] = deadlineTime.pattern("yyyy-MM-dd hh:mm:ss");
+                item['begintime'] = startTime.pattern("yyyy-MM-dd HH:mm:ss");
+                item['endtime'] = deadlineTime.pattern("yyyy-MM-dd HH:mm:ss");
                 item['state'] = this.getState(startTime.getTime(), deadlineTime.getTime(), this.serverTime);
                 item['lefttime'] = deadlineTime.getTime() - this.serverTime;
                 item['percentvalue'] = 0;
