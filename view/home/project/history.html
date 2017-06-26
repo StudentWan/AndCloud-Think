@@ -773,8 +773,14 @@
                                                 <div class="s-progress-container">
                                                     <div class="s-progress-bar"
                                                          v-bind:style="{width: (item.percentvalue*100).toFixed(0)+'%'}"></div>
-                                                    <div class="s-progress-text">{$ parseInt(item.lefttime / 60000)
+                                                    <div class="s-progress-text" v-if="(item.lefttime/1000).toFixed(0)%60 >= 10">{$ parseInt(item.lefttime / 60000)
                                                         $}:{$ (item.lefttime/1000).toFixed(0)%60 $}
+                                                    </div>
+                                                    <div class="s-progress-text" v-else-if="(item.lefttime/1000).toFixed(0)%60 > 0">{$ parseInt(item.lefttime / 60000)
+                                                        $}:{$ "0" + (item.lefttime/1000).toFixed(0)%60 $}
+                                                    </div>
+                                                    <div class="s-progress-text" v-else>{$ Math.ceil(item.lefttime / 60000)
+                                                        $}:{$ "0" + (item.lefttime/1000).toFixed(0)%60 $}
                                                     </div>
                                                 </div>
                                             </div>
@@ -788,8 +794,8 @@
                                     </div>
                                     <div class="content">
                                         <div class="right">
-                                            <a v-bind:href="'/dynamicreport/index?dynamicid='+item.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=0'+'&projectid='+item.pid"
-                                               target="_blank" class="button manual">进入报告页面</a>
+                                            <a v-if="item.state == 2" class="button disable">进入报告页面</a>
+                                            <a class="button manual" v-bind:href="'/dynamicreport/index?dynamicid='+item.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=0'+'&projectid='+item.pid" target="_blank" v-else>进入报告页面</a>
                                         </div>
                                         <div class="left">
                                             <div style="margin-top:16px;display: flex;">
@@ -1301,7 +1307,8 @@
                                     app.created_time = app.uploadtime;
                                     app.isfullinfo = false;
                                     if (!app.label) {
-                                        app.label = "正在检测...";
+                                        console.log(app.apkfilename);
+                                        app.label = "正在检测..." + app.apkfilename;
                                     }
                                     if (!app.logo) {
                                         app.logo = "/static/images/loading.gif";
@@ -1348,7 +1355,7 @@
                             app.created_time = app.uploadtime;
                             app.isfullinfo = false;
                             if (!app.label) {
-                                app.label = "正在检测...";
+                                app.label = "正在检测..." + app.apkfilename;
                             }
                             if (!app.logo) {
                                 app.logo = "/static/images/loading.gif";

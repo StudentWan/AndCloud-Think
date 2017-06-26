@@ -453,6 +453,7 @@
     function uploadFile(file) {
 
         var name = file.name;
+        console.log(name);
         var size = file.size;
         var formData = new FormData();
         formData.append('apk', file);
