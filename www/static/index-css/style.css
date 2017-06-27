@@ -110,6 +110,7 @@ a:focus {
     color: #fff !important;
     padding: 2% 0;
     transition: all 0.5s;
+    border-radius: 0;
 }
 
 #sticky {
@@ -117,7 +118,6 @@ a:focus {
     background-color: #333;
     color: #fff;
     font-size: 2em;
-    border-radius: 0.5ex;
 }
 
 #tf-menu.stick {
@@ -125,8 +125,14 @@ a:focus {
     top: 0;
     width: 100%;
     z-index: 10000;
-    background: #222222;
+    background: #49a2f5;
     padding: 1% 0;
+}
+
+@media screen and (max-width: 400px) {
+    .navbar-right {
+        display: none;
+    }
 }
 
 #tf-menu.navbar-default .navbar-nav > li > a {
@@ -347,8 +353,12 @@ form#contact {
     border-top: 2px solid #8696aa;
 }
 
+.list-inline {
+    margin: 0;
+}
+
 nav#tf-footer {
-    background: #222222;
-    padding: 3% 0 2% 0;
+    background: #49a2f5;
+    padding: 1% 0 1% 0;
     color: #f1f1f1;
 }
