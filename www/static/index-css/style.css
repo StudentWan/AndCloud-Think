@@ -354,7 +354,7 @@ form#contact {
 }
 
 .list-inline {
-    margin: 0;
+    margin-bottom: 0;
 }
 
 nav#tf-footer {
