@@ -29,10 +29,16 @@ npm run product
 
 ## Deploy with pm2
 
-### Notice: Not deployed yet.
+Notice: Not deployed yet.
 
 Use pm2 to deploy app on production enviroment.
 
 ```
 pm2 startOrReload pm2.json
+```
+
+## Use browser-sync to watch
+
+```
+./browser-sync.sh
 ```
