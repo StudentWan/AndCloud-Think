@@ -1106,7 +1106,6 @@
                                 deadlinetime: data.data[0].deadlinetime
                             });
                         } else {
-                            console.log(type, data.errmsg);
                             return success({
                                 iserror: true,
                                 type: type,
@@ -1304,7 +1303,6 @@
                                     app.created_time = app.uploadtime;
                                     app.isfullinfo = false;
                                     if (!app.label) {
-                                        console.log(app.apkfilename);
                                         app.label = "正在检测..." + app.apkfilename;
                                     }
                                     if (!app.logo) {
