@@ -5,12 +5,13 @@
     body {
         background: url("/static/img/login-background.jpg") center top;
         background-size: cover;
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
-    .main {
-        /*background-color: rgba(0,0,0);*/
+        background-attachment: fixed;
+        min-width: 768px;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
     }
 
     .form-control {
@@ -39,15 +40,14 @@
         cursor: pointer;
     }
 
-    .container {
-        position: static;
-        height:100vh;
+    .main {
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .row {
-        width: 100%;
+        width: 400px;
     }
 
     .login-container {
@@ -82,6 +82,10 @@
         filter: blur(5px);
         margin: -30px;
         z-index: -2;
+    }
+
+    .login-content {
+        position: relative;
     }
 
     .login-container .login-content:before {
@@ -140,16 +144,16 @@
 {% endblock %}
 {% block content %}
 <body>
+
 <div class="main">
-<div class="container " style="height:100vh;">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 login-container">
-            <div class="login-title col-md-8 col-md-offset-2">
+        <div class="login-container">
+            <div class="login-title">
                 <span style="font-size: 21px;font-weight: 400;letter-spacing: 2px;">移动互联网应用安全检测平台</span>
                 <br>
                 <span style="font-size: 12px;font-weight: 400;">SAFE-CODE MOBILE APP TEST PLATFORM</span>
             </div>
-            <div class="login-content col-md-8 col-md-offset-2">
+            <div class="login-content">
                 <p id="log-hint" style="font-weight: 400;color: #fff;">登录 <span style="color: #49a2f5"> / LOGIN</span></p>
                 <hr style="color: #8696aa">
                 <form method="post" action="">
@@ -165,7 +169,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 {% endblock %}
