@@ -63,7 +63,7 @@ a:focus {
 
 /* Home Style */
 #tf-home {
-    background: url(../index-img/01.jpg);
+    background: url(../img/login-background.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -73,15 +73,16 @@ a:focus {
 }
 
 #tf-home .overlay {
-    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.8)), color-stop(17%, rgba(0, 0, 0, 0.73)), color-stop(35%, rgba(0, 0, 0, 0.66)), color-stop(62%, rgba(0, 0, 0, 0.55)), color-stop(100%, rgba(0, 0, 0, 0.4))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); /* IE10+ */
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc000000', endColorstr='#66000000', GradientType=0); /* IE6-9 */
+    /*background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); !* FF3.6+ *!
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.8)), color-stop(17%, rgba(0, 0, 0, 0.73)), color-stop(35%, rgba(0, 0, 0, 0.66)), color-stop(62%, rgba(0, 0, 0, 0.55)), color-stop(100%, rgba(0, 0, 0, 0.4))); !* Chrome,Safari4+ *!
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); !* Chrome10+,Safari5.1+ *!
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); !* Opera 11.10+ *!
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); !* IE10+ *!
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.73) 17%, rgba(0, 0, 0, 0.66) 35%, rgba(0, 0, 0, 0.55) 62%, rgba(0, 0, 0, 0.4) 100%); !* W3C *!
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc000000', endColorstr='#66000000', GradientType=0); !* IE6-9 *!
     height: auto;
-    background-attachment: fixed;
+    background-attachment: fixed;*/
+    background-color: rgba(0,0,0,.3);
 }
 
 .content {
@@ -125,7 +126,7 @@ a:focus {
     top: 0;
     width: 100%;
     z-index: 10000;
-    background: #49a2f5;
+    background: #27384f;
     padding: 1% 0;
 }
 
@@ -145,7 +146,7 @@ a:focus {
 
 #tf-menu.navbar-default .navbar-nav > li > a:hover,
 #tf-menu.navbar-default .navbar-nav > li > a:focus {
-    color: #8696aa;
+    color: #49a2f5;
     background-color: transparent;
 }
 
@@ -202,7 +203,7 @@ a.btn {
 
 button.btn.btn-primary.my-btn,
 a.btn.btn-primary.my-btn {
-    background: #8696aa;
+    background: #49a2f5;
     border-color: transparent;
     border-radius: 0px;
     border-width: 2px;
@@ -216,7 +217,7 @@ a.btn.btn-primary.my-btn {
 button.btn.btn-primary.my-btn:hover,
 a.btn.btn-primary.my-btn:hover {
     background: #ffffff;
-    color: #8696aa;
+    color: #49a2f5;
     border-color: transparent;
 }
 
@@ -358,7 +359,12 @@ form#contact {
 }
 
 nav#tf-footer {
-    background: #49a2f5;
+    background: #27384f;
     padding: 1% 0 1% 0;
     color: #f1f1f1;
+}
+
+.content h1,
+.content h3 {
+    color: #fff;
 }
