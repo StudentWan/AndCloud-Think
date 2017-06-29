@@ -22,25 +22,25 @@
         min-width: 1150px;
     }
 
-        .history-list {
-            /*width: calc(40% - 3px);
-            height: calc(100vh - 160px);*/
-            width: 42%;
-            display: inline-block;
-            vertical-align: top;
-        }
+    .history-list {
+        /*width: calc(40% - 3px);
+        height: calc(100vh - 160px);*/
+        width: 42%;
+        display: inline-block;
+        vertical-align: top;
+    }
 
-        .app-selected {
-            /*width: calc(60% - 3px);*/
-            display: inline-block;
-            /*height: calc(100vh - 160px);*/
-            width: 57%;
-            overflow-x: hidden;
-            overflow-y: auto;
-            vertical-align: top;
-            min-width: 550px;
-            height: 620px;
-        }
+    .app-selected {
+        /*width: calc(60% - 3px);*/
+        display: inline-block;
+        /*height: calc(100vh - 160px);*/
+        width: 57%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        vertical-align: top;
+        min-width: 550px;
+        height: 620px;
+    }
 
     .app-item-wrapper .choosen {
         background-color: #ced6e1;
@@ -122,7 +122,7 @@
         overflow: hidden;
         /*height: 100%;*/
         /*padding-top: 80px;*/
-        height: 680px;
+        height: 650px;
     }
 
     .app span {
@@ -494,8 +494,6 @@
         text-decoration: none !important;
     }
 
-
-
     .button:hover {
         background: #fff;
         border: 2px solid #49a2f5;
@@ -649,174 +647,179 @@
             </div>
             <!--Waiting for implement-->
             <div class="app-action-list">
-                    <div v-if="apps[selectedIndex].isfullinfo === false"></div>
-                    <div v-else style="padding-top: 15px;font-size: 12px;font-weight: 400;">
-                        <div class="test-result-title">
-                            <p style="font-weight: 400; font-size: 12px">自动检测<span style="color: #49a2f5"> / AUTOMATIC DETECTION</span>
-                            </p>
-                        </div>
+                <div v-if="apps[selectedIndex].isfullinfo === false"></div>
+                <div v-else style="padding-top: 15px;font-size: 12px;font-weight: 400;">
+                    <div class="test-result-title">
+                        <p style="font-weight: 400; font-size: 12px">自动检测<span style="color: #49a2f5"> / AUTOMATIC DETECTION</span>
+                        </p>
+                    </div>
 
-                        <div class="automatic">
-                            <div class="left-progress">
-                                <div class="s-panel">
-                                    <div class="title">检测进度&nbsp;&nbsp;TEST&nbsp;PROGRESS</div>
-                                    <div class="content"
-                                         style="text-align: center; margin-left: 50%; position: relative;margin-top:20px">
-                                        <div class='process_bar' style="margin-left:-55px; position: absolute;">
-                                            <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
-                                                <circle cx="55" cy="55" r="50" fill="none" stroke="lightgrey"
-                                                        stroke-width="10"
-                                                        stroke-linecap="round"/>
-                                                <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50"
-                                                        fill="none"
-                                                        stroke="#f5498e" stroke-width="5" stroke-dasharray="157,10000"/>
-                                            </svg>
-                                            <div class="mask">{$autoPercentage$}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a v-bind:href="'/runner/token/'+autoDomainInfo.token" v-if="autoDomainInfo.state==1"
-                                   target="_blank" class="button rose">进入检测页面</a>
-                                <div v-if="!(autoDomainInfo.state==1)" class="button disable">进入检测页面</div>
-                            </div>
-                            <div class="right-info">
-                                <div class="s-panel">
-                                    <div class="title">检测信息&nbsp;&nbsp;TEST&nbsp;INFORMATION</div>
-                                    <div class="content">
-                                        <p>检测引擎：{$ autoDomainInfo.imagename $}</p>
-                                        <p>检测时间：{$ (autoDomainInfo.testtime / 60000).toFixed(2) $} min</p>
-                                        <p>开始时间：{$ autoDomainInfo.begintime $}</p>
-                                        <p>结束时间：{$ autoDomainInfo.endtime $}</p>
-                                        <p>当前状态：{$ getStateName(autoDomainInfo.state) $}</p>
-                                    </div>
-                                </div>
-                                <a v-bind:href="'/dynamicreport/index?dynamicid='+autoDomainInfo.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=1'+'&projectid='+autoDomainInfo.pid"
-                                   v-if="autoDomainInfo.state==3" target="_blank" class="button">进入报告页面</a>
-                                <div v-if="!(autoDomainInfo.state==3)" class="button disable">进入报告页面</div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="test-result-title" style="margin-top: 20px;">
-                            <p style="font-weight: 400; font-size: 12px">手动检测<span style="color: #49a2f5"> / MANUAL INSPECTION</span>
-                            </p>
-                        </div>
-                        <div class="un-automatic">
+                    <div class="automatic">
+                        <div class="left-progress">
                             <div class="s-panel">
-                                <div class="title">
-                                    创建检测 CREATE TEST
-                                    <div class="right-button" v-on:click="showCreateLayout=!showCreateLayout">创建</div>
-                                </div>
-                                <div class="content" v-if="showCreateLayout">
-                                    <div class="right">
-                                        <div class="button manual" v-on:click="createNewTest()">添加手动检测</div>
+                                <div class="title">检测进度&nbsp;&nbsp;TEST&nbsp;PROGRESS</div>
+                                <div class="content"
+                                     style="text-align: center; margin-left: 50%; position: relative;margin-top:20px">
+                                    <div class='process_bar' style="margin-left:-55px; position: absolute;">
+                                        <svg xmlns="http://www.w3.org/200/svg" height="110" width="110">
+                                            <circle cx="55" cy="55" r="50" fill="none" stroke="lightgrey"
+                                                    stroke-width="10"
+                                                    stroke-linecap="round"/>
+                                            <circle class="demo2" id="J_progress_bar" cx="55" cy="55" r="50"
+                                                    fill="none"
+                                                    stroke="#f5498e" stroke-width="5" stroke-dasharray="157,10000"/>
+                                        </svg>
+                                        <div class="mask">{$autoPercentage$}</div>
                                     </div>
-                                    <form class="left">
-                                        <label for="version" style="font-weight: 100">检测器版本</label>
-                                        <select name="version" id="version">
-                                            {% for item in mirrorlist %}
-                                            <option value="{{item.id}}">{{item.name}}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <br/>
-                                        <label for="time" style="font-weight: 100">检测时间&emsp;</label>
-                                        <select name="time" id="time">
-                                            <option value="5">5 mins</option>
-                                            <option value="10">10 mins</option>
-                                            <option value="15">15 mins</option>
-                                            <option value="120">2 hours</option>
-                                        </select>
-                                        <br/>
-                                    </form>
                                 </div>
                             </div>
-                            <template v-for="item in domainInfo">
-                                <div class="s-panel" v-if="!item.iserror && !item.iscomplete">
-                                    <div class="title">
-                                        检测进度 TEST PROGRESS - {$ item.imagename $}
-                                        <div class="right-button">
-                                            <div v-on:click="terminateHandTest(item)">停止</div>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        <div class="right">
-                                            <a v-bind:href="'/runner/token/'+item.token" v-if="item.state==1"
-                                               target="_blank" class="button rose">进入检测页面</a>
-                                            <div v-if="!(item.state==1)" class="button disable">进入检测页面</div>
-                                            <div class="button disable">进入报告页面</div>
-                                        </div>
-                                        <div class="left">
-                                            <div>
-                                                <div class="info-item" style="margin-right: 5px;">当前状态：{$
-                                                    getStateName(item.state) $}
-                                                </div>
-                                                <div class="info-item" style="margin-right: 5px">开始时间：{$ item.begintime $}
-                                                </div>
-                                                <div class="info-item" style="">结束时间：{$ item.endtime $}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="s-progress-container">
-                                                    <div class="s-progress-bar"
-                                                         v-bind:style="{width: (item.percentvalue*100).toFixed(0)+'%'}"></div>
-                                                    <div class="s-progress-text" v-if="(item.lefttime/1000).toFixed(0)%60 >= 10">{$ parseInt((item.lefttime / 1000).toFixed(0) / 60)
-                                                        $}:{$ (item.lefttime/1000).toFixed(0)%60 $}
-                                                    </div>
-                                                    <div class="s-progress-text" v-else>{$ parseInt((item.lefttime / 1000).toFixed(0) / 60)
-                                                        $}:{$ "0" + (item.lefttime/1000).toFixed(0)%60 $}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
+                            <a v-bind:href="'/runner/token/'+autoDomainInfo.token" v-if="autoDomainInfo.state==1"
+                               target="_blank" class="button rose">进入检测页面</a>
+                            <div v-if="!(autoDomainInfo.state==1)" class="button disable">进入检测页面</div>
+                        </div>
+                        <div class="right-info">
+                            <div class="s-panel">
+                                <div class="title">检测信息&nbsp;&nbsp;TEST&nbsp;INFORMATION</div>
+                                <div class="content">
+                                    <p>检测引擎：{$ autoDomainInfo.imagename $}</p>
+                                    <p>检测时间：{$ (autoDomainInfo.testtime / 60000).toFixed(2) $} min</p>
+                                    <p>开始时间：{$ autoDomainInfo.begintime $}</p>
+                                    <p>结束时间：{$ autoDomainInfo.endtime $}</p>
+                                    <p>当前状态：{$ getStateName(autoDomainInfo.state) $}</p>
                                 </div>
-                                <div class="s-panel" v-if="!item.iserror && item.iscomplete">
-                                    <div class="title">
-                                        检测进度 TEST PROGRESS - {$ item.imagename $}
-                                    </div>
-                                    <div class="content">
-                                        <div class="right">
-                                            <a v-if="item.state == 2" class="button disable">进入报告页面</a>
-                                            <a class="button manual" v-bind:href="'/dynamicreport/index?dynamicid='+item.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=0'+'&projectid='+item.pid" target="_blank" v-else>进入报告页面</a>
-                                        </div>
-                                        <div class="left">
-                                            <div style="margin-top:16px;display: flex;">
-                                                <div class="info-item" style="margin-right: 10px;">当前状态：{$
-                                                    getStateName(item.state) $}
-                                                </div>
-                                                <div class="info-item" style="margin-right: 10px;">开始时间：{$ item.begintime $}
-                                                </div>
-                                                <div class="info-item" style="">持续时间：{$ (item.testtime /
-                                                    60000).toFixed(2) $} min
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="s-panel" v-if="item.iserror">
-                                    <div class="title">
-                                        检测进度 TEST PROGRESS - {$ item.imagename $}
-                                    </div>
-                                    <div class="content">
-                                        <div class="left">
-                                            <div style="margin-top:16px;display: flex;">
-                                                <div class="info-item" style="margin-right: 10px;">当前状态：{$
-                                                    getStateName(item.state) $}
-                                                </div>
-                                                <div class="info-item" style="margin-right: 10px;">开始时间：{$ item.begintime $}
-                                                </div>
-                                                <div class="info-item">持续时间：{$ (item.testtime /
-                                                    60000).toFixed(2) $} min
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </template>
+                            </div>
+                            <a v-bind:href="'/dynamicreport/index?dynamicid='+autoDomainInfo.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=1'+'&projectid='+autoDomainInfo.pid"
+                               v-if="autoDomainInfo.state==3" target="_blank" class="button">进入报告页面</a>
+                            <div v-if="!(autoDomainInfo.state==3)" class="button disable">进入报告页面</div>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
+                    <div class="test-result-title" style="margin-top: 20px;">
+                        <p style="font-weight: 400; font-size: 12px">手动检测<span style="color: #49a2f5"> / MANUAL INSPECTION</span>
+                        </p>
+                    </div>
+                    <div class="un-automatic">
+                        <div class="s-panel">
+                            <div class="title">
+                                创建检测 CREATE TEST
+                                <div class="right-button" v-on:click="showCreateLayout=!showCreateLayout">创建</div>
+                            </div>
+                            <div class="content" v-if="showCreateLayout">
+                                <div class="right">
+                                    <div class="button manual" v-on:click="createNewTest()">添加手动检测</div>
+                                </div>
+                                <form class="left">
+                                    <label for="version" style="font-weight: 100">检测器版本</label>
+                                    <select name="version" id="version">
+                                        {% for item in mirrorlist %}
+                                        <option value="{{item.id}}">{{item.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br/>
+                                    <label for="time" style="font-weight: 100">检测时间&emsp;</label>
+                                    <select name="time" id="time">
+                                        <option value="5">5 mins</option>
+                                        <option value="10">10 mins</option>
+                                        <option value="15">15 mins</option>
+                                        <option value="120">2 hours</option>
+                                    </select>
+                                    <br/>
+                                </form>
+                            </div>
+                        </div>
+                        <template v-for="item in domainInfo">
+                            <div class="s-panel" v-if="!item.iserror && !item.iscomplete">
+                                <div class="title">
+                                    检测进度 TEST PROGRESS - {$ item.imagename $}
+                                    <div class="right-button">
+                                        <div v-on:click="terminateHandTest(item)">停止</div>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="right">
+                                        <a v-bind:href="'/runner/token/'+item.token" v-if="item.state==1"
+                                           target="_blank" class="button rose">进入检测页面</a>
+                                        <div v-if="!(item.state==1)" class="button disable">进入检测页面</div>
+                                        <div class="button disable">进入报告页面</div>
+                                    </div>
+                                    <div class="left">
+                                        <div>
+                                            <div class="info-item" style="margin-right: 5px;">当前状态：{$
+                                                getStateName(item.state) $}
+                                            </div>
+                                            <div class="info-item" style="margin-right: 5px">开始时间：{$ item.begintime $}
+                                            </div>
+                                            <div class="info-item" style="">结束时间：{$ item.endtime $}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="s-progress-container">
+                                                <div class="s-progress-bar"
+                                                     v-bind:style="{width: (item.percentvalue*100).toFixed(0)+'%'}"></div>
+                                                <div class="s-progress-text"
+                                                     v-if="(item.lefttime/1000).toFixed(0)%60 >= 10">{$
+                                                    parseInt((item.lefttime / 1000).toFixed(0) / 60)
+                                                    $}:{$ (item.lefttime/1000).toFixed(0)%60 $}
+                                                </div>
+                                                <div class="s-progress-text" v-else>{$ parseInt((item.lefttime /
+                                                    1000).toFixed(0) / 60)
+                                                    $}:{$ "0" + (item.lefttime/1000).toFixed(0)%60 $}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="s-panel" v-if="!item.iserror && item.iscomplete">
+                                <div class="title">
+                                    检测进度 TEST PROGRESS - {$ item.imagename $}
+                                </div>
+                                <div class="content">
+                                    <div class="right">
+                                        <a v-if="item.state == 2" class="button disable">进入报告页面</a>
+                                        <a class="button manual"
+                                           v-bind:href="'/dynamicreport/index?dynamicid='+item.did+'&apkinfoid='+apps[selectedIndex].infoid+'&auto=0'+'&projectid='+item.pid"
+                                           target="_blank" v-else>进入报告页面</a>
+                                    </div>
+                                    <div class="left">
+                                        <div style="margin-top:16px;display: flex;">
+                                            <div class="info-item" style="margin-right: 10px;">当前状态：{$
+                                                getStateName(item.state) $}
+                                            </div>
+                                            <div class="info-item" style="margin-right: 10px;">开始时间：{$ item.begintime $}
+                                            </div>
+                                            <div class="info-item" style="">持续时间：{$ (item.testtime /
+                                                60000).toFixed(2) $} min
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="s-panel" v-if="item.iserror">
+                                <div class="title">
+                                    检测进度 TEST PROGRESS - {$ item.imagename $}
+                                </div>
+                                <div class="content">
+                                    <div class="left">
+                                        <div style="margin-top:16px;display: flex;">
+                                            <div class="info-item" style="margin-right: 10px;">当前状态：{$
+                                                getStateName(item.state) $}
+                                            </div>
+                                            <div class="info-item" style="margin-right: 10px;">开始时间：{$ item.begintime $}
+                                            </div>
+                                            <div class="info-item">持续时间：{$ (item.testtime /
+                                                60000).toFixed(2) $} min
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1204,7 +1207,7 @@
                 });
             },
             select: function (index, force) {
-                if(!force && this.selectedIndex === index) return;
+                if (!force && this.selectedIndex === index) return;
                 this.selectedIndex = index;
                 this.getDomainList(this.apps[this.selectedIndex].id);
                 this.getApkInfo(this.apps[this.selectedIndex].id);
@@ -1295,7 +1298,7 @@
                                     }
                                     return app;
                                 });
-                                this.select(0,true);
+                                this.select(0, true);
 
                             }, 100);
                         }
