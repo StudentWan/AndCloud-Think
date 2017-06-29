@@ -1,6 +1,17 @@
 {% extends "./../basebar.html" %}{% block title %}历史列表{% endblock %}{% block headerbar %}
 <link rel="stylesheet" href="/static/app/css/hwLayer.css">
 <style>
+
+    body {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
+
+    .left-bar {
+        flex-shrink: 0;
+    }
+
     #app {
         padding-left: 30px;
         padding-right: 30px;
