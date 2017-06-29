@@ -2,8 +2,8 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!--<meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
     <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -17,6 +17,9 @@
             color: #8696aa;
             font-weight: 100;
             font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow: auto;
         }
     </style>
     {% block header %}
