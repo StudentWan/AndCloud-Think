@@ -11,5 +11,6 @@ export default {
     zmq: {
         url: 'tcp://127.0.0.1:12001'
     },
-    workspace: '/opt/andcloud-workspace/'
+    workspace: '/opt/andcloud-workspace/',
+    wsaddr: '192.168.8.88'
 }
