@@ -1,6 +1,8 @@
 {% extends "./../basebar.html" %}{% block title %}创建任务{% endblock %} {% block headerbar %}
 <style>
     body {
+        display: flex;
+        flex-wrap: nowrap;
         font-weight: 400;
     }
     
@@ -10,6 +12,11 @@
     
     .right-content {
         overflow: auto;
+        min-width: 1150px;
+    }
+
+    .left-bar {
+        flex-shrink: 0;
     }
     
     .contain-upload {
@@ -21,7 +28,7 @@
     }
     
     .apk-list {
-        width: calc(40% - 3px);
+        width: 42%;
         max-height: 680px;
         height: 100%;
         position: relative;
@@ -37,7 +44,7 @@
     }
     
     .uploadfile-container {
-        width: calc(55% - 3px);
+        width: 56%;
         height: 100%;
         max-height: 680px;
     }
@@ -415,7 +422,6 @@
                     <div>
                         <button onclick="animateToTwo()">开始上传</button>
                     </div>
-                    <!--<div class="confirm col-md-4"><i class="iconfont icon-check" onclick="animateToTwo()"></i></div>-->
                 </div>
             </div>
             <div id="upload_anim" class="step-container" style="margin-top: -40px;">
