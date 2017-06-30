@@ -135,8 +135,8 @@
             }
         }
     });
-    let socket = new WebSocket('ws://192.168.8.88:6565');
-    let imgsocket = new WebSocket('ws://192.168.8.88:6566');
+    let socket = new WebSocket('ws://127.0.0.1:6565');
+    let imgsocket = new WebSocket('ws://127.0.0.1:6566');
     let canvas = document.getElementById('phone-screen');
     var pinger = null;
     socket.onopen = function() {
