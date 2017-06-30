@@ -1,7 +1,7 @@
 {% extends "./../basebar.html" %}{% block title %}检测页面{% endblock %}{% block headerbar %}
 <style>
     body {
-        min-width: 1000px;
+        min-width: 1150px;
     }
     
     .right-content {
@@ -135,8 +135,8 @@
             }
         }
     });
-    let socket = new WebSocket('ws://127.0.0.1:6565');
-    let imgsocket = new WebSocket('ws://127.0.0.1:6566');
+    let socket = new WebSocket('ws://' + '{{wsaddr}}' + ':6565');
+    let imgsocket = new WebSocket('ws://' + '{{wsaddr}}' + ':6566');
     let canvas = document.getElementById('phone-screen');
     var pinger = null;
     socket.onopen = function() {

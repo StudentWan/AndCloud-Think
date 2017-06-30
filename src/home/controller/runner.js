@@ -10,10 +10,12 @@ import net from 'net';
 import ws from 'ws';
 
 
+
 export default class extends Base {
 
     async tokenAction() {
         let token = this.http.pathname.split('/').pop();
+        let wsaddr = this.config('wsaddr');
         // console.log(token);
         let tokenModel = this.model('tokens');
         let mirrorModel = this.model('mirror');
@@ -33,7 +35,8 @@ export default class extends Base {
             'width': mirrorData.width,
             'height': mirrorData.height,
             'wmwidth': mirrorData.wmwidth,
-            'wmheight': mirrorData.wmheight
+            'wmheight': mirrorData.wmheight,
+            'wsaddr': wsaddr
 
         });
         return this.display()
