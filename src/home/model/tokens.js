@@ -22,6 +22,7 @@ class Tokens extends think.model.base {
     }
 
     async getTokens(projectid, userid) {
+        console.log(projectid + userid);
         return await this.where({
             userid: userid,
             projectid: projectid,

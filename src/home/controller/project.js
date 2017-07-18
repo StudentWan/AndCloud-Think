@@ -67,14 +67,13 @@ export default class extends Base {
     }
 
     async mirrorimageAction() {
-        let projectid = this.get('projectid')
-        let projectModel = this.model('projects');
-        let projectresult = await projectModel.getProjectViaId(projectid);
-
+        let projectid = this.get('projectid');
+        let userid = await this.session('user_id');
+        let tokenModel = this.model('tokens');
+        let res = await tokenModel.getTokens(projectid, userid);
         let mirrorModel = this.model('mirror');
-        let mirrorresult = await mirrorModel.getMirrorViaId(projectresult.mirrorid);
+        let mirrorresult = await mirrorModel.getMirrorViaId(res[0].imageid);
         return this.success(mirrorresult.name);
-
     }
 
     async createanddeadAction() {
@@ -94,7 +93,6 @@ export default class extends Base {
         let screenShotsPath = JSON.parse(screenShotsPathRowData[0].screenShotsPath);
         let basePath = screenShotsPathRowData[0].basePath;
         for (let item of screenShotsPath) {
-
             let imgurl = this.config('workspace') + basePath + '/screenshots/' + item;
             // console.log(imgurl);
             let bitmap = fs.readFileSync(imgurl);
@@ -103,7 +101,6 @@ export default class extends Base {
 
         // console.log('imgbase64 length:' + imgbase64.length);
         return this.success(imgbase64);
-
     }
 
     async uploadAction() {

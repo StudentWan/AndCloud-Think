@@ -16,13 +16,10 @@ export default class extends Base {
     async tokenAction() {
         let token = this.http.pathname.split('/').pop();
         let wsaddr = this.config('wsaddr');
-        // console.log(token);
         let tokenModel = this.model('tokens');
         let mirrorModel = this.model('mirror');
         let tokenData = await tokenModel.where({ token: token }).find();
-        // console.log(tokenData);
         let mirrorData = await mirrorModel.where({ id: tokenData.imageid }).find();
-        // console.log(mirrorData);
 
 
         this.assign({
