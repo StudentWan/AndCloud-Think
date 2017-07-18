@@ -31,7 +31,8 @@
     "babel-preset-stage-1": "^6.5.0",
     "browser-sync": "^2.18.12",
     "istanbul": "0.4.0",
-    "mocha": "1.20.1"
+    "mocha": "1.20.1",
+    "webpack": "^3.0.0"
   },
   "repository": "",
   "license": "MIT"
