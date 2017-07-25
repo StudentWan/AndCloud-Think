@@ -32,7 +32,7 @@ npm run product
 Use pm2 to deploy app on production enviroment.
 
 ```
-pm2 startOrReload pm2.json
+pm2 start www/production.js
 ```
 
 ## Use browser-sync to watch
