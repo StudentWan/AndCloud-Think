@@ -29,8 +29,6 @@ npm run product
 
 ## Deploy with pm2
 
-Notice: Not deployed yet.
-
 Use pm2 to deploy app on production enviroment.
 
 ```
